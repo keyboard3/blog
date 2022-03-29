@@ -6,7 +6,7 @@
   <link href="/blog/atom.xml" rel="self"/>
   
   <link href="https://keyboard3.github.io/"/>
-  <updated>2022-03-29T15:15:38.081Z</updated>
+  <updated>2022-03-29T15:18:59.357Z</updated>
   <id>https://keyboard3.github.io/</id>
   
   <author>
@@ -21,7 +21,7 @@
     <link href="https://keyboard3.github.io/gs-ppa-hosted-pages/"/>
     <id>https://keyboard3.github.io/gs-ppa-hosted-pages/</id>
     <published>2022-03-29T07:49:03.000Z</published>
-    <updated>2022-03-29T15:15:38.081Z</updated>
+    <updated>2022-03-29T15:18:59.357Z</updated>
     
     <summary type="html">
     
@@ -243,11 +243,11 @@
     
       <category term="翻译" scheme="https://keyboard3.github.io/tags/%E7%BF%BB%E8%AF%91/"/>
     
-      <category term="进行中" scheme="https://keyboard3.github.io/tags/%E8%BF%9B%E8%A1%8C%E4%B8%AD/"/>
-    
       <category term="js" scheme="https://keyboard3.github.io/tags/js/"/>
     
       <category term="animate" scheme="https://keyboard3.github.io/tags/animate/"/>
+    
+      <category term="进行中" scheme="https://keyboard3.github.io/tags/%E8%BF%9B%E8%A1%8C%E4%B8%AD/"/>
     
   </entry>
   
@@ -496,9 +496,9 @@
     
       <category term="翻译" scheme="https://keyboard3.github.io/tags/%E7%BF%BB%E8%AF%91/"/>
     
-      <category term="git" scheme="https://keyboard3.github.io/tags/git/"/>
-    
       <category term="进行中" scheme="https://keyboard3.github.io/tags/%E8%BF%9B%E8%A1%8C%E4%B8%AD/"/>
+    
+      <category term="git" scheme="https://keyboard3.github.io/tags/git/"/>
     
   </entry>
   

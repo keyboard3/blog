@@ -497,7 +497,27 @@ RESPMSG=Approved</code></pre><h2 id="使用安全令牌并获取交易详情"><a
 <p>注意: 对比下面的测试代码（支付后只有 iframe 窗口重定向），父窗口一般应该重定向。因此，与下面的测试代码相比，您可以创建一个中间页面，PayPal 将重定向到该中间页面，并使用该中间页面捕获返回数据并强制客户的浏览器重定向到您的最终收据页面。</p>
 </blockquote>
 <p>在下面的测试代码中，iframe 标记中使用了以下参数，该标记指向 Payflow Link 端点 <a href="https://payflowlink.paypal.com。使用下面的测试" target="_blank" rel="noopener">https://payflowlink.paypal.com。使用下面的测试</a> HTML 文件后，您可以开始添加特定于 PPA 集成的参数和功能；请参阅 <a href="https://developer.paypal.com/api/nvp-soap/payflow/integration-guide/" target="_blank" rel="noopener">Payflow Gateway 开发人员指南和参考</a>。</p>
-<p>以下测试 HTML 文件以测试模式提交安全令牌。此表包含 HTML 文件中 iframe 标记的参数：<br>| 名字 | 描述 |<br>| —- | —- |<br>| MODE | 指定 TEST 以指示您的调用是测试调用。对于生产应用程序，您可以将值设置为 LIVE（这是默认值）。|<br>| SECURETOKENID | 指定您为安全令牌创建（如上所述）的 ID。当您提交安全令牌（如下）时，请使用与上述相同的 SECURETOKENID 值。 |<br>| SECURETOKEN | 指定您刚刚从 Payflow 试点端点 (<a href="https://pilot-payflowpro.paypal.com" target="_blank" rel="noopener">https://pilot-payflowpro.paypal.com</a>) 收到（上图）的 SECURETOKEN 的值。 |</p>
+<p>以下测试 HTML 文件以测试模式提交安全令牌。此表包含 HTML 文件中 iframe 标记的参数：</p>
+<table>
+<thead>
+<tr>
+<th>名字</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>MODE</td>
+<td>指定 TEST 以指示您的调用是测试调用。对于生产应用程序，您可以将值设置为 LIVE（这是默认值）。</td>
+</tr>
+<tr>
+<td>SECURETOKENID</td>
+<td>指定您为安全令牌创建（如上所述）的 ID。当您提交安全令牌（如下）时，请使用与上述相同的 SECURETOKENID 值。</td>
+</tr>
+<tr>
+<td>SECURETOKEN</td>
+<td>指定您刚刚从 Payflow 试点端点 (<a href="https://pilot-payflowpro.paypal.com" target="_blank" rel="noopener">https://pilot-payflowpro.paypal.com</a>) 收到（上图）的 SECURETOKEN 的值。</td>
+</tr>
+</tbody></table>
 <p>在下面创建测试 HTML 文件。然后，在 iframe 标记的 src 属性中，替换您自己的 SECURETOKENID 和 SECURETOKEN 值。此测试 HTML 文件说明了如何在商家页面中包含托管页面，以使商家能够接受付款。</p>
 <pre class="line-numbers language-html"><code class="language-html"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>html</span><span class="token punctuation">></span></span>
   <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>head</span><span class="token punctuation">></span></span>
