@@ -7,7 +7,7 @@ mathjax: true
 date: 2022-03-21 09:24:10
 password:
 summary:
-tags: [Kubernetes, 翻译, 进行中]
+tags: [Kubernetes, 翻译]
 categories:
 ---
 [原文](https://thechief.io/c/editorial/k3d-vs-k3s-vs-kind-vs-microk8s-vs-minikube/)
