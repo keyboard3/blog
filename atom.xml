@@ -6,7 +6,7 @@
   <link href="/blog/atom.xml" rel="self"/>
   
   <link href="https://keyboard3.github.io/"/>
-  <updated>2022-03-29T14:23:50.432Z</updated>
+  <updated>2022-03-29T15:15:38.081Z</updated>
   <id>https://keyboard3.github.io/</id>
   
   <author>
@@ -21,7 +21,7 @@
     <link href="https://keyboard3.github.io/gs-ppa-hosted-pages/"/>
     <id>https://keyboard3.github.io/gs-ppa-hosted-pages/</id>
     <published>2022-03-29T07:49:03.000Z</published>
-    <updated>2022-03-29T14:23:50.432Z</updated>
+    <updated>2022-03-29T15:15:38.081Z</updated>
     
     <summary type="html">
     
@@ -29,13 +29,16 @@
       
         
         
-          &lt;h1 id=&quot;概览&quot;&gt;&lt;a href=&quot;#概览&quot; class=&quot;headerlink&quot; title=&quot;概览&quot;&gt;&lt;/a&gt;概览&lt;/h1&gt;&lt;p&gt;高级 PayPal 付款 (PPA) 使得商家接受 PayPal 和 信用卡。 PPA 给商家提供 PayPal 商家账户。集成 PPA
+          &lt;p&gt;&lt;a href=&quot;https://developer.paypal.com/api/nvp-soap/payflow/gs-ppa-hosted-pages/&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;原文&lt;/a&gt;&lt;/p&gt;
+&lt;h1
         
       
     
     </summary>
     
     
+    
+      <category term="翻译" scheme="https://keyboard3.github.io/tags/%E7%BF%BB%E8%AF%91/"/>
     
       <category term="paypal" scheme="https://keyboard3.github.io/tags/paypal/"/>
     
@@ -46,7 +49,7 @@
     <link href="https://keyboard3.github.io/k3d-vs-k3s-vs-kind-vs-microk8s-vs-minikube/"/>
     <id>https://keyboard3.github.io/k3d-vs-k3s-vs-kind-vs-microk8s-vs-minikube/</id>
     <published>2022-03-21T01:24:10.000Z</published>
-    <updated>2022-03-21T14:19:35.974Z</updated>
+    <updated>2022-03-29T15:09:10.321Z</updated>
     
     <summary type="html">
     
@@ -64,8 +67,6 @@
     
     
       <category term="翻译" scheme="https://keyboard3.github.io/tags/%E7%BF%BB%E8%AF%91/"/>
-    
-      <category term="进行中" scheme="https://keyboard3.github.io/tags/%E8%BF%9B%E8%A1%8C%E4%B8%AD/"/>
     
       <category term="Kubernetes" scheme="https://keyboard3.github.io/tags/Kubernetes/"/>
     
@@ -242,11 +243,11 @@
     
       <category term="翻译" scheme="https://keyboard3.github.io/tags/%E7%BF%BB%E8%AF%91/"/>
     
+      <category term="进行中" scheme="https://keyboard3.github.io/tags/%E8%BF%9B%E8%A1%8C%E4%B8%AD/"/>
+    
       <category term="js" scheme="https://keyboard3.github.io/tags/js/"/>
     
       <category term="animate" scheme="https://keyboard3.github.io/tags/animate/"/>
-    
-      <category term="进行中" scheme="https://keyboard3.github.io/tags/%E8%BF%9B%E8%A1%8C%E4%B8%AD/"/>
     
   </entry>
   
@@ -495,9 +496,9 @@
     
       <category term="翻译" scheme="https://keyboard3.github.io/tags/%E7%BF%BB%E8%AF%91/"/>
     
-      <category term="进行中" scheme="https://keyboard3.github.io/tags/%E8%BF%9B%E8%A1%8C%E4%B8%AD/"/>
-    
       <category term="git" scheme="https://keyboard3.github.io/tags/git/"/>
+    
+      <category term="进行中" scheme="https://keyboard3.github.io/tags/%E8%BF%9B%E8%A1%8C%E4%B8%AD/"/>
     
   </entry>
   
