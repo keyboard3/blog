@@ -423,10 +423,12 @@
 <li>在页面的服务摘要部分的服务下，单击托管结帐页面。<br><img src="https://www.paypalobjects.com/webstatic/en_US/developer/docs/pfg/paypal_mngr_svc_summary.png" alt=""></li>
 <li>在标题为 Hosted Checkout Pages 的登录页面上，单击设置。</li>
 <li>最初，出于测试目的，我们将此设置页面上的大部分字段留空。当您稍后填写更多设置页面字段时，请务必单击同一页面上的帮助按钮以获取更多信息。另请参阅 <a href="https://developer.paypal.com/api/nvp-soap/payflow/integration-guide/" target="_blank" rel="noopener">Payflow Gateway 开发人员指南和参考</a>。</li>
-<li>在此设置页面上，输入以下值。 （设置页面上的其他值对于您的初始测试调用是不必要的。）</li>
+<li>在此设置页面上，输入以下值。 （设置页面上的其他值对于您的初始测试调用是不必要的。）<ul>
 <li>PayPal 沙盒电子邮件地址: 您用于 PayPal 沙盒帐户的电子邮件，它是您在 PayPal 开发人员体验中的个人资料的一部分。</li>
 <li>Return URL: 在页面的“付款确认”部分，输入 Return URL（供消费者继续付款时使用）。对于 Return URL 方法，指定 POST。</li>
 <li>启用安全令牌: 设置为是。</li>
+</ul>
+</li>
 <li>在此设置页面上，单击保存更改。</li>
 <li>单击自定义，选择布局 C，然后单击保存并发布。</li>
 </ul>
@@ -477,16 +479,16 @@
 </tbody></table>
 <p>出于演示目的，以下示例使用 cURL 获取您将在后续测试调用中使用的安全令牌。</p>
 <p>请参阅上表中的参数说明，了解在以下示例中替换 PARTNER、VENDOR、USER 和 PWD 的值。</p>
-<pre class="line-numbers language-shell"><code class="language-shell">curl https://pilot-payflowpro.paypal.com \ 
--s \ 
---insecure \ 
--d PARTNER=<PayPal> \ 
--d VENDOR=<MyMerchantID> \ 
--d USER=<UserID> \ 
--d PWD=<UserPassword> \ 
--d TRXTYPE=S \ 
--d AMT=40 \ 
--d CREATESECURETOKEN=Y \ 
+<pre class="line-numbers language-shell"><code class="language-shell">curl https://pilot-payflowpro.paypal.com \
+-s \
+--insecure \
+-d PARTNER=<PayPal> \
+-d VENDOR=<MyMerchantID> \
+-d USER=<UserID> \
+-d PWD=<UserPassword> \
+-d TRXTYPE=S \
+-d AMT=40 \
+-d CREATESECURETOKEN=Y \
 -d SECURETOKENID=12528208de1413abc3d60c86cb15<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>响应应类似于以下内容。响应包含 RESULT=0（表示成功）、一个 SECURETOKEN（用于后续事务调用）、一个 SECURETOKENID（您在请求中提供以标识接收到的令牌）和一个 RESPMSG 值 Approved。</p>
 <pre><code>RESULT=0&amp;
@@ -526,11 +528,15 @@ RESPMSG=Approved</code></pre><h2 id="使用安全令牌并获取交易详情"><a
   <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>body</span><span class="token punctuation">></span></span>
     <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>p</span><span class="token punctuation">></span></span>This is a test HTML file.<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>p</span><span class="token punctuation">></span></span>
 
-    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>iframe</span> <span class="token attr-name">src</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>https://payflowlink.paypal.com?MODE<span class="token punctuation">=</span>TEST&amp;SECURETOKENID<span class="token punctuation">=</span>MySecureTokenID&amp;SECURETOKEN<span class="token punctuation">=</span>MySecureToken<span class="token punctuation">"</span></span>
-    <span class="token attr-name">name</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>test_iframe<span class="token punctuation">"</span></span> <span class="token attr-name">scrolling</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>no<span class="token punctuation">"</span></span> <span class="token attr-name">width</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>570px<span class="token punctuation">"</span></span> <span class="token attr-name">height</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>540px<span class="token punctuation">"</span></span><span class="token punctuation">></span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>iframe</span><span class="token punctuation">></span></span>
-
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>iframe</span>
+      <span class="token attr-name">src</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>https://payflowlink.paypal.com?MODE<span class="token punctuation">=</span>TEST&amp;SECURETOKENID<span class="token punctuation">=</span>MySecureTokenID&amp;SECURETOKEN<span class="token punctuation">=</span>MySecureToken<span class="token punctuation">"</span></span>
+      <span class="token attr-name">name</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>test_iframe<span class="token punctuation">"</span></span>
+      <span class="token attr-name">scrolling</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>no<span class="token punctuation">"</span></span>
+      <span class="token attr-name">width</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>570px<span class="token punctuation">"</span></span>
+      <span class="token attr-name">height</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>540px<span class="token punctuation">"</span></span>
+    <span class="token punctuation">></span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>iframe</span><span class="token punctuation">></span></span>
   <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>body</span><span class="token punctuation">></span></span>
-<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>html</span><span class="token punctuation">></span></span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>html</span><span class="token punctuation">></span></span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>保存并在浏览器中打开上述 HTML 文件。在“这是一个商家页面”的文字下方，会显示页面的 iframe（内联框架）部分。该页面的“托管结帐”部分使客户可以选择使用 PayPal 或信用卡付款，然后进行付款。<br><img src="https://www.paypalobjects.com/webstatic/en_US/developer/docs/pfg/payflow_iframe_with_hosted_pages.png" alt=""></p>
 <h2 id="接收交易数据"><a href="#接收交易数据" class="headerlink" title="接收交易数据"></a>接收交易数据</h2><p>在上面页面的 iframe 部分中，其中显示了托管的结帐框架，输入测试信用卡号 4111111111111111 和到期日期值 12 和 12。然后单击立即付款。显示以下确认页面：<br><img src="https://www.paypalobjects.com/webstatic/en_US/developer/docs/pfg/payflow_pay_confirmation.png" alt=""></p>
 <p>该确认页面使客户能够点击“返回商家网站。如果您单击该链接，将发生以下情况： 服务器将您的浏览器重定向到您的返回 URL，即您在 PayPal 管理器的设置页面上提供的返回 URL。（请参阅上面的“设置托管结帐页面”。请注意，PayPal 管理器中设置页面上的帮助按钮包含有关自定义选项的信息。）</p>
