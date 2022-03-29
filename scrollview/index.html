@@ -1,0 +1,1464 @@
+<!DOCTYPE HTML>
+<html lang="zh-CN">
+
+
+<head>
+    <meta charset="utf-8">
+    <meta name="keywords" content="ScrollView, keyboard3的博客">
+    <meta name="description" content="ScrollView参考这篇文章React-Native 之 ScrollView 使用结合了使用案例非常棒
+介绍一个对原生 ScrollView 的包装组件，同时还集成了触摸锁定“响应者”系统记住 ScrollViews 需要有确定的高度">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="renderer" content="webkit|ie-stand|ie-comp">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <title>ScrollView | keyboard3的博客</title>
+    <link rel="icon" type="image/png" href="/blog/favicon.png">
+
+    <link rel="stylesheet" type="text/css" href="/blog/libs/awesome/css/all.css">
+    <link rel="stylesheet" type="text/css" href="/blog/libs/materialize/materialize.min.css">
+    <link rel="stylesheet" type="text/css" href="/blog/libs/aos/aos.css">
+    <link rel="stylesheet" type="text/css" href="/blog/libs/animate/animate.min.css">
+    <link rel="stylesheet" type="text/css" href="/blog/libs/lightGallery/css/lightgallery.min.css">
+    <link rel="stylesheet" type="text/css" href="/blog/css/matery.css">
+    <link rel="stylesheet" type="text/css" href="/blog/css/my.css">
+    
+    <script src="/blog/libs/jquery/jquery.min.js"></script>
+    
+<meta name="generator" content="Hexo 4.2.0"><link rel="alternate" href="/blog/atom.xml" title="keyboard3的博客" type="application/atom+xml">
+<link rel="stylesheet" href="/blog/css/prism-tomorrow.css" type="text/css">
+<link rel="stylesheet" href="/blog/css/prism-line-numbers.css" type="text/css"></head>
+
+
+<body>
+    <header class="navbar-fixed">
+    <nav id="headNav" class="bg-color nav-transparent">
+        <div id="navContainer" class="nav-wrapper head-container">
+            <div class="brand-logo">
+                <a href="/blog/" class="waves-effect waves-light">
+                    
+                    <img src="/blog/medias/logo.png" class="logo-img" alt="LOGO">
+                    
+                    <span class="logo-span">keyboard3的博客</span>
+                </a>
+            </div>
+            
+
+<a href="#" data-target="mobile-nav" class="sidenav-trigger button-collapse"><i class="fas fa-bars"></i></a>
+<ul class="right nav-menu">
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/blog" class="waves-effect waves-light">
+      
+      <i class="fas fa-home" style="zoom: 0.6;"></i>
+      
+      <span>首页</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/blog/tags" class="waves-effect waves-light">
+      
+      <i class="fas fa-tags" style="zoom: 0.6;"></i>
+      
+      <span>标签</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/blog/archives" class="waves-effect waves-light">
+      
+      <i class="fas fa-archive" style="zoom: 0.6;"></i>
+      
+      <span>归档</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/blog/about" class="waves-effect waves-light">
+      
+      <i class="fas fa-user-circle" style="zoom: 0.6;"></i>
+      
+      <span>关于</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/blog/contact" class="waves-effect waves-light">
+      
+      <i class="fas fa-comments" style="zoom: 0.6;"></i>
+      
+      <span>留言板</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/blog/friends" class="waves-effect waves-light">
+      
+      <i class="fas fa-address-book" style="zoom: 0.6;"></i>
+      
+      <span>友情链接</span>
+    </a>
+    
+  </li>
+  
+  <li>
+    <a href="#searchModal" class="modal-trigger waves-effect waves-light">
+      <i id="searchIcon" class="fas fa-search" title="搜索" style="zoom: 0.85;"></i>
+    </a>
+  </li>
+</ul>
+
+<div id="mobile-nav" class="side-nav sidenav">
+
+    <div class="mobile-head bg-color">
+        
+        <img src="/blog/medias/logo.png" class="logo-img circle responsive-img">
+        
+        <div class="logo-name">keyboard3的博客</div>
+        <div class="logo-desc">
+            
+            我想事业有成，家庭美满，不过好像有点远
+            
+        </div>
+    </div>
+
+    
+
+    <ul class="menu-list mobile-menu-list">
+        
+        <li class="m-nav-item">
+	  
+		<a href="/blog" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-home"></i>
+			
+			首页
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/blog/tags" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-tags"></i>
+			
+			标签
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/blog/archives" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-archive"></i>
+			
+			归档
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/blog/about" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-user-circle"></i>
+			
+			关于
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/blog/contact" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-comments"></i>
+			
+			留言板
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/blog/friends" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-address-book"></i>
+			
+			友情链接
+		</a>
+          
+        </li>
+        
+        
+    </ul>
+</div>
+
+        </div>
+
+        
+    </nav>
+
+</header>
+
+    
+
+
+
+<div class="bg-cover pd-header post-cover" style="background-image: url('/blog/medias/featureimages/2.jpg')">
+    <div class="container" style="right: 0px;left: 0px;">
+        <div class="row">
+            <div class="col s12 m12 l12">
+                <div class="brand">
+                    <h1 class="description center-align post-title">ScrollView</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+<main class="post-container content">
+
+    
+    <link rel="stylesheet" href="/blog/libs/tocbot/tocbot.css">
+<style>
+    #articleContent h1::before,
+    #articleContent h2::before,
+    #articleContent h3::before,
+    #articleContent h4::before,
+    #articleContent h5::before,
+    #articleContent h6::before {
+        display: block;
+        content: " ";
+        height: 100px;
+        margin-top: -100px;
+        visibility: hidden;
+    }
+
+    #articleContent :focus {
+        outline: none;
+    }
+
+    .toc-fixed {
+        position: fixed;
+        top: 64px;
+    }
+
+    .toc-widget {
+        width: 345px;
+        padding-left: 20px;
+    }
+
+    .toc-widget .toc-title {
+        margin: 35px 0 15px 0;
+        padding-left: 17px;
+        font-size: 1.5rem;
+        font-weight: bold;
+        line-height: 1.5rem;
+    }
+
+    .toc-widget ol {
+        padding: 0;
+        list-style: none;
+    }
+
+    #toc-content {
+        height: calc(100vh - 250px);
+        overflow: auto;
+    }
+
+    #toc-content ol {
+        padding-left: 10px;
+    }
+
+    #toc-content ol li {
+        padding-left: 10px;
+    }
+
+    #toc-content .toc-link:hover {
+        color: #42b983;
+        font-weight: 700;
+        text-decoration: underline;
+    }
+
+    #toc-content .toc-link::before {
+        background-color: transparent;
+        max-height: 25px;
+    }
+
+    #toc-content .is-active-link {
+        color: #42b983;
+    }
+
+    #toc-content .is-active-link::before {
+        background-color: #42b983;
+    }
+
+    #floating-toc-btn {
+        position: fixed;
+        right: 15px;
+        bottom: 76px;
+        padding-top: 15px;
+        margin-bottom: 0;
+        z-index: 998;
+    }
+
+    #floating-toc-btn .btn-floating {
+        width: 48px;
+        height: 48px;
+    }
+
+    #floating-toc-btn .btn-floating i {
+        line-height: 48px;
+        font-size: 1.4rem;
+    }
+</style>
+<div class="row">
+    <div id="main-content" class="col s12 m12 l9">
+        <!-- 文章内容详情 -->
+<div id="artDetail">
+    <div class="card">
+        <div class="card-content article-info">
+            <div class="row tag-cate">
+                <div class="col s7">
+                    
+                    <div class="article-tag">
+                        
+                            <a href="/blog/tags/react-native/">
+                                <span class="chip bg-color">react-native</span>
+                            </a>
+                        
+                            <a href="/blog/tags/api/">
+                                <span class="chip bg-color">api</span>
+                            </a>
+                        
+                            <a href="/blog/tags/%E7%BF%BB%E8%AF%91/">
+                                <span class="chip bg-color">翻译</span>
+                            </a>
+                        
+                            <a href="/blog/tags/%E5%AE%8C%E7%BB%93/">
+                                <span class="chip bg-color">完结</span>
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+                <div class="col s5 right-align">
+                    
+                </div>
+            </div>
+
+            <div class="post-info">
+                
+                <div class="post-date info-break-policy">
+                    <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
+                    2020-03-15
+                </div>
+                
+
+                
+                <div class="post-date info-break-policy">
+                    <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
+                    2022-03-21
+                </div>
+                
+
+                
+                <div class="info-break-policy">
+                    <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
+                    3.2k
+                </div>
+                
+
+                
+                <div class="info-break-policy">
+                    <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
+                    12 分
+                </div>
+                
+
+                
+                    <div id="busuanzi_container_page_pv" class="info-break-policy">
+                        <i class="far fa-eye fa-fw"></i>阅读次数:&nbsp;&nbsp;
+                        <span id="busuanzi_value_page_pv"></span>
+                    </div>
+				
+            </div>
+
+        </div>
+        <hr class="clearfix">
+        <div class="card-content article-card-content">
+            <div id="articleContent">
+                <h1 id="ScrollView"><a href="#ScrollView" class="headerlink" title="ScrollView"></a><a href="https://reactnative.dev/docs/scrollview" target="_blank" rel="noopener">ScrollView</a></h1><h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><p>这篇文章<a href="https://www.jianshu.com/p/29563c7c548b" target="_blank" rel="noopener">React-Native 之 ScrollView 使用</a>结合了使用案例非常棒</p>
+<h2 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h2><p>一个对原生 ScrollView 的包装组件，同时还集成了触摸锁定“响应者”系统<br>记住 ScrollViews 需要有确定的高度才能正常工作，因为需要在确定的容器中填充不确定高度的子组件（这样就可以滚动操作）。为了确定 ScrollViews 的高度，可以直接给它设置高度或者让它所有的父组件都为确定高度。忘记{flex:1}会向下 View 栈传递会导致错误，通过元素诊断器来快速定位到那一层高度不确定。<br>不支持 ScrollView 内部其他响应者 block 掉 ScrollView，自己成为响应者<br><code>ScrollView</code>vs<a href="/blog/flatlist">FlatList</a>-应该用哪个？<br><code>ScrollView</code>一次性渲染所有子组件，但会降低性能<br>想象一下如果你要显示非常大的列表，可能需要几屏内容。会一次性创建所有的 js 组件以及原生组件，大部分甚至不会显示，会导致渲染很慢以及增加内容占用<br>因此<code>FlatList</code>出现，<code>FlatList</code>懒渲染，当要显示的时候才会去渲染，当滚动出屏幕外就会删除 view 实例节省内存和提高处理速度<br><code>FlatList</code>非常方便。可以渲染分割线，多列，无限加载指示器以及其他一些开箱即用的功能。<br><strong>ScrollView</strong></p>
+<pre class="line-numbers language-ts"><code class="language-ts"><span class="token keyword">import</span> React <span class="token keyword">from</span> <span class="token string">"react"</span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> <span class="token punctuation">{</span> StyleSheet<span class="token punctuation">,</span> Text<span class="token punctuation">,</span> SafeAreaView<span class="token punctuation">,</span> ScrollView <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">"react-native"</span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> Constants <span class="token keyword">from</span> <span class="token string">"expo-constants"</span><span class="token punctuation">;</span>
+
+<span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token keyword">function</span> <span class="token function">App</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  <span class="token keyword">return</span> <span class="token punctuation">(</span>
+    <span class="token operator">&lt;</span>SafeAreaView style<span class="token operator">=</span><span class="token punctuation">{</span>styles<span class="token punctuation">.</span>container<span class="token punctuation">}</span><span class="token operator">></span>
+      <span class="token operator">&lt;</span>ScrollView style<span class="token operator">=</span><span class="token punctuation">{</span>styles<span class="token punctuation">.</span>scrollView<span class="token punctuation">}</span><span class="token operator">></span>
+        <span class="token operator">&lt;</span>Text style<span class="token operator">=</span><span class="token punctuation">{</span>styles<span class="token punctuation">.</span>text<span class="token punctuation">}</span><span class="token operator">></span>
+          Lorem ipsum dolor sit amet<span class="token punctuation">,</span> consectetur adipiscing elit<span class="token punctuation">,</span> sed <span class="token keyword">do</span>
+          eiusmod tempor incididunt ut labore et dolore magna aliqua<span class="token punctuation">.</span> Ut enim ad
+          minim veniam<span class="token punctuation">,</span> quis nostrud exercitation ullamco laboris nisi ut
+          aliquip ex ea commodo consequat<span class="token punctuation">.</span> Duis aute irure dolor <span class="token keyword">in</span>
+          reprehenderit <span class="token keyword">in</span> voluptate velit esse cillum dolore eu fugiat nulla
+          pariatur<span class="token punctuation">.</span> Excepteur sint occaecat cupidatat non proident<span class="token punctuation">,</span> sunt <span class="token keyword">in</span>
+          culpa qui officia deserunt mollit anim id est laborum<span class="token punctuation">.</span>
+        <span class="token operator">&lt;</span><span class="token operator">/</span>Text<span class="token operator">></span>
+      <span class="token operator">&lt;</span><span class="token operator">/</span>ScrollView<span class="token operator">></span>
+    <span class="token operator">&lt;</span><span class="token operator">/</span>SafeAreaView<span class="token operator">></span>
+  <span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">const</span> styles <span class="token operator">=</span> StyleSheet<span class="token punctuation">.</span><span class="token function">create</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
+  container<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+    flex<span class="token punctuation">:</span> <span class="token number">1</span><span class="token punctuation">,</span>
+    marginTop<span class="token punctuation">:</span> Constants<span class="token punctuation">.</span>statusBarHeight<span class="token punctuation">,</span>
+  <span class="token punctuation">}</span><span class="token punctuation">,</span>
+  scrollView<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+    backgroundColor<span class="token punctuation">:</span> <span class="token string">"pink"</span><span class="token punctuation">,</span>
+    marginHorizontal<span class="token punctuation">:</span> <span class="token number">20</span><span class="token punctuation">,</span>
+  <span class="token punctuation">}</span><span class="token punctuation">,</span>
+  text<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+    fontSize<span class="token punctuation">:</span> <span class="token number">42</span><span class="token punctuation">,</span>
+  <span class="token punctuation">}</span><span class="token punctuation">,</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h2 id="Props"><a href="#Props" class="headerlink" title="Props"></a>Props</h2><p>继承自<a href="https://reactnative.dev/docs/view#props" target="_blank" rel="noopener">View Props</a></p>
+<h3 id="alwaysBounceHorizontal"><a href="#alwaysBounceHorizontal" class="headerlink" title="alwaysBounceHorizontal"></a>alwaysBounceHorizontal</h3><p>仅 iOS。当 scroll view 水平滚动触摸到底边时产生回弹效果，即使是内容小余 scroll view 大小。当<code>horizontal={true}</code>时，默认值 true，否则就是 false</p>
+<h3 id="alwaysBounceVertical"><a href="#alwaysBounceVertical" class="headerlink" title="alwaysBounceVertical"></a>alwaysBounceVertical</h3><p>仅 iOS。当 scroll view 竖直滚动触摸到底边时产生回弹效果，即使是内容小余 scroll view 大小。当<code>horizontal={true}</code>时，默认值 false,否则就是 true</p>
+<h3 id="automaticallyAdjustContentInsets"><a href="#automaticallyAdjustContentInsets" class="headerlink" title="automaticallyAdjustContentInsets"></a>automaticallyAdjustContentInsets</h3><p>仅 iOS。控制如果是 ios，自动适配 scroll views 的 content inset，将 content view 放到导航条和工具栏之间。默认是 true。</p>
+<h3 id="bounces"><a href="#bounces" class="headerlink" title="bounces"></a>bounces</h3><p>仅 iOS。如果内容大于 scroll view 两个方向的大小，触摸到边就会产生回弹效果。如果设置 false，即使 alwaysBounce**设置了也没用。</p>
+<h3 id="bouncesZoom"><a href="#bouncesZoom" class="headerlink" title="bouncesZoom"></a>bouncesZoom</h3><p>仅 iOS。true 的话手势会驱动缩放的动画效果，否则没有</p>
+<h3 id="canCancelContentTouches"><a href="#canCancelContentTouches" class="headerlink" title="canCancelContentTouches"></a>canCancelContentTouches</h3><p>仅 iOS。false 的话触摸拖动元素将不会有反应，默认值是 true</p>
+<h3 id="centerContent"><a href="#centerContent" class="headerlink" title="centerContent"></a>centerContent</h3><p>仅 iOS。当内容小余 scroll view，内容会居中显示。当大于 scroll view 则没有效果。默认值是 false</p>
+<h3 id="contentContainerStyle"><a href="#contentContainerStyle" class="headerlink" title="contentContainerStyle"></a>contentContainerStyle</h3><p>样式应用到包裹所有子组件的 scroll content container 容器上</p>
+<h3 id="contentInset"><a href="#contentInset" class="headerlink" title="contentInset"></a>contentInset</h3><p>仅 iOS。滚动视图的边缘相对于内容的距离。默认是<code>{top: 0, left: 0, bottom: 0, right: 0}</code></p>
+<h3 id="contentInsetAdjustmentBehavior"><a href="#contentInsetAdjustmentBehavior" class="headerlink" title="contentInsetAdjustmentBehavior"></a>contentInsetAdjustmentBehavior</h3><p>仅 iOS。属性指定的话会用安全区的距离来调整内容区，默认值是”never”。只有在 ios 11 以上有效</p>
+<h3 id="contentOffset"><a href="#contentOffset" class="headerlink" title="contentOffset"></a>contentOffset</h3><p>仅 iOS。用来设置起始滚动的偏移。默认值是<code>{x: 0, y: 0}</code></p>
+<h3 id="decelerationRate"><a href="#decelerationRate" class="headerlink" title="decelerationRate"></a>decelerationRate</h3><p>浮点数值，确定用户释放手指之后 scroll view 滚动下降的速度。你可以用简短的字符串”normal”和”fast”来匹配响应 iOS 下的<code>UIScrollViewDecelerationRateNormal</code>和<code>UIScrollViewDecelerationRateFast</code></p>
+<ul>
+<li>“normal” (default)，在 iOS 上 0.998，Android 上 0.985</li>
+<li>“fast”，iOS 上 0.99，Android 上 0.9</li>
+</ul>
+<h3 id="directionalLockEnabled"><a href="#directionalLockEnabled" class="headerlink" title="directionalLockEnabled"></a>directionalLockEnabled</h3><p>仅 iOS。true 的话，ScrollView 会能够滚动的方向。默认是 false</p>
+<h3 id="disableIntervalMomentum"><a href="#disableIntervalMomentum" class="headerlink" title="disableIntervalMomentum"></a>disableIntervalMomentum</h3><p>这里意思含糊，云里雾里的。<br>如果是 true，无论手势滚动有多快，scroll view 都会停止在下一个 index 处(跟滚动释放的位置有关)。当 page 小余 ScrollView 的宽度时，可以用来水平分页。默认是 false</p>
+<h3 id="disableScrollViewPanResponder"><a href="#disableScrollViewPanResponder" class="headerlink" title="disableScrollViewPanResponder"></a>disableScrollViewPanResponder</h3><p>如果是 true，会禁用 Scroll View 的 js 事件响应，并将触摸控制完全交给子组件。如果<code>snapToInterval</code>启用将非常有用，因为它不遵循典型的触摸模式。不要在没有<code>snapToInterval</code>的正常 Scroll View 去启用它，否则在滚动时会出现无法预知的异常。默认值是 false</p>
+<h3 id="endFillColor"><a href="#endFillColor" class="headerlink" title="endFillColor"></a>endFillColor</h3><p>仅 Android。有时候 ScrollView 会比内容填充占用更多的空间。在这种情况下，这个属性的颜色会填充掉剩余空间，避免使用背景颜色从而避免的多余的绘制。这是一种高级的优化，通常情况下不需要。</p>
+<h3 id="horizontal"><a href="#horizontal" class="headerlink" title="horizontal"></a>horizontal</h3><p>会将 item 从竖着堆叠变成横着摆放</p>
+<h3 id="indicatorStyle"><a href="#indicatorStyle" class="headerlink" title="indicatorStyle"></a>indicatorStyle</h3><p>仅 iOS。滚动指示器的样式</p>
+<ul>
+<li>“default” (默认)，像”black”</li>
+<li>“black”，滚动指示器是黑色，在浅色背景下效果更好</li>
+<li>“white”，滚动指示器是白色，在黑色背景下效果更好</li>
+</ul>
+<h3 id="invertStickyHeaders"><a href="#invertStickyHeaders" class="headerlink" title="invertStickyHeaders"></a>invertStickyHeaders</h3><p>如果固定 Header 应该固定在底部而不是在 ScrollView 顶部。通常使用在翻转的 ScrollView</p>
+<h3 id="keyboardDismissMode"><a href="#keyboardDismissMode" class="headerlink" title="keyboardDismissMode"></a>keyboardDismissMode</h3><p>用户拖动的时候是否应该隐藏键盘<br>跨平台</p>
+<ul>
+<li>“none” (默认)，拖动不隐藏键盘</li>
+<li>“on-drag”，当拖动开始时键盘隐藏<br>仅 ios 有效</li>
+<li>“interactive”，通过拖动的交互方式关闭键盘，同时同步触摸移动；向上拖动可以取消操作。在 Android 上不支持这种行为并且行为为 none</li>
+</ul>
+<h3 id="keyboardShouldPersistTaps"><a href="#keyboardShouldPersistTaps" class="headerlink" title="keyboardShouldPersistTaps"></a>keyboardShouldPersistTaps</h3><p>当敲击后键盘应该保留显示</p>
+<ul>
+<li>“never”</li>
+<li>“always”</li>
+<li>“handled”</li>
+<li>“false”</li>
+<li>“true”</li>
+</ul>
+<h3 id="maintainVisibleContentPosition"><a href="#maintainVisibleContentPosition" class="headerlink" title="maintainVisibleContentPosition"></a>maintainVisibleContentPosition</h3><p>(这里有点懵逼，每个字能看懂，连起来就不知道啥意思)<br>仅 iOS。滚动视图将会调整滚动位置让当前第一个子组件可见，并且<code>minIndexForVisible</code>及更高将不会改变位置。这对于双向加载内容的列表有用，比如在聊天线程，否则新消息进来时可能造成滚动位置跳转。0 是常见值。但是 1 被用来跳过加载指示器或者其他不需要保持位置的内容。<br>如果用户在进行调整之前位于顶部的阈值之内，则<code>autoscrollToTopThreshold</code>用于在内容调整之后自动滚动到顶部。当用户想看到新消息滚动到那的应用程序非常有用，但是如果用户已经向上某种方式滚动并且滚动一堆消息<br>警告 1：启用此功能，滚动视图元素将重新排序，可能会造成跳转混乱。它可以被修复，但是当前没有计划。现在，使用此功能更不要在 ScrollViews or List 进行重新排序<br>警告 2：这在本机代码中使用 contentOffset 和 frame.origin 来计算可见性。关于内容是否“可见”，将不考虑遮挡，变换和其他复杂性</p>
+<h3 id="maximumZoomScale"><a href="#maximumZoomScale" class="headerlink" title="maximumZoomScale"></a>maximumZoomScale</h3><p>仅 iOS。最大允许的缩放比列，默认是 1</p>
+<h3 id="minimumZoomScale"><a href="#minimumZoomScale" class="headerlink" title="minimumZoomScale"></a>minimumZoomScale</h3><p>仅 iOS。最小允许的缩放比列，默认是 1</p>
+<h3 id="nestedScrollEnabled"><a href="#nestedScrollEnabled" class="headerlink" title="nestedScrollEnabled"></a>nestedScrollEnabled</h3><p>仅 Android。Android api21(5.0)以上才支持嵌套滚动。iOS 默认支持嵌套滚动</p>
+<h3 id="onContentSizeChange"><a href="#onContentSizeChange" class="headerlink" title="onContentSizeChange"></a>onContentSizeChange</h3><p>当 ScrollView 的可滚动内容大小放生变化时调用<br>处理函数被传递了宽和高参数<br>它被附加到 ScrollView 的内容容器的 onLayout 处理函数实现</p>
+<h3 id="onMomentumScrollBegin"><a href="#onMomentumScrollBegin" class="headerlink" title="onMomentumScrollBegin"></a>onMomentumScrollBegin</h3><p>当动量滚动开始时调用（ScrollView 滑动开始）</p>
+<h3 id="onMomentumScrollEnd"><a href="#onMomentumScrollEnd" class="headerlink" title="onMomentumScrollEnd"></a>onMomentumScrollEnd</h3><p>当动量滚动停止时调用（ScrollView 滑动停止）</p>
+<h3 id="onScroll"><a href="#onScroll" class="headerlink" title="onScroll"></a>onScroll</h3><p>在滚动的过程中，每帧最多调用一次此回调函数。调用的频率可以用<code>scrollEventThrottle</code>属性来控制。The event has the following shape (all values are numbers):</p>
+<pre><code>{
+  nativeEvent: {
+    contentInset: {bottom, left, right, top},
+    contentOffset: {x, y},
+    contentSize: {height, width},
+    layoutMeasurement: {height, width},
+    zoomScale
+  }
+}</code></pre><h3 id="onScrollBeginDrag"><a href="#onScrollBeginDrag" class="headerlink" title="onScrollBeginDrag"></a>onScrollBeginDrag</h3><p>当用户开始拖动视图时调用</p>
+<h3 id="onScrollEndDrag"><a href="#onScrollEndDrag" class="headerlink" title="onScrollEndDrag"></a>onScrollEndDrag</h3><p>当用户停止拖动并且 view 开始停止或者开始滑动时被动调用</p>
+<h3 id="onScrollToTop"><a href="#onScrollToTop" class="headerlink" title="onScrollToTop"></a>onScrollToTop</h3><p>仅 iOS。状态栏被点击时触发滚动到顶部</p>
+<h3 id="overScrollMode"><a href="#overScrollMode" class="headerlink" title="overScrollMode"></a>overScrollMode</h3><p>仅 Android。重写 overScrollMode 的默认值<br><strong>值可能为</strong></p>
+<ul>
+<li>“auto”：默认值，当内容足够大超过 ScrollView 时才允许用户滚动</li>
+<li>“always”：允许用户滚动视图</li>
+<li>“never”：不允许用户滚动</li>
+</ul>
+<h3 id="pagingEnabled"><a href="#pagingEnabled" class="headerlink" title="pagingEnabled"></a>pagingEnabled</h3><p>如果 true，scroll view 停止在可视视图大小的倍数上。可以用来水平分页。默认是 false<br>注意：竖直分页不支持 Android</p>
+<h3 id="persistentScrollbar"><a href="#persistentScrollbar" class="headerlink" title="persistentScrollbar"></a>persistentScrollbar</h3><p>仅 Android。当它不被使用时不会变成透明。默认是 false</p>
+<h3 id="pinchGestureEnabled"><a href="#pinchGestureEnabled" class="headerlink" title="pinchGestureEnabled"></a>pinchGestureEnabled</h3><p>仅 iOS。如果 true，允许通过捏的手势放大缩小。默认是 true</p>
+<h3 id="refreshControl"><a href="#refreshControl" class="headerlink" title="refreshControl"></a>refreshControl</h3><p>刷新组件，提供下拉刷新的功能。只有在竖直状态下有效</p>
+<h3 id="removeClippedSubviews"><a href="#removeClippedSubviews" class="headerlink" title="removeClippedSubviews"></a>removeClippedSubviews</h3><p>在大列表时可能会提高滚动性能</p>
+<blockquote>
+<p>有 bug，在某些场景下会导致内容丢失。谨慎使用</p>
+</blockquote>
+<h3 id="scrollBarThumbImage"><a href="#scrollBarThumbImage" class="headerlink" title="scrollBarThumbImage"></a>scrollBarThumbImage</h3><p>仅 VR。不想写….</p>
+<h3 id="scrollEnabled"><a href="#scrollEnabled" class="headerlink" title="scrollEnabled"></a>scrollEnabled</h3><p>如果是 false，无法通过交互滚动。默认是 true。<br>注意仍然可以通过 scrollTo 来实现滚动</p>
+<h3 id="scrollEventThrottle"><a href="#scrollEventThrottle" class="headerlink" title="scrollEventThrottle"></a>scrollEventThrottle</h3><p>仅 iOS。这个属性控制在滚动过程中，scroll 事件被调用的频率（单位是每秒事件数量）。更小的数值能够更及时的跟踪滚动位置，不过可能会带来性能问题，因为更多的信息会通过 bridge 传递。由于 JS 事件循环需要和屏幕刷新率同步，因此设置 1-16 之间的数值不会有实质区别。默认值为 0，意味着每次视图被滚动，scroll 事件只会被调用一次。</p>
+<h3 id="scrollIndicatorInsets"><a href="#scrollIndicatorInsets" class="headerlink" title="scrollIndicatorInsets"></a>scrollIndicatorInsets</h3><p>仅 iOS。决定滚动条距离视图边缘的坐标。这个值应该和 contentInset 一样。默认值为{0, 0, 0, 0}。</p>
+<h3 id="scrollPerfTag"><a href="#scrollPerfTag" class="headerlink" title="scrollPerfTag"></a>scrollPerfTag</h3><p>仅 Android。用于在此滚动视图上记录滚动性能的标签。将强制打开动量事件（请参见 sendMomentumEvents）,这并没有做任何开箱即用的事情，您需要实现自定义本机 FpsListener 才有用</p>
+<h3 id="scrollToOverflowEnabled"><a href="#scrollToOverflowEnabled" class="headerlink" title="scrollToOverflowEnabled"></a>scrollToOverflowEnabled</h3><p>仅 iOS。scroll view 可以通过编程滚动超过内容大小。默认是 false</p>
+<h3 id="scrollsToTop"><a href="#scrollsToTop" class="headerlink" title="scrollsToTop"></a>scrollsToTop</h3><p>仅 iOS。如果为 true，当状态被点击，scroll view 滚动到顶部。默认是 true</p>
+<h3 id="DEPRECATED-sendUpdatedChildFrames"><a href="#DEPRECATED-sendUpdatedChildFrames" class="headerlink" title="DEPRECATED_sendUpdatedChildFrames"></a>DEPRECATED_sendUpdatedChildFrames</h3><p>仅 iOS。如果为 true，则 ScrollView 将在滚动事件中发出 updateChildFrames 数据，否则将不计算或发出子帧数据。存在是为了支持遗留问题，而应使用 onLayout 来检索帧数据。默认值为 false。</p>
+<h3 id="showsHorizontalScrollIndicator"><a href="#showsHorizontalScrollIndicator" class="headerlink" title="showsHorizontalScrollIndicator"></a>showsHorizontalScrollIndicator</h3><p>如果 true，显示水平滚动的指示器。默认是 true</p>
+<h3 id="showsVerticalScrollIndicator"><a href="#showsVerticalScrollIndicator" class="headerlink" title="showsVerticalScrollIndicator"></a>showsVerticalScrollIndicator</h3><p>如果 true，显示竖直滚动的指示器。默认是 true</p>
+<h3 id="snapToAlignment"><a href="#snapToAlignment" class="headerlink" title="snapToAlignment"></a>snapToAlignment</h3><p>当设置了 snapToInterval，snapToAlignment 会定义 snap 与滚动视图之间的关系。</p>
+<ul>
+<li>start (默认值) 会将 snap 对齐在左侧（水平）或顶部（垂直）</li>
+<li>center 会将 snap 对齐到中间</li>
+<li>end 会将 snap 对齐到右侧（水平）或底部（垂直）</li>
+</ul>
+<h3 id="snapToEnd"><a href="#snapToEnd" class="headerlink" title="snapToEnd"></a>snapToEnd</h3><p>和<code>snapToOffsets</code>一起使用。默认，列表尾部作为 snap 的偏移量。设置<code>snapToEnd</code>为 false 禁用此行为，并允许列表在其结尾和最后一个 snapToOffsets 偏移量之间自由滚动。默认是 true</p>
+<h3 id="snapToInterval"><a href="#snapToInterval" class="headerlink" title="snapToInterval"></a>snapToInterval</h3><p>当设置了此属性时，会让滚动视图滚动停止后，停止在 snapToInterval 的倍数的位置。这可以在一些子视图比滚动视图本身小的时候用于实现分页显示 <code>snapToAlignment</code>以及<code>decelerationRate="fast"</code> 组合使用。覆盖可配置性较低的 pagesEnabled 属性。</p>
+<h3 id="snapToOffsets"><a href="#snapToOffsets" class="headerlink" title="snapToOffsets"></a>snapToOffsets</h3><p>设置后，使滚动视图在定义的偏移处停止。这可用于对长度小于滚动视图的各种大小的子项进行分页,通常与<code>decelerationRate ="fast"</code>结合使用。重写可配置性较低<code>pagesEnabled</code>和 s<code>snapToInterval</code>属性。</p>
+<h3 id="snapToStart"><a href="#snapToStart" class="headerlink" title="snapToStart"></a>snapToStart</h3><p>与<code>snapToOffsets</code>一起使用。默认，列表的开始作为停住点的偏移。设置<code>snapToStart</code>false 可以禁止此行为，允许礼包在开始和第一个 snap 偏移量之间滚动。默认是 true</p>
+<h3 id="stickyHeaderIndices"><a href="#stickyHeaderIndices" class="headerlink" title="stickyHeaderIndices"></a>stickyHeaderIndices</h3><p>一组子元素索引，确定滚动时哪些子元素停靠在屏幕顶部。例子，传递<code>stickyHeaderIndices={[0]}</code>将固定第一个子元素显示在顶部。这个属性不支持与<code>horizontal={true}</code>一起使用。</p>
+<h3 id="zoomScale"><a href="#zoomScale" class="headerlink" title="zoomScale"></a>zoomScale</h3><p>仅 iOS。滚动内容的当前缩放比列。默认是 1</p>
+<h2 id="Methods"><a href="#Methods" class="headerlink" title="Methods"></a>Methods</h2><h3 id="flashScrollIndicators"><a href="#flashScrollIndicators" class="headerlink" title="flashScrollIndicators()"></a>flashScrollIndicators()</h3><p>让滚动指示器显示短暂</p>
+<h3 id="scrollTo"><a href="#scrollTo" class="headerlink" title="scrollTo()"></a>scrollTo()</h3><p>滚动到指定的 x,y 位置。可以带着动画滚动或者直接到该位置<br>注意：这个混乱的函数签名由于历史原因，这个函数接受分隔的参数而不是对象。由于 x，y 传值模棱两可，应该被废弃</p>
+<h3 id="scrollToEnd"><a href="#scrollToEnd" class="headerlink" title="scrollToEnd()"></a>scrollToEnd()</h3><p>竖直方向滚动到底部，水平方向滚动到右边。可以带动画滚动。Android 上可能需要制定滚动时常。如果不指定默认是包含动画</p>
+<h3 id="scrollWithoutAnimationTo"><a href="#scrollWithoutAnimationTo" class="headerlink" title="scrollWithoutAnimationTo()"></a>scrollWithoutAnimationTo()</h3><p>废弃应该用 scrollTo 代替</p>
+<script>
+        document.querySelectorAll('.github-emoji')
+          .forEach(el => {
+            if (!el.dataset.src) { return; }
+            const img = document.createElement('img');
+            img.style = 'display:none !important;';
+            img.src = el.dataset.src;
+            img.addEventListener('error', () => {
+              img.remove();
+              el.style.color = 'inherit';
+              el.style.backgroundImage = 'none';
+              el.style.background = 'none';
+            });
+            img.addEventListener('load', () => {
+              img.remove();
+            });
+            document.body.appendChild(img);
+          });
+      </script>
+            </div>
+            <hr/>
+
+            
+
+    <div class="reprint" id="reprint-statement">
+        
+            <div class="reprint__author">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-user">
+                        文章作者:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="https://keyboard3.github.io" rel="external nofollow noreferrer">keyboard3</a>
+                </span>
+            </div>
+            <div class="reprint__type">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-link">
+                        文章链接:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="https://keyboard3.github.io/blog/scrollview/">https://keyboard3.github.io/blog/scrollview/</a>
+                </span>
+            </div>
+            <div class="reprint__notice">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-copyright">
+                        版权声明:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    本博客所有文章除特別声明外，均采用
+                    <a href="https://creativecommons.org/licenses/by/4.0/deed.zh" rel="external nofollow noreferrer" target="_blank">CC BY 4.0</a>
+                    许可协议。转载请注明来源
+                    <a href="https://keyboard3.github.io" target="_blank">keyboard3</a>
+                    !
+                </span>
+            </div>
+        
+    </div>
+
+    <script async defer>
+      document.addEventListener("copy", function (e) {
+        let toastHTML = '<span>复制成功，请遵循本文的转载规则</span><button class="btn-flat toast-action" onclick="navToReprintStatement()" style="font-size: smaller">查看</a>';
+        M.toast({html: toastHTML})
+      });
+
+      function navToReprintStatement() {
+        $("html, body").animate({scrollTop: $("#reprint-statement").offset().top - 80}, 800);
+      }
+    </script>
+
+
+
+            <div class="tag_share" style="display: block;">
+                <div class="post-meta__tag-list" style="display: inline-block;">
+                    
+                        <div class="article-tag">
+                            
+                                <a href="/blog/tags/react-native/">
+                                    <span class="chip bg-color">react-native</span>
+                                </a>
+                            
+                                <a href="/blog/tags/api/">
+                                    <span class="chip bg-color">api</span>
+                                </a>
+                            
+                                <a href="/blog/tags/%E7%BF%BB%E8%AF%91/">
+                                    <span class="chip bg-color">翻译</span>
+                                </a>
+                            
+                                <a href="/blog/tags/%E5%AE%8C%E7%BB%93/">
+                                    <span class="chip bg-color">完结</span>
+                                </a>
+                            
+                        </div>
+                    
+                </div>
+                <div class="post_share" style="zoom: 80%; width: fit-content; display: inline-block; float: right; margin: -0.15rem 0;">
+                    <link rel="stylesheet" type="text/css" href="/blog/libs/share/css/share.min.css">
+
+<div id="article-share">
+    
+    
+    <div class="social-share" data-sites="twitter,facebook,google,qq,qzone,wechat,weibo,douban,linkedin" data-wechat-qrcode-helper="<p>微信扫一扫即可分享！</p>"></div>
+    <script src="/blog/libs/share/js/social-share.min.js"></script>
+    
+
+    
+
+</div>
+
+                </div>
+            </div>
+            
+                <style>
+    #reward {
+        margin: 40px 0;
+        text-align: center;
+    }
+
+    #reward .reward-link {
+        font-size: 1.4rem;
+        line-height: 38px;
+    }
+
+    #reward .btn-floating:hover {
+        box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2), 0 5px 15px rgba(0, 0, 0, 0.2);
+    }
+
+    #rewardModal {
+        width: 320px;
+        height: 350px;
+    }
+
+    #rewardModal .reward-title {
+        margin: 15px auto;
+        padding-bottom: 5px;
+    }
+
+    #rewardModal .modal-content {
+        padding: 10px;
+    }
+
+    #rewardModal .close {
+        position: absolute;
+        right: 15px;
+        top: 15px;
+        color: rgba(0, 0, 0, 0.5);
+        font-size: 1.3rem;
+        line-height: 20px;
+        cursor: pointer;
+    }
+
+    #rewardModal .close:hover {
+        color: #ef5350;
+        transform: scale(1.3);
+        -moz-transform:scale(1.3);
+        -webkit-transform:scale(1.3);
+        -o-transform:scale(1.3);
+    }
+
+    #rewardModal .reward-tabs {
+        margin: 0 auto;
+        width: 210px;
+    }
+
+    .reward-tabs .tabs {
+        height: 38px;
+        margin: 10px auto;
+        padding-left: 0;
+    }
+
+    .reward-content ul {
+        padding-left: 0 !important;
+    }
+
+    .reward-tabs .tabs .tab {
+        height: 38px;
+        line-height: 38px;
+    }
+
+    .reward-tabs .tab a {
+        color: #fff;
+        background-color: #ccc;
+    }
+
+    .reward-tabs .tab a:hover {
+        background-color: #ccc;
+        color: #fff;
+    }
+
+    .reward-tabs .wechat-tab .active {
+        color: #fff !important;
+        background-color: #22AB38 !important;
+    }
+
+    .reward-tabs .alipay-tab .active {
+        color: #fff !important;
+        background-color: #019FE8 !important;
+    }
+
+    .reward-tabs .reward-img {
+        width: 210px;
+        height: 210px;
+    }
+</style>
+
+<div id="reward">
+    <a href="#rewardModal" class="reward-link modal-trigger btn-floating btn-medium waves-effect waves-light red">赏</a>
+
+    <!-- Modal Structure -->
+    <div id="rewardModal" class="modal">
+        <div class="modal-content">
+            <a class="close modal-close"><i class="fas fa-times"></i></a>
+            <h4 class="reward-title">你的赏识是我前进的动力</h4>
+            <div class="reward-content">
+                <div class="reward-tabs">
+                    <ul class="tabs row">
+                        <li class="tab col s6 alipay-tab waves-effect waves-light"><a href="#alipay">支付宝</a></li>
+                        <li class="tab col s6 wechat-tab waves-effect waves-light"><a href="#wechat">微 信</a></li>
+                    </ul>
+                    <div id="alipay">
+                        <img src="/blog/medias/reward/alipay.jpg" class="reward-img" alt="支付宝打赏二维码">
+                    </div>
+                    <div id="wechat">
+                        <img src="/blog/medias/reward/wechat.png" class="reward-img" alt="微信打赏二维码">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    $(function () {
+        $('.tabs').tabs();
+    });
+</script>
+            
+        </div>
+    </div>
+
+    
+
+    
+
+    
+
+    
+
+    
+        <style>
+    .valine-card {
+        margin: 1.5rem auto;
+    }
+
+    .valine-card .card-content {
+        padding: 20px 20px 5px 20px;
+    }
+
+    #vcomments textarea {
+        box-sizing: border-box;
+        background: url("/medias/comment_bg.png") 100% 100% no-repeat;
+    }
+
+    #vcomments p {
+        margin: 2px 2px 10px;
+        font-size: 1.05rem;
+        line-height: 1.78rem;
+    }
+
+    #vcomments blockquote p {
+        text-indent: 0.2rem;
+    }
+
+    #vcomments a {
+        padding: 0 2px;
+        color: #4cbf30;
+        font-weight: 500;
+        text-decoration: none;
+    }
+
+    #vcomments img {
+        max-width: 100%;
+        height: auto;
+        cursor: pointer;
+    }
+
+    #vcomments ol li {
+        list-style-type: decimal;
+    }
+
+    #vcomments ol,
+    ul {
+        display: block;
+        padding-left: 2em;
+        word-spacing: 0.05rem;
+    }
+
+    #vcomments ul li,
+    ol li {
+        display: list-item;
+        line-height: 1.8rem;
+        font-size: 1rem;
+    }
+
+    #vcomments ul li {
+        list-style-type: disc;
+    }
+
+    #vcomments ul ul li {
+        list-style-type: circle;
+    }
+
+    #vcomments table, th, td {
+        padding: 12px 13px;
+        border: 1px solid #dfe2e5;
+    }
+
+    #vcomments table, th, td {
+        border: 0;
+    }
+
+    table tr:nth-child(2n), thead {
+        background-color: #fafafa;
+    }
+
+    #vcomments table th {
+        background-color: #f2f2f2;
+        min-width: 80px;
+    }
+
+    #vcomments table td {
+        min-width: 80px;
+    }
+
+    #vcomments h1 {
+        font-size: 1.85rem;
+        font-weight: bold;
+        line-height: 2.2rem;
+    }
+
+    #vcomments h2 {
+        font-size: 1.65rem;
+        font-weight: bold;
+        line-height: 1.9rem;
+    }
+
+    #vcomments h3 {
+        font-size: 1.45rem;
+        font-weight: bold;
+        line-height: 1.7rem;
+    }
+
+    #vcomments h4 {
+        font-size: 1.25rem;
+        font-weight: bold;
+        line-height: 1.5rem;
+    }
+
+    #vcomments h5 {
+        font-size: 1.1rem;
+        font-weight: bold;
+        line-height: 1.4rem;
+    }
+
+    #vcomments h6 {
+        font-size: 1rem;
+        line-height: 1.3rem;
+    }
+
+    #vcomments p {
+        font-size: 1rem;
+        line-height: 1.5rem;
+    }
+
+    #vcomments hr {
+        margin: 12px 0;
+        border: 0;
+        border-top: 1px solid #ccc;
+    }
+
+    #vcomments blockquote {
+        margin: 15px 0;
+        border-left: 5px solid #42b983;
+        padding: 1rem 0.8rem 0.3rem 0.8rem;
+        color: #666;
+        background-color: rgba(66, 185, 131, .1);
+    }
+
+    #vcomments pre {
+        font-family: monospace, monospace;
+        padding: 1.2em;
+        margin: .5em 0;
+        background: #272822;
+        overflow: auto;
+        border-radius: 0.3em;
+        tab-size: 4;
+    }
+
+    #vcomments code {
+        font-family: monospace, monospace;
+        padding: 1px 3px;
+        font-size: 0.92rem;
+        color: #e96900;
+        background-color: #f8f8f8;
+        border-radius: 2px;
+    }
+
+    #vcomments pre code {
+        font-family: monospace, monospace;
+        padding: 0;
+        color: #e8eaf6;
+        background-color: #272822;
+    }
+
+    #vcomments pre[class*="language-"] {
+        padding: 1.2em;
+        margin: .5em 0;
+    }
+
+    #vcomments code[class*="language-"],
+    pre[class*="language-"] {
+        color: #e8eaf6;
+    }
+
+    #vcomments [type="checkbox"]:not(:checked), [type="checkbox"]:checked {
+        position: inherit;
+        margin-left: -1.3rem;
+        margin-right: 0.4rem;
+        margin-top: -1px;
+        vertical-align: middle;
+        left: unset;
+        visibility: visible;
+    }
+
+    #vcomments b,
+    strong {
+        font-weight: bold;
+    }
+
+    #vcomments dfn {
+        font-style: italic;
+    }
+
+    #vcomments small {
+        font-size: 85%;
+    }
+
+    #vcomments cite {
+        font-style: normal;
+    }
+
+    #vcomments mark {
+        background-color: #fcf8e3;
+        padding: .2em;
+    }
+
+    #vcomments table, th, td {
+        padding: 12px 13px;
+        border: 1px solid #dfe2e5;
+    }
+
+    table tr:nth-child(2n), thead {
+        background-color: #fafafa;
+    }
+
+    #vcomments table th {
+        background-color: #f2f2f2;
+        min-width: 80px;
+    }
+
+    #vcomments table td {
+        min-width: 80px;
+    }
+
+    #vcomments [type="checkbox"]:not(:checked), [type="checkbox"]:checked {
+        position: inherit;
+        margin-left: -1.3rem;
+        margin-right: 0.4rem;
+        margin-top: -1px;
+        vertical-align: middle;
+        left: unset;
+        visibility: visible;
+    }
+</style>
+
+<div class="card valine-card" data-aos="fade-up">
+    <div class="comment_headling" style="font-size: 20px; font-weight: 700; position: relative; left: 20px; top: 15px; padding-bottom: 5px;">
+        <i class="fas fa-comments fa-fw" aria-hidden="true"></i>
+        <span>评论</span>
+    </div>
+    <div id="vcomments" class="card-content" style="display: grid">
+    </div>
+</div>
+
+<script src="/blog/libs/valine/av-min.js"></script>
+<script src="/blog/libs/valine/Valine.min.js"></script>
+<script>
+    new Valine({
+        el: '#vcomments',
+        appId: 'LjtOad9cDpBmF6oLUHgGTBH2-gzGzoHsz',
+        appKey: '0ybf4IysannKKpv99yB4aMbL',
+        notify: 'false' === 'true',
+        verify: 'false' === 'true',
+        visitor: 'true' === 'true',
+        avatar: 'mm',
+        pageSize: '10',
+        lang: 'zh-cn',
+        placeholder: 'just go go'
+    });
+</script>
+
+    
+
+    
+
+<article id="prenext-posts" class="prev-next articles">
+    <div class="row article-row">
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge left-badge text-color">
+                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
+            <div class="card">
+                <a href="/blog/nextjs-learn/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/blog/medias/featureimages/0.jpg" class="responsive-img" alt="next.js learn">
+                        
+                        <span class="card-title">next.js learn</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            参考原文 Nextjs learn
+介绍如今创建单页 js 应用可能的困难，已经不再是秘密。幸运的是，已经有多个框架和库可以供选择。即使到现在，在你构建一个不错的应用之前，它仍然具有很高的学习曲线。因为你需要学习客户端路由，页面布局，api
+                        
+                    </div>
+                    <div class="publish-info">
+                        <span class="publish-date">
+                            <i class="far fa-clock fa-fw icon-date"></i>2020-03-30
+                        </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-user fa-fw"></i>
+                            keyboard3
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/blog/tags/%E7%BF%BB%E8%AF%91/">
+                        <span class="chip bg-color">翻译</span>
+                    </a>
+                    
+                    <a href="/blog/tags/%E8%BF%9B%E8%A1%8C%E4%B8%AD/">
+                        <span class="chip bg-color">进行中</span>
+                    </a>
+                    
+                    <a href="/blog/tags/next-js/">
+                        <span class="chip bg-color">next.js</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge right-badge text-color">
+                下一篇&nbsp;<i class="fas fa-chevron-right"></i>
+            </div>
+            <div class="card">
+                <a href="/blog/virtualizedlist/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/blog/medias/featureimages/1.jpg" class="responsive-img" alt="VirtualizedList">
+                        
+                        <span class="card-title">VirtualizedList</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            VirtualizedList介绍是FlatList和SectionList的父类实现。有更好的记录。通常情况下应该使用FlatList，除非需要更灵活采用它。比如你需要使用不可变数据中文文档虚拟化列表通过维护一个可见的元素在有限的窗口，不
+                        
+                    </div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2020-03-15
+                            </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-user fa-fw"></i>
+                            keyboard3
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/blog/tags/react-native/">
+                        <span class="chip bg-color">react-native</span>
+                    </a>
+                    
+                    <a href="/blog/tags/api/">
+                        <span class="chip bg-color">api</span>
+                    </a>
+                    
+                    <a href="/blog/tags/%E7%BF%BB%E8%AF%91/">
+                        <span class="chip bg-color">翻译</span>
+                    </a>
+                    
+                    <a href="/blog/tags/%E5%AE%8C%E7%BB%93/">
+                        <span class="chip bg-color">完结</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+    </div>
+</article>
+
+</div>
+
+
+
+<!-- 代码块功能依赖 -->
+<script type="text/javascript" src="/blog/libs/codeBlock/codeBlockFuction.js"></script>
+
+<!-- 代码语言 -->
+
+<script type="text/javascript" src="/blog/libs/codeBlock/codeLang.js"></script>
+
+
+<!-- 代码块复制 -->
+
+<script type="text/javascript" src="/blog/libs/codeBlock/codeCopy.js"></script>
+
+
+<!-- 代码块收缩 -->
+
+<script type="text/javascript" src="/blog/libs/codeBlock/codeShrink.js"></script>
+
+
+<!-- 代码块折行 -->
+
+
+    </div>
+    <div id="toc-aside" class="expanded col l3 hide-on-med-and-down">
+        <div class="toc-widget">
+            <div class="toc-title"><i class="far fa-list-alt"></i>&nbsp;&nbsp;目录</div>
+            <div id="toc-content"></div>
+        </div>
+    </div>
+</div>
+
+<!-- TOC 悬浮按钮. -->
+
+<div id="floating-toc-btn" class="hide-on-med-and-down">
+    <a class="btn-floating btn-large bg-color">
+        <i class="fas fa-list-ul"></i>
+    </a>
+</div>
+
+
+<script src="/blog/libs/tocbot/tocbot.min.js"></script>
+<script>
+    $(function () {
+        tocbot.init({
+            tocSelector: '#toc-content',
+            contentSelector: '#articleContent',
+            headingsOffset: -($(window).height() * 0.4 - 45),
+            collapseDepth: Number('0'),
+            headingSelector: 'h2, h3, h4'
+        });
+
+        // modify the toc link href to support Chinese.
+        let i = 0;
+        let tocHeading = 'toc-heading-';
+        $('#toc-content a').each(function () {
+            $(this).attr('href', '#' + tocHeading + (++i));
+        });
+
+        // modify the heading title id to support Chinese.
+        i = 0;
+        $('#articleContent').children('h2, h3, h4').each(function () {
+            $(this).attr('id', tocHeading + (++i));
+        });
+
+        // Set scroll toc fixed.
+        let tocHeight = parseInt($(window).height() * 0.4 - 64);
+        let $tocWidget = $('.toc-widget');
+        $(window).scroll(function () {
+            let scroll = $(window).scrollTop();
+            /* add post toc fixed. */
+            if (scroll > tocHeight) {
+                $tocWidget.addClass('toc-fixed');
+            } else {
+                $tocWidget.removeClass('toc-fixed');
+            }
+        });
+
+        
+        /* 修复文章卡片 div 的宽度. */
+        let fixPostCardWidth = function (srcId, targetId) {
+            let srcDiv = $('#' + srcId);
+            if (srcDiv.length === 0) {
+                return;
+            }
+
+            let w = srcDiv.width();
+            if (w >= 450) {
+                w = w + 21;
+            } else if (w >= 350 && w < 450) {
+                w = w + 18;
+            } else if (w >= 300 && w < 350) {
+                w = w + 16;
+            } else {
+                w = w + 14;
+            }
+            $('#' + targetId).width(w);
+        };
+
+        // 切换TOC目录展开收缩的相关操作.
+        const expandedClass = 'expanded';
+        let $tocAside = $('#toc-aside');
+        let $mainContent = $('#main-content');
+        $('#floating-toc-btn .btn-floating').click(function () {
+            if ($tocAside.hasClass(expandedClass)) {
+                $tocAside.removeClass(expandedClass).hide();
+                $mainContent.removeClass('l9');
+            } else {
+                $tocAside.addClass(expandedClass).show();
+                $mainContent.addClass('l9');
+            }
+            fixPostCardWidth('artDetail', 'prenext-posts');
+        });
+        
+    });
+</script>
+
+    
+
+</main>
+
+
+
+    <footer class="page-footer bg-color">
+    <div class="container row center-align" style="margin-bottom: 0px !important;">
+        <div class="col s12 m8 l8 copy-right">
+            Copyright&nbsp;&copy;
+            <span id="year">2020</span>
+            <a href="https://keyboard3.github.io" target="_blank">keyboard3</a>
+            |&nbsp;Powered by&nbsp;<a href="https://hexo.io/" target="_blank">Hexo</a>
+            |&nbsp;Theme&nbsp;<a href="https://github.com/blinkfox/hexo-theme-matery" target="_blank">Matery</a>
+            <br>
+            
+            &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
+                class="white-color">105.3k</span>&nbsp;字
+            
+            
+            
+            
+            
+            
+            <span id="busuanzi_container_site_pv">
+                |&nbsp;<i class="far fa-eye"></i>&nbsp;总访问量:&nbsp;<span id="busuanzi_value_site_pv"
+                    class="white-color"></span>&nbsp;次
+            </span>
+            
+            
+            <span id="busuanzi_container_site_uv">
+                |&nbsp;<i class="fas fa-users"></i>&nbsp;总访问人数:&nbsp;<span id="busuanzi_value_site_uv"
+                    class="white-color"></span>&nbsp;人
+            </span>
+            
+            <br>
+            
+            <br>
+            
+        </div>
+        <div class="col s12 m4 l4 social-link social-statis">
+    <a href="https://github.com/keyboard3" class="tooltipped" target="_blank" data-tooltip="访问我的GitHub" data-position="top" data-delay="50">
+        <i class="fab fa-github"></i>
+    </a>
+
+
+
+    <a href="mailto:keyboard3@icloud.com" class="tooltipped" target="_blank" data-tooltip="邮件联系我" data-position="top" data-delay="50">
+        <i class="fas fa-envelope-open"></i>
+    </a>
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <a href="/blog/atom.xml" class="tooltipped" target="_blank" data-tooltip="RSS 订阅" data-position="top" data-delay="50">
+        <i class="fas fa-rss"></i>
+    </a>
+
+</div>
+    </div>
+</footer>
+
+<div class="progress-bar"></div>
+
+
+    <!-- 搜索遮罩框 -->
+<div id="searchModal" class="modal">
+    <div class="modal-content">
+        <div class="search-header">
+            <span class="title"><i class="fas fa-search"></i>&nbsp;&nbsp;搜索</span>
+            <input type="search" id="searchInput" name="s" placeholder="请输入搜索的关键字"
+                   class="search-input">
+        </div>
+        <div id="searchResult"></div>
+    </div>
+</div>
+
+<script src="/blog/js/search.js"></script>
+<script type="text/javascript">
+$(function () {
+    searchFunc("/blog/" + "search.xml", 'searchInput', 'searchResult');
+});
+</script>
+    <!-- 回到顶部按钮 -->
+<div id="backTop" class="top-scroll">
+    <a class="btn-floating btn-large waves-effect waves-light" href="#!">
+        <i class="fas fa-arrow-up"></i>
+    </a>
+</div>
+
+
+    <script src="/blog/libs/materialize/materialize.min.js"></script>
+    <script src="/blog/libs/masonry/masonry.pkgd.min.js"></script>
+    <script src="/blog/libs/aos/aos.js"></script>
+    <script src="/blog/libs/scrollprogress/scrollProgress.min.js"></script>
+    <script src="/blog/libs/lightGallery/js/lightgallery-all.min.js"></script>
+    <script src="/blog/js/matery.js"></script>
+
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-160750441-1"></script>
+<script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() {
+        dataLayer.push(arguments);
+    }
+
+    gtag('js', new Date());
+    gtag('config', 'UA-160750441-1');
+</script>
+
+
+    <!-- Baidu Analytics -->
+
+    <!-- Baidu Push -->
+
+<script>
+    (function () {
+        var bp = document.createElement('script');
+        var curProtocol = window.location.protocol.split(':')[0];
+        if (curProtocol === 'https') {
+            bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+        } else {
+            bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+        }
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(bp, s);
+    })();
+</script>
+
+    
+    
+    <script async src="/blog/libs/others/busuanzi.pure.mini.js"></script>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    
+    
+    <script src="/blog/libs/instantpage/instantpage.js" type="module"></script>
+    
+
+<script src="/blog/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"log":false,"model":{"jsonPath":"/blog/live2dw/assets/tororo.model.json"},"display":{"position":"left","width":150,"height":300},"mobile":{"show":true},"react":{"opacity":1}});</script></body>
+
+</html>

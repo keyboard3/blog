@@ -1,0 +1,1494 @@
+<!DOCTYPE HTML>
+<html lang="zh-CN">
+
+
+<head>
+    <meta charset="utf-8">
+    <meta name="keywords" content="next源码分析, keyboard3的博客">
+    <meta name="description" content="重定向路由 rewrite 参数分析过程next
+  build
+    //例子：
+      ~/work/dev-web/next.js/examples/custom-routes-proxying/node_modules/nex">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="renderer" content="webkit|ie-stand|ie-comp">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <title>next源码分析 | keyboard3的博客</title>
+    <link rel="icon" type="image/png" href="/blog/favicon.png">
+
+    <link rel="stylesheet" type="text/css" href="/blog/libs/awesome/css/all.css">
+    <link rel="stylesheet" type="text/css" href="/blog/libs/materialize/materialize.min.css">
+    <link rel="stylesheet" type="text/css" href="/blog/libs/aos/aos.css">
+    <link rel="stylesheet" type="text/css" href="/blog/libs/animate/animate.min.css">
+    <link rel="stylesheet" type="text/css" href="/blog/libs/lightGallery/css/lightgallery.min.css">
+    <link rel="stylesheet" type="text/css" href="/blog/css/matery.css">
+    <link rel="stylesheet" type="text/css" href="/blog/css/my.css">
+    
+    <script src="/blog/libs/jquery/jquery.min.js"></script>
+    
+<meta name="generator" content="Hexo 4.2.0"><link rel="alternate" href="/blog/atom.xml" title="keyboard3的博客" type="application/atom+xml">
+<link rel="stylesheet" href="/blog/css/prism-tomorrow.css" type="text/css">
+<link rel="stylesheet" href="/blog/css/prism-line-numbers.css" type="text/css"></head>
+
+
+<body>
+    <header class="navbar-fixed">
+    <nav id="headNav" class="bg-color nav-transparent">
+        <div id="navContainer" class="nav-wrapper head-container">
+            <div class="brand-logo">
+                <a href="/blog/" class="waves-effect waves-light">
+                    
+                    <img src="/blog/medias/logo.png" class="logo-img" alt="LOGO">
+                    
+                    <span class="logo-span">keyboard3的博客</span>
+                </a>
+            </div>
+            
+
+<a href="#" data-target="mobile-nav" class="sidenav-trigger button-collapse"><i class="fas fa-bars"></i></a>
+<ul class="right nav-menu">
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/blog" class="waves-effect waves-light">
+      
+      <i class="fas fa-home" style="zoom: 0.6;"></i>
+      
+      <span>首页</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/blog/tags" class="waves-effect waves-light">
+      
+      <i class="fas fa-tags" style="zoom: 0.6;"></i>
+      
+      <span>标签</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/blog/archives" class="waves-effect waves-light">
+      
+      <i class="fas fa-archive" style="zoom: 0.6;"></i>
+      
+      <span>归档</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/blog/about" class="waves-effect waves-light">
+      
+      <i class="fas fa-user-circle" style="zoom: 0.6;"></i>
+      
+      <span>关于</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/blog/contact" class="waves-effect waves-light">
+      
+      <i class="fas fa-comments" style="zoom: 0.6;"></i>
+      
+      <span>留言板</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/blog/friends" class="waves-effect waves-light">
+      
+      <i class="fas fa-address-book" style="zoom: 0.6;"></i>
+      
+      <span>友情链接</span>
+    </a>
+    
+  </li>
+  
+  <li>
+    <a href="#searchModal" class="modal-trigger waves-effect waves-light">
+      <i id="searchIcon" class="fas fa-search" title="搜索" style="zoom: 0.85;"></i>
+    </a>
+  </li>
+</ul>
+
+<div id="mobile-nav" class="side-nav sidenav">
+
+    <div class="mobile-head bg-color">
+        
+        <img src="/blog/medias/logo.png" class="logo-img circle responsive-img">
+        
+        <div class="logo-name">keyboard3的博客</div>
+        <div class="logo-desc">
+            
+            我想事业有成，家庭美满，不过好像有点远
+            
+        </div>
+    </div>
+
+    
+
+    <ul class="menu-list mobile-menu-list">
+        
+        <li class="m-nav-item">
+	  
+		<a href="/blog" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-home"></i>
+			
+			首页
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/blog/tags" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-tags"></i>
+			
+			标签
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/blog/archives" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-archive"></i>
+			
+			归档
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/blog/about" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-user-circle"></i>
+			
+			关于
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/blog/contact" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-comments"></i>
+			
+			留言板
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/blog/friends" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-address-book"></i>
+			
+			友情链接
+		</a>
+          
+        </li>
+        
+        
+    </ul>
+</div>
+
+        </div>
+
+        
+    </nav>
+
+</header>
+
+    
+
+
+
+<div class="bg-cover pd-header post-cover" style="background-image: url('/blog/medias/featureimages/2.jpg')">
+    <div class="container" style="right: 0px;left: 0px;">
+        <div class="row">
+            <div class="col s12 m12 l12">
+                <div class="brand">
+                    <h1 class="description center-align post-title">next源码分析</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+<main class="post-container content">
+
+    
+    <link rel="stylesheet" href="/blog/libs/tocbot/tocbot.css">
+<style>
+    #articleContent h1::before,
+    #articleContent h2::before,
+    #articleContent h3::before,
+    #articleContent h4::before,
+    #articleContent h5::before,
+    #articleContent h6::before {
+        display: block;
+        content: " ";
+        height: 100px;
+        margin-top: -100px;
+        visibility: hidden;
+    }
+
+    #articleContent :focus {
+        outline: none;
+    }
+
+    .toc-fixed {
+        position: fixed;
+        top: 64px;
+    }
+
+    .toc-widget {
+        width: 345px;
+        padding-left: 20px;
+    }
+
+    .toc-widget .toc-title {
+        margin: 35px 0 15px 0;
+        padding-left: 17px;
+        font-size: 1.5rem;
+        font-weight: bold;
+        line-height: 1.5rem;
+    }
+
+    .toc-widget ol {
+        padding: 0;
+        list-style: none;
+    }
+
+    #toc-content {
+        height: calc(100vh - 250px);
+        overflow: auto;
+    }
+
+    #toc-content ol {
+        padding-left: 10px;
+    }
+
+    #toc-content ol li {
+        padding-left: 10px;
+    }
+
+    #toc-content .toc-link:hover {
+        color: #42b983;
+        font-weight: 700;
+        text-decoration: underline;
+    }
+
+    #toc-content .toc-link::before {
+        background-color: transparent;
+        max-height: 25px;
+    }
+
+    #toc-content .is-active-link {
+        color: #42b983;
+    }
+
+    #toc-content .is-active-link::before {
+        background-color: #42b983;
+    }
+
+    #floating-toc-btn {
+        position: fixed;
+        right: 15px;
+        bottom: 76px;
+        padding-top: 15px;
+        margin-bottom: 0;
+        z-index: 998;
+    }
+
+    #floating-toc-btn .btn-floating {
+        width: 48px;
+        height: 48px;
+    }
+
+    #floating-toc-btn .btn-floating i {
+        line-height: 48px;
+        font-size: 1.4rem;
+    }
+</style>
+<div class="row">
+    <div id="main-content" class="col s12 m12 l9">
+        <!-- 文章内容详情 -->
+<div id="artDetail">
+    <div class="card">
+        <div class="card-content article-info">
+            <div class="row tag-cate">
+                <div class="col s7">
+                    
+                          <div class="article-tag">
+                            <span class="chip bg-color">无标签</span>
+                          </div>
+                    
+                </div>
+                <div class="col s5 right-align">
+                    
+                </div>
+            </div>
+
+            <div class="post-info">
+                
+                <div class="post-date info-break-policy">
+                    <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
+                    2020-07-04
+                </div>
+                
+
+                
+                <div class="post-date info-break-policy">
+                    <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
+                    2022-03-21
+                </div>
+                
+
+                
+                <div class="info-break-policy">
+                    <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
+                    990
+                </div>
+                
+
+                
+                <div class="info-break-policy">
+                    <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
+                    5 分
+                </div>
+                
+
+                
+                    <div id="busuanzi_container_page_pv" class="info-break-policy">
+                        <i class="far fa-eye fa-fw"></i>阅读次数:&nbsp;&nbsp;
+                        <span id="busuanzi_value_page_pv"></span>
+                    </div>
+				
+            </div>
+
+        </div>
+        <hr class="clearfix">
+        <div class="card-content article-card-content">
+            <div id="articleContent">
+                <h2 id="重定向路由-rewrite-参数分析过程"><a href="#重定向路由-rewrite-参数分析过程" class="headerlink" title="重定向路由 rewrite 参数分析过程"></a>重定向路由 rewrite 参数分析过程</h2><pre class="line-numbers language-js"><code class="language-js">next
+  build
+    <span class="token comment" spellcheck="true">//例子：</span>
+      <span class="token operator">~</span><span class="token operator">/</span>work<span class="token operator">/</span>dev<span class="token operator">-</span>web<span class="token operator">/</span>next<span class="token punctuation">.</span>js<span class="token operator">/</span>examples<span class="token operator">/</span>custom<span class="token operator">-</span>routes<span class="token operator">-</span>proxying<span class="token operator">/</span>node_modules<span class="token operator">/</span>next<span class="token operator">/</span>dist<span class="token operator">/</span>build<span class="token operator">/</span>index<span class="token punctuation">.</span>js
+        <span class="token keyword">if</span><span class="token punctuation">(</span><span class="token keyword">typeof</span> config<span class="token punctuation">.</span>experimental<span class="token punctuation">.</span>rewrites<span class="token operator">===</span><span class="token string">'function'</span><span class="token punctuation">)</span><span class="token punctuation">{</span><span class="token keyword">const</span> _rewrites<span class="token operator">=</span><span class="token keyword">await</span> config<span class="token punctuation">.</span>experimental<span class="token punctuation">.</span><span class="token function">rewrites</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+      <span class="token operator">~</span><span class="token operator">/</span>work<span class="token operator">/</span>dev<span class="token operator">-</span>web<span class="token operator">/</span>next<span class="token punctuation">.</span>js<span class="token operator">/</span>packages<span class="token operator">/</span>next<span class="token operator">/</span>build<span class="token operator">/</span>index<span class="token punctuation">.</span>ts
+        <span class="token keyword">const</span> <span class="token punctuation">{</span> headers<span class="token punctuation">,</span> rewrites<span class="token punctuation">,</span> redirects <span class="token punctuation">}</span> <span class="token operator">=</span> <span class="token keyword">await</span> <span class="token function">loadCustomRoutes</span><span class="token punctuation">(</span>config<span class="token punctuation">)</span>
+        <span class="token operator">...</span>
+        routesManifest <span class="token operator">=</span> <span class="token punctuation">{</span>
+          <span class="token operator">...</span>rewrites<span class="token punctuation">:</span> rewrites<span class="token punctuation">.</span><span class="token function">map</span><span class="token punctuation">(</span><span class="token punctuation">(</span>r<span class="token punctuation">)</span> <span class="token operator">=</span><span class="token operator">></span> <span class="token function">buildCustomRoute</span><span class="token punctuation">(</span>r<span class="token punctuation">,</span> <span class="token string">'rewrite'</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+        <span class="token punctuation">}</span>
+        <span class="token operator">...</span>
+        <span class="token keyword">await</span> promises<span class="token punctuation">.</span><span class="token function">writeFile</span><span class="token punctuation">(</span>
+          routesManifestPath<span class="token punctuation">,</span> <span class="token comment" spellcheck="true">//path.join(distDir, ROUTES_MANIFEST) //routes-manifest.json</span>
+          JSON<span class="token punctuation">.</span><span class="token function">stringify</span><span class="token punctuation">(</span>routesManifest<span class="token punctuation">)</span><span class="token punctuation">,</span>
+          <span class="token string">'utf8'</span>
+        <span class="token punctuation">)</span>
+  next<span class="token operator">-</span>server<span class="token operator">/</span>server
+    <span class="token comment" spellcheck="true">//例子:</span>
+      <span class="token operator">~</span><span class="token operator">/</span>work<span class="token operator">/</span>dev<span class="token operator">-</span>web<span class="token operator">/</span>next<span class="token punctuation">.</span>js<span class="token operator">/</span>examples<span class="token operator">/</span>custom<span class="token operator">-</span>routes<span class="token operator">-</span>proxying<span class="token operator">/</span>node_modules<span class="token operator">/</span>next<span class="token operator">/</span>dist<span class="token operator">/</span>next<span class="token operator">-</span>server<span class="token operator">/</span>server<span class="token operator">/</span>next<span class="token operator">-</span>server<span class="token punctuation">.</span>js
+      <span class="token operator">~</span><span class="token operator">/</span>work<span class="token operator">/</span>dev<span class="token operator">-</span>web<span class="token operator">/</span>next<span class="token punctuation">.</span>js<span class="token operator">/</span>packages<span class="token operator">/</span>next<span class="token operator">/</span>next<span class="token operator">-</span>server<span class="token operator">/</span>server<span class="token operator">/</span>next<span class="token operator">-</span>server<span class="token punctuation">.</span>ts
+        <span class="token operator">...</span>
+        <span class="token keyword">this</span><span class="token punctuation">.</span>customRoutes <span class="token operator">=</span> <span class="token keyword">this</span><span class="token punctuation">.</span><span class="token function">getCustomRoutes</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+        <span class="token operator">...</span>
+            <span class="token function">require</span><span class="token punctuation">(</span><span class="token function">join</span><span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">.</span>distDir<span class="token punctuation">,</span> ROUTES_MANIFEST<span class="token punctuation">)</span><span class="token punctuation">)</span>
+        <span class="token operator">...</span>
+          <span class="token keyword">const</span> rewrites <span class="token operator">=</span> <span class="token keyword">this</span><span class="token punctuation">.</span>customRoutes<span class="token punctuation">.</span>rewrites<span class="token punctuation">.</span><span class="token function">map</span><span class="token punctuation">(</span><span class="token punctuation">(</span>rewrite<span class="token punctuation">)</span> <span class="token operator">=</span><span class="token operator">></span> <span class="token punctuation">{</span>
+        <span class="token operator">...</span>
+
+        <span class="token keyword">this</span><span class="token punctuation">.</span>router <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Router</span><span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">.</span><span class="token function">generateRoutes</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+        <span class="token operator">...</span>
+          <span class="token comment" spellcheck="true">//generateRoutes()</span>
+          <span class="token operator">...</span>fsRoutes
+            match<span class="token punctuation">:</span> <span class="token function">route</span><span class="token punctuation">(</span><span class="token string">'/_next/data/:path*'</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+            <span class="token operator">...</span>
+            <span class="token keyword">await</span> <span class="token keyword">this</span><span class="token punctuation">.</span><span class="token function">render</span><span class="token punctuation">(</span>req<span class="token punctuation">,</span>res<span class="token punctuation">,</span>pathname<span class="token punctuation">,</span>query<span class="token punctuation">,</span>parsedUrl<span class="token punctuation">)</span>
+              <span class="token operator">...</span>
+              <span class="token keyword">this</span><span class="token punctuation">.</span><span class="token function">handleRequest</span><span class="token punctuation">(</span>req<span class="token punctuation">,</span> res<span class="token punctuation">,</span> parsedUrl<span class="token punctuation">)</span>
+                <span class="token operator">...</span>
+                <span class="token keyword">this</span><span class="token punctuation">.</span><span class="token function">run</span><span class="token punctuation">(</span>req<span class="token punctuation">,</span> res<span class="token punctuation">,</span> parsedUrl<span class="token punctuation">)</span>
+                  <span class="token operator">...</span>
+                  <span class="token keyword">const</span> matched <span class="token operator">=</span> <span class="token keyword">await</span> <span class="token keyword">this</span><span class="token punctuation">.</span>router<span class="token punctuation">.</span><span class="token function">execute</span><span class="token punctuation">(</span>req<span class="token punctuation">,</span> res<span class="token punctuation">,</span> parsedUrl<span class="token punctuation">)</span>
+                    <span class="token operator">...</span>
+                    allRoutes<span class="token operator">=</span> <span class="token punctuation">[</span>
+                      <span class="token operator">...</span><span class="token keyword">this</span><span class="token punctuation">.</span>redirects
+                    <span class="token punctuation">]</span>
+                    <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">const</span> testRoute <span class="token keyword">of</span> allRoutes<span class="token punctuation">)</span> <span class="token punctuation">{</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h2 id="服务端渲染过程"><a href="#服务端渲染过程" class="headerlink" title="服务端渲染过程"></a>服务端渲染过程</h2><pre class="line-numbers language-js"><code class="language-js"><span class="token function">generateRoutes</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+  <span class="token keyword">const</span> fsRoutes<span class="token punctuation">:</span> Route<span class="token punctuation">[</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token punctuation">[</span>
+    match<span class="token punctuation">:</span> <span class="token function">route</span><span class="token punctuation">(</span><span class="token string">'/_next/static/:path*'</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+    match<span class="token punctuation">:</span> <span class="token function">route</span><span class="token punctuation">(</span><span class="token string">'/_next/data/:path*'</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+    <span class="token operator">...</span>
+      <span class="token keyword">await</span> <span class="token keyword">this</span><span class="token punctuation">.</span><span class="token function">render</span><span class="token punctuation">(</span>req<span class="token punctuation">,</span>res<span class="token punctuation">,</span>pathname<span class="token punctuation">,</span><span class="token operator">...</span>
+        <span class="token operator">...</span>
+        <span class="token keyword">const</span> html <span class="token operator">=</span> <span class="token keyword">await</span> <span class="token keyword">this</span><span class="token punctuation">.</span><span class="token function">renderToHTML</span><span class="token punctuation">(</span>req<span class="token punctuation">,</span> res<span class="token punctuation">,</span> pathname<span class="token punctuation">,</span> query<span class="token punctuation">)</span>
+          <span class="token keyword">const</span> result <span class="token operator">=</span> <span class="token keyword">await</span> <span class="token keyword">this</span><span class="token punctuation">.</span><span class="token function">findPageComponents</span><span class="token punctuation">(</span>pathname<span class="token punctuation">,</span> query<span class="token punctuation">)</span>
+            <span class="token keyword">const</span> components <span class="token operator">=</span> <span class="token keyword">await</span> <span class="token function">loadComponents</span><span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">.</span>distDir<span class="token punctuation">,</span>pagePath<span class="token operator">!</span><span class="token punctuation">,</span><span class="token punctuation">.</span><span class="token punctuation">.</span>
+              <span class="token keyword">const</span> Component <span class="token operator">=</span> <span class="token keyword">await</span> <span class="token function">requirePage</span><span class="token punctuation">(</span>pathname<span class="token punctuation">,</span> distDir<span class="token punctuation">,</span> serverless<span class="token punctuation">)</span>
+                <span class="token keyword">return</span> <span class="token function">require</span><span class="token punctuation">(</span>pagePath<span class="token punctuation">)</span>
+              <span class="token keyword">const</span> <span class="token punctuation">{</span> getStaticProps<span class="token punctuation">,</span> getStaticPaths<span class="token punctuation">,</span> getServerSideProps <span class="token punctuation">}</span> <span class="token operator">=</span> Component
+              <span class="token operator">...</span>
+              <span class="token keyword">const</span> DocumentMod <span class="token operator">=</span> <span class="token function">requirePage</span><span class="token punctuation">(</span><span class="token string">'/_document'</span><span class="token punctuation">,</span> distDir<span class="token punctuation">,</span> serverless<span class="token punctuation">)</span>
+              <span class="token keyword">const</span> AppMod <span class="token operator">=</span> <span class="token function">requirePage</span><span class="token punctuation">(</span><span class="token string">'/_app'</span><span class="token punctuation">,</span> distDir<span class="token punctuation">,</span> serverless<span class="token punctuation">)</span>
+              <span class="token keyword">const</span> ComponentMod <span class="token operator">=</span> <span class="token function">requirePage</span><span class="token punctuation">(</span>pathname<span class="token punctuation">,</span> distDir<span class="token punctuation">,</span> serverless<span class="token punctuation">)</span>
+              <span class="token operator">...</span>
+              <span class="token keyword">const</span> <span class="token punctuation">{</span> getServerSideProps<span class="token punctuation">,</span> getStaticProps<span class="token punctuation">,</span> getStaticPaths <span class="token punctuation">}</span> <span class="token operator">=</span> ComponentMod
+              <span class="token keyword">return</span> <span class="token punctuation">{</span>
+                App<span class="token punctuation">,</span>
+                Document<span class="token punctuation">,</span>
+                Component<span class="token punctuation">,</span>
+                buildManifest<span class="token punctuation">,</span>
+                reactLoadableManifest<span class="token punctuation">,</span>
+                pageConfig<span class="token punctuation">:</span> ComponentMod<span class="token punctuation">.</span>config <span class="token operator">||</span> <span class="token punctuation">{</span><span class="token punctuation">}</span><span class="token punctuation">,</span>
+                getServerSideProps<span class="token punctuation">,</span>
+                getStaticProps<span class="token punctuation">,</span>
+                getStaticPaths<span class="token punctuation">,</span>
+              <span class="token punctuation">}</span>
+          <span class="token operator">...</span>
+          <span class="token keyword">await</span> <span class="token keyword">this</span><span class="token punctuation">.</span><span class="token function">renderToHTMLWithComponents</span><span class="token punctuation">(</span>req<span class="token punctuation">,</span>res<span class="token punctuation">,</span>pathname<span class="token punctuation">,</span>result<span class="token punctuation">,</span><span class="token punctuation">{</span> <span class="token operator">...</span><span class="token keyword">this</span><span class="token punctuation">.</span>renderOpts <span class="token punctuation">}</span><span class="token punctuation">)</span>
+            <span class="token comment" spellcheck="true">// handle static page</span>
+            <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token keyword">typeof</span> components<span class="token punctuation">.</span>Component <span class="token operator">===</span> <span class="token string">'string'</span><span class="token punctuation">)</span> <span class="token keyword">return</span> components<span class="token punctuation">.</span>Component
+            <span class="token operator">...</span>
+            <span class="token keyword">const</span> isServerProps <span class="token operator">=</span> <span class="token operator">!</span><span class="token operator">!</span>components<span class="token punctuation">.</span>getServerSideProps
+            <span class="token operator">...</span>
+            <span class="token keyword">const</span> isDataReq <span class="token operator">=</span> <span class="token operator">!</span><span class="token operator">!</span>query<span class="token punctuation">.</span>_nextDataReq <span class="token operator">&amp;&amp;</span> <span class="token punctuation">(</span>isSSG <span class="token operator">||</span> isServerProps<span class="token punctuation">)</span>
+            <span class="token operator">...</span><span class="token punctuation">.</span>
+            <span class="token keyword">const</span> renderOpts<span class="token punctuation">:</span> RenderOpts <span class="token operator">=</span> <span class="token punctuation">{</span><span class="token operator">...</span>components<span class="token punctuation">,</span><span class="token operator">...</span>opts<span class="token punctuation">,</span>isDataReq<span class="token punctuation">,</span><span class="token punctuation">}</span>
+            <span class="token operator">...</span>
+            renderResult <span class="token operator">=</span> <span class="token keyword">await</span> <span class="token function">renderToHTML</span><span class="token punctuation">(</span>req<span class="token punctuation">,</span>res<span class="token punctuation">,</span>pathname<span class="token punctuation">,</span>query<span class="token punctuation">,</span>renderOpts<span class="token punctuation">)</span>
+              <span class="token operator">...</span>
+              data <span class="token operator">=</span> <span class="token keyword">await</span> <span class="token function">getServerSideProps</span><span class="token punctuation">(</span><span class="token punctuation">{</span>req<span class="token punctuation">,</span>res<span class="token punctuation">,</span>query<span class="token punctuation">,</span><span class="token operator">...</span><span class="token punctuation">}</span><span class="token punctuation">)</span>
+              <span class="token operator">...</span>
+              props<span class="token punctuation">.</span>pageProps <span class="token operator">=</span> Object<span class="token punctuation">.</span><span class="token function">assign</span><span class="token punctuation">(</span><span class="token punctuation">{</span><span class="token punctuation">}</span><span class="token punctuation">,</span> props<span class="token punctuation">.</span>pageProps<span class="token punctuation">,</span> data<span class="token punctuation">.</span>props<span class="token punctuation">)</span>
+              <span class="token operator">...</span>
+              <span class="token comment" spellcheck="true">//renderPage</span>
+                  <span class="token keyword">const</span> <span class="token punctuation">{</span>App<span class="token punctuation">:</span> EnhancedApp<span class="token punctuation">,</span>Component<span class="token punctuation">:</span> EnhancedComponent<span class="token punctuation">}</span> <span class="token operator">=</span> <span class="token function">enhanceComponents</span><span class="token punctuation">(</span>options<span class="token punctuation">,</span> App<span class="token punctuation">,</span> Component<span class="token punctuation">)</span>
+                  <span class="token keyword">const</span> html <span class="token operator">=</span> <span class="token function">renderToString</span><span class="token punctuation">(</span>
+                      <span class="token operator">&lt;</span>AppContainer<span class="token operator">></span>
+                        <span class="token operator">&lt;</span>EnhancedApp Component<span class="token operator">=</span><span class="token punctuation">{</span>EnhancedComponent<span class="token punctuation">}</span> router<span class="token operator">=</span><span class="token punctuation">{</span>router<span class="token punctuation">}</span> <span class="token punctuation">{</span><span class="token operator">...</span>props<span class="token punctuation">}</span> <span class="token operator">/</span><span class="token operator">></span>
+                      <span class="token operator">&lt;</span><span class="token operator">/</span>AppContainer<span class="token operator">></span>
+                    <span class="token punctuation">)</span>
+                  <span class="token keyword">return</span> <span class="token punctuation">{</span> html<span class="token punctuation">,</span> head <span class="token punctuation">}</span>
+              <span class="token keyword">const</span> documentCtx <span class="token operator">=</span> <span class="token punctuation">{</span> <span class="token operator">...</span>ctx<span class="token punctuation">,</span> renderPage <span class="token punctuation">}</span>
+              <span class="token keyword">const</span> docProps<span class="token punctuation">:</span> DocumentInitialProps <span class="token operator">=</span> <span class="token keyword">await</span> <span class="token function">loadGetInitialProps</span><span class="token punctuation">(</span>Document<span class="token punctuation">,</span>documentCtx<span class="token punctuation">)</span>
+              <span class="token operator">...</span>
+              <span class="token keyword">let</span> html <span class="token operator">=</span> <span class="token function">renderDocument</span><span class="token punctuation">(</span>Document<span class="token punctuation">,</span> <span class="token punctuation">{</span>props<span class="token punctuation">,</span>docProps<span class="token punctuation">,</span><span class="token operator">...</span><span class="token punctuation">}</span>
+                <span class="token function">renderToStaticMarkup</span><span class="token punctuation">(</span>
+                  <span class="token operator">&lt;</span>AmpStateContext<span class="token punctuation">.</span>Provider value<span class="token operator">=</span><span class="token punctuation">{</span>ampState<span class="token punctuation">}</span><span class="token operator">></span>
+                    <span class="token punctuation">{</span>Document<span class="token punctuation">.</span><span class="token function">renderDocument</span><span class="token punctuation">(</span>Document<span class="token punctuation">,</span> <span class="token punctuation">{</span> __NEXT_DATA__<span class="token punctuation">:</span> <span class="token punctuation">{</span>gssp<span class="token punctuation">,</span> <span class="token comment" spellcheck="true">// whether the page is getServerSideProps , ...docProps}</span>
+                       <span class="token operator">&lt;</span>DocumentComponent <span class="token punctuation">{</span><span class="token operator">...</span>props<span class="token punctuation">}</span> <span class="token operator">/</span><span class="token operator">></span>
+                       <span class="token operator">...</span>
+                          <span class="token function">render</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+                            <span class="token keyword">return</span> <span class="token punctuation">(</span>
+                              <span class="token operator">&lt;</span>Html<span class="token operator">></span>
+                                <span class="token operator">&lt;</span>Head <span class="token operator">/</span><span class="token operator">></span>
+                                <span class="token operator">&lt;</span>body<span class="token operator">></span>
+                                  <span class="token operator">&lt;</span>Main <span class="token operator">/</span><span class="token operator">></span>
+                                  <span class="token operator">&lt;</span>NextScript <span class="token operator">/</span><span class="token operator">></span>
+                                <span class="token operator">&lt;</span><span class="token operator">/</span>body<span class="token operator">></span>
+                              <span class="token operator">&lt;</span><span class="token operator">/</span>Html<span class="token operator">></span>
+                            <span class="token punctuation">)</span>
+                          <span class="token punctuation">}</span>
+                        <span class="token comment" spellcheck="true">//main</span>
+                          <span class="token keyword">const</span> <span class="token punctuation">{</span> inAmpMode<span class="token punctuation">,</span> html <span class="token punctuation">}</span> <span class="token operator">=</span> <span class="token function">useContext</span><span class="token punctuation">(</span>DocumentComponentContext<span class="token punctuation">)</span><span class="token punctuation">.</span>_documentProps
+                          <span class="token operator">...</span>
+                          <span class="token keyword">return</span> <span class="token operator">&lt;</span>div id<span class="token operator">=</span><span class="token string">"__next"</span> dangerouslySetInnerHTML<span class="token operator">=</span><span class="token punctuation">{</span><span class="token punctuation">{</span> __html<span class="token punctuation">:</span> html <span class="token punctuation">}</span><span class="token punctuation">}</span> <span class="token operator">/</span><span class="token operator">></span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h2 id="客户端渲染过程"><a href="#客户端渲染过程" class="headerlink" title="客户端渲染过程"></a>客户端渲染过程</h2><pre class="line-numbers language-js"><code class="language-js">router <span class="token operator">=</span> <span class="token function">createRouter</span><span class="token punctuation">(</span>page<span class="token punctuation">,</span> query<span class="token punctuation">,</span> asPath<span class="token punctuation">,</span> <span class="token punctuation">{</span>
+    subscription<span class="token punctuation">:</span> <span class="token punctuation">(</span><span class="token punctuation">{</span> Component<span class="token punctuation">,</span> props<span class="token punctuation">,</span> err <span class="token punctuation">}</span><span class="token punctuation">,</span> App<span class="token punctuation">)</span> <span class="token operator">=</span><span class="token operator">></span>
+      <span class="token function">render</span><span class="token punctuation">(</span><span class="token punctuation">{</span> App<span class="token punctuation">,</span> Component<span class="token punctuation">,</span> props<span class="token punctuation">,</span> err <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+          <span class="token keyword">await</span> <span class="token function">doRender</span><span class="token punctuation">(</span>renderingProps<span class="token punctuation">)</span>
+              <span class="token keyword">const</span> appProps <span class="token operator">=</span> <span class="token punctuation">{</span> <span class="token operator">...</span>props<span class="token punctuation">,</span> Component<span class="token punctuation">,</span> err<span class="token punctuation">,</span> router <span class="token punctuation">}</span>
+              <span class="token operator">...</span>
+              <span class="token function">renderReactElement</span><span class="token punctuation">(</span>
+                  <span class="token operator">&lt;</span>Root callback<span class="token operator">=</span><span class="token punctuation">{</span>resolvePromise<span class="token punctuation">}</span><span class="token operator">></span>
+                  <span class="token operator">&lt;</span>AppContainer<span class="token operator">></span>
+                    <span class="token operator">&lt;</span>App <span class="token punctuation">{</span><span class="token operator">...</span>appProps<span class="token punctuation">}</span> <span class="token operator">/</span><span class="token operator">></span>
+                  <span class="token operator">&lt;</span><span class="token operator">/</span>AppContainer<span class="token operator">></span>
+                <span class="token operator">&lt;</span><span class="token operator">/</span>Root<span class="token operator">></span>
+                <span class="token punctuation">,</span>document<span class="token punctuation">.</span><span class="token function">getElementById</span><span class="token punctuation">(</span><span class="token string">'__next'</span><span class="token punctuation">)</span>
+              <span class="token punctuation">)</span>
+
+
+<span class="token function">push</span><span class="token punctuation">(</span>url<span class="token punctuation">:</span> Url<span class="token punctuation">,</span> <span class="token keyword">as</span><span class="token punctuation">:</span> Url <span class="token operator">=</span> url<span class="token punctuation">,</span> options <span class="token operator">=</span> <span class="token punctuation">{</span><span class="token punctuation">}</span><span class="token punctuation">)</span>
+    <span class="token comment" spellcheck="true">//pushState,replaceState 都是用来操作window.history的方法</span>
+    <span class="token keyword">return</span> <span class="token keyword">this</span><span class="token punctuation">.</span><span class="token function">change</span><span class="token punctuation">(</span><span class="token string">'pushState'</span><span class="token punctuation">,</span> url<span class="token punctuation">,</span> <span class="token keyword">as</span><span class="token punctuation">,</span> options<span class="token punctuation">)</span>
+        routeInfo <span class="token operator">=</span> <span class="token keyword">await</span> <span class="token keyword">this</span><span class="token punctuation">.</span><span class="token function">getRouteInfo</span><span class="token punctuation">(</span>route<span class="token punctuation">,</span> pathname<span class="token punctuation">,</span> query<span class="token punctuation">,</span> <span class="token keyword">as</span><span class="token punctuation">,</span> shallow<span class="token punctuation">)</span>
+            <span class="token keyword">const</span> cachedRouteInfo <span class="token operator">=</span> <span class="token keyword">this</span><span class="token punctuation">.</span>components<span class="token punctuation">[</span>route<span class="token punctuation">]</span> <span class="token operator">-</span><span class="token operator">></span>
+            <span class="token keyword">if</span><span class="token punctuation">(</span>shallow <span class="token operator">&amp;&amp;</span> cachedRouteInfo <span class="token operator">&amp;&amp;</span> <span class="token keyword">this</span><span class="token punctuation">.</span>route <span class="token operator">===</span> route<span class="token punctuation">)</span> <span class="token keyword">return</span> cachedRouteInfo<span class="token punctuation">;</span>
+            <span class="token operator">...</span>
+
+            routeInfo<span class="token punctuation">:</span><span class="token punctuation">{</span> Component<span class="token punctuation">:</span> res<span class="token punctuation">.</span>page<span class="token punctuation">,</span>
+              __N_SSG<span class="token punctuation">:</span> res<span class="token punctuation">.</span>mod<span class="token punctuation">.</span>__N_SSG<span class="token punctuation">,</span>
+              __N_SSP<span class="token punctuation">:</span> res<span class="token punctuation">.</span>mod<span class="token punctuation">.</span>__N_SSP<span class="token punctuation">,</span>
+            <span class="token punctuation">}</span> <span class="token operator">=</span> <span class="token keyword">await</span> <span class="token keyword">this</span><span class="token punctuation">.</span><span class="token function">fetchComponent</span><span class="token punctuation">(</span>route<span class="token punctuation">)</span><span class="token punctuation">;</span>
+                <span class="token keyword">const</span> componentResult <span class="token operator">=</span> <span class="token keyword">await</span> <span class="token keyword">this</span><span class="token punctuation">.</span>pageLoader<span class="token punctuation">.</span><span class="token function">loadPage</span><span class="token punctuation">(</span>route<span class="token punctuation">)</span>
+                    <span class="token operator">...</span>
+                    <span class="token keyword">const</span> cachedPage <span class="token operator">=</span> <span class="token keyword">this</span><span class="token punctuation">.</span>pageCache<span class="token punctuation">[</span>route<span class="token punctuation">]</span>
+                    <span class="token operator">...</span>
+                    <span class="token comment" spellcheck="true">// Register a listener to get the page</span>
+                      <span class="token keyword">this</span><span class="token punctuation">.</span>pageRegisterEvents<span class="token punctuation">.</span><span class="token function">on</span><span class="token punctuation">(</span>route<span class="token punctuation">,</span> fire<span class="token punctuation">)</span>
+                      <span class="token operator">...</span>
+                      <span class="token keyword">this</span><span class="token punctuation">.</span>loadingRoutes<span class="token punctuation">[</span>route<span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token boolean">true</span>
+                      deps <span class="token operator">=</span> <span class="token keyword">await</span> <span class="token keyword">this</span><span class="token punctuation">.</span><span class="token function">getDependencies</span><span class="token punctuation">(</span>route<span class="token punctuation">)</span>
+                          <span class="token keyword">this</span><span class="token punctuation">.</span><span class="token function">loadScript</span><span class="token punctuation">(</span>d<span class="token punctuation">,</span> route<span class="token punctuation">)</span>
+                              script<span class="token punctuation">.</span>crossOrigin <span class="token operator">=</span> process<span class="token punctuation">.</span>env<span class="token punctuation">.</span>__NEXT_CROSS_ORIGIN
+                            script<span class="token punctuation">.</span>src <span class="token operator">=</span> url
+                            document<span class="token punctuation">.</span>body<span class="token punctuation">.</span><span class="token function">appendChild</span><span class="token punctuation">(</span>script<span class="token punctuation">)</span>
+                          <span class="token function">appendLink</span><span class="token punctuation">(</span>d<span class="token punctuation">,</span> <span class="token string">'stylesheet'</span><span class="token punctuation">)</span>
+            <span class="token operator">...</span>
+            <span class="token keyword">this</span><span class="token punctuation">.</span>_getData<span class="token operator">&lt;</span>RouteInfo<span class="token operator">></span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=</span><span class="token operator">></span>__N_SSG
+                <span class="token operator">?</span> <span class="token keyword">this</span><span class="token punctuation">.</span><span class="token function">_getStaticData</span><span class="token punctuation">(</span>dataHref<span class="token operator">!</span><span class="token punctuation">)</span>
+                <span class="token punctuation">:</span> __N_SSP
+                    <span class="token operator">?</span> <span class="token keyword">this</span><span class="token punctuation">.</span><span class="token function">_getServerData</span><span class="token punctuation">(</span>dataHref<span class="token operator">!</span><span class="token punctuation">)</span>
+                        <span class="token keyword">return</span> <span class="token function">fetchNextData</span><span class="token punctuation">(</span>dataHref<span class="token punctuation">,</span> <span class="token keyword">this</span><span class="token punctuation">.</span>isSsr<span class="token punctuation">)</span>
+                            res <span class="token operator">=</span> <span class="token keyword">await</span> <span class="token function">fetch</span><span class="token punctuation">(</span>dataHref<span class="token punctuation">,</span> <span class="token punctuation">{</span>credentials<span class="token punctuation">:</span> <span class="token string">'same-origin'</span><span class="token punctuation">,</span><span class="token punctuation">}</span><span class="token punctuation">)</span>
+                            <span class="token keyword">return</span> res<span class="token punctuation">.</span><span class="token function">json</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+                    <span class="token punctuation">:</span> <span class="token keyword">this</span><span class="token punctuation">.</span><span class="token function">getInitialProps</span><span class="token punctuation">(</span>Component<span class="token punctuation">,</span><span class="token punctuation">{</span>pathname<span class="token punctuation">,</span>query<span class="token punctuation">,</span>asPath<span class="token punctuation">:</span> <span class="token keyword">as</span><span class="token punctuation">,</span><span class="token punctuation">}</span> <span class="token keyword">as</span> any
+                  <span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">then</span><span class="token punctuation">(</span><span class="token punctuation">(</span>props<span class="token punctuation">)</span> <span class="token operator">=</span><span class="token operator">></span> <span class="token punctuation">{</span>
+                  routeInfo<span class="token punctuation">.</span>props <span class="token operator">=</span> props
+                  <span class="token keyword">this</span><span class="token punctuation">.</span>components<span class="token punctuation">[</span>route<span class="token punctuation">]</span> <span class="token operator">=</span> routeInfo
+                  <span class="token keyword">return</span> routeInfo
+                <span class="token punctuation">}</span><span class="token punctuation">)</span>
+        <span class="token keyword">this</span><span class="token punctuation">.</span><span class="token keyword">set</span><span class="token punctuation">(</span>route<span class="token punctuation">,</span> pathname<span class="token operator">!</span><span class="token punctuation">,</span> query<span class="token punctuation">,</span> cleanedAs<span class="token punctuation">,</span> routeInfo<span class="token punctuation">)</span>
+            data <span class="token operator">=</span> routeInfo<span class="token punctuation">;</span>
+            <span class="token keyword">return</span> <span class="token keyword">this</span><span class="token punctuation">.</span><span class="token function">notify</span><span class="token punctuation">(</span>data<span class="token punctuation">)</span>
+                <span class="token keyword">return</span> <span class="token keyword">this</span><span class="token punctuation">.</span><span class="token function">sub</span><span class="token punctuation">(</span>data<span class="token punctuation">,</span> <span class="token keyword">this</span><span class="token punctuation">.</span>components<span class="token punctuation">[</span><span class="token string">'/_app'</span><span class="token punctuation">]</span><span class="token punctuation">.</span>Component<span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h2 id="next-i18n-分析"><a href="#next-i18n-分析" class="headerlink" title="next-i18n 分析"></a>next-i18n 分析</h2><ul>
+<li>服务端：<ol>
+<li>服务端渲染解析出来访用户的语言，然后匹配找到语言的资源文件，</li>
+<li>解析渲染页面所需要的命名空间，然后选择相应的向 appTree 下注入这个 i18nStore，</li>
+<li>最后由各组件 withTranslation 选择命名空间，得到相应的字符串。</li>
+</ol>
+</li>
+<li>客户端<br>next 在客户端重建 appTree 的时候，会把该 i18nStore 一同恢复。</li>
+<li>缺点<br>当 shallowRender router 跳转的时候，那么新页面的拿不到它所需的命名空间数据。</li>
+<li>原因<br>渲染 App 时顺序：1.App 的 getInitialProps 执行 2.page 的 getServerSideProps 执行 3.渲染 App 4.渲染 Component<br>withAppTranslation 包装的组件会包装 App 的 getInitialProps，同时解析出此次请求需要的命名空间，但是这个时候还没有页面 getServerSideProps 的事情，所以需要在 page 页面 class 上时挂属性（例:getInitialProps）拿到响应的命名空间。<br>所以客户端路由的时候，先拿 getServerProps 的数据时是带不上这个页面的 i18n 命名空间的。</li>
+</ul>
+<script>
+        document.querySelectorAll('.github-emoji')
+          .forEach(el => {
+            if (!el.dataset.src) { return; }
+            const img = document.createElement('img');
+            img.style = 'display:none !important;';
+            img.src = el.dataset.src;
+            img.addEventListener('error', () => {
+              img.remove();
+              el.style.color = 'inherit';
+              el.style.backgroundImage = 'none';
+              el.style.background = 'none';
+            });
+            img.addEventListener('load', () => {
+              img.remove();
+            });
+            document.body.appendChild(img);
+          });
+      </script>
+            </div>
+            <hr/>
+
+            
+
+    <div class="reprint" id="reprint-statement">
+        
+            <div class="reprint__author">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-user">
+                        文章作者:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="https://keyboard3.github.io" rel="external nofollow noreferrer">keyboard3</a>
+                </span>
+            </div>
+            <div class="reprint__type">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-link">
+                        文章链接:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="https://keyboard3.github.io/blog/next-source-analysis/">https://keyboard3.github.io/blog/next-source-analysis/</a>
+                </span>
+            </div>
+            <div class="reprint__notice">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-copyright">
+                        版权声明:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    本博客所有文章除特別声明外，均采用
+                    <a href="https://creativecommons.org/licenses/by/4.0/deed.zh" rel="external nofollow noreferrer" target="_blank">CC BY 4.0</a>
+                    许可协议。转载请注明来源
+                    <a href="https://keyboard3.github.io" target="_blank">keyboard3</a>
+                    !
+                </span>
+            </div>
+        
+    </div>
+
+    <script async defer>
+      document.addEventListener("copy", function (e) {
+        let toastHTML = '<span>复制成功，请遵循本文的转载规则</span><button class="btn-flat toast-action" onclick="navToReprintStatement()" style="font-size: smaller">查看</a>';
+        M.toast({html: toastHTML})
+      });
+
+      function navToReprintStatement() {
+        $("html, body").animate({scrollTop: $("#reprint-statement").offset().top - 80}, 800);
+      }
+    </script>
+
+
+
+            <div class="tag_share" style="display: block;">
+                <div class="post-meta__tag-list" style="display: inline-block;">
+                    
+                        <div class="article-tag">
+                            <span class="chip bg-color">无标签</span>
+                        </div>
+                    
+                </div>
+                <div class="post_share" style="zoom: 80%; width: fit-content; display: inline-block; float: right; margin: -0.15rem 0;">
+                    <link rel="stylesheet" type="text/css" href="/blog/libs/share/css/share.min.css">
+
+<div id="article-share">
+    
+    
+    <div class="social-share" data-sites="twitter,facebook,google,qq,qzone,wechat,weibo,douban,linkedin" data-wechat-qrcode-helper="<p>微信扫一扫即可分享！</p>"></div>
+    <script src="/blog/libs/share/js/social-share.min.js"></script>
+    
+
+    
+
+</div>
+
+                </div>
+            </div>
+            
+                <style>
+    #reward {
+        margin: 40px 0;
+        text-align: center;
+    }
+
+    #reward .reward-link {
+        font-size: 1.4rem;
+        line-height: 38px;
+    }
+
+    #reward .btn-floating:hover {
+        box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2), 0 5px 15px rgba(0, 0, 0, 0.2);
+    }
+
+    #rewardModal {
+        width: 320px;
+        height: 350px;
+    }
+
+    #rewardModal .reward-title {
+        margin: 15px auto;
+        padding-bottom: 5px;
+    }
+
+    #rewardModal .modal-content {
+        padding: 10px;
+    }
+
+    #rewardModal .close {
+        position: absolute;
+        right: 15px;
+        top: 15px;
+        color: rgba(0, 0, 0, 0.5);
+        font-size: 1.3rem;
+        line-height: 20px;
+        cursor: pointer;
+    }
+
+    #rewardModal .close:hover {
+        color: #ef5350;
+        transform: scale(1.3);
+        -moz-transform:scale(1.3);
+        -webkit-transform:scale(1.3);
+        -o-transform:scale(1.3);
+    }
+
+    #rewardModal .reward-tabs {
+        margin: 0 auto;
+        width: 210px;
+    }
+
+    .reward-tabs .tabs {
+        height: 38px;
+        margin: 10px auto;
+        padding-left: 0;
+    }
+
+    .reward-content ul {
+        padding-left: 0 !important;
+    }
+
+    .reward-tabs .tabs .tab {
+        height: 38px;
+        line-height: 38px;
+    }
+
+    .reward-tabs .tab a {
+        color: #fff;
+        background-color: #ccc;
+    }
+
+    .reward-tabs .tab a:hover {
+        background-color: #ccc;
+        color: #fff;
+    }
+
+    .reward-tabs .wechat-tab .active {
+        color: #fff !important;
+        background-color: #22AB38 !important;
+    }
+
+    .reward-tabs .alipay-tab .active {
+        color: #fff !important;
+        background-color: #019FE8 !important;
+    }
+
+    .reward-tabs .reward-img {
+        width: 210px;
+        height: 210px;
+    }
+</style>
+
+<div id="reward">
+    <a href="#rewardModal" class="reward-link modal-trigger btn-floating btn-medium waves-effect waves-light red">赏</a>
+
+    <!-- Modal Structure -->
+    <div id="rewardModal" class="modal">
+        <div class="modal-content">
+            <a class="close modal-close"><i class="fas fa-times"></i></a>
+            <h4 class="reward-title">你的赏识是我前进的动力</h4>
+            <div class="reward-content">
+                <div class="reward-tabs">
+                    <ul class="tabs row">
+                        <li class="tab col s6 alipay-tab waves-effect waves-light"><a href="#alipay">支付宝</a></li>
+                        <li class="tab col s6 wechat-tab waves-effect waves-light"><a href="#wechat">微 信</a></li>
+                    </ul>
+                    <div id="alipay">
+                        <img src="/blog/medias/reward/alipay.jpg" class="reward-img" alt="支付宝打赏二维码">
+                    </div>
+                    <div id="wechat">
+                        <img src="/blog/medias/reward/wechat.png" class="reward-img" alt="微信打赏二维码">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    $(function () {
+        $('.tabs').tabs();
+    });
+</script>
+            
+        </div>
+    </div>
+
+    
+
+    
+
+    
+
+    
+
+    
+        <style>
+    .valine-card {
+        margin: 1.5rem auto;
+    }
+
+    .valine-card .card-content {
+        padding: 20px 20px 5px 20px;
+    }
+
+    #vcomments textarea {
+        box-sizing: border-box;
+        background: url("/medias/comment_bg.png") 100% 100% no-repeat;
+    }
+
+    #vcomments p {
+        margin: 2px 2px 10px;
+        font-size: 1.05rem;
+        line-height: 1.78rem;
+    }
+
+    #vcomments blockquote p {
+        text-indent: 0.2rem;
+    }
+
+    #vcomments a {
+        padding: 0 2px;
+        color: #4cbf30;
+        font-weight: 500;
+        text-decoration: none;
+    }
+
+    #vcomments img {
+        max-width: 100%;
+        height: auto;
+        cursor: pointer;
+    }
+
+    #vcomments ol li {
+        list-style-type: decimal;
+    }
+
+    #vcomments ol,
+    ul {
+        display: block;
+        padding-left: 2em;
+        word-spacing: 0.05rem;
+    }
+
+    #vcomments ul li,
+    ol li {
+        display: list-item;
+        line-height: 1.8rem;
+        font-size: 1rem;
+    }
+
+    #vcomments ul li {
+        list-style-type: disc;
+    }
+
+    #vcomments ul ul li {
+        list-style-type: circle;
+    }
+
+    #vcomments table, th, td {
+        padding: 12px 13px;
+        border: 1px solid #dfe2e5;
+    }
+
+    #vcomments table, th, td {
+        border: 0;
+    }
+
+    table tr:nth-child(2n), thead {
+        background-color: #fafafa;
+    }
+
+    #vcomments table th {
+        background-color: #f2f2f2;
+        min-width: 80px;
+    }
+
+    #vcomments table td {
+        min-width: 80px;
+    }
+
+    #vcomments h1 {
+        font-size: 1.85rem;
+        font-weight: bold;
+        line-height: 2.2rem;
+    }
+
+    #vcomments h2 {
+        font-size: 1.65rem;
+        font-weight: bold;
+        line-height: 1.9rem;
+    }
+
+    #vcomments h3 {
+        font-size: 1.45rem;
+        font-weight: bold;
+        line-height: 1.7rem;
+    }
+
+    #vcomments h4 {
+        font-size: 1.25rem;
+        font-weight: bold;
+        line-height: 1.5rem;
+    }
+
+    #vcomments h5 {
+        font-size: 1.1rem;
+        font-weight: bold;
+        line-height: 1.4rem;
+    }
+
+    #vcomments h6 {
+        font-size: 1rem;
+        line-height: 1.3rem;
+    }
+
+    #vcomments p {
+        font-size: 1rem;
+        line-height: 1.5rem;
+    }
+
+    #vcomments hr {
+        margin: 12px 0;
+        border: 0;
+        border-top: 1px solid #ccc;
+    }
+
+    #vcomments blockquote {
+        margin: 15px 0;
+        border-left: 5px solid #42b983;
+        padding: 1rem 0.8rem 0.3rem 0.8rem;
+        color: #666;
+        background-color: rgba(66, 185, 131, .1);
+    }
+
+    #vcomments pre {
+        font-family: monospace, monospace;
+        padding: 1.2em;
+        margin: .5em 0;
+        background: #272822;
+        overflow: auto;
+        border-radius: 0.3em;
+        tab-size: 4;
+    }
+
+    #vcomments code {
+        font-family: monospace, monospace;
+        padding: 1px 3px;
+        font-size: 0.92rem;
+        color: #e96900;
+        background-color: #f8f8f8;
+        border-radius: 2px;
+    }
+
+    #vcomments pre code {
+        font-family: monospace, monospace;
+        padding: 0;
+        color: #e8eaf6;
+        background-color: #272822;
+    }
+
+    #vcomments pre[class*="language-"] {
+        padding: 1.2em;
+        margin: .5em 0;
+    }
+
+    #vcomments code[class*="language-"],
+    pre[class*="language-"] {
+        color: #e8eaf6;
+    }
+
+    #vcomments [type="checkbox"]:not(:checked), [type="checkbox"]:checked {
+        position: inherit;
+        margin-left: -1.3rem;
+        margin-right: 0.4rem;
+        margin-top: -1px;
+        vertical-align: middle;
+        left: unset;
+        visibility: visible;
+    }
+
+    #vcomments b,
+    strong {
+        font-weight: bold;
+    }
+
+    #vcomments dfn {
+        font-style: italic;
+    }
+
+    #vcomments small {
+        font-size: 85%;
+    }
+
+    #vcomments cite {
+        font-style: normal;
+    }
+
+    #vcomments mark {
+        background-color: #fcf8e3;
+        padding: .2em;
+    }
+
+    #vcomments table, th, td {
+        padding: 12px 13px;
+        border: 1px solid #dfe2e5;
+    }
+
+    table tr:nth-child(2n), thead {
+        background-color: #fafafa;
+    }
+
+    #vcomments table th {
+        background-color: #f2f2f2;
+        min-width: 80px;
+    }
+
+    #vcomments table td {
+        min-width: 80px;
+    }
+
+    #vcomments [type="checkbox"]:not(:checked), [type="checkbox"]:checked {
+        position: inherit;
+        margin-left: -1.3rem;
+        margin-right: 0.4rem;
+        margin-top: -1px;
+        vertical-align: middle;
+        left: unset;
+        visibility: visible;
+    }
+</style>
+
+<div class="card valine-card" data-aos="fade-up">
+    <div class="comment_headling" style="font-size: 20px; font-weight: 700; position: relative; left: 20px; top: 15px; padding-bottom: 5px;">
+        <i class="fas fa-comments fa-fw" aria-hidden="true"></i>
+        <span>评论</span>
+    </div>
+    <div id="vcomments" class="card-content" style="display: grid">
+    </div>
+</div>
+
+<script src="/blog/libs/valine/av-min.js"></script>
+<script src="/blog/libs/valine/Valine.min.js"></script>
+<script>
+    new Valine({
+        el: '#vcomments',
+        appId: 'LjtOad9cDpBmF6oLUHgGTBH2-gzGzoHsz',
+        appKey: '0ybf4IysannKKpv99yB4aMbL',
+        notify: 'false' === 'true',
+        verify: 'false' === 'true',
+        visitor: 'true' === 'true',
+        avatar: 'mm',
+        pageSize: '10',
+        lang: 'zh-cn',
+        placeholder: 'just go go'
+    });
+</script>
+
+    
+
+    
+
+<article id="prenext-posts" class="prev-next articles">
+    <div class="row article-row">
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge left-badge text-color">
+                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
+            <div class="card">
+                <a href="/blog/k3d-vs-k3s-vs-kind-vs-microk8s-vs-minikube/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/blog/medias/featureimages/15.jpg" class="responsive-img" alt="K3d vs k3s vs Kind vs Microk8s vs Minikube">
+                        
+                        <span class="card-title">K3d vs k3s vs Kind vs Microk8s vs Minikube</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            原文
+在本地运行 Kubernetes 是保证你的应用程序在生产环境中最常用的容器编排平台运行的最好方式。minikube 就是这样的一个本地 Kubernetes 工具。本文提供了一组可选项和一个简单的对比帮助你在使用时做出一个明智的选择
+                        
+                    </div>
+                    <div class="publish-info">
+                        <span class="publish-date">
+                            <i class="far fa-clock fa-fw icon-date"></i>2022-03-21
+                        </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-user fa-fw"></i>
+                            keyboard3
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/blog/tags/%E7%BF%BB%E8%AF%91/">
+                        <span class="chip bg-color">翻译</span>
+                    </a>
+                    
+                    <a href="/blog/tags/%E8%BF%9B%E8%A1%8C%E4%B8%AD/">
+                        <span class="chip bg-color">进行中</span>
+                    </a>
+                    
+                    <a href="/blog/tags/Kubernetes/">
+                        <span class="chip bg-color">Kubernetes</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge right-badge text-color">
+                下一篇&nbsp;<i class="fas fa-chevron-right"></i>
+            </div>
+            <div class="card">
+                <a href="/blog/workbox/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/blog/medias/featureimages/2.jpg" class="responsive-img" alt="workbox">
+                        
+                        <span class="card-title">workbox</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            workbox/guides 原文
+开始使用创建和注册一个 service worker 文件导入 workbox从 CDN 中使用打包器使用 workboxworkbox 可以做什么？路由匹配请求使用字符串匹配路由使用正则匹配路由使用回调
+                        
+                    </div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2020-06-16
+                            </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-user fa-fw"></i>
+                            keyboard3
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/blog/tags/%E7%BF%BB%E8%AF%91/">
+                        <span class="chip bg-color">翻译</span>
+                    </a>
+                    
+                    <a href="/blog/tags/service-work/">
+                        <span class="chip bg-color">service-work</span>
+                    </a>
+                    
+                    <a href="/blog/tags/workbox/">
+                        <span class="chip bg-color">workbox</span>
+                    </a>
+                    
+                    <a href="/blog/tags/%E7%BF%BB%E8%AF%91%E4%B8%AD/">
+                        <span class="chip bg-color">翻译中</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+    </div>
+</article>
+
+</div>
+
+
+
+<!-- 代码块功能依赖 -->
+<script type="text/javascript" src="/blog/libs/codeBlock/codeBlockFuction.js"></script>
+
+<!-- 代码语言 -->
+
+<script type="text/javascript" src="/blog/libs/codeBlock/codeLang.js"></script>
+
+
+<!-- 代码块复制 -->
+
+<script type="text/javascript" src="/blog/libs/codeBlock/codeCopy.js"></script>
+
+
+<!-- 代码块收缩 -->
+
+<script type="text/javascript" src="/blog/libs/codeBlock/codeShrink.js"></script>
+
+
+<!-- 代码块折行 -->
+
+
+    </div>
+    <div id="toc-aside" class="expanded col l3 hide-on-med-and-down">
+        <div class="toc-widget">
+            <div class="toc-title"><i class="far fa-list-alt"></i>&nbsp;&nbsp;目录</div>
+            <div id="toc-content"></div>
+        </div>
+    </div>
+</div>
+
+<!-- TOC 悬浮按钮. -->
+
+<div id="floating-toc-btn" class="hide-on-med-and-down">
+    <a class="btn-floating btn-large bg-color">
+        <i class="fas fa-list-ul"></i>
+    </a>
+</div>
+
+
+<script src="/blog/libs/tocbot/tocbot.min.js"></script>
+<script>
+    $(function () {
+        tocbot.init({
+            tocSelector: '#toc-content',
+            contentSelector: '#articleContent',
+            headingsOffset: -($(window).height() * 0.4 - 45),
+            collapseDepth: Number('0'),
+            headingSelector: 'h2, h3, h4'
+        });
+
+        // modify the toc link href to support Chinese.
+        let i = 0;
+        let tocHeading = 'toc-heading-';
+        $('#toc-content a').each(function () {
+            $(this).attr('href', '#' + tocHeading + (++i));
+        });
+
+        // modify the heading title id to support Chinese.
+        i = 0;
+        $('#articleContent').children('h2, h3, h4').each(function () {
+            $(this).attr('id', tocHeading + (++i));
+        });
+
+        // Set scroll toc fixed.
+        let tocHeight = parseInt($(window).height() * 0.4 - 64);
+        let $tocWidget = $('.toc-widget');
+        $(window).scroll(function () {
+            let scroll = $(window).scrollTop();
+            /* add post toc fixed. */
+            if (scroll > tocHeight) {
+                $tocWidget.addClass('toc-fixed');
+            } else {
+                $tocWidget.removeClass('toc-fixed');
+            }
+        });
+
+        
+        /* 修复文章卡片 div 的宽度. */
+        let fixPostCardWidth = function (srcId, targetId) {
+            let srcDiv = $('#' + srcId);
+            if (srcDiv.length === 0) {
+                return;
+            }
+
+            let w = srcDiv.width();
+            if (w >= 450) {
+                w = w + 21;
+            } else if (w >= 350 && w < 450) {
+                w = w + 18;
+            } else if (w >= 300 && w < 350) {
+                w = w + 16;
+            } else {
+                w = w + 14;
+            }
+            $('#' + targetId).width(w);
+        };
+
+        // 切换TOC目录展开收缩的相关操作.
+        const expandedClass = 'expanded';
+        let $tocAside = $('#toc-aside');
+        let $mainContent = $('#main-content');
+        $('#floating-toc-btn .btn-floating').click(function () {
+            if ($tocAside.hasClass(expandedClass)) {
+                $tocAside.removeClass(expandedClass).hide();
+                $mainContent.removeClass('l9');
+            } else {
+                $tocAside.addClass(expandedClass).show();
+                $mainContent.addClass('l9');
+            }
+            fixPostCardWidth('artDetail', 'prenext-posts');
+        });
+        
+    });
+</script>
+
+    
+
+</main>
+
+
+
+    <footer class="page-footer bg-color">
+    <div class="container row center-align" style="margin-bottom: 0px !important;">
+        <div class="col s12 m8 l8 copy-right">
+            Copyright&nbsp;&copy;
+            <span id="year">2020</span>
+            <a href="https://keyboard3.github.io" target="_blank">keyboard3</a>
+            |&nbsp;Powered by&nbsp;<a href="https://hexo.io/" target="_blank">Hexo</a>
+            |&nbsp;Theme&nbsp;<a href="https://github.com/blinkfox/hexo-theme-matery" target="_blank">Matery</a>
+            <br>
+            
+            &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
+                class="white-color">105.3k</span>&nbsp;字
+            
+            
+            
+            
+            
+            
+            <span id="busuanzi_container_site_pv">
+                |&nbsp;<i class="far fa-eye"></i>&nbsp;总访问量:&nbsp;<span id="busuanzi_value_site_pv"
+                    class="white-color"></span>&nbsp;次
+            </span>
+            
+            
+            <span id="busuanzi_container_site_uv">
+                |&nbsp;<i class="fas fa-users"></i>&nbsp;总访问人数:&nbsp;<span id="busuanzi_value_site_uv"
+                    class="white-color"></span>&nbsp;人
+            </span>
+            
+            <br>
+            
+            <br>
+            
+        </div>
+        <div class="col s12 m4 l4 social-link social-statis">
+    <a href="https://github.com/keyboard3" class="tooltipped" target="_blank" data-tooltip="访问我的GitHub" data-position="top" data-delay="50">
+        <i class="fab fa-github"></i>
+    </a>
+
+
+
+    <a href="mailto:keyboard3@icloud.com" class="tooltipped" target="_blank" data-tooltip="邮件联系我" data-position="top" data-delay="50">
+        <i class="fas fa-envelope-open"></i>
+    </a>
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <a href="/blog/atom.xml" class="tooltipped" target="_blank" data-tooltip="RSS 订阅" data-position="top" data-delay="50">
+        <i class="fas fa-rss"></i>
+    </a>
+
+</div>
+    </div>
+</footer>
+
+<div class="progress-bar"></div>
+
+
+    <!-- 搜索遮罩框 -->
+<div id="searchModal" class="modal">
+    <div class="modal-content">
+        <div class="search-header">
+            <span class="title"><i class="fas fa-search"></i>&nbsp;&nbsp;搜索</span>
+            <input type="search" id="searchInput" name="s" placeholder="请输入搜索的关键字"
+                   class="search-input">
+        </div>
+        <div id="searchResult"></div>
+    </div>
+</div>
+
+<script src="/blog/js/search.js"></script>
+<script type="text/javascript">
+$(function () {
+    searchFunc("/blog/" + "search.xml", 'searchInput', 'searchResult');
+});
+</script>
+    <!-- 回到顶部按钮 -->
+<div id="backTop" class="top-scroll">
+    <a class="btn-floating btn-large waves-effect waves-light" href="#!">
+        <i class="fas fa-arrow-up"></i>
+    </a>
+</div>
+
+
+    <script src="/blog/libs/materialize/materialize.min.js"></script>
+    <script src="/blog/libs/masonry/masonry.pkgd.min.js"></script>
+    <script src="/blog/libs/aos/aos.js"></script>
+    <script src="/blog/libs/scrollprogress/scrollProgress.min.js"></script>
+    <script src="/blog/libs/lightGallery/js/lightgallery-all.min.js"></script>
+    <script src="/blog/js/matery.js"></script>
+
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-160750441-1"></script>
+<script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() {
+        dataLayer.push(arguments);
+    }
+
+    gtag('js', new Date());
+    gtag('config', 'UA-160750441-1');
+</script>
+
+
+    <!-- Baidu Analytics -->
+
+    <!-- Baidu Push -->
+
+<script>
+    (function () {
+        var bp = document.createElement('script');
+        var curProtocol = window.location.protocol.split(':')[0];
+        if (curProtocol === 'https') {
+            bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+        } else {
+            bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+        }
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(bp, s);
+    })();
+</script>
+
+    
+    
+    <script async src="/blog/libs/others/busuanzi.pure.mini.js"></script>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    
+    
+    <script src="/blog/libs/instantpage/instantpage.js" type="module"></script>
+    
+
+<script src="/blog/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"log":false,"model":{"jsonPath":"/blog/live2dw/assets/tororo.model.json"},"display":{"position":"left","width":150,"height":300},"mobile":{"show":true},"react":{"opacity":1}});</script></body>
+
+</html>

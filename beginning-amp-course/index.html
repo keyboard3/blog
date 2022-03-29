@@ -1,0 +1,1831 @@
+<!DOCTYPE HTML>
+<html lang="zh-CN">
+
+
+<head>
+    <meta charset="utf-8">
+    <meta name="keywords" content="amp教程, keyboard3的博客">
+    <meta name="description" content="原文 Welcome to the AMP community!
+初级课程欢迎来到 AMP 社区为什么有 AMP？在许多方面，互联网是世界中心的枢纽。每天，来自全世界的许多人在线访问信息。但是许多人不是高速链接或者高性能设备上访问互联网，许">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="renderer" content="webkit|ie-stand|ie-comp">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <title>amp教程 | keyboard3的博客</title>
+    <link rel="icon" type="image/png" href="/blog/favicon.png">
+
+    <link rel="stylesheet" type="text/css" href="/blog/libs/awesome/css/all.css">
+    <link rel="stylesheet" type="text/css" href="/blog/libs/materialize/materialize.min.css">
+    <link rel="stylesheet" type="text/css" href="/blog/libs/aos/aos.css">
+    <link rel="stylesheet" type="text/css" href="/blog/libs/animate/animate.min.css">
+    <link rel="stylesheet" type="text/css" href="/blog/libs/lightGallery/css/lightgallery.min.css">
+    <link rel="stylesheet" type="text/css" href="/blog/css/matery.css">
+    <link rel="stylesheet" type="text/css" href="/blog/css/my.css">
+    
+    <script src="/blog/libs/jquery/jquery.min.js"></script>
+    
+<meta name="generator" content="Hexo 4.2.0"><link rel="alternate" href="/blog/atom.xml" title="keyboard3的博客" type="application/atom+xml">
+<link rel="stylesheet" href="/blog/css/prism-tomorrow.css" type="text/css">
+<link rel="stylesheet" href="/blog/css/prism-line-numbers.css" type="text/css"></head>
+
+
+<body>
+    <header class="navbar-fixed">
+    <nav id="headNav" class="bg-color nav-transparent">
+        <div id="navContainer" class="nav-wrapper head-container">
+            <div class="brand-logo">
+                <a href="/blog/" class="waves-effect waves-light">
+                    
+                    <img src="/blog/medias/logo.png" class="logo-img" alt="LOGO">
+                    
+                    <span class="logo-span">keyboard3的博客</span>
+                </a>
+            </div>
+            
+
+<a href="#" data-target="mobile-nav" class="sidenav-trigger button-collapse"><i class="fas fa-bars"></i></a>
+<ul class="right nav-menu">
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/blog" class="waves-effect waves-light">
+      
+      <i class="fas fa-home" style="zoom: 0.6;"></i>
+      
+      <span>首页</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/blog/tags" class="waves-effect waves-light">
+      
+      <i class="fas fa-tags" style="zoom: 0.6;"></i>
+      
+      <span>标签</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/blog/archives" class="waves-effect waves-light">
+      
+      <i class="fas fa-archive" style="zoom: 0.6;"></i>
+      
+      <span>归档</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/blog/about" class="waves-effect waves-light">
+      
+      <i class="fas fa-user-circle" style="zoom: 0.6;"></i>
+      
+      <span>关于</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/blog/contact" class="waves-effect waves-light">
+      
+      <i class="fas fa-comments" style="zoom: 0.6;"></i>
+      
+      <span>留言板</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/blog/friends" class="waves-effect waves-light">
+      
+      <i class="fas fa-address-book" style="zoom: 0.6;"></i>
+      
+      <span>友情链接</span>
+    </a>
+    
+  </li>
+  
+  <li>
+    <a href="#searchModal" class="modal-trigger waves-effect waves-light">
+      <i id="searchIcon" class="fas fa-search" title="搜索" style="zoom: 0.85;"></i>
+    </a>
+  </li>
+</ul>
+
+<div id="mobile-nav" class="side-nav sidenav">
+
+    <div class="mobile-head bg-color">
+        
+        <img src="/blog/medias/logo.png" class="logo-img circle responsive-img">
+        
+        <div class="logo-name">keyboard3的博客</div>
+        <div class="logo-desc">
+            
+            我想事业有成，家庭美满，不过好像有点远
+            
+        </div>
+    </div>
+
+    
+
+    <ul class="menu-list mobile-menu-list">
+        
+        <li class="m-nav-item">
+	  
+		<a href="/blog" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-home"></i>
+			
+			首页
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/blog/tags" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-tags"></i>
+			
+			标签
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/blog/archives" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-archive"></i>
+			
+			归档
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/blog/about" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-user-circle"></i>
+			
+			关于
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/blog/contact" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-comments"></i>
+			
+			留言板
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/blog/friends" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-address-book"></i>
+			
+			友情链接
+		</a>
+          
+        </li>
+        
+        
+    </ul>
+</div>
+
+        </div>
+
+        
+    </nav>
+
+</header>
+
+    
+
+
+
+<div class="bg-cover pd-header post-cover" style="background-image: url('/blog/medias/featureimages/14.jpg')">
+    <div class="container" style="right: 0px;left: 0px;">
+        <div class="row">
+            <div class="col s12 m12 l12">
+                <div class="brand">
+                    <h1 class="description center-align post-title">amp教程</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+<main class="post-container content">
+
+    
+    <link rel="stylesheet" href="/blog/libs/tocbot/tocbot.css">
+<style>
+    #articleContent h1::before,
+    #articleContent h2::before,
+    #articleContent h3::before,
+    #articleContent h4::before,
+    #articleContent h5::before,
+    #articleContent h6::before {
+        display: block;
+        content: " ";
+        height: 100px;
+        margin-top: -100px;
+        visibility: hidden;
+    }
+
+    #articleContent :focus {
+        outline: none;
+    }
+
+    .toc-fixed {
+        position: fixed;
+        top: 64px;
+    }
+
+    .toc-widget {
+        width: 345px;
+        padding-left: 20px;
+    }
+
+    .toc-widget .toc-title {
+        margin: 35px 0 15px 0;
+        padding-left: 17px;
+        font-size: 1.5rem;
+        font-weight: bold;
+        line-height: 1.5rem;
+    }
+
+    .toc-widget ol {
+        padding: 0;
+        list-style: none;
+    }
+
+    #toc-content {
+        height: calc(100vh - 250px);
+        overflow: auto;
+    }
+
+    #toc-content ol {
+        padding-left: 10px;
+    }
+
+    #toc-content ol li {
+        padding-left: 10px;
+    }
+
+    #toc-content .toc-link:hover {
+        color: #42b983;
+        font-weight: 700;
+        text-decoration: underline;
+    }
+
+    #toc-content .toc-link::before {
+        background-color: transparent;
+        max-height: 25px;
+    }
+
+    #toc-content .is-active-link {
+        color: #42b983;
+    }
+
+    #toc-content .is-active-link::before {
+        background-color: #42b983;
+    }
+
+    #floating-toc-btn {
+        position: fixed;
+        right: 15px;
+        bottom: 76px;
+        padding-top: 15px;
+        margin-bottom: 0;
+        z-index: 998;
+    }
+
+    #floating-toc-btn .btn-floating {
+        width: 48px;
+        height: 48px;
+    }
+
+    #floating-toc-btn .btn-floating i {
+        line-height: 48px;
+        font-size: 1.4rem;
+    }
+</style>
+<div class="row">
+    <div id="main-content" class="col s12 m12 l9">
+        <!-- 文章内容详情 -->
+<div id="artDetail">
+    <div class="card">
+        <div class="card-content article-info">
+            <div class="row tag-cate">
+                <div class="col s7">
+                    
+                    <div class="article-tag">
+                        
+                            <a href="/blog/tags/%E7%BF%BB%E8%AF%91/">
+                                <span class="chip bg-color">翻译</span>
+                            </a>
+                        
+                            <a href="/blog/tags/%E5%AE%8C%E7%BB%93/">
+                                <span class="chip bg-color">完结</span>
+                            </a>
+                        
+                            <a href="/blog/tags/amp/">
+                                <span class="chip bg-color">amp</span>
+                            </a>
+                        
+                            <a href="/blog/tags/%E6%95%99%E7%A8%8B/">
+                                <span class="chip bg-color">教程</span>
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+                <div class="col s5 right-align">
+                    
+                </div>
+            </div>
+
+            <div class="post-info">
+                
+                <div class="post-date info-break-policy">
+                    <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
+                    2020-06-06
+                </div>
+                
+
+                
+                <div class="post-date info-break-policy">
+                    <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
+                    2022-03-21
+                </div>
+                
+
+                
+                <div class="info-break-policy">
+                    <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
+                    11.5k
+                </div>
+                
+
+                
+                <div class="info-break-policy">
+                    <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
+                    43 分
+                </div>
+                
+
+                
+                    <div id="busuanzi_container_page_pv" class="info-break-policy">
+                        <i class="far fa-eye fa-fw"></i>阅读次数:&nbsp;&nbsp;
+                        <span id="busuanzi_value_page_pv"></span>
+                    </div>
+				
+            </div>
+
+        </div>
+        <hr class="clearfix">
+        <div class="card-content article-card-content">
+            <div id="articleContent">
+                <p><a href="https://amp.dev/zh_cn/documentation/courses/beginning-course/?format=websites&amp;level=beginner" target="_blank" rel="noopener">原文 Welcome to the AMP community!</a></p>
+<h2 id="初级课程"><a href="#初级课程" class="headerlink" title="初级课程"></a>初级课程</h2><h3 id="欢迎来到-AMP-社区"><a href="#欢迎来到-AMP-社区" class="headerlink" title="欢迎来到 AMP 社区"></a>欢迎来到 AMP 社区</h3><h4 id="为什么有-AMP？"><a href="#为什么有-AMP？" class="headerlink" title="为什么有 AMP？"></a>为什么有 AMP？</h4><p>在许多方面，互联网是世界中心的枢纽。每天，来自全世界的许多人在线访问信息。但是许多人不是高速链接或者高性能设备上访问互联网，许多用户的体验不佳。</p>
+<p>为了给网站访问者更好的体验，开发社区找到了提高网站性能的方法。在这个过程中开发者改善了辅助技术的用户的可访问性，变化无常的可靠性和各种设备上的网站设计。</p>
+<p>有时候追踪学习所有 web 新技术非常困难。我们相信开发者想要更快速的网站，但是一路走来很容易出错。</p>
+<p>AMP 就解决这些问题。AMP 目的是让开发者轻松的关注构建更好的功能而不用担心给用户带来不良的用户体验</p>
+<h4 id="AMP-有什么好处？"><a href="#AMP-有什么好处？" class="headerlink" title="AMP 有什么好处？"></a>AMP 有什么好处？</h4><p>AMP 是一个 web 组件库用于实施最佳的 web 实践。AMP 解决了常见的开发障碍，以允许设计高性能，可访问和响应迅速的网站。</p>
+<p>简而言之，AMP 让正确的事变得容易。让开发者腾出时间专注于给用户带来更有价值的功能。</p>
+<p>AMP 致力于通过以下方式提高网站性能：</p>
+<ul>
+<li><p>通过添加常见网站功能标签来扩展 HTML。HTML 是为了创建基本的内容页面开发的，但是还没发展到跟上现代网站的步伐。一些相关的现代网站功能包括侧滑导航菜单，视频播放器和图片轮播。为这些功能添加的额外标签被叫做“web 组件”</p>
+</li>
+<li><p>减少 JavaScript 数量。AMP 需要运行 JavaScript，但是 AMP 限制了页面上的 JavaScript 何时以及如何使用。这种限制可以极大的提高移动端网站性能。AMP 组件提供了许多开发者第一次使用 JavaScript 的功能。</p>
+</li>
+<li><p>在网站的开发过程中更早的发现问题。正如我们已经说过的，在现代 web 开发中有许多需要跟踪的地方。AMP 通过提供验证程序来帮我们来管理它们，验证程序用来帮我们找到网站中可能影响性能或访问性的问题。它还可以帮助你学习如何解决发现的问题。</p>
+</li>
+</ul>
+<p>AMP 的好处并不止于页面部署。像谷歌和微软都创建了缓存来存储没有验证错误的 AMP 页面。这些缓存对网站内容进行强大的性能优化，而不会影响到用户体验。缓存过的 AMP 页面还与搜索引擎集成在一起，所以你可以在几秒内甚至更少的时间从搜索结果到你的网站。</p>
+<h4 id="学习-AMP-开发"><a href="#学习-AMP-开发" class="headerlink" title="学习 AMP 开发"></a>学习 AMP 开发</h4><p>学习 AMP 是学习 web 开发的好方法，因为 AMP 站点有：</p>
+<ul>
+<li>使用标准的 HTML，CSS 和 JavaScript 构建</li>
+<li>兼容所有现代浏览器</li>
+<li>不依赖特殊工具或软件来在线部署</li>
+</ul>
+<p>你将在构建 AMP 页面时获得技能，这些页面可以被转移到用其他的格式或者框架构建网站中。跟许多流行的框架一样，AMP 是基于组件的方式来设计和构建网站的。你讲学习到公认的构建最佳体验的网站，开始思考组件，并避免损坏用户的不良体验。这些通用的技能可以应用于整个 web。</p>
+<p>AMP 解决了性能，可访问性和响应式设计问题，让你可以更加关注功能。但是，如果你磨炼你的技能，学习 AMP 也可以帮助你准确的了解 AMP 如何解决这些问题。你也将作为一名开发者继续学习和走向成熟，甚至你的用户享受 AMP 帮助你构建的体验。</p>
+<h2 id="课程介绍"><a href="#课程介绍" class="headerlink" title="课程介绍"></a>课程介绍</h2><h3 id="这个课程适合谁"><a href="#这个课程适合谁" class="headerlink" title="这个课程适合谁"></a>这个课程适合谁</h3><p>这个课程是为了有志向的新开发和希望提高网站性能的的开发设计的。在本课程和以下课程你将：</p>
+<ul>
+<li>向你介绍 AMP 页面和传统“vanilla”网站的区别</li>
+<li>使用实际的 AMP 页面和最佳体验逐步构建一个示例项目</li>
+<li>学习构建现代网站的策略</li>
+</ul>
+<h3 id="先决条件"><a href="#先决条件" class="headerlink" title="先决条件"></a>先决条件</h3><p>为了从这些课程中获得收益，你应该对 HTML 和 CSS 有基础的理解。足以识别 HTML 和 CSS 代码，并能够按照练习中的指示进行少量的添加和修改。请注意讲授这些概念超出了本课程的范围。如果需要，你可以在<a href="https://developer.mozilla.org/en-US/docs/Web/HTML" target="_blank" rel="noopener">HTML</a>和<a href="https://developer.mozilla.org/en-US/docs/Web/CSS" target="_blank" rel="noopener">CSS</a>复习这些知识。</p>
+<h3 id="使用-Glitch-来跟踪代码"><a href="#使用-Glitch-来跟踪代码" class="headerlink" title="使用 Glitch 来跟踪代码"></a>使用 Glitch 来跟踪代码</h3><p>为了完成这些课程中的代码示例，我们将使用<a href="https://glitch.com/" target="_blank" rel="noopener">Glitch</a>。Glitch 是一个线上的代码编辑器，它允许你创建和预览网站而不需要在你电脑上安装任何东西。它也允许你创建一个服务，全部都在 Glitch 页面。</p>
+<p>这个 Glitch 代码编辑环境看起来像这样：<br><img src="https://amp.dev/static/img/courses/beginner/image13.png?width=1000&amp;hash=81846846441c0719ea8d81a85b15c447cbe5131d" alt="The online editor of Glitch"></p>
+<p>上面红色的框表明了你可以输入 HTML 和 CSS。绿色的框表示该按钮将带你进入创建页面的实时版本。黄色框的按钮让你可以复制这个项目并修改它。蓝色的框表示你可以使用的文件。在资源文件夹下，你可以找到你的图片。</p>
+<p>在这些课程中，你将需要各种图片来完成练习。所有完成这些课程的图片都会被保存在我们的 Glitch 项目中。要查看项目中的图片，请在 Glitch 编辑器的左侧文件列表中点击资产条目。要获得任何单个图片的链接，请从右侧的资产资产列表中选中该图片。在弹出的弹框中，点击 URL 旁边的赋值按钮。然后你可以在任何需要的地方使用这个链接。<br><img src="https://amp.dev/static/img/courses/beginner/image8.png?width=1000&amp;hash=70e74330b4a3cf41bd91d88ecc2e376d991bf509" alt="The assets view in Glitch"><br><img src="https://amp.dev/static/img/courses/beginner/image12.png?width=1200&amp;hash=7dd67d72f09d12373617986571a37d7b47beeb91" alt="The details pop-up (including URL) for an image in the assets collection"></p>
+<p>在这个课程中，我们将从最基本的 HTML 页面开始。我们将在 Glitch 上创建一个空的项目，其包含一些图片，你稍后需要的服务器代码，带标题和一张图片的 index.html 文件。</p>
+<p>打开<a href="https://glitch.com/edit/#!/nosy-leech" target="_blank" rel="noopener">这个</a>项目开始。点击右上角的“Remix This”按钮创建一个可以编辑的新项目。你可以在本课程和以后的课程继续使用这个编辑器。以后的每门课程都会给你提供该点开始的解决方案参考版本的机会。</p>
+<p>你无需使用 Glitch 来完成这些培训。然而，一些完成练习所需要的代码值包含在 Glitch 示例上。如果你喜欢使用其他编辑器，你仍需要使用 Glitch 示例来找到这些代码。</p>
+<h3 id="设置-AMP-验证器"><a href="#设置-AMP-验证器" class="headerlink" title="设置 AMP 验证器"></a>设置 AMP 验证器</h3><p>为了检测我们 AMP 页面的错误，我们有一个有价值的工具：AMP 验证器。编写有效的 AMP 页面是获得框架全部收益的关键。AMP 验证器可以通过两种方式访问：通过 Chrome 扩展程序，或者是通过在我们的 URL 上添加参数，所以我们需要在代码中内置验证器。就本课程来说，我们建议你使用 Chrome 扩展程序，因为它在构建你网站时更容易使用和访问。</p>
+<ul>
+<li>安装 Chrome 扩展程序，访问<a href="https://chrome.google.com/webstore/detail/amp-validator/nmoffdblmcmgeicmolmhobpoocbbmknc/related?hl=en" target="_blank" rel="noopener">链接</a></li>
+<li>要改为内置的 AMP 验证器，在你 AMP 页面 URL 地址末尾添加#development=1，然后在你浏览器控制台查看结果。如果你使用 Chrome 扩展程序你不需要添加这个参数。</li>
+</ul>
+<h3 id="我们将构建什么"><a href="#我们将构建什么" class="headerlink" title="我们将构建什么"></a>我们将构建什么</h3><p>在我们三个课程中，你将为 Chico 的奶酪自行车商城建立一个网站。Chico 开发一款完全由奶酪制成的革命性自行车。对自行车需求如此之高让 Chico 需要尽可能快的构建一个网站。当我们完成这三门课程，Chico 的网站将看起来这样：<br><img src="https://amp.dev/static/img/courses/beginner/image14.png?width=330&amp;hash=1b27ffdd511e8550ae8920116b236cdf74c50bd0" alt="How the site looks at the end of the Advanced Course"><br>你可以点击<a href="https://nice-consonant.glitch.me/" target="_blank" rel="noopener">这个</a>链接来看到实时的预览。纵观整个网站。我们有视频，注册表单，图片轮播，分享到其他媒体的方式。通过点击左上角的三行图标（也叫做汉堡菜单图标）。一旦菜单展开，点击我们的产品链接导航到产品列表。尝试按照价格对产品列表排序，并按照产品分类过滤产品列表。</p>
+<p>我们选择 Chico 的网站作为我们的模型，因为它提供了我们今天在流行网站上常见的功能集合。它完全使用 AMP 来构建。在这些课程中，我们将从头开始构建此站点。</p>
+<h2 id="我们的第一个-AMP-页面"><a href="#我们的第一个-AMP-页面" class="headerlink" title="我们的第一个 AMP 页面"></a>我们的第一个 AMP 页面</h2><h3 id="开始我们的旅程"><a href="#开始我们的旅程" class="headerlink" title="开始我们的旅程"></a>开始我们的旅程</h3><p>这是我们团队第一天构建 Chico 的奶酪自行车网站。到目前为止，这个网站是基础的 HTML 页面，表头包含网站的标题，一个我们自行车的图片，一些营销文字。<br><img src="https://amp.dev/static/img/courses/beginner/image17.png?width=1000&amp;hash=fe919f49d78010e4d32814e1067b0190b46fc608" alt="Our basic HTML website"><br>在你的 Glitch 项目中，打开 index.html 并查看 HTML：</p>
+<pre class="line-numbers language-html"><code class="language-html"><span class="token doctype">&lt;!DOCTYPE html></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>html</span> <span class="token attr-name">lang</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>en<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>head</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>meta</span> <span class="token attr-name">charset</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>utf-8<span class="token punctuation">"</span></span> <span class="token punctuation">/></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>title</span><span class="token punctuation">></span></span>Chico's Cheese Bicycles<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>title</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>link</span>
+      <span class="token attr-name">rel</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>shortcut icon<span class="token punctuation">"</span></span>
+      <span class="token attr-name">href</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>https://cdn.glitch.com/d7f46a57-0ca4-4cca-ab0f-69068dec6631%2Fcheese-favicon.png?1540228964214<span class="token punctuation">"</span></span>
+    <span class="token punctuation">/></span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>head</span><span class="token punctuation">></span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>body</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>header</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>headerbar<span class="token punctuation">"</span></span><span class="token punctuation">></span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>h2</span><span class="token punctuation">></span></span>Chico's Cheese Bicycles<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>h2</span><span class="token punctuation">></span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>header</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>main</span><span class="token punctuation">></span></span>
+      <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>main-content<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>
+        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>img</span>
+          <span class="token attr-name">src</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>https://cdn.glitch.com/d7f46a57-0ca4-4cca-ab0f-69068dec6631%2Fricotta-racer.jpg?1540228217746<span class="token punctuation">"</span></span>
+        <span class="token punctuation">/></span></span>
+        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>below-hero<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>
+          <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>h2</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>main-heading<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>What we're about<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>h2</span><span class="token punctuation">></span></span>
+          <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>p</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>main-text<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>
+            We sell the only ten-speed bicycles in the world made entirely of
+            cheese. They get you where you need to go, and you never arrive
+            hungry. Our bikes are 100% biodegradable. And with our new
+            rodent-repelling varnish they last longer than ever!
+          <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>p</span><span class="token punctuation">></span></span>
+        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">></span></span>
+      <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>main</span><span class="token punctuation">></span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>body</span><span class="token punctuation">></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>html</span><span class="token punctuation">></span></span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>我们团队已经确定使用 AMP 将构建所需要的网站功能更加容易，因此我们的工作是将这个 HTML 页面转换成有效的 AMP 页面。</p>
+<p>首先我们需要将全世界表明我们正在尝试构建 AMP 网站。为此，我们将为 html 标签加上一些装饰。如果 html 标签包含 ⚡ 符号或者单词<code>amp</code>，AMP 验证程序和 AMP 缓存会将我们的网站认为是 AMP 站点。</p>
+<p>在你的 Glitch 项目，添加 ⚡ 符号到 html 标签，像这样：</p>
+<pre class="line-numbers language-html"><code class="language-html"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>html</span> <span class="token attr-name">⚡</span> <span class="token attr-name">lang</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>en<span class="token punctuation">"</span></span><span class="token punctuation">></span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>html</span><span class="token punctuation">></span></span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p>这个符号是必须的。表明我们正在构建 AMP 页面。下一步，我们讨论像 AMP 验证器这样的工具如何帮助我们确定使网站有效需要哪些更改。</p>
+<h3 id="验证和-AMP-缓存"><a href="#验证和-AMP-缓存" class="headerlink" title="验证和 AMP 缓存"></a>验证和 AMP 缓存</h3><p>我们已经多次提到一个概念：编写有效的 AMP。让我们讨论一下它是什么意思，以及为什么它重要。</p>
+<p>首先，有效的 AMP 是很重要，因为它对你的用户有好处。AMP 的规则代表了性能，可访问性和安全的最佳实践。但是验证错误是 AMP 告诉你仍有空间为你的用户改善网站。</p>
+<p>其次，AMP 重要的原因是有用的 AMP 缓存。这个缓存是 AMP 体系结构中重要的组成部分。它是内容分发网络(CDN)，目的是：</p>
+<ul>
+<li>只服务有效的 AMP 页面</li>
+<li>允许 AMP 页面去高效和安全的预加载</li>
+<li>在缓存中的页面上做一些性能优化</li>
+</ul>
+<p>当用户请求你的 AMP 网站，它们可能是从就近的 AMP 缓存服务器发送给它。如果你的网站在 AMP 缓存中，那么当你使用 Google 之类的搜索引擎时，可以高效的预加载在到后台。如果用户在搜索结果中选中你的网站，即使连接不良，它也会在几秒内显示出来，这个 AMP 缓存将你站点上执行自动优化，例如：</p>
+<ul>
+<li>缓存字体</li>
+<li>缓存和压缩图片，转换它们成 WebP 这样的新格式</li>
+<li>对 AMP 文档消毒以阻止跨站脚本攻击或者其他漏洞</li>
+<li>修复可能导致在各种浏览器下渲染不一致的 HTML 问题;例如，关闭所有标签，小写属性名或者转义文本</li>
+</ul>
+<p>当你使用 AMP 构建网站并完成这些训练中的练习时，检查保证你的网站有效。为了跟踪这些验证错误，我将使用在<a href="https://amp.dev/zh_cn/documentation/courses/beginning-course/course-introduction/?format=websites&amp;level=beginner#setting-up-the-amp-validator" target="_blank" rel="noopener">课程介绍</a>中已经安装的 AMP 验证器。</p>
+<h3 id="练习-1：使用-AMP-验证器"><a href="#练习-1：使用-AMP-验证器" class="headerlink" title="练习 1：使用 AMP 验证器"></a>练习 1：使用 AMP 验证器</h3><p>安装 AMP 验证器 chrome 扩展程序之后，这个验证器将自动在你打开的任何带有 html 标签中包含 AMP 符号(⚡)的页面上运行，像我们现在这样。打开你的 Glitch 项目并查看 AMP 验证器扩展程序的图标。它应该看起来类似于红色上有一个徽章，表明了有 7 个验证错误。<br><img src="https://amp.dev/static/img/courses/beginner/image6.png" alt="The AMP Validator Chrome extension showing AMP issues."><br>点击 AMP 验证器的图标打开弹窗，显示当前页面的验证错误列表，并给出这些错误可能的解决方案。<br><img src="https://amp.dev/static/img/courses/beginner/image22.png?width=2500&amp;hash=7ee74f950b8b863213940e0dc221a38a4c7c850c" alt="The issues displayed in the AMP Validator Chrome Extension."><br>img 标签这一项：</p>
+<pre><code>The tag &lt;img&gt; may only appear as a descendant of tag 'noscript'. Did you mean 'amp-img'?</code></pre><p>点击这一项末尾的 Debug 链接。这个 Debug 链接将带你直接跳转到你页面上包含这个错误的代码行。它帮助你在你文件中找到遇到的错误，并提供所需的上下文来理解如何解决这个错误。不用担心，这个消息现在似乎尚不清楚，但这很容易解决。我们需要使用 AMP 组件 <amp-img> 来替换 HTML 标签 <img> 。在本课程的<a href="https://amp.dev/zh_cn/documentation/courses/beginning-course/thinking-in-components/?format=websites&amp;level=beginner" target="_blank" rel="noopener">组件的思考</a>这一节中，我们将探索为什么会出现这个错误，<amp-img> 是什么，然后如何解决它。<br><img src="https://amp.dev/static/img/courses/beginner/image16.png?width=2500&amp;hash=73a6f348dbdad8011aa80519378e74a8c4442b14" alt="AMP debugger showing an error inline."><br>对于其他的验证错误项，点击”Learn more”的链接标签。这个链接将你从错误描述中转到响应的 AMP 文档，帮助你修复这个问题。<br><img src="https://amp.dev/static/img/courses/beginner/image21.png?width=1750&amp;hash=06f514eceeae89e6bf72c99bfc23ea619f71f6af" alt="AMP documentation reached via the “Learn more” link in the AMP Validator."><br>下一步是修复这些验证问题。为此，我们需要更加的了解 AMP 页面必要的元素。除了向我们的 HTML 中添加闪电符号之外我们还需要做更多的事情创建一个有效的 AMP 页面。</amp-img></amp-img></p>
+<h3 id="AMP-页面的剖析"><a href="#AMP-页面的剖析" class="headerlink" title="AMP 页面的剖析"></a>AMP 页面的剖析</h3><p>每个页面都以相同的基础模板开头。然后我们自定义并从那里构建页面。这个入门模板有时候叫做 AMP 样板。这个样板是设置 AMP 运行时并帮助 AMP 页面运行的更加平滑的标签组合。</p>
+<p>在这一节，我们将对 AMP 样板的每个部分都进行一些解释。然而，你无需记住在你用 AMP 创建的每个页面添加这些标签。你可以简单的用这个样板开始构建 AMP 页面。</p>
+<p>下面的这些标签是 AMP 页面必须的。有效的 AMP 页面一定包含：</p>
+<ul>
+<li>从 <code>&lt;!doctype html&gt;</code> doctype 开始</li>
+<li>包含 <code>&lt;head&gt;</code> 和 <code>&lt;body&gt;</code> 标签</li>
+<li><code>&lt;head&gt;</code> 内的第一个标签是 <code>&lt;meta charset="utf-8"&gt;</code> 标签</li>
+<li>在 <code>&lt;head&gt;</code> 标签中包含 <code>&lt;meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1"&gt;</code>。注意：建议 initial-scale=1</li>
+</ul>
+<p>下面这些规则专门用于设置 AMP 运行时。验证 AMP 页面一定包含：</p>
+<ul>
+<li>包含一个顶层的<code>&lt;html ⚡&gt;</code>标签。这个闪电象征符号表明它是一个 AMP 站点。注意：<code>&lt;html amp&gt;</code>也接受。</li>
+<li>在它们的<code>&lt;head&gt;</code>标签中包含一个<code>&lt;script async src="https://cdn.ampproject.org/v0.js"&gt;&lt;/script&gt;</code>标签。加载 AMP JavaScript 库。注意：作为最佳实践，你应该在<code>&lt;head&gt;</code>中尽量早的包含这个脚本。</li>
+<li>在<code>&lt;head&gt;</code>中包含一个<code>&lt;link rel="canonical" href="$SOME_URL"&gt;</code>标签。如果存在指向常规的 HTML 版本，或者如果不存在非 AMP 的版本就指向自身。注意：你应该在你页面上替换<code>$SOME_URL</code>为真实的地址。</li>
+<li>在<code>&lt;head&gt;</code>标签中包含 AMP 样式的样板代码。该 CSS 在页面上隐藏直到 AMP 库加载完成。以下是 AMP 样式的样板代码：</li>
+</ul>
+<pre class="line-numbers language-html"><code class="language-html"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>style</span> <span class="token attr-name">amp-boilerplate</span><span class="token punctuation">></span></span><span class="token style language-css">
+  <span class="token selector">body </span><span class="token punctuation">{</span>
+    <span class="token property">-webkit-animation</span><span class="token punctuation">:</span> -amp-start <span class="token number">8</span>s <span class="token function">steps</span><span class="token punctuation">(</span><span class="token number">1</span>, end<span class="token punctuation">)</span> <span class="token number">0</span>s <span class="token number">1</span> normal both<span class="token punctuation">;</span>
+    <span class="token property">-moz-animation</span><span class="token punctuation">:</span> -amp-start <span class="token number">8</span>s <span class="token function">steps</span><span class="token punctuation">(</span><span class="token number">1</span>, end<span class="token punctuation">)</span> <span class="token number">0</span>s <span class="token number">1</span> normal both<span class="token punctuation">;</span>
+    <span class="token property">-ms-animation</span><span class="token punctuation">:</span> -amp-start <span class="token number">8</span>s <span class="token function">steps</span><span class="token punctuation">(</span><span class="token number">1</span>, end<span class="token punctuation">)</span> <span class="token number">0</span>s <span class="token number">1</span> normal both<span class="token punctuation">;</span>
+    <span class="token property">animation</span><span class="token punctuation">:</span> -amp-start <span class="token number">8</span>s <span class="token function">steps</span><span class="token punctuation">(</span><span class="token number">1</span>, end<span class="token punctuation">)</span> <span class="token number">0</span>s <span class="token number">1</span> normal both<span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
+  <span class="token atrule"><span class="token rule">@-webkit-keyframes</span> -amp-start</span> <span class="token punctuation">{</span>
+    <span class="token selector">from </span><span class="token punctuation">{</span>
+      <span class="token property">visibility</span><span class="token punctuation">:</span> hidden<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+    <span class="token selector">to </span><span class="token punctuation">{</span>
+      <span class="token property">visibility</span><span class="token punctuation">:</span> visible<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+  <span class="token punctuation">}</span>
+  <span class="token atrule"><span class="token rule">@-moz-keyframes</span> -amp-start</span> <span class="token punctuation">{</span>
+    <span class="token selector">from </span><span class="token punctuation">{</span>
+      <span class="token property">visibility</span><span class="token punctuation">:</span> hidden<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+    <span class="token selector">to </span><span class="token punctuation">{</span>
+      <span class="token property">visibility</span><span class="token punctuation">:</span> visible<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+  <span class="token punctuation">}</span>
+  <span class="token atrule"><span class="token rule">@-ms-keyframes</span> -amp-start</span> <span class="token punctuation">{</span>
+    <span class="token selector">from </span><span class="token punctuation">{</span>
+      <span class="token property">visibility</span><span class="token punctuation">:</span> hidden<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+    <span class="token selector">to </span><span class="token punctuation">{</span>
+      <span class="token property">visibility</span><span class="token punctuation">:</span> visible<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+  <span class="token punctuation">}</span>
+  <span class="token atrule"><span class="token rule">@-o-keyframes</span> -amp-start</span> <span class="token punctuation">{</span>
+    <span class="token selector">from </span><span class="token punctuation">{</span>
+      <span class="token property">visibility</span><span class="token punctuation">:</span> hidden<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+    <span class="token selector">to </span><span class="token punctuation">{</span>
+      <span class="token property">visibility</span><span class="token punctuation">:</span> visible<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+  <span class="token punctuation">}</span>
+  <span class="token atrule"><span class="token rule">@keyframes</span> -amp-start</span> <span class="token punctuation">{</span>
+    <span class="token selector">from </span><span class="token punctuation">{</span>
+      <span class="token property">visibility</span><span class="token punctuation">:</span> hidden<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+    <span class="token selector">to </span><span class="token punctuation">{</span>
+      <span class="token property">visibility</span><span class="token punctuation">:</span> visible<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+  <span class="token punctuation">}</span><span class="token selector">&lt;/style
+>&lt;noscript
+  >&lt;style amp-boilerplate>
+    body </span><span class="token punctuation">{</span>
+      <span class="token property">-webkit-animation</span><span class="token punctuation">:</span> none<span class="token punctuation">;</span>
+      <span class="token property">-moz-animation</span><span class="token punctuation">:</span> none<span class="token punctuation">;</span>
+      <span class="token property">-ms-animation</span><span class="token punctuation">:</span> none<span class="token punctuation">;</span>
+      <span class="token property">animation</span><span class="token punctuation">:</span> none<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+  </span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>style</span><span class="token punctuation">></span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>noscript</span>
+<span class="token punctuation">></span></span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h3 id="CSS-和-AMP"><a href="#CSS-和-AMP" class="headerlink" title="CSS 和 AMP"></a>CSS 和 AMP</h3><p>CSS 自定义你网站的外观。你将几乎总是添加自定义样式到你的 AMP 页面上。不过，注意 AMP 对 CSS 的使用做了一些限制：</p>
+<ul>
+<li>样式只能存在于<code>&lt;style amp-custom&gt;</code>标签内的文档头，或在需要时作为内联样式使用。这个限制阻止加载外部样式表，但是也保存网络请求，启用缓存并提高性能。</li>
+<li>一个 AMP 页面只能包含一个<code>&lt;style amp-custom&gt;</code>标签(装饰的样式标签)</li>
+<li>一个页面最多包含 75k 的 css</li>
+<li><code>!important</code>规则受限制</li>
+<li>更多的关于 CSS 规则的限制，请查看<a href="https://amp.dev/zh_cn/documentation/guides-and-tutorials/develop/style_and_layout/style_pages/?format=websites" target="_blank" rel="noopener">此处</a>的文档</li>
+</ul>
+<p>要练习将自定义的样式添加到 AMP，请在<code>&lt;head&gt;</code>的页面上添加<code>&lt;style amp-custom&gt;</code>标签，看看会发生什么。完成后，你可以从你的页面中删除它。</p>
+<pre class="line-numbers language-html"><code class="language-html"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>style</span> <span class="token attr-name">amp-custom</span><span class="token punctuation">></span></span><span class="token style language-css">
+  <span class="token selector">body </span><span class="token punctuation">{</span>
+    <span class="token property">font-family</span><span class="token punctuation">:</span> sans-serif<span class="token punctuation">;</span>
+    <span class="token property">line-height</span><span class="token punctuation">:</span> <span class="token number">1.5</span>rem<span class="token punctuation">;</span>
+    <span class="token property">padding</span><span class="token punctuation">:</span> <span class="token number">20</span>px<span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
+  <span class="token selector">p,
+  h2 </span><span class="token punctuation">{</span>
+    <span class="token property">border</span><span class="token punctuation">:</span> <span class="token number">1</span>px dotted red<span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
+</span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>style</span><span class="token punctuation">></span></span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p><img src="https://amp.dev/static/img/courses/beginner/image10.png?width=560&amp;hash=e71123278226e4245149ac2b1d9f11ea83a1f484" alt="Custom CSS affecting our page."></p>
+<h3 id="练习-2：转换我们-HTML-页面的剩余部分"><a href="#练习-2：转换我们-HTML-页面的剩余部分" class="headerlink" title="练习 2：转换我们 HTML 页面的剩余部分"></a>练习 2：转换我们 HTML 页面的剩余部分</h3><p>现在是时候修正上一节练习在我们网站上发现的验证错误了。为此，我们需要给我们基础 HTML 网站添加缺失的 AMP 样板代码。</p>
+<p>对此以及所有以后的练习，我们将应用所学的知识对我们的 Glitch 网站上的真实代码进行更改。我们会给你一些提示。在每次练习结束之后，我们将给出一个完整的解决方案。尝试依靠自己完成练习，但是如果你卡主了或者是需要提示，可以随时从解决方案一节中复制代码。</p>
+<p>另外，在每一节课程的开头和末尾，我们提供一个包含我们到此为止完成的所有的代码。如果你丢失了当前的 Glitch 页面或者想从我们的解决方案开始，你可以从 Glitch 示例中复制代码，或者重新混合这些示例并从那里继续前行。</p>
+<p>使用 AMP 的<a href="https://amp.dev/zh_cn/documentation/guides-and-tutorials/start/create/basic_markup/?format=websites" target="_blank" rel="noopener">文档</a>和上面的注释，更新你的 Glitch 项目，你会发现只有<code>&lt;img&gt;</code>标签验证错误依旧存在。另外，为了帮助我们构建 Chico 的奶酪自行车网站，我们已经提供了一些样式，可以在整个培训中使用。如果你打开<a href="https://pastebin.com/vNws2bA1" target="_blank" rel="noopener">这个</a>页面，<code>&lt;style amp-custom&gt;</code>标签包含你所需的样式。你应该复制这些样式到你正在工作的项目中去。</p>
+<h4 id="解决方案"><a href="#解决方案" class="headerlink" title="解决方案"></a>解决方案</h4><p>可以在[<a href="https://glitch.com/~hungry-modem]这个" target="_blank" rel="noopener">https://glitch.com/~hungry-modem]这个</a> Glitch 示例中找到解决方案。这个页面包含改动的部分应该如下所示：</p>
+<pre class="line-numbers language-html"><code class="language-html"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>head</span><span class="token punctuation">></span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>meta</span> <span class="token attr-name">charset</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>utf-8<span class="token punctuation">"</span></span> <span class="token punctuation">/></span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>script</span> <span class="token attr-name">async</span> <span class="token attr-name">src</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>https://cdn.ampproject.org/v0.js<span class="token punctuation">"</span></span><span class="token punctuation">></span></span><span class="token script language-javascript"></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>script</span><span class="token punctuation">></span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>title</span><span class="token punctuation">></span></span>Chico's Cheese Bicycles<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>title</span><span class="token punctuation">></span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>link</span>
+    <span class="token attr-name">rel</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>shortcut icon<span class="token punctuation">"</span></span>
+    <span class="token attr-name">href</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>https://cdn.glitch.com/d7f46a57-0ca4-4cca-ab0f-69068dec6631%2Fcheese-favicon.png?1540228964214<span class="token punctuation">"</span></span>
+  <span class="token punctuation">/></span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>meta</span>
+    <span class="token attr-name">name</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>viewport<span class="token punctuation">"</span></span>
+    <span class="token attr-name">content</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>width<span class="token punctuation">=</span>device-width,minimum-scale<span class="token punctuation">=</span>1,initial-scale<span class="token punctuation">=</span>1<span class="token punctuation">"</span></span>
+  <span class="token punctuation">/></span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>link</span> <span class="token attr-name">rel</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>canonical<span class="token punctuation">"</span></span> <span class="token attr-name">href</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>https://hungry-modem.glitch.me/<span class="token punctuation">"</span></span> <span class="token punctuation">/></span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>style</span> <span class="token attr-name">amp-boilerplate</span><span class="token punctuation">></span></span><span class="token style language-css">
+    <span class="token selector">body </span><span class="token punctuation">{</span>
+      <span class="token property">-webkit-animation</span><span class="token punctuation">:</span> -amp-start <span class="token number">8</span>s <span class="token function">steps</span><span class="token punctuation">(</span><span class="token number">1</span>, end<span class="token punctuation">)</span> <span class="token number">0</span>s <span class="token number">1</span> normal both<span class="token punctuation">;</span>
+      <span class="token property">-moz-animation</span><span class="token punctuation">:</span> -amp-start <span class="token number">8</span>s <span class="token function">steps</span><span class="token punctuation">(</span><span class="token number">1</span>, end<span class="token punctuation">)</span> <span class="token number">0</span>s <span class="token number">1</span> normal both<span class="token punctuation">;</span>
+      <span class="token property">-ms-animation</span><span class="token punctuation">:</span> -amp-start <span class="token number">8</span>s <span class="token function">steps</span><span class="token punctuation">(</span><span class="token number">1</span>, end<span class="token punctuation">)</span> <span class="token number">0</span>s <span class="token number">1</span> normal both<span class="token punctuation">;</span>
+      <span class="token property">animation</span><span class="token punctuation">:</span> -amp-start <span class="token number">8</span>s <span class="token function">steps</span><span class="token punctuation">(</span><span class="token number">1</span>, end<span class="token punctuation">)</span> <span class="token number">0</span>s <span class="token number">1</span> normal both<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+    <span class="token atrule"><span class="token rule">@-webkit-keyframes</span> -amp-start</span> <span class="token punctuation">{</span>
+      <span class="token selector">from </span><span class="token punctuation">{</span>
+        <span class="token property">visibility</span><span class="token punctuation">:</span> hidden<span class="token punctuation">;</span>
+      <span class="token punctuation">}</span>
+      <span class="token selector">to </span><span class="token punctuation">{</span>
+        <span class="token property">visibility</span><span class="token punctuation">:</span> visible<span class="token punctuation">;</span>
+      <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+    <span class="token atrule"><span class="token rule">@-moz-keyframes</span> -amp-start</span> <span class="token punctuation">{</span>
+      <span class="token selector">from </span><span class="token punctuation">{</span>
+        <span class="token property">visibility</span><span class="token punctuation">:</span> hidden<span class="token punctuation">;</span>
+      <span class="token punctuation">}</span>
+      <span class="token selector">to </span><span class="token punctuation">{</span>
+        <span class="token property">visibility</span><span class="token punctuation">:</span> visible<span class="token punctuation">;</span>
+      <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+    <span class="token atrule"><span class="token rule">@-ms-keyframes</span> -amp-start</span> <span class="token punctuation">{</span>
+      <span class="token selector">from </span><span class="token punctuation">{</span>
+        <span class="token property">visibility</span><span class="token punctuation">:</span> hidden<span class="token punctuation">;</span>
+      <span class="token punctuation">}</span>
+      <span class="token selector">to </span><span class="token punctuation">{</span>
+        <span class="token property">visibility</span><span class="token punctuation">:</span> visible<span class="token punctuation">;</span>
+      <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+    <span class="token atrule"><span class="token rule">@-o-keyframes</span> -amp-start</span> <span class="token punctuation">{</span>
+      <span class="token selector">from </span><span class="token punctuation">{</span>
+        <span class="token property">visibility</span><span class="token punctuation">:</span> hidden<span class="token punctuation">;</span>
+      <span class="token punctuation">}</span>
+      <span class="token selector">to </span><span class="token punctuation">{</span>
+        <span class="token property">visibility</span><span class="token punctuation">:</span> visible<span class="token punctuation">;</span>
+      <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+    <span class="token atrule"><span class="token rule">@keyframes</span> -amp-start</span> <span class="token punctuation">{</span>
+      <span class="token selector">from </span><span class="token punctuation">{</span>
+        <span class="token property">visibility</span><span class="token punctuation">:</span> hidden<span class="token punctuation">;</span>
+      <span class="token punctuation">}</span>
+      <span class="token selector">to </span><span class="token punctuation">{</span>
+        <span class="token property">visibility</span><span class="token punctuation">:</span> visible<span class="token punctuation">;</span>
+      <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+  </span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>style</span><span class="token punctuation">></span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>noscript</span>
+    <span class="token punctuation">></span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>style</span> <span class="token attr-name">amp-boilerplate</span><span class="token punctuation">></span></span><span class="token style language-css">
+      <span class="token selector">body </span><span class="token punctuation">{</span>
+        <span class="token property">-webkit-animation</span><span class="token punctuation">:</span> none<span class="token punctuation">;</span>
+        <span class="token property">-moz-animation</span><span class="token punctuation">:</span> none<span class="token punctuation">;</span>
+        <span class="token property">-ms-animation</span><span class="token punctuation">:</span> none<span class="token punctuation">;</span>
+        <span class="token property">animation</span><span class="token punctuation">:</span> none<span class="token punctuation">;</span>
+      <span class="token punctuation">}</span>
+    </span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>style</span><span class="token punctuation">></span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>noscript</span>
+  <span class="token punctuation">></span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>style</span> <span class="token attr-name">amp-custom</span><span class="token punctuation">></span></span><span class="token style language-css">
+    <span class="token number">...</span> styles elided due to length <span class="token number">...</span><span class="token punctuation">;</span>
+  </span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>style</span><span class="token punctuation">></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>head</span><span class="token punctuation">></span></span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h3 id="一个几乎有效的-AMP-页面"><a href="#一个几乎有效的-AMP-页面" class="headerlink" title="一个几乎有效的 AMP 页面"></a>一个几乎有效的 AMP 页面</h3><p>如果你完成了上述的所有练习，恭喜！你的页面几乎是一个有效的 AMP 页面。如果你打开你的页面并打开 Chrome DevTools(<code>Command+Option+I 在Mac上 或者 Control+Shift+I 在Windows/Linux</code>)并选中 Console 标签页，你应该在控制台中看到这个消息，表示这个 AMP 库被成功的加载了：</p>
+<pre><code>Powered by AMP ⚡ HTML</code></pre><p>接下来，如果你打开 AMP 验证扩展程序，会显示我们犯下了最后一个错误：</p>
+<pre><code>The tag 'img' may only appear as a descendant of tag 'noscript'. Did you mean 'amp-img'?</code></pre><p>这是需要理解的重要错误。一些 HTML 标签不允许出现在 AMP 文档中。在某些情况下，AMP 要求你使用其他来替换。我们叫一些自定义非 HTML 标签的标签为”组件“，并且我们将稍后在本训练的下一节来讨论它们。</p>
+<h2 id="组件思考"><a href="#组件思考" class="headerlink" title="组件思考"></a>组件思考</h2><h3 id="添加功能给我们的网站"><a href="#添加功能给我们的网站" class="headerlink" title="添加功能给我们的网站"></a>添加功能给我们的网站</h3><p>到目前为止，我们将基础的 HTML 网站转化成了基础的 AMP 网站。目前我们的网站上仍有一个错误，我们将使用<code>&lt;amp-img&gt;</code>组件来替换<code>&lt;img&gt;</code>标签来修复这个错误。解决最后一个验证问题之后，我们将学习到上面是 AMP 组件，为什么某些 HTML 标签在 AMP 中被替换或禁止，以及如何为我们的网站中添加组件。</p>
+<p>之后，是时候向我们的网站上添加额外的功能了。为了完成 Chico 的奶酪自行车首页的初始版本，我们将添加一些额外的营销内容。团队决定添加一个关于如何制作奶酪自行车的 YouTube 视频，一个各种奶酪自行车产品的图片轮播以及一些社交媒体链接，帮助用户分享我们的网站到它们喜欢的社交网络上。</p>
+<p>看起来这么快的向我们的网站上添加这么多内容令人害怕。我们应该创建 HTML，CSS 和 JavaScript 来满足我们想要添加功能的要求（例如如何更改轮播图的滑动）。然后，我们来考虑如何提升整个站点的性能。</p>
+<p>但是这是 AMP 之美。使用 AMP，我们不需要担心所有这些细节！AMP 库作者为我们提供了这些功能的插入构建块，并关心质量像性能、可访问性和安全。这些块本称之为组件，它们是 AMP 成功的关键。</p>
+<h3 id="什么是-Web-组件？"><a href="#什么是-Web-组件？" class="headerlink" title="什么是 Web 组件？"></a>什么是 Web 组件？</h3><p>组件是构建 Web 的块。它们代表结构（HTML）、样式（CSS）和行为（JavaScript）的组合，并具有很容易在自己网站中使用和与其他人分享的接口。组件有如下特征：</p>
+<ul>
+<li>一个名字(如<code>&lt;amp-img&gt;</code>)，如 tag 名一样来确定一个组件</li>
+<li>自定义属性，可以改变行为，样式，或者组件内容（如 width,height,src 和 attribution）</li>
+<li>事件，可以捕获组件的用户输入（属性 on）</li>
+</ul>
+<p>可选的，组件也有”children”。在这里,”children”引用了内容(像文本，HTML 标签或者其他组件)被放置在组件的打开和闭合标签之间。这些 children 的显示内容因每个组件不同而不一样。</p>
+<p>AMP 组件系统让你用最小的努力帮助你快速的构建高效且响应迅速的功能到页面上。这个组件库提供了一个完整的组件列表给你使用。有用于构建表单和轮播图的组件，用于集成页面分析，用于向服务器发送 XHR 请求的组件，等等。扩展性几乎是无限的。你可以在 AMP 组件参考<a href="https://amp.dev/zh_cn/documentation/components/?format=websites" target="_blank" rel="noopener">这里</a>看到完整的组件列表。</p>
+<p>举例，这里是我们网站时使用的 3 个 AMP 组件：<br>| AMP component | How it renders on our site |<br>| —- | —– |<br>| <code>&lt;amp-img src="IMG-URL" layout="responsive" width="640" height="480"&gt;&lt;/amp-img&gt;</code> | <img src="https://amp.dev/static/img/courses/beginner/image14.png?width=1000&amp;hash=1b27ffdd511e8550ae8920116b236cdf74c50bd0" alt=""> |</p>
+<p>|<code>&lt;amp-twitter width="486" height="657" layout="responsive" data-tweetid="ID"&gt;&lt;/amp-twitter&gt;</code>|<img src="https://amp.dev/static/img/courses/beginner/image19.png?width=1000&amp;hash=af27220195f943de1cd2b4815e76acf8ed7dd045" alt=""> |<br>|<code>&lt;amp-youtube data-videoid="ID" layout="responsive" width="480" height="270"&gt;&lt;/amp-youtube&gt;</code>|<img src="https://amp.dev/static/img/courses/beginner/image15.png?width=1000&amp;hash=8b870c5a1cfb74d64993f9841a08814e7eac0fc3" alt=""> |</p>
+<p>建立 AMP 站点的目的是尽可能的使用 AMP 组件。组件使得构建的 AMP 的性能优势最大化，因为你不需要创建已有的组件，从而利用 AMP 库作者的工作。</p>
+<p>几乎所有的 AMP 组件都由至少一些 JavaScript 运行。对于某些 AMP 组件(如<code>&lt;amp-img&gt;</code>)，这个 JavaScript 直接内置到了 AMP 运行时脚本中，该脚本包含在页面的样式代码的顶部。对于大多数 AMP 组件，你需要包含单独的 script 标签。一个充分的理由是：你只包含你网站上真正需要的脚本。然后，用户只需要下载浏览页面所需要的代码。越少的代码下载意味着你的网站加载更快。</p>
+<h3 id="练习-3：我们的第一个组件"><a href="#练习-3：我们的第一个组件" class="headerlink" title="练习 3：我们的第一个组件-"></a>练习 3：我们的第一个组件-<amp-img></amp-img></h3><p>大多数 HTML 标签可以被直接在 AMP 中使用，像<code>&lt;img&gt;</code>标签，一定要替换成等效的 AMP 组件。这些组件结合了可访问性，响应能力和性能的内置最佳实践。</p>
+<p>例如，在<code>&lt;amp-img&gt;</code>的情况下，AMP 要求我们去指定图片的尺寸。AMP 需要在资源(如 images)加载之前知道页面的布局。它可以提高在页面正在加载，图片资源还没有下载完成之前的用户体验。当图片下载完，可以将它插入到页面而不会造成页面上已存在的内容四处移动。它给 AMP 运行时空间去决定根据用户设备的能力和网络连接情况何时去加载网络图片资源。</p>
+<p>要使用该组件来解决早起的<code>&lt;amp-img&gt;</code>验证错误，用 AMP 等效组件来替换页面中已存在的 img 标签。注意：编写<code>&lt;amp-img ...&gt;</code>而不是<code>&lt;img ...&gt;</code>需要给你的图片指定尺寸。给图片一个宽 640，高 480。</p>
+<p>如果需要，<a href="https://amp.dev/zh_cn/documentation/components/amp-img/?format=websites" target="_blank" rel="noopener">参考</a>这里的<code>&lt;amp-img&gt;</code>文档。</p>
+<h4 id="解决方案-1"><a href="#解决方案-1" class="headerlink" title="解决方案"></a>解决方案</h4><p>页面中包含的图片部分应该如下所示：</p>
+<pre class="line-numbers language-html"><code class="language-html"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>amp-img</span>
+  <span class="token attr-name">src</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>https://cdn.glitch.com/d7f46a57-0ca4-4cca-ab0f-69068dec6631%2Fricotta-racer.jpg?1540228217746<span class="token punctuation">"</span></span>
+  <span class="token attr-name">width</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>”640”<span class="token punctuation">"</span></span>
+  <span class="token attr-name">height</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>480<span class="token punctuation">"</span></span>
+<span class="token punctuation">></span></span>&lt;/amp-img<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h3 id="排列和调整组件大小"><a href="#排列和调整组件大小" class="headerlink" title="排列和调整组件大小"></a>排列和调整组件大小</h3><p>下一个我们需要解决的问题是我们页面的外观。你不会在大的桌面显示器上注意到它，但是当我们在移动设备上查看我们的网站时就很容易看到问题所在。<br><img src="https://amp.dev/static/img/courses/beginner/image23.png?width=1000&amp;hash=de743706d2eb97cf44b26e9f3945e2657bb88f2f" alt="自行车的图片超出了屏幕边缘"></p>
+<p>我们添加到页面的图片不会缩小以适应更小的屏幕；它会溢出边缘。如果我们没有指定布局图片和调整大小的策略，它将默认按照我们代码中指定的宽高来固定。幸运的是，我们可以使用 AMP 的布局系统来解决这个问题。</p>
+<p>我们将给我们的图片指定响应类型的 layout 属性，使其自动根据窗口调整大小来缩放。响应式布局假设图片为父容器的尺寸，同时遵循原始尺寸的长宽比。如果父容器只有 320 像素的宽，图片将维持长宽比并调整成 320<em>240(而不是 640</em>480)。</p>
+<p>添加 layout 属性到我们的图片。如果正确完成，它看起来像这样：</p>
+<pre class="line-numbers language-html"><code class="language-html"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>amp-img</span>
+  <span class="token attr-name">src</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>https://cdn.glitch.com/d7f46a57-0ca4-4cca-ab0f-69068dec6631%2Fricotta-racer.jpg?1540228217746<span class="token punctuation">"</span></span>
+  <span class="token attr-name">layout</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>responsive<span class="token punctuation">"</span></span>
+  <span class="token attr-name">width</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>640<span class="token punctuation">"</span></span>
+  <span class="token attr-name">height</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>480<span class="token punctuation">"</span></span>
+<span class="token punctuation">></span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>amp-img</span><span class="token punctuation">></span></span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>在你完成改动之后，看下你的页面。图片会正确的按照长宽比，响应式的根据屏幕宽度去填充显示。问题解决。<br><img src="https://amp.dev/static/img/courses/beginner/image26.png?width=1000&amp;hash=c8df8c9c35ded613d440e108b6664d8d724fd9f1" alt="纵横比正确的自行车图片"></p>
+<p>除了<code>responsive</code>之外还有其他布局类型(实际上至少总共有 8 种)。例如，<code>fixed</code>布局表明组件永远不会调整分配给它的宽和高。<code>intrinsic</code>布局和<code>responsive</code>布局类似，除了它具有组件不能超过固有宽高的概念。某些布局只能应用于某些组件上。每个组件的文档将会指定那些布局对它有效。你可以在<a href="https://amp.dev/zh_cn/documentation/guides-and-tutorials/learn/amp-html-layout/layouts_demonstrated/?format=websites" target="_blank" rel="noopener">这里</a>查看看剩下的布局类型。</p>
+<p>如果你想成为一个成功的 AMP 开发者，学习如何使用布局系统是关键。所有 AMP 提供的布局系统都可以用纯 CSS 去实现，但是通常它们很复杂或者有复杂的边界情况要求很深入的知识来解决。AMP 简化了过程并暴露一些选项，可以在你 AMP 页面上任何元素上使用。查看<a href="https://amp.dev/zh_cn/documentation/guides-and-tutorials/learn/amp-html-layout/?format=websites" target="_blank" rel="noopener">官方文档</a>学习更多的布局系统知识。</p>
+<h3 id="练习-4：嵌入视频"><a href="#练习-4：嵌入视频" class="headerlink" title="练习 4：嵌入视频"></a>练习 4：嵌入视频</h3><p>下一步，来嵌入 YouTube 视频到我们的文档中。我们的营销团队发布了<a href="https://www.youtube.com/watch?v=BlpMQ7fMCzA" target="_blank" rel="noopener">这个</a>视频，来展示我们正在生产一款奶酪自行车。</p>
+<p>使用这份<code>&lt;amp-youtube&gt;</code>文档嵌入这个 YouTube 视频放到<code>&lt;amp-imp&gt;</code>组件之后：</p>
+<ul>
+<li>设置视频 id 为<code>BlpMQ7fMCzA</code></li>
+<li>使得视频布局<code>responsive</code></li>
+<li>注意：不要忘记添加这个脚本到<code>&lt;head&gt;</code>中</li>
+</ul>
+<p>推荐样式指南：</p>
+<ul>
+<li>设置元素宽度 480，高度 270</li>
+</ul>
+<p>你更改之后，看下页面。你现在应该可以看到 YouTube 视频：<br><img src="https://amp.dev/static/img/courses/beginner/image18.png?width=1000&amp;hash=42af1c8df34f27b866b35d7bc78c6754762e4de4" alt="页面中YouTube视频的图像"></p>
+<h4 id="解决方案-2"><a href="#解决方案-2" class="headerlink" title="解决方案"></a>解决方案</h4><pre class="line-numbers language-html"><code class="language-html"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>amp-youtube</span>
+  <span class="token attr-name">data-videoid</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>BlpMQ7fMCzA<span class="token punctuation">"</span></span>
+  <span class="token attr-name">layout</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>responsive<span class="token punctuation">"</span></span>
+  <span class="token attr-name">width</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>480<span class="token punctuation">"</span></span>
+  <span class="token attr-name">height</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>270<span class="token punctuation">"</span></span>
+<span class="token punctuation">></span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>amp-youtube</span><span class="token punctuation">></span></span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>记住在<code>&lt;head&gt;</code>中包含<code>&lt;amp-youtube&gt;</code>脚本：</p>
+<pre class="line-numbers language-html"><code class="language-html"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>script</span>
+  <span class="token attr-name">async</span>
+  <span class="token attr-name">custom-element</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>amp-youtube<span class="token punctuation">"</span></span>
+  <span class="token attr-name">src</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>https://cdn.ampproject.org/v0/amp-youtube-0.1.js<span class="token punctuation">"</span></span>
+<span class="token punctuation">></span></span><span class="token script language-javascript"></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>script</span><span class="token punctuation">></span></span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h2 id="找到正确的组件"><a href="#找到正确的组件" class="headerlink" title="找到正确的组件"></a>找到正确的组件</h2><h3 id="浏览-AMP-组件文档"><a href="#浏览-AMP-组件文档" class="headerlink" title="浏览 AMP 组件文档"></a>浏览 AMP 组件文档</h3><p>到目前为止，我们使用的组件非常简单。对于<code>&lt;amp-img&gt;</code>和<code>&lt;amp-youtube&gt;</code>通过这篇文档的学习足够了，查看示例，然后复制代码到我们的网站。对于某些组件的高级功能，或者对更复杂的组件，我们将从这篇文档中读取和吸收更多的信息。</p>
+<p>为了更高效的开发 AMP 网站，学会如何浏览 AMP 组件文档非常重要。在本系列的每个培训中广泛的练习这个技能。</p>
+<p>下一步，我将添加奶酪自行车产品的图片集合供用户去滚动。对此，我们将使用一个图片轮播图组件。轮播图组件是一个包含一组子项的元素，它们滑动起来像幻灯片放映。轮播图的 AMP 实现是<code>&lt;amp-carousel&gt;</code>。这个组件不是内置的，所以你需要添加它的脚本到页面的<code>&lt;head&gt;</code>中。</p>
+<p>当我们查看<code>&lt;amp-carousel&gt;</code>的<a href="https://amp.dev/zh_cn/documentation/components/amp-carousel/?format=websites" target="_blank" rel="noopener">文档</a>时，我们将寻找下面问题的答案：</p>
+<ul>
+<li>这个组件做什么？</li>
+<li>我应该如何使用这个组件？</li>
+<li>我应该如何使用属性来定制这个组件？</li>
+<li>我应该如何改变这个组件的样式？</li>
+<li>我们需要引用外部的脚本来启用这个组件吗？</li>
+<li>这个组件支持哪些布局类型？</li>
+</ul>
+<p><img src="https://amp.dev/static/img/courses/beginner/image25.png?width=1750&amp;hash=a70b70e161b20fc05d42dd6afac1f928c28c076b" alt="AMP documentation page fo carousel"><br>查看<code>&lt;amp-carousel&gt;</code>文档的下面各项：</p>
+<ul>
+<li><strong>描述</strong> - 每个组件文档的顶部是一个简单的介绍。总结了这个组件是什么，以及它存在的理由。</li>
+<li><strong>行为 behavior</strong> - 这一节解析了组件是如何实现的。通常提供了示例代码和它的展示效果</li>
+<li><strong>列出的属性</strong> - 我们在 web 组件的上一节讨论了自定义属性。它允许我们用某些方式来自定义我们的 AMP 组件。这一节包含了不同属性的列表，它们可能的值，以及这些值控制什么。</li>
+<li><strong>样式 styling</strong> - 这一节解释了如何使用 CSS 来改变组件的外观。除了通过标签名和 id 来设置样式，许多组件提供了额外的 CSS 类名，在某些状态下使用它来改变组件的外观。例如，<code>&lt;amp-carousel&gt;</code>提供了类<code>.amp-carousel-button</code>，允许开发者重新调整改变轮播图滑动的按钮的样式。</li>
+<li><strong>要求的脚本标签</strong> - 置于文档的顶部，这个标签需要添加我们网站的顶部让这个正常工作。许多组件都需要这些脚本才能正常工作。</li>
+<li><strong>支持的布局类型</strong> - 我们在上一节讨论了<a href="https://amp.dev/zh_cn/documentation/guides-and-tutorials/learn/amp-html-layout/layouts_demonstrated/?format=websites" target="_blank" rel="noopener">布局</a>属性。它控制屏幕上这个元素的显示。这一节解释了那些布局类型对这个组件有效。</li>
+</ul>
+<p>几乎所有的 AMP 组件的文档都列出了这些项。让我们来探索其中一个示例的文档：</p>
+<pre class="line-numbers language-html"><code class="language-html"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>amp-carousel</span>
+  <span class="token attr-name">id</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>carousel-with-preview<span class="token punctuation">"</span></span>
+  <span class="token attr-name">width</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>450<span class="token punctuation">"</span></span>
+  <span class="token attr-name">height</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>300<span class="token punctuation">"</span></span>
+  <span class="token attr-name">layout</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>responsive<span class="token punctuation">"</span></span>
+  <span class="token attr-name">type</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>slides<span class="token punctuation">"</span></span>
+<span class="token punctuation">></span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>amp-img</span>
+    <span class="token attr-name">src</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>images/image1.jpg<span class="token punctuation">"</span></span>
+    <span class="token attr-name">width</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>450<span class="token punctuation">"</span></span>
+    <span class="token attr-name">height</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>300<span class="token punctuation">"</span></span>
+    <span class="token attr-name">layout</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>responsive<span class="token punctuation">"</span></span>
+    <span class="token attr-name">alt</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>apples<span class="token punctuation">"</span></span>
+  <span class="token punctuation">></span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>amp-img</span><span class="token punctuation">></span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>amp-img</span>
+    <span class="token attr-name">src</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>images/image2.jpg<span class="token punctuation">"</span></span>
+    <span class="token attr-name">width</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>450<span class="token punctuation">"</span></span>
+    <span class="token attr-name">height</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>300<span class="token punctuation">"</span></span>
+    <span class="token attr-name">layout</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>responsive<span class="token punctuation">"</span></span>
+    <span class="token attr-name">alt</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>lemons<span class="token punctuation">"</span></span>
+  <span class="token punctuation">></span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>amp-img</span><span class="token punctuation">></span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>amp-img</span>
+    <span class="token attr-name">src</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>images/image3.jpg<span class="token punctuation">"</span></span>
+    <span class="token attr-name">width</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>450<span class="token punctuation">"</span></span>
+    <span class="token attr-name">height</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>300<span class="token punctuation">"</span></span>
+    <span class="token attr-name">layout</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>responsive<span class="token punctuation">"</span></span>
+    <span class="token attr-name">alt</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>blueberries<span class="token punctuation">"</span></span>
+  <span class="token punctuation">></span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>amp-img</span><span class="token punctuation">></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>amp-carousel</span><span class="token punctuation">></span></span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>这个轮播图包含了 3 张图片用于提供给用户滑动。这个轮播图组件的实例的属性（id,width,height,layout,和 type）被拆分成 3 组：<a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes" target="_blank" rel="noopener">所有 HTML 元素共有的属性</a>(id),<a href="https://amp.dev/zh_cn/documentation/guides-and-tutorials/learn/common_attributes/?format=websites" target="_blank" rel="noopener">所有 AMP 组件共有的属性</a>(width,height,和 layout)，轮播图组件特有的属性(type)。</p>
+<p>在<code>&lt;amp-carousel&gt;</code>的文档中，我们看到组件有 type 属性。它显示 type 的有效输入包括 slides 和 carousel。</p>
+<p>这意味着如果你不指定 type，它的默认值将是 carousel。</p>
+<p>许多其他自定义的属性可以被用到<code>&lt;amp-carousel&gt;</code>组件上。当第一次使用 AMP 组件时，查看文档以了解通过哪些方式你可以通过这些属性自定义组件的行为和外观。</p>
+<h3 id="练习-5：创建一个图片幻灯片"><a href="#练习-5：创建一个图片幻灯片" class="headerlink" title="练习 5：创建一个图片幻灯片"></a>练习 5：创建一个图片幻灯片</h3><p>来练习通过这篇文档添加<code>&lt;amp-carousel&gt;</code>到我们的项目。添加一个带有下面设置的轮播图到<code>&lt;p class="main-text"&gt;</code>:</p>
+<ul>
+<li>给轮播图一个<code>responsive</code>的布局</li>
+<li>给轮播图 type 设置为 slides</li>
+<li>添加三张图片到轮播图：<code>assets/cheddar-chaser.jpg</code>,<code>assets/cheese.jpg</code>和<code>assets/mouse.jpg</code>。</li>
+<li>如果用户尝试从最后一张滚动，轮播图图片回到开始</li>
+</ul>
+<p>推荐样式指南：</p>
+<ul>
+<li>给轮播图宽 412 和高 309</li>
+<li>给每张图片宽 412 和高度 309</li>
+</ul>
+<p>在你做这些改动之后，查看实时页面来检查你的成果。你的页面看起来像这样：<br><img src="https://amp.dev/static/img/courses/beginner/image9.png?width=1000&amp;hash=ac6a95075bd0b8e33800dd14a2d399b0c6d299be" alt="The carousel in our page."></p>
+<h4 id="解决方案-3"><a href="#解决方案-3" class="headerlink" title="解决方案"></a>解决方案</h4><p>这里是你添加到项目中的代码：</p>
+<pre class="line-numbers language-html"><code class="language-html"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>amp-carousel</span> <span class="token attr-name">layout</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>responsive<span class="token punctuation">"</span></span> <span class="token attr-name">width</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>412<span class="token punctuation">"</span></span> <span class="token attr-name">height</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>309<span class="token punctuation">"</span></span> <span class="token attr-name">type</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>slides<span class="token punctuation">"</span></span> <span class="token attr-name">loop</span><span class="token punctuation">></span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>amp-img</span>
+    <span class="token attr-name">src</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>https://cdn.glitch.com/d7f46a57-0ca4-4cca-ab0f-69068dec6631%2Fcheddar-chaser.jpg?1540228205366<span class="token punctuation">"</span></span>
+    <span class="token attr-name">width</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>412<span class="token punctuation">"</span></span>
+    <span class="token attr-name">height</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>309<span class="token punctuation">"</span></span>
+    <span class="token attr-name">layout</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>responsive<span class="token punctuation">"</span></span>
+  <span class="token punctuation">></span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>amp-img</span><span class="token punctuation">></span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>amp-img</span>
+    <span class="token attr-name">src</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>https://cdn.glitch.com/d7f46a57-0ca4-4cca-ab0f-69068dec6631%2Fcheese.jpg?1540228223785<span class="token punctuation">"</span></span>
+    <span class="token attr-name">width</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>412<span class="token punctuation">"</span></span>
+    <span class="token attr-name">height</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>309<span class="token punctuation">"</span></span>
+    <span class="token attr-name">layout</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>responsive<span class="token punctuation">"</span></span>
+  <span class="token punctuation">></span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>amp-img</span><span class="token punctuation">></span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>amp-img</span>
+    <span class="token attr-name">src</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>https://cdn.glitch.com/d7f46a57-0ca4-4cca-ab0f-69068dec6631%2Fmouse.jpg?1540228223963<span class="token punctuation">"</span></span>
+    <span class="token attr-name">width</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>412<span class="token punctuation">"</span></span>
+    <span class="token attr-name">height</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>309<span class="token punctuation">"</span></span>
+    <span class="token attr-name">layout</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>responsive<span class="token punctuation">"</span></span>
+  <span class="token punctuation">></span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>amp-img</span><span class="token punctuation">></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>amp-carousel</span><span class="token punctuation">></span></span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>记住在<code>&lt;head&gt;</code>中引入<code>&lt;amp-carousel&gt;</code>组件：</p>
+<pre class="line-numbers language-html"><code class="language-html"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>script</span>
+  <span class="token attr-name">async</span>
+  <span class="token attr-name">custom-element</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>amp-carousel<span class="token punctuation">"</span></span>
+  <span class="token attr-name">src</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>https://cdn.ampproject.org/v0/amp-carousel-0.1.js<span class="token punctuation">"</span></span>
+<span class="token punctuation">></span></span><span class="token script language-javascript"></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>script</span><span class="token punctuation">></span></span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h3 id="发现新组件"><a href="#发现新组件" class="headerlink" title="发现新组件"></a>发现新组件</h3><p>当我们继续开发我们的奶酪自行车网站，我们不会一直知道添加我们想要的功能的 AMP 组件的名字。AMP 社区已经生产了大量用于处理不同功能的组件：广告和分析，动态内容，布局，媒体，展示和社会。典型的是当开发一个 AMP 站点给了一些新功能的要求，然后在通过在 AMP 组件的列表中检索出符合要求的组件。</p>
+<p>第一种方式发现新 AMP 组件是使用你最喜欢的搜索引擎或者是在 AMP 项目<a href="https://amp.dev/" target="_blank" rel="noopener">网站</a>上使用搜索功能。这种方式适合你已经知道名字直接跳转到组件的文档。另外，你可以搜索你感兴趣的组件描述去找结果。举例，搜索“YouTube 视频”，第一个搜索结果是<code>&lt;amp-youtube&gt;</code>。类似，搜索“可折叠内容”，<code>&lt;amp-accordion&gt;</code>组件是第一个结果。</p>
+<p>另外一种寻找组件的方式是使用<a href="https://amp.dev/zh_cn/documentation/components/?format=websites" target="_blank" rel="noopener">AMP Components Reference</a>页面。它包含了 AMP 支持的组件列表。每个组件的入口包含了组件的名字和这个组件能提供的功能的简单描述。我们可以通过点击它的名字去访问这个组件的文档。正如我们之前学习到的，这个文档将给你对这个组件的行为更深的了解。基于这些信息，我们应该可以决定这个组件是否满足我们的需求或者是否去搜索其他组件。在后面的培训中，我们将讨论如果没有组件符合我们的需求该怎么做。<br><img src="https://amp.dev/static/img/courses/beginner/image3.png?width=1750&amp;hash=76dae16d0d5be7f067c1ba8ca1e20ab3de4b88f1" alt="The AMP Component Reference page."></p>
+<p>最后，我们可能仍然对这些组件如何在我们网站上运作有点疑问，或者我们不清楚在更复杂的场景中如何使用组件。在 amp.dev 上<a href="https://amp.dev/zh_cn/documentation/examples/?format=websites" target="_blank" rel="noopener">AMP By Example</a>的页面展示了许多 AMP 组件，显示了这些组件的各种方式来满足现代网站的用户场景。通常，你可以从组件的文档转到响应的 AMP by Example 页面上。<br><img src="https://amp.dev/static/img/courses/beginner/image7.png?width=1750&amp;hash=de5b63554527c405e24ebf9b5c7696b31770aba3" alt="AMP By Example page for the amp-carousel component."></p>
+<h3 id="练习-6：添加社交分享链接"><a href="#练习-6：添加社交分享链接" class="headerlink" title="练习 6：添加社交分享链接"></a>练习 6：添加社交分享链接</h3><p>在现代 web 页面社交媒体链接是很常见的。AMP 提供了一个准备好链接的按钮允许用户通过一次点击来分享你的页面到他的社交媒体上，从而帮你您提供用户的参与度。</p>
+<p>使用 AMP 文档，添加按钮到<code>&lt;amp-youtube&gt;</code>之后让用户通过一次点击来分享我们的页面。然而，你将需要在<a href="https://amp.dev/zh_cn/documentation/components/?format=websites" target="_blank" rel="noopener">AMP Components Reference</a>上寻找相应的 AMP 组件。（<strong>注意</strong>：这一节的标题应该是帮助你寻找到你想要的组件）。</p>
+<p>一旦你定位到正确的的组件，点击组件的名字访问它的文档。使用这个文档添加这样的组件：</p>
+<ul>
+<li>给用户选项来在下面的平台分享你的页面：Email，LinkedIn，Tumblr，和 Twitter。</li>
+</ul>
+<p>推荐样式指南：</p>
+<ul>
+<li>使用带 social-bar 的样式的 div 包裹 AMP 组件</li>
+<li>给每个 AMP 组件设置 width 和 height 为 44</li>
+</ul>
+<p>在你完成这个任务之后，你的页面应该包含用户可以分享你页面的按钮：<br><img src="https://amp.dev/static/img/courses/beginner/image19.png?width=680&amp;hash=af27220195f943de1cd2b4815e76acf8ed7dd045" alt="Social media buttons embedded in the page."></p>
+<h3 id="解决方案-4"><a href="#解决方案-4" class="headerlink" title="解决方案"></a>解决方案</h3><pre class="line-numbers language-html"><code class="language-html"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>social-bar<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>amp-social-share</span> <span class="token attr-name">type</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>email<span class="token punctuation">"</span></span> <span class="token attr-name">width</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>44<span class="token punctuation">"</span></span> <span class="token attr-name">height</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>44<span class="token punctuation">"</span></span><span class="token punctuation">></span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>amp-social-share</span><span class="token punctuation">></span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>amp-social-share</span> <span class="token attr-name">type</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>linkedin<span class="token punctuation">"</span></span> <span class="token attr-name">width</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>44<span class="token punctuation">"</span></span> <span class="token attr-name">height</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>44<span class="token punctuation">"</span></span><span class="token punctuation">></span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>amp-social-share</span><span class="token punctuation">></span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>amp-social-share</span> <span class="token attr-name">type</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>tumblr<span class="token punctuation">"</span></span> <span class="token attr-name">width</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>44<span class="token punctuation">"</span></span> <span class="token attr-name">height</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>44<span class="token punctuation">"</span></span><span class="token punctuation">></span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>amp-social-share</span><span class="token punctuation">></span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>amp-social-share</span> <span class="token attr-name">type</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>twitter<span class="token punctuation">"</span></span> <span class="token attr-name">width</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>44<span class="token punctuation">"</span></span> <span class="token attr-name">height</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>44<span class="token punctuation">"</span></span><span class="token punctuation">></span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>amp-social-share</span><span class="token punctuation">></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">></span></span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>记住在<code>&lt;head&gt;</code>上引用<code>&lt;amp-social-share&gt;</code>脚本</p>
+<pre class="line-numbers language-html"><code class="language-html"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>script</span>
+  <span class="token attr-name">async</span>
+  <span class="token attr-name">custom-element</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>amp-social-share<span class="token punctuation">"</span></span>
+  <span class="token attr-name">src</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>https://cdn.ampproject.org/v0/amp-social-share-0.1.js<span class="token punctuation">"</span></span>
+<span class="token punctuation">></span></span><span class="token script language-javascript"></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>script</span><span class="token punctuation">></span></span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h2 id="结论和下一步"><a href="#结论和下一步" class="headerlink" title="结论和下一步"></a>结论和下一步</h2><p>恭喜！你已经完成了 AMP 初学者的课程，并成功创建你的第一个 AMP 页面。</p>
+<p>反思一下到目前为止的构建。你已经创建了一个引人入胜的 AMP 网页，有图片，轮播图和视频。想一想我们不需要做的工作，像编写 JavaScript 允许我们跟踪轮播图当前滑动的哪一张，或者计算如何包装我们的轮播图从最后一张滑到第一张。我们没有沉迷于细节和繁琐的工作，而是专注于关注构建出让我们蓬勃发展的奶酪自行车业务更加高效的网站。</p>
+<p>正如你课程中所看到的，大多数现代化网站有的功能都有对应的 AMP 组件。就像我们目前所做的那样，我们通常只需要少量的额外代码就可以使用这些组件来构建出完整功能的网站。在这个课程中，你需要学习如何找到并使用 AMP 组件来构建出简单的用户页面。向你介绍了 AMP 的简单和强大和它提供的工具。最后，你学习了 AMP 验证器以及它在启用 AMP 缓存的作用性。在我们下面的课程中，我们将学习如何处理用户输入和事件，如何在 AMP 组件上调用 action 去改变它的状态和外观，如何组合多个 AMP 组件来只做出更加精良的用户页面。我们将继续在 Chico 的奶酪网站上扩大规模，让 Chico 有机会去打动爱好奶酪自行车的人。</p>
+<p><a href="https://aquamarine-baritone.glitch.me/" target="_blank" rel="noopener">这里</a>是今天我们构建的完成版本。<br>以下是其他额外话题和链接去探索：</p>
+<ul>
+<li><a href="https://amp.dev/zh_cn/documentation/examples/?format=websites" target="_blank" rel="noopener">AMP By Example</a></li>
+<li><a href="https://amp.dev/zh_cn/documentation/guides-and-tutorials/optimize-and-measure/discovery/?format=websites" target="_blank" rel="noopener">All about Page Discovery</a></li>
+<li><a href="https://amp.dev/zh_cn/documentation/guides-and-tutorials/learn/spec/amphtml/?format=websites#html-tags" target="_blank" rel="noopener">Disallowed HTML Tags</a></li>
+<li><a href="https://amp.dev/zh_cn/documentation/guides-and-tutorials/develop/style_and_layout/style_pages/?format=websites" target="_blank" rel="noopener">Restricted CSS Rules &amp; Animations</a></li>
+<li><a href="https://amp.dev/zh_cn/documentation/guides-and-tutorials/start/create/basic_markup/?format=websites" target="_blank" rel="noopener">The AMP Boilerplate</a></li>
+<li><a href="https://amp.dev/zh_cn/documentation/components/?format=websites" target="_blank" rel="noopener">List of available AMP Components</a></li>
+</ul>
+<h2 id="附录"><a href="#附录" class="headerlink" title="附录"></a>附录</h2><h3 id="解释样板-AMP-HTML"><a href="#解释样板-AMP-HTML" class="headerlink" title="解释样板 AMP HTML"></a>解释样板 AMP HTML</h3><h4 id="标签"><a href="#标签" class="headerlink" title="标签"></a><link rel="canonical">标签</h4><p>AMP 刚开始时，它仅用于创建用于移动设备的网页。一个网页应该有一个服务于移动设备的 AMP 版本，一个用于桌面设备的常规 HTML 编写的版本（成为“canonical”版本）。你应该使用<code>&lt;link&gt;</code>标签来连接这两个版本，让搜索引擎知道这两个文档代表相同的网页。</p>
+<p>所以，非 AMP 文档包含 AMP 文档的链接。比如：</p>
+<pre class="line-numbers language-html"><code class="language-html"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>link</span> <span class="token attr-name">rel</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>amphtml<span class="token punctuation">"</span></span> <span class="token attr-name">href</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>https://www.site.com/amp/document.html<span class="token punctuation">"</span></span> <span class="token punctuation">/></span></span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p>并且，AMP 文档包含非 AMP 文档的链接，比如：</p>
+<pre class="line-numbers language-html"><code class="language-html"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>link</span> <span class="token attr-name">rel</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>canonical<span class="token punctuation">"</span></span> <span class="token attr-name">href</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>https://www.site.com/document.html<span class="token punctuation">"</span></span> <span class="token punctuation">/></span></span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p>现在 AMP 功能更加强大，除非你在桌面页面上需要其他功能，在移动和桌面两个设备上使用 AMP 都很简单。这样一来，你只需要维护一个页面而非两个！尽管如此，这个<code>&lt;link&gt;</code>仍然需要。这种情况下，你只需要简单的连接页面到自己，比如：</p>
+<pre class="line-numbers language-html"><code class="language-html"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>link</span> <span class="token attr-name">rel</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>canonical<span class="token punctuation">"</span></span> <span class="token attr-name">href</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>https://www.site.com/amp/document.html<span class="token punctuation">"</span></span> <span class="token punctuation">/></span></span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p>在所有设备上都使用一个 AMP 页面被称之为“canonical AMP”。这就是我们为奶酪自行车商店所做的。</p>
+<h4 id="amp-boilerplate-标签"><a href="#amp-boilerplate-标签" class="headerlink" title="amp-boilerplate  标签"></a>amp-boilerplate <style> 标签</h4><p>所有 AMP HTML 页面一定要在<code>&lt;head&gt;</code>标签中包含一些默认样式。这个样式会影响到页面外观，直到 AMP 库被完全加载。从本质上讲，它目的是先隐藏内容，直到页面完全准备好，即页面上的所有元素都准备好且 AMP 知道在哪里渲染以及它们将要占多少空间。完成此操作，页面就会淡入。这样，用户可以立刻以最终形式查看页面，使它们感觉页面以及立刻加载完成。</p>
+<h4 id="为什么使用视窗-lt-meta-gt-标签"><a href="#为什么使用视窗-lt-meta-gt-标签" class="headerlink" title="为什么使用视窗&lt;meta&gt;标签"></a>为什么使用视窗<code>&lt;meta&gt;</code>标签</h4><p>AMP 可以在移动和桌面设备上运行。因为用户可能在任何一个设备上运行的你的网页，最好是在开发的时候就在这两个设备上检查你的网页。点击移动手机设备图标就可以在 Chrome DevTools 中模拟移动设备体验：<br><img src="https://amp.dev/static/img/courses/beginner/image5.png?width=470&hash=8bd8fac56020d9cadf3fe022193a08532cb0714e" alt="Mobile preview in DevTools"></p>
+<p>现在从菜单中选择“Nexus Fx”移动设备：<br><img src="https://amp.dev/static/img/courses/beginner/image1.png?width=390&hash=4c3da386bfacbc8823e930dd9ded686ed4f5115c" alt="Select a mobile device"></p>
+<p>你应该可以看到你浏览器中选择的设备对应页面显示页面的效果：<br><img src="https://amp.dev/static/img/courses/beginner/image11.png?width=470&hash=2980d95ab3572d7d21c381f9bdd4251c036aa04b" alt="A simulation of how the page looks on mobile"></p>
+<p>注意内容不应该填充满整个移动设备。这个“viewport”标签可以解决这个问题。这个标签根据给定的屏幕大小缩放页面。由于我们想要 AMP 页面对移动设备优化，并使其变成响应式，不用说 AMP 验证器需要此标签。</p>
+<p>所以下面标签一定要放到我们 AMP 页面的<code>&lt;head&gt;</code>标签中，将其添加到快捷图标链接下方。</p>
+<pre class="line-numbers language-html"><code class="language-html"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>meta</span>
+  <span class="token attr-name">name</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>viewport<span class="token punctuation">"</span></span>
+  <span class="token attr-name">content</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>width<span class="token punctuation">=</span>device-width,minimum-scale<span class="token punctuation">=</span>1,initial-scale<span class="token punctuation">=</span>1<span class="token punctuation">"</span></span>
+<span class="token punctuation">/></span></span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+<p>如果你刷新页面，现在在小屏幕上看起来会好一些，比如这样：<br><img src="https://amp.dev/static/img/courses/beginner/image20.png?width=470&hash=4066d835368fd81e7e1ef796a075bb02b187b1f3" alt="Mobile optimized page"><br>除了标题之外，你不会注意到太大的区别。随着我们跟进一步了解缩放的原理，你可以尝试一下。</p>
+<h3 id="AMP-中的懒加载"><a href="#AMP-中的懒加载" class="headerlink" title="AMP 中的懒加载"></a>AMP 中的懒加载</h3><p>“Lazy-loading”意味着资源（图片，数据，视频，脚本等）不是立刻加载，只有在需要的时候才去加载。AMP 下载资源时，它会优化下载，所以以便更重要的资源被首先下载。图片和广告只有在某些条件满足时才下载，如果它们被用户看到，或者用户可能很快速的滑动它们。这些媒体资产的等效组件(<code>&lt;amp-img&gt;</code>代替<code>&lt;img&gt;</code>)被称为”托管资源”，因为它们是否以及何时将它们加载显示给用户由 AMP 决定。AMP 可以随时决定卸载当前用户看不到的资源。AMP 性能优化之一就是要求元素如<code>&lt;amp-img&gt;</code>之类的元素预先声明其高度。有助于帮助 AMP 计算如何最好的方式布局显示。这非常关键，例如，因为 AMP 会预先加载第一视窗的所有资源，即用户访问网站第一眼看到的所有资源。</p>
+<h3 id="Fixed-vs-Responsive-布局"><a href="#Fixed-vs-Responsive-布局" class="headerlink" title="Fixed vs Responsive 布局"></a>Fixed vs Responsive 布局</h3><p>页面包含布局系统以保证在浏览器渲染页面之前页面布局尽可能的严格。该系统给我们提供了一个 layout 属性，让我们以各种方式定位和缩放元素 – 固定尺寸，响应式设计，固定高度等等。布局系统强制某些元素的尺寸声明。</p>
+<p>这个布局属性对于大多数元素来说是有效的，它指定了 AMP 组件在页面上的显示方式。两种常见的 layout 属性值是“fixed”和“responsive”。如果元素有固定布局，则宽度和高度一定存在。然后，元素将保持此精确大小（以像素为单位），不用担心屏幕或者视图窗口发生变化。如果元素是响应式布局，同样宽和高也一定存在。这种情况下，虽然，元素将自动调整大小以占用可用空间，维持给定宽高的尺寸比列。可用空间依赖于它的父元素。</p>
+</style></h4><script>
+        document.querySelectorAll('.github-emoji')
+          .forEach(el => {
+            if (!el.dataset.src) { return; }
+            const img = document.createElement('img');
+            img.style = 'display:none !important;';
+            img.src = el.dataset.src;
+            img.addEventListener('error', () => {
+              img.remove();
+              el.style.color = 'inherit';
+              el.style.backgroundImage = 'none';
+              el.style.background = 'none';
+            });
+            img.addEventListener('load', () => {
+              img.remove();
+            });
+            document.body.appendChild(img);
+          });
+      </script>
+            </div>
+            <hr/>
+
+            
+
+    <div class="reprint" id="reprint-statement">
+        
+            <div class="reprint__author">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-user">
+                        文章作者:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="https://keyboard3.github.io" rel="external nofollow noreferrer">keyboard3</a>
+                </span>
+            </div>
+            <div class="reprint__type">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-link">
+                        文章链接:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="https://keyboard3.github.io/blog/beginning-amp-course/">https://keyboard3.github.io/blog/beginning-amp-course/</a>
+                </span>
+            </div>
+            <div class="reprint__notice">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-copyright">
+                        版权声明:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    本博客所有文章除特別声明外，均采用
+                    <a href="https://creativecommons.org/licenses/by/4.0/deed.zh" rel="external nofollow noreferrer" target="_blank">CC BY 4.0</a>
+                    许可协议。转载请注明来源
+                    <a href="https://keyboard3.github.io" target="_blank">keyboard3</a>
+                    !
+                </span>
+            </div>
+        
+    </div>
+
+    <script async defer>
+      document.addEventListener("copy", function (e) {
+        let toastHTML = '<span>复制成功，请遵循本文的转载规则</span><button class="btn-flat toast-action" onclick="navToReprintStatement()" style="font-size: smaller">查看</a>';
+        M.toast({html: toastHTML})
+      });
+
+      function navToReprintStatement() {
+        $("html, body").animate({scrollTop: $("#reprint-statement").offset().top - 80}, 800);
+      }
+    </script>
+
+
+
+            <div class="tag_share" style="display: block;">
+                <div class="post-meta__tag-list" style="display: inline-block;">
+                    
+                        <div class="article-tag">
+                            
+                                <a href="/blog/tags/%E7%BF%BB%E8%AF%91/">
+                                    <span class="chip bg-color">翻译</span>
+                                </a>
+                            
+                                <a href="/blog/tags/%E5%AE%8C%E7%BB%93/">
+                                    <span class="chip bg-color">完结</span>
+                                </a>
+                            
+                                <a href="/blog/tags/amp/">
+                                    <span class="chip bg-color">amp</span>
+                                </a>
+                            
+                                <a href="/blog/tags/%E6%95%99%E7%A8%8B/">
+                                    <span class="chip bg-color">教程</span>
+                                </a>
+                            
+                        </div>
+                    
+                </div>
+                <div class="post_share" style="zoom: 80%; width: fit-content; display: inline-block; float: right; margin: -0.15rem 0;">
+                    <link rel="stylesheet" type="text/css" href="/blog/libs/share/css/share.min.css">
+
+<div id="article-share">
+    
+    
+    <div class="social-share" data-sites="twitter,facebook,google,qq,qzone,wechat,weibo,douban,linkedin" data-wechat-qrcode-helper="<p>微信扫一扫即可分享！</p>"></div>
+    <script src="/blog/libs/share/js/social-share.min.js"></script>
+    
+
+    
+
+</div>
+
+                </div>
+            </div>
+            
+                <style>
+    #reward {
+        margin: 40px 0;
+        text-align: center;
+    }
+
+    #reward .reward-link {
+        font-size: 1.4rem;
+        line-height: 38px;
+    }
+
+    #reward .btn-floating:hover {
+        box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2), 0 5px 15px rgba(0, 0, 0, 0.2);
+    }
+
+    #rewardModal {
+        width: 320px;
+        height: 350px;
+    }
+
+    #rewardModal .reward-title {
+        margin: 15px auto;
+        padding-bottom: 5px;
+    }
+
+    #rewardModal .modal-content {
+        padding: 10px;
+    }
+
+    #rewardModal .close {
+        position: absolute;
+        right: 15px;
+        top: 15px;
+        color: rgba(0, 0, 0, 0.5);
+        font-size: 1.3rem;
+        line-height: 20px;
+        cursor: pointer;
+    }
+
+    #rewardModal .close:hover {
+        color: #ef5350;
+        transform: scale(1.3);
+        -moz-transform:scale(1.3);
+        -webkit-transform:scale(1.3);
+        -o-transform:scale(1.3);
+    }
+
+    #rewardModal .reward-tabs {
+        margin: 0 auto;
+        width: 210px;
+    }
+
+    .reward-tabs .tabs {
+        height: 38px;
+        margin: 10px auto;
+        padding-left: 0;
+    }
+
+    .reward-content ul {
+        padding-left: 0 !important;
+    }
+
+    .reward-tabs .tabs .tab {
+        height: 38px;
+        line-height: 38px;
+    }
+
+    .reward-tabs .tab a {
+        color: #fff;
+        background-color: #ccc;
+    }
+
+    .reward-tabs .tab a:hover {
+        background-color: #ccc;
+        color: #fff;
+    }
+
+    .reward-tabs .wechat-tab .active {
+        color: #fff !important;
+        background-color: #22AB38 !important;
+    }
+
+    .reward-tabs .alipay-tab .active {
+        color: #fff !important;
+        background-color: #019FE8 !important;
+    }
+
+    .reward-tabs .reward-img {
+        width: 210px;
+        height: 210px;
+    }
+</style>
+
+<div id="reward">
+    <a href="#rewardModal" class="reward-link modal-trigger btn-floating btn-medium waves-effect waves-light red">赏</a>
+
+    <!-- Modal Structure -->
+    <div id="rewardModal" class="modal">
+        <div class="modal-content">
+            <a class="close modal-close"><i class="fas fa-times"></i></a>
+            <h4 class="reward-title">你的赏识是我前进的动力</h4>
+            <div class="reward-content">
+                <div class="reward-tabs">
+                    <ul class="tabs row">
+                        <li class="tab col s6 alipay-tab waves-effect waves-light"><a href="#alipay">支付宝</a></li>
+                        <li class="tab col s6 wechat-tab waves-effect waves-light"><a href="#wechat">微 信</a></li>
+                    </ul>
+                    <div id="alipay">
+                        <img src="/blog/medias/reward/alipay.jpg" class="reward-img" alt="支付宝打赏二维码">
+                    </div>
+                    <div id="wechat">
+                        <img src="/blog/medias/reward/wechat.png" class="reward-img" alt="微信打赏二维码">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    $(function () {
+        $('.tabs').tabs();
+    });
+</script>
+            
+        </div>
+    </div>
+
+    
+
+    
+
+    
+
+    
+
+    
+        <style>
+    .valine-card {
+        margin: 1.5rem auto;
+    }
+
+    .valine-card .card-content {
+        padding: 20px 20px 5px 20px;
+    }
+
+    #vcomments textarea {
+        box-sizing: border-box;
+        background: url("/medias/comment_bg.png") 100% 100% no-repeat;
+    }
+
+    #vcomments p {
+        margin: 2px 2px 10px;
+        font-size: 1.05rem;
+        line-height: 1.78rem;
+    }
+
+    #vcomments blockquote p {
+        text-indent: 0.2rem;
+    }
+
+    #vcomments a {
+        padding: 0 2px;
+        color: #4cbf30;
+        font-weight: 500;
+        text-decoration: none;
+    }
+
+    #vcomments img {
+        max-width: 100%;
+        height: auto;
+        cursor: pointer;
+    }
+
+    #vcomments ol li {
+        list-style-type: decimal;
+    }
+
+    #vcomments ol,
+    ul {
+        display: block;
+        padding-left: 2em;
+        word-spacing: 0.05rem;
+    }
+
+    #vcomments ul li,
+    ol li {
+        display: list-item;
+        line-height: 1.8rem;
+        font-size: 1rem;
+    }
+
+    #vcomments ul li {
+        list-style-type: disc;
+    }
+
+    #vcomments ul ul li {
+        list-style-type: circle;
+    }
+
+    #vcomments table, th, td {
+        padding: 12px 13px;
+        border: 1px solid #dfe2e5;
+    }
+
+    #vcomments table, th, td {
+        border: 0;
+    }
+
+    table tr:nth-child(2n), thead {
+        background-color: #fafafa;
+    }
+
+    #vcomments table th {
+        background-color: #f2f2f2;
+        min-width: 80px;
+    }
+
+    #vcomments table td {
+        min-width: 80px;
+    }
+
+    #vcomments h1 {
+        font-size: 1.85rem;
+        font-weight: bold;
+        line-height: 2.2rem;
+    }
+
+    #vcomments h2 {
+        font-size: 1.65rem;
+        font-weight: bold;
+        line-height: 1.9rem;
+    }
+
+    #vcomments h3 {
+        font-size: 1.45rem;
+        font-weight: bold;
+        line-height: 1.7rem;
+    }
+
+    #vcomments h4 {
+        font-size: 1.25rem;
+        font-weight: bold;
+        line-height: 1.5rem;
+    }
+
+    #vcomments h5 {
+        font-size: 1.1rem;
+        font-weight: bold;
+        line-height: 1.4rem;
+    }
+
+    #vcomments h6 {
+        font-size: 1rem;
+        line-height: 1.3rem;
+    }
+
+    #vcomments p {
+        font-size: 1rem;
+        line-height: 1.5rem;
+    }
+
+    #vcomments hr {
+        margin: 12px 0;
+        border: 0;
+        border-top: 1px solid #ccc;
+    }
+
+    #vcomments blockquote {
+        margin: 15px 0;
+        border-left: 5px solid #42b983;
+        padding: 1rem 0.8rem 0.3rem 0.8rem;
+        color: #666;
+        background-color: rgba(66, 185, 131, .1);
+    }
+
+    #vcomments pre {
+        font-family: monospace, monospace;
+        padding: 1.2em;
+        margin: .5em 0;
+        background: #272822;
+        overflow: auto;
+        border-radius: 0.3em;
+        tab-size: 4;
+    }
+
+    #vcomments code {
+        font-family: monospace, monospace;
+        padding: 1px 3px;
+        font-size: 0.92rem;
+        color: #e96900;
+        background-color: #f8f8f8;
+        border-radius: 2px;
+    }
+
+    #vcomments pre code {
+        font-family: monospace, monospace;
+        padding: 0;
+        color: #e8eaf6;
+        background-color: #272822;
+    }
+
+    #vcomments pre[class*="language-"] {
+        padding: 1.2em;
+        margin: .5em 0;
+    }
+
+    #vcomments code[class*="language-"],
+    pre[class*="language-"] {
+        color: #e8eaf6;
+    }
+
+    #vcomments [type="checkbox"]:not(:checked), [type="checkbox"]:checked {
+        position: inherit;
+        margin-left: -1.3rem;
+        margin-right: 0.4rem;
+        margin-top: -1px;
+        vertical-align: middle;
+        left: unset;
+        visibility: visible;
+    }
+
+    #vcomments b,
+    strong {
+        font-weight: bold;
+    }
+
+    #vcomments dfn {
+        font-style: italic;
+    }
+
+    #vcomments small {
+        font-size: 85%;
+    }
+
+    #vcomments cite {
+        font-style: normal;
+    }
+
+    #vcomments mark {
+        background-color: #fcf8e3;
+        padding: .2em;
+    }
+
+    #vcomments table, th, td {
+        padding: 12px 13px;
+        border: 1px solid #dfe2e5;
+    }
+
+    table tr:nth-child(2n), thead {
+        background-color: #fafafa;
+    }
+
+    #vcomments table th {
+        background-color: #f2f2f2;
+        min-width: 80px;
+    }
+
+    #vcomments table td {
+        min-width: 80px;
+    }
+
+    #vcomments [type="checkbox"]:not(:checked), [type="checkbox"]:checked {
+        position: inherit;
+        margin-left: -1.3rem;
+        margin-right: 0.4rem;
+        margin-top: -1px;
+        vertical-align: middle;
+        left: unset;
+        visibility: visible;
+    }
+</style>
+
+<div class="card valine-card" data-aos="fade-up">
+    <div class="comment_headling" style="font-size: 20px; font-weight: 700; position: relative; left: 20px; top: 15px; padding-bottom: 5px;">
+        <i class="fas fa-comments fa-fw" aria-hidden="true"></i>
+        <span>评论</span>
+    </div>
+    <div id="vcomments" class="card-content" style="display: grid">
+    </div>
+</div>
+
+<script src="/blog/libs/valine/av-min.js"></script>
+<script src="/blog/libs/valine/Valine.min.js"></script>
+<script>
+    new Valine({
+        el: '#vcomments',
+        appId: 'LjtOad9cDpBmF6oLUHgGTBH2-gzGzoHsz',
+        appKey: '0ybf4IysannKKpv99yB4aMbL',
+        notify: 'false' === 'true',
+        verify: 'false' === 'true',
+        visitor: 'true' === 'true',
+        avatar: 'mm',
+        pageSize: '10',
+        lang: 'zh-cn',
+        placeholder: 'just go go'
+    });
+</script>
+
+    
+
+    
+
+<article id="prenext-posts" class="prev-next articles">
+    <div class="row article-row">
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge left-badge text-color">
+                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
+            <div class="card">
+                <a href="/blog/workbox/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/blog/medias/featureimages/2.jpg" class="responsive-img" alt="workbox">
+                        
+                        <span class="card-title">workbox</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            workbox/guides 原文
+开始使用创建和注册一个 service worker 文件导入 workbox从 CDN 中使用打包器使用 workboxworkbox 可以做什么？路由匹配请求使用字符串匹配路由使用正则匹配路由使用回调
+                        
+                    </div>
+                    <div class="publish-info">
+                        <span class="publish-date">
+                            <i class="far fa-clock fa-fw icon-date"></i>2020-06-16
+                        </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-user fa-fw"></i>
+                            keyboard3
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/blog/tags/%E7%BF%BB%E8%AF%91/">
+                        <span class="chip bg-color">翻译</span>
+                    </a>
+                    
+                    <a href="/blog/tags/service-work/">
+                        <span class="chip bg-color">service-work</span>
+                    </a>
+                    
+                    <a href="/blog/tags/workbox/">
+                        <span class="chip bg-color">workbox</span>
+                    </a>
+                    
+                    <a href="/blog/tags/%E7%BF%BB%E8%AF%91%E4%B8%AD/">
+                        <span class="chip bg-color">翻译中</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge right-badge text-color">
+                下一篇&nbsp;<i class="fas fa-chevron-right"></i>
+            </div>
+            <div class="card">
+                <a href="/blog/guide-topics-ui/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/blog/medias/featureimages/19.jpg" class="responsive-img" alt="Android 用户页面和导航">
+                        
+                        <span class="card-title">Android 用户页面和导航</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            布局通知概览添加 app bar控制系统 UI 显示性概览调暗系统栏隐藏状态栏本课程介绍如何在不同的 Android 版本上隐藏状态栏。隐藏状态栏（以及可选的导航栏）让内容使用更多的显示空间，从而提供更加身临其境的用户体验。
+图 1 显示一
+                        
+                    </div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2020-05-12
+                            </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-user fa-fw"></i>
+                            keyboard3
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/blog/tags/%E7%BF%BB%E8%AF%91/">
+                        <span class="chip bg-color">翻译</span>
+                    </a>
+                    
+                    <a href="/blog/tags/%E8%BF%9B%E8%A1%8C%E4%B8%AD/">
+                        <span class="chip bg-color">进行中</span>
+                    </a>
+                    
+                    <a href="/blog/tags/android/">
+                        <span class="chip bg-color">android</span>
+                    </a>
+                    
+                    <a href="/blog/tags/guide/">
+                        <span class="chip bg-color">guide</span>
+                    </a>
+                    
+                    <a href="/blog/tags/ui/">
+                        <span class="chip bg-color">ui</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+    </div>
+</article>
+
+</div>
+
+
+
+<!-- 代码块功能依赖 -->
+<script type="text/javascript" src="/blog/libs/codeBlock/codeBlockFuction.js"></script>
+
+<!-- 代码语言 -->
+
+<script type="text/javascript" src="/blog/libs/codeBlock/codeLang.js"></script>
+
+
+<!-- 代码块复制 -->
+
+<script type="text/javascript" src="/blog/libs/codeBlock/codeCopy.js"></script>
+
+
+<!-- 代码块收缩 -->
+
+<script type="text/javascript" src="/blog/libs/codeBlock/codeShrink.js"></script>
+
+
+<!-- 代码块折行 -->
+
+
+    </div>
+    <div id="toc-aside" class="expanded col l3 hide-on-med-and-down">
+        <div class="toc-widget">
+            <div class="toc-title"><i class="far fa-list-alt"></i>&nbsp;&nbsp;目录</div>
+            <div id="toc-content"></div>
+        </div>
+    </div>
+</div>
+
+<!-- TOC 悬浮按钮. -->
+
+<div id="floating-toc-btn" class="hide-on-med-and-down">
+    <a class="btn-floating btn-large bg-color">
+        <i class="fas fa-list-ul"></i>
+    </a>
+</div>
+
+
+<script src="/blog/libs/tocbot/tocbot.min.js"></script>
+<script>
+    $(function () {
+        tocbot.init({
+            tocSelector: '#toc-content',
+            contentSelector: '#articleContent',
+            headingsOffset: -($(window).height() * 0.4 - 45),
+            collapseDepth: Number('0'),
+            headingSelector: 'h2, h3, h4'
+        });
+
+        // modify the toc link href to support Chinese.
+        let i = 0;
+        let tocHeading = 'toc-heading-';
+        $('#toc-content a').each(function () {
+            $(this).attr('href', '#' + tocHeading + (++i));
+        });
+
+        // modify the heading title id to support Chinese.
+        i = 0;
+        $('#articleContent').children('h2, h3, h4').each(function () {
+            $(this).attr('id', tocHeading + (++i));
+        });
+
+        // Set scroll toc fixed.
+        let tocHeight = parseInt($(window).height() * 0.4 - 64);
+        let $tocWidget = $('.toc-widget');
+        $(window).scroll(function () {
+            let scroll = $(window).scrollTop();
+            /* add post toc fixed. */
+            if (scroll > tocHeight) {
+                $tocWidget.addClass('toc-fixed');
+            } else {
+                $tocWidget.removeClass('toc-fixed');
+            }
+        });
+
+        
+        /* 修复文章卡片 div 的宽度. */
+        let fixPostCardWidth = function (srcId, targetId) {
+            let srcDiv = $('#' + srcId);
+            if (srcDiv.length === 0) {
+                return;
+            }
+
+            let w = srcDiv.width();
+            if (w >= 450) {
+                w = w + 21;
+            } else if (w >= 350 && w < 450) {
+                w = w + 18;
+            } else if (w >= 300 && w < 350) {
+                w = w + 16;
+            } else {
+                w = w + 14;
+            }
+            $('#' + targetId).width(w);
+        };
+
+        // 切换TOC目录展开收缩的相关操作.
+        const expandedClass = 'expanded';
+        let $tocAside = $('#toc-aside');
+        let $mainContent = $('#main-content');
+        $('#floating-toc-btn .btn-floating').click(function () {
+            if ($tocAside.hasClass(expandedClass)) {
+                $tocAside.removeClass(expandedClass).hide();
+                $mainContent.removeClass('l9');
+            } else {
+                $tocAside.addClass(expandedClass).show();
+                $mainContent.addClass('l9');
+            }
+            fixPostCardWidth('artDetail', 'prenext-posts');
+        });
+        
+    });
+</script>
+
+    
+
+</main>
+
+
+
+    <footer class="page-footer bg-color">
+    <div class="container row center-align" style="margin-bottom: 0px !important;">
+        <div class="col s12 m8 l8 copy-right">
+            Copyright&nbsp;&copy;
+            <span id="year">2020</span>
+            <a href="https://keyboard3.github.io" target="_blank">keyboard3</a>
+            |&nbsp;Powered by&nbsp;<a href="https://hexo.io/" target="_blank">Hexo</a>
+            |&nbsp;Theme&nbsp;<a href="https://github.com/blinkfox/hexo-theme-matery" target="_blank">Matery</a>
+            <br>
+            
+            &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
+                class="white-color">105.3k</span>&nbsp;字
+            
+            
+            
+            
+            
+            
+            <span id="busuanzi_container_site_pv">
+                |&nbsp;<i class="far fa-eye"></i>&nbsp;总访问量:&nbsp;<span id="busuanzi_value_site_pv"
+                    class="white-color"></span>&nbsp;次
+            </span>
+            
+            
+            <span id="busuanzi_container_site_uv">
+                |&nbsp;<i class="fas fa-users"></i>&nbsp;总访问人数:&nbsp;<span id="busuanzi_value_site_uv"
+                    class="white-color"></span>&nbsp;人
+            </span>
+            
+            <br>
+            
+            <br>
+            
+        </div>
+        <div class="col s12 m4 l4 social-link social-statis">
+    <a href="https://github.com/keyboard3" class="tooltipped" target="_blank" data-tooltip="访问我的GitHub" data-position="top" data-delay="50">
+        <i class="fab fa-github"></i>
+    </a>
+
+
+
+    <a href="mailto:keyboard3@icloud.com" class="tooltipped" target="_blank" data-tooltip="邮件联系我" data-position="top" data-delay="50">
+        <i class="fas fa-envelope-open"></i>
+    </a>
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <a href="/blog/atom.xml" class="tooltipped" target="_blank" data-tooltip="RSS 订阅" data-position="top" data-delay="50">
+        <i class="fas fa-rss"></i>
+    </a>
+
+</div>
+    </div>
+</footer>
+
+<div class="progress-bar"></div>
+
+
+    <!-- 搜索遮罩框 -->
+<div id="searchModal" class="modal">
+    <div class="modal-content">
+        <div class="search-header">
+            <span class="title"><i class="fas fa-search"></i>&nbsp;&nbsp;搜索</span>
+            <input type="search" id="searchInput" name="s" placeholder="请输入搜索的关键字"
+                   class="search-input">
+        </div>
+        <div id="searchResult"></div>
+    </div>
+</div>
+
+<script src="/blog/js/search.js"></script>
+<script type="text/javascript">
+$(function () {
+    searchFunc("/blog/" + "search.xml", 'searchInput', 'searchResult');
+});
+</script>
+    <!-- 回到顶部按钮 -->
+<div id="backTop" class="top-scroll">
+    <a class="btn-floating btn-large waves-effect waves-light" href="#!">
+        <i class="fas fa-arrow-up"></i>
+    </a>
+</div>
+
+
+    <script src="/blog/libs/materialize/materialize.min.js"></script>
+    <script src="/blog/libs/masonry/masonry.pkgd.min.js"></script>
+    <script src="/blog/libs/aos/aos.js"></script>
+    <script src="/blog/libs/scrollprogress/scrollProgress.min.js"></script>
+    <script src="/blog/libs/lightGallery/js/lightgallery-all.min.js"></script>
+    <script src="/blog/js/matery.js"></script>
+
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-160750441-1"></script>
+<script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() {
+        dataLayer.push(arguments);
+    }
+
+    gtag('js', new Date());
+    gtag('config', 'UA-160750441-1');
+</script>
+
+
+    <!-- Baidu Analytics -->
+
+    <!-- Baidu Push -->
+
+<script>
+    (function () {
+        var bp = document.createElement('script');
+        var curProtocol = window.location.protocol.split(':')[0];
+        if (curProtocol === 'https') {
+            bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+        } else {
+            bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+        }
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(bp, s);
+    })();
+</script>
+
+    
+    
+    <script async src="/blog/libs/others/busuanzi.pure.mini.js"></script>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    
+    
+    <script src="/blog/libs/instantpage/instantpage.js" type="module"></script>
+    
+
+<script src="/blog/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"log":false,"model":{"jsonPath":"/blog/live2dw/assets/tororo.model.json"},"display":{"position":"left","width":150,"height":300},"mobile":{"show":true},"react":{"opacity":1}});</script></body>
+
+</html>
