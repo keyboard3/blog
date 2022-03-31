@@ -2,6 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://keyboard3.github.io/repository/</loc>
+    
+    <lastmod>2022-03-31T15:59:32.538Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://keyboard3.github.io/about/</loc>
     
     <lastmod>2022-03-31T15:41:41.789Z</lastmod>
@@ -128,13 +135,6 @@
   </url>
   
   <url>
-    <loc>https://keyboard3.github.io/contact/index.html</loc>
-    
-    <lastmod>2022-03-21T01:16:32.337Z</lastmod>
-    
-  </url>
-  
-  <url>
     <loc>https://keyboard3.github.io/categories/index.html</loc>
     
     <lastmod>2022-03-21T01:16:32.337Z</lastmod>
@@ -143,6 +143,13 @@
   
   <url>
     <loc>https://keyboard3.github.io/friends/index.html</loc>
+    
+    <lastmod>2022-03-21T01:16:32.337Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://keyboard3.github.io/contact/index.html</loc>
     
     <lastmod>2022-03-21T01:16:32.337Z</lastmod>
     
