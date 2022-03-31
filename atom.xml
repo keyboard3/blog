@@ -6,7 +6,7 @@
   <link href="/blog/atom.xml" rel="self"/>
   
   <link href="https://keyboard3.github.io/"/>
-  <updated>2022-03-31T10:43:36.832Z</updated>
+  <updated>2022-03-31T13:52:13.089Z</updated>
   <id>https://keyboard3.github.io/</id>
   
   <author>
@@ -15,6 +15,34 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>如何加速或减速一个视频</title>
+    <link href="https://keyboard3.github.io/how-to-speed-a-video/"/>
+    <id>https://keyboard3.github.io/how-to-speed-a-video/</id>
+    <published>2022-03-31T13:27:00.000Z</published>
+    <updated>2022-03-31T13:52:13.089Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;p&gt;&lt;a href=&quot;http://trac.ffmpeg.org/wiki/How%20to%20speed%20up%20/%20slow%20down%20a%20video&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;原文&lt;/a&gt;&lt;/p&gt;
+&lt;h1
+        
+      
+    
+    </summary>
+    
+    
+    
+      <category term="翻译" scheme="https://keyboard3.github.io/tags/%E7%BF%BB%E8%AF%91/"/>
+    
+      <category term="FFmpeg" scheme="https://keyboard3.github.io/tags/FFmpeg/"/>
+    
+  </entry>
   
   <entry>
     <title>PayPal Payments Pro [2.4]</title>
@@ -591,38 +619,6 @@
       <category term="进行中" scheme="https://keyboard3.github.io/tags/%E8%BF%9B%E8%A1%8C%E4%B8%AD/"/>
     
       <category term="react" scheme="https://keyboard3.github.io/tags/react/"/>
-    
-      <category term="docs" scheme="https://keyboard3.github.io/tags/docs/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>next.js docs</title>
-    <link href="https://keyboard3.github.io/nextjs-docs/"/>
-    <id>https://keyboard3.github.io/nextjs-docs/</id>
-    <published>2020-03-30T02:47:26.000Z</published>
-    <updated>2022-03-21T01:16:32.333Z</updated>
-    
-    <summary type="html">
-    
-      
-      
-        
-        
-          &lt;p&gt;&lt;a href=&quot;https://nextjs.org/docs/getting-started&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;nextjs-docs&lt;/a&gt;&lt;/p&gt;
-&lt;h1 id=&quot;文档&quot;&gt;&lt;a href=&quot;#文档&quot;
-        
-      
-    
-    </summary>
-    
-    
-    
-      <category term="翻译" scheme="https://keyboard3.github.io/tags/%E7%BF%BB%E8%AF%91/"/>
-    
-      <category term="完结" scheme="https://keyboard3.github.io/tags/%E5%AE%8C%E7%BB%93/"/>
-    
-      <category term="next.js" scheme="https://keyboard3.github.io/tags/next-js/"/>
     
       <category term="docs" scheme="https://keyboard3.github.io/tags/docs/"/>
     

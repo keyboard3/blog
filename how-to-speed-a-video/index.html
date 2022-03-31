@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html  lang="zh-CN" >
+    <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, minimum-scale=1, initial-scale=1, maximum-scale=5, viewport-fit=cover">
+    <title>如何加速或减速一个视频 | keyboard3的博客</title>
+    <meta name="description" content="原文 加速&#x2F;减速视频可以通过更改每个视频帧的呈现时间戳 (PTS) 来更改视频流的速度。这可以通过两种方法完成：使用 setpts 视频过滤器（需要重新编码）或通过将视频导出为原始比特流格式并在创建新时间戳时复用到容器来擦除时间戳。 请注意，在以下示例中，音频流未更改，因此理想情况下应使用 -an 禁用它。 原始比特流方法这种方法是无损的，除了更改时间戳之外，还可以按原样复制视频流。如果您不需要对">
+<meta property="og:type" content="article">
+<meta property="og:title" content="如何加速或减速一个视频">
+<meta property="og:url" content="https://keyboard3.github.io/how-to-speed-a-video/index.html">
+<meta property="og:site_name" content="keyboard3的博客">
+<meta property="og:description" content="原文 加速&#x2F;减速视频可以通过更改每个视频帧的呈现时间戳 (PTS) 来更改视频流的速度。这可以通过两种方法完成：使用 setpts 视频过滤器（需要重新编码）或通过将视频导出为原始比特流格式并在创建新时间戳时复用到容器来擦除时间戳。 请注意，在以下示例中，音频流未更改，因此理想情况下应使用 -an 禁用它。 原始比特流方法这种方法是无损的，除了更改时间戳之外，还可以按原样复制视频流。如果您不需要对">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2022-03-31T13:27:00.000Z">
+<meta property="article:modified_time" content="2022-03-31T13:52:13.089Z">
+<meta property="article:author" content="keyboard3">
+<meta property="article:tag" content="翻译">
+<meta property="article:tag" content="FFmpeg">
+<meta name="twitter:card" content="summary">
+
+    <link rel="alternate" type="application/atom+xml" href="/blog/atom.xml">
+    <link rel="icon" href="/images/favicon.ico" type="image/x-icon">
+
+    
+<link rel="stylesheet" href="/blog/css/common.min.css">
+
+
+
+    
+    
+    
+    
+        <link href="//cdn.jsdelivr.net/npm/lightgallery.js@1.1.3/dist/css/lightgallery.min.css" rel="stylesheet">
+    
+    
+    
+<link rel="stylesheet" href="/blog/css/iconfont.min.css">
+
+    
+<meta name="generator" content="Hexo 4.2.0"><link rel="stylesheet" href="/blog/css/prism-tomorrow.css" type="text/css">
+<link rel="stylesheet" href="/blog/css/prism-line-numbers.css" type="text/css"></head>
+
+    <body>
+        <header class="header header-fixture">
+    <div class="profile-search-wrap flex sm:block">
+        
+        
+        <div class="profile sm:text-center md:px-1 lg:px-3 sm:pb-4 sm:pt-6">
+            <a id="avatar" role="link" href="https://github.com/keyboard3" class="inline-block lg:w-16 lg:h-16 w-8 h-8 m-2" target="_blank" rel="noopener" rel="noreferrer" >
+                <img src="https://www.gravatar.com/avatar/5a65c2880a8f2804b5af3dc39819bdf1?s=128" class="rounded-full" alt="avatar">
+            </a>
+            <h2 id="name" class="hidden lg:block">keyboard3</h2>
+            <h3 id="title" class="hidden lg:block">单身男青年</h3>
+            
+            <small id="location" class="hidden lg:block">
+                <i class="iconfont icon-map-icon"></i>
+                home
+            </small>
+            
+        </div>
+        
+        
+<div class="search flex-1 flex lg:inline-block sm:hidden lg:px-4 lg:mt-2 lg:mb-4 lg:w-full">
+    <form id="search-form" class="my-auto flex-1 lg:border lg:border-solid lg:border-gray-200">
+        <div class="input-group table bg-gray-100 lg:bg-white w-full">
+            <input id="search-input" type="text" placeholder="搜索" class="inline-block w-full bg-gray-100 lg:bg-white">
+            <span class="table-cell">
+                <button name="search tigger button" disabled>
+                    <i class="iconfont icon-search m-2"></i>
+                </button>
+            </span>
+        </div>
+    </form>
+        
+<div id="content-json" data-placeholder="搜索" class="invisible hidden">/content.json</div>
+<script id="search-teamplate" type="text/html" data-path="/blog/content.json">
+    <div>
+        <div class="search-header bg-gray-400">
+            <input id="actual-search-input" model="keyword" ref="input" class="inline-block w-full h-10 px-2 py-1" placeholder="搜索" type="text">
+        </div>
+        <div class="search-result bg-gray-200">
+            {{#each searchPosts}}
+            <a href="/{{ path }}" class="result-item block px-2 pb-3 mb-1 pt-1 hover:bg-indigo-100">
+                <i class="iconfont icon-file"></i>
+                <h1 class="result-title inline font-medium text-lg">{{ title }}</h1>
+                <p class="result-content text-gray-600 text-sm">{{{ text }}}</p>
+            </a>
+            {{/each}}
+        </div>
+    </div>
+</script>
+
+</div>
+
+
+        <button name="menu toogle button" id="menu-toggle-btn" class="block sm:hidden p-3" role="button" aria-expanded="false">
+            <i class="iconfont icon-hamburger"></i>
+        </button>
+    </div>
+    <nav id="menu-nav" class="hidden sm:flex flex-col">
+        
+        
+            <div class="menu-item menu-home" role="menuitem">
+                <a href="/blog/.">
+                    <i class="iconfont icon-home" aria-hidden="true"></i>
+                    <span class="menu-title">首页</span>
+                </a>
+            </div>
+        
+        
+            <div class="menu-item menu-archives" role="menuitem">
+                <a href="/blog/archives">
+                    <i class="iconfont icon-archive" aria-hidden="true"></i>
+                    <span class="menu-title">归档</span>
+                </a>
+            </div>
+        
+        
+            <div class="menu-item menu-categories" role="menuitem">
+                <a href="/blog/categories">
+                    <i class="iconfont icon-folder" aria-hidden="true"></i>
+                    <span class="menu-title">分类</span>
+                </a>
+            </div>
+        
+        
+            <div class="menu-item menu-tags" role="menuitem">
+                <a href="/blog/tags">
+                    <i class="iconfont icon-tag" aria-hidden="true"></i>
+                    <span class="menu-title">标签</span>
+                </a>
+            </div>
+        
+        
+            <div class="menu-item menu-repository" role="menuitem">
+                <a href="/blog/repository">
+                    <i class="iconfont icon-project" aria-hidden="true"></i>
+                    <span class="menu-title">项目</span>
+                </a>
+            </div>
+        
+        
+            <div class="menu-item menu-links" role="menuitem">
+                <a href="/blog/links">
+                    <i class="iconfont icon-friend" aria-hidden="true"></i>
+                    <span class="menu-title">友链</span>
+                </a>
+            </div>
+        
+        
+            <div class="menu-item menu-about" role="menuitem">
+                <a href="/blog/about">
+                    <i class="iconfont icon-cup" aria-hidden="true"></i>
+                    <span class="menu-title">关于</span>
+                </a>
+            </div>
+        
+        
+<div class="social-links flex sm:flex-col lg:hidden mt-5">
+    
+        <span class="social-item text-center">
+            <a href="https://github.com/keyboard3" target="_blank" rel="noopener">
+                <i class="iconfont social-icon icon-github"></i>
+                <span class="menu-title hidden lg:inline">menu.github</span>
+            </a>
+        </span>
+    
+        <span class="social-item text-center">
+            <a href="/blog/atom.xml">
+                <i class="iconfont social-icon icon-rss"></i>
+                <span class="menu-title hidden lg:inline">menu.rss</span>
+            </a>
+        </span>
+    
+</div>
+
+
+    </nav>
+</header>
+
+        <section class="main-section">
+            
+    <main class="flex-1 px-4 py-14 md:px-5 lg:px-8 lg:py-4 relative min-h-screen">
+    
+
+    <article class="content article article-archives article-type-list" itemscope="">
+        <header class="article-header">
+            
+    
+        <h1 class="article-title text-lg" itemprop="name">
+            如何加速或减速一个视频
+        </h1>
+    
+
+
+
+            <p class="article-meta mb-3 text-xs">
+                <span class="article-date">
+    <i class="iconfont icon-calendar-check"></i>
+	<a href="/blog/how-to-speed-a-video/" class="article-date">
+	  <time datetime="2022-03-31T13:27:00.000Z" itemprop="datePublished">3月 31</time>
+	</a>
+</span>
+
+                
+
+                
+    <span class="article-tags">
+    <i class="iconfont icon-tag"></i>
+    <a class="article-tag-link" href="/blog/tags/FFmpeg/" rel="tag">FFmpeg</a>, <a class="article-tag-link" href="/blog/tags/%E7%BF%BB%E8%AF%91/" rel="tag">翻译</a>
+  </span>
+
+
+                <span class="_partial/post-comment"><i class="icon icon-comment"></i>
+                    <a href="/blog/how-to-speed-a-video/#comments" class="article-comment-link">
+                        评论
+                    </a>
+                </span>
+                
+    
+        <span class="post-wordcount" itemprop="wordCount">字数统计: 871(字)</span>
+    
+    
+        <span class="post-readcount" itemprop="timeRequired">阅读时长: 3(分)</span>
+    
+
+
+            </p>
+        </header>
+        <div class="marked-body article-body">
+            <p><a href="http://trac.ffmpeg.org/wiki/How%20to%20speed%20up%20/%20slow%20down%20a%20video" target="_blank" rel="noopener">原文</a></p>
+<h1 id="加速-减速视频"><a href="#加速-减速视频" class="headerlink" title="加速/减速视频"></a>加速/减速视频</h1><p>可以通过更改每个视频帧的呈现时间戳 (PTS) 来更改视频流的速度。这可以通过两种方法完成：使用 setpts 视频过滤器（需要重新编码）或通过将视频导出为原始比特流格式并在创建新时间戳时复用到容器来擦除时间戳。</p>
+<p>请注意，在以下示例中，音频流未更改，因此理想情况下应使用 -an 禁用它。</p>
+<h3 id="原始比特流方法"><a href="#原始比特流方法" class="headerlink" title="原始比特流方法"></a>原始比特流方法</h3><p>这种方法是无损的，除了更改时间戳之外，还可以按原样复制视频流。如果您不需要对输入视频进行其他更改，请使用此选项。</p>
+<p>首先，将视频复制为原始比特流格式。</p>
+<p>对于 H.264：<br><code>ffmpeg -i input.mp4 -map 0:v -c:v copy -bsf:v h264_mp4toannexb raw.h264</code><br>对于 H.265：<br><code>ffmpeg -i input.mp4 -map 0:v -c:v copy -bsf:v hevc_mp4toannexb raw.h265</code><br>然后在复用到容器时生成新的时间戳：<br><code>ffmpeg -fflags +genpts -r 30 -i raw.h264 -c:v copy output.mp4</code><br>将 -r 的值更改为所需的播放帧速率。</p>
+<h3 id="setpts-视频过滤器"><a href="#setpts-视频过滤器" class="headerlink" title="setpts 视频过滤器"></a>setpts 视频过滤器</h3><p>要使用 setpts 过滤器将视频速度加倍，您可以使用：<br><code>ffmpeg -i input.mkv -filter:v "setpts=0.5*PTS" output.mkv</code><br>该过滤器通过更改每个视频帧的呈现时间戳 (PTS) 来工作。例如，如果在时间戳 1 和 2 处连续显示两个帧，并且您想加快视频速度，则这些时间戳需要分别变为 0.5 和 1。因此，我们必须将它们乘以 0.5。</p>
+<p>请注意，此方法将丢帧以达到所需的速度。您可以通过指定比输入更高的输出帧速率来避免丢帧。例如，从 4 FPS 的输入到加速到 4 倍（16 FPS）的输入：<br><code>ffmpeg -i input.mkv -r 16 -filter:v "setpts=0.25*PTS" output.mkv</code><br>要减慢视频速度，您必须使用大于 1 的乘数：<br><code>ffmpeg -i input.mkv -filter:v "setpts=2.0*PTS" output.mkv</code></p>
+<h4 id="平滑"><a href="#平滑" class="headerlink" title="平滑"></a>平滑</h4><p>您可以使用插值视频过滤器平滑慢/快视频。这也称为“运动插值”或“光流”。<br><code>ffmpeg -i input.mkv -filter:v "minterpolate='mi_mode=mci:mc_mode=aobmc:vsbmc=1:fps=120'" output.mkv</code><br>其他选项包括<a href="https://github.com/slowmoVideo/slowmoVideo/" target="_blank" rel="noopener">​slowmoVideo</a> 和<a href="https://github.com/dthpham/butterflow" target="_blank" rel="noopener">​Butterflow</a>。</p>
+<h3 id="加快-减慢音频"><a href="#加快-减慢音频" class="headerlink" title="加快/减慢音频"></a>加快/减慢音频</h3><p>您可以使用 <a href="http://ffmpeg.org/ffmpeg-all.html#atempo" target="_blank" rel="noopener">​atempo</a> 音频过滤器加快或减慢音频。将音频速度加倍：<br><code>ffmpeg -i input.mkv -filter:a "atempo=2.0" -vn output.mkv</code><br>atempo 过滤器仅限于使用 0.5 到 2.0 之间的值（因此它可以将其减慢到不低于原始速度的一半，并且加速不超过输入的两倍）。如果需要，您可以通过将多个 atempo 过滤器串在一起来绕过此限制。以下是音频速度的四倍：<br><code>ffmpeg -i input.mkv -filter:a "atempo=2.0,atempo=2.0" -vn output.mkv</code><br>使用复杂的过滤器图，您可以同时加速视频和音频：<br><code>ffmpeg -i input.mkv -filter_complex "[0:v]setpts=0.5*PTS[v];[0:a]atempo=2.0[a]" -map "[v]" -map "[a]" output.mkv</code><br>使用上面的原始比特流方法示例，不需要复杂的过滤器图。您可以通过以下方式同时减慢 30 fps 的视频和音频：<br><code>ffmpeg -fflags +genpts -r 15 -i raw.h264 -i input.mp4 -map 0:v -c:v copy -map 1:a -af atempo=0.5 -movflags faststart output.mp4</code></p>
+<script>
+        document.querySelectorAll('.github-emoji')
+          .forEach(el => {
+            if (!el.dataset.src) { return; }
+            const img = document.createElement('img');
+            img.style = 'display:none !important;';
+            img.src = el.dataset.src;
+            img.addEventListener('error', () => {
+              img.remove();
+              el.style.color = 'inherit';
+              el.style.backgroundImage = 'none';
+              el.style.background = 'none';
+            });
+            img.addEventListener('load', () => {
+              img.remove();
+            });
+            document.body.appendChild(img);
+          });
+      </script>
+        </div>
+        
+<blockquote class="copyright">
+    <p><strong>本文链接 : </strong><a class="permalink" href="https://keyboard3.github.io/how-to-speed-a-video/">https://keyboard3.github.io/how-to-speed-a-video/</a></p>
+    <p><strong>This article is available under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank" rel="noopener noreferrer">Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0)</a> License</strong></p>
+</blockquote>
+
+
+    </article>
+    
+    <section id="comments">
+        
+            <div id="vcomments"></div>
+        
+    </section>
+
+
+    
+
+</main>
+
+
+<aside style="" id="sidebar" class="aside aside-fixture">
+    <div class="toc-sidebar">
+        <nav id="toc" class="article-toc">
+            <h3 class="toc-title">文章目录</h3>
+            <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#加速-减速视频"><span class="toc-number">1.</span> <span class="toc-text">加速&#x2F;减速视频</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#原始比特流方法"><span class="toc-number">1.0.1.</span> <span class="toc-text">原始比特流方法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#setpts-视频过滤器"><span class="toc-number">1.0.2.</span> <span class="toc-text">setpts 视频过滤器</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#平滑"><span class="toc-number">1.0.2.1.</span> <span class="toc-text">平滑</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#加快-减慢音频"><span class="toc-number">1.0.3.</span> <span class="toc-text">加快&#x2F;减慢音频</span></a></li></ol></li></ol></li></ol>
+        </nav>
+    </div>
+</aside>
+
+
+
+
+
+        </section>
+        <footer class="hidden lg:block fixed bottom-0 left-0 sm:w-1/12 lg:w-1/6 bg-gray-100 z-40">
+    
+    <div class="footer-social-links">
+        
+            <a href="https://github.com/keyboard3" target="_blank" rel="noopener">
+                <i class="iconfont icon-github"></i>
+            </a>
+        
+            <a href="/blog/atom.xml">
+                <i class="iconfont icon-rss"></i>
+            </a>
+        
+    </div>
+    
+    
+</footer>
+
+        <div id="mask" class="hidden mask fixed inset-0 bg-gray-900 opacity-75 z-40"></div>
+        <div id="search-view-container" class="hidden shadow-xl"></div>
+        
+<script src="/blog/js/dom-event.min.js"></script>
+
+
+
+<script src="/blog/js/local-search.min.js"></script>
+
+
+    <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+<script src="//cdn.jsdelivr.net/npm/valine"></script>
+<script type="text/javascript">
+var GUEST = ['nick', 'mail', 'link'];
+var meta = '';
+meta = meta.split(',').filter(function(item) {
+  return GUEST.indexOf(item) > -1;
+});
+new Valine({
+  el: '#vcomments',
+  verify: 'false',
+  notify: 'false',
+  appId: '',
+  appKey: '',
+  placeholder: 'just go go',
+  avatar: 'mm',
+  meta: meta,
+  pageSize: '10' || 10,
+  visitor: 'true',
+  lang: ''
+});
+</script>
+
+
+
+    <script src="//cdn.jsdelivr.net/npm/lightgallery.js@1.1.3/dist/js/lightgallery.min.js"></script>
+    
+<script src="/blog/js/light-gallery.min.js"></script>
+
+
+
+
+
+
+    </body>
+</html>
