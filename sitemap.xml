@@ -2,6 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://keyboard3.github.io/paypal-payments-pro/</loc>
+    
+    <lastmod>2022-03-31T10:43:36.832Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://keyboard3.github.io/gs-ppa-hosted-pages/</loc>
     
     <lastmod>2022-03-29T15:23:38.518Z</lastmod>
@@ -30,21 +37,7 @@
   </url>
   
   <url>
-    <loc>https://keyboard3.github.io/about/index.html</loc>
-    
-    <lastmod>2022-03-21T01:16:32.337Z</lastmod>
-    
-  </url>
-  
-  <url>
     <loc>https://keyboard3.github.io/categories/index.html</loc>
-    
-    <lastmod>2022-03-21T01:16:32.337Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://keyboard3.github.io/friends/index.html</loc>
     
     <lastmod>2022-03-21T01:16:32.337Z</lastmod>
     
@@ -58,6 +51,27 @@
   </url>
   
   <url>
+    <loc>https://keyboard3.github.io/about/index.html</loc>
+    
+    <lastmod>2022-03-21T01:16:32.337Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://keyboard3.github.io/friends/index.html</loc>
+    
+    <lastmod>2022-03-21T01:16:32.337Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://keyboard3.github.io/typescript-handbook-declaration-files/</loc>
+    
+    <lastmod>2022-03-21T01:16:32.336Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://keyboard3.github.io/react-native-render-html/</loc>
     
     <lastmod>2022-03-21T01:16:32.336Z</lastmod>
@@ -66,13 +80,6 @@
   
   <url>
     <loc>https://keyboard3.github.io/seo-tutorial/</loc>
-    
-    <lastmod>2022-03-21T01:16:32.336Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://keyboard3.github.io/typescript-handbook-declaration-files/</loc>
     
     <lastmod>2022-03-21T01:16:32.336Z</lastmod>
     
@@ -142,6 +149,13 @@
   </url>
   
   <url>
+    <loc>https://keyboard3.github.io/mdn-web-api/</loc>
+    
+    <lastmod>2022-03-21T01:16:32.332Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://keyboard3.github.io/lottery-wheel/</loc>
     
     <lastmod>2022-03-21T01:16:32.332Z</lastmod>
@@ -150,13 +164,6 @@
   
   <url>
     <loc>https://keyboard3.github.io/next-source-analysis/</loc>
-    
-    <lastmod>2022-03-21T01:16:32.332Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://keyboard3.github.io/mdn-web-api/</loc>
     
     <lastmod>2022-03-21T01:16:32.332Z</lastmod>
     

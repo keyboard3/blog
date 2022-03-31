@@ -6,7 +6,7 @@
   <link href="/blog/atom.xml" rel="self"/>
   
   <link href="https://keyboard3.github.io/"/>
-  <updated>2022-03-29T15:23:38.518Z</updated>
+  <updated>2022-03-31T10:43:36.832Z</updated>
   <id>https://keyboard3.github.io/</id>
   
   <author>
@@ -15,6 +15,34 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>PayPal Payments Pro [2.4]</title>
+    <link href="https://keyboard3.github.io/paypal-payments-pro/"/>
+    <id>https://keyboard3.github.io/paypal-payments-pro/</id>
+    <published>2022-03-31T06:30:00.000Z</published>
+    <updated>2022-03-31T10:43:36.832Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;p&gt;&lt;a href=&quot;https://docs.magento.com/user-guide/payment/paypal-payments-pro.html&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;原文&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a
+        
+      
+    
+    </summary>
+    
+    
+    
+      <category term="翻译" scheme="https://keyboard3.github.io/tags/%E7%BF%BB%E8%AF%91/"/>
+    
+      <category term="PayPal" scheme="https://keyboard3.github.io/tags/PayPal/"/>
+    
+  </entry>
   
   <entry>
     <title>高级 PayPal 付款 托管页面入门</title>
@@ -597,36 +625,6 @@
       <category term="next.js" scheme="https://keyboard3.github.io/tags/next-js/"/>
     
       <category term="docs" scheme="https://keyboard3.github.io/tags/docs/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>pyenv</title>
-    <link href="https://keyboard3.github.io/pyenv/"/>
-    <id>https://keyboard3.github.io/pyenv/</id>
-    <published>2020-03-30T02:31:11.000Z</published>
-    <updated>2022-03-21T01:16:32.334Z</updated>
-    
-    <summary type="html">
-    
-      
-      
-        
-        
-          &lt;p&gt;&lt;a href=&quot;https://github.com/pyenv/pyenv&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;Simple Python Version Management: pyenv&lt;/a&gt;&lt;/p&gt;
-&lt;h2 id=&quot;介绍&quot;&gt;&lt;a
-        
-      
-    
-    </summary>
-    
-    
-    
-      <category term="翻译" scheme="https://keyboard3.github.io/tags/%E7%BF%BB%E8%AF%91/"/>
-    
-      <category term="进行中" scheme="https://keyboard3.github.io/tags/%E8%BF%9B%E8%A1%8C%E4%B8%AD/"/>
-    
-      <category term="python" scheme="https://keyboard3.github.io/tags/python/"/>
     
   </entry>
   
