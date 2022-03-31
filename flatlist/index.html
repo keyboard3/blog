@@ -12,12 +12,11 @@
 <meta property="og:description" content="FlatList介绍一个高性能用于渲染基础列表，支持一些便利的特性感觉FlatList 中文版比英文原版都好。  跨平台支持 可选的横向展示 可配置的已显示的回调函数 列表头支持 列表尾支持 分割线支持 下拉刷新 滚动加载 滚动到指定行支持 多列支持  它是对virtualizedlist封装，继承自它的所有属性（同样也继承自ScrollView),这些继承的属性在这里没有列出来。此外还有以下注意">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2020-03-14T10:05:38.000Z">
-<meta property="article:modified_time" content="2022-03-21T01:16:32.328Z">
+<meta property="article:modified_time" content="2022-03-31T15:14:13.113Z">
 <meta property="article:author" content="keyboard3">
 <meta property="article:tag" content="react-native">
 <meta property="article:tag" content="api">
 <meta property="article:tag" content="翻译">
-<meta property="article:tag" content="完结">
 <meta name="twitter:card" content="summary">
 
     <link rel="alternate" type="application/atom+xml" href="/blog/atom.xml">
@@ -211,7 +210,7 @@
                 
     <span class="article-tags">
     <i class="iconfont icon-tag"></i>
-    <a class="article-tag-link" href="/blog/tags/api/" rel="tag">api</a>, <a class="article-tag-link" href="/blog/tags/react-native/" rel="tag">react-native</a>, <a class="article-tag-link" href="/blog/tags/%E5%AE%8C%E7%BB%93/" rel="tag">完结</a>, <a class="article-tag-link" href="/blog/tags/%E7%BF%BB%E8%AF%91/" rel="tag">翻译</a>
+    <a class="article-tag-link" href="/blog/tags/api/" rel="tag">api</a>, <a class="article-tag-link" href="/blog/tags/react-native/" rel="tag">react-native</a>, <a class="article-tag-link" href="/blog/tags/%E7%BF%BB%E8%AF%91/" rel="tag">翻译</a>
   </span>
 
 
@@ -252,7 +251,7 @@
 <li>为了优化内存的同时保持平滑滚动，内容被异步离屏渲染。这意味着可能滑动速度可能大于内容的填充速度，会看到短暂的白屏。这是优化而不得不做出的妥协，每个应用可以根据自己的需要来调整对应的参数，我们仍然在这方面的优化做努力。</li>
 <li>默认列表会将 item 数据项的<code>key</code>属性作为单项组件的 React key。另外，你可以提供自定义函数<code>keyExtractor</code>来获取 key</li>
 </ul>
-<p>如果需要 section 支持，请使用<a href="https://reactnative.dev/docs/sectionlist" target="_blank" rel="noopener">Section List</a><br><a href="https://snack.expo.io/?session_id=snack-session-fXpTgLMiC&amp;preview=true&amp;platform=web&amp;iframeId=j4bavelnge&amp;supportedPlatforms=ios,android,web&amp;name=flatlist-simple&amp;description=Example%20usage&amp;waitForData=true" target="_blank" rel="noopener">flatlist-simple</a></p>
+<p>如果需要 section 支持，请使用<a href="https://reactnative.dev/docs/sectionlist" target="_blank" rel="noopener">Section List</a><br><a href="https://snack.expo.io/?session_id=snack-session-fXpTgLMiC&preview=true&platform=web&iframeId=j4bavelnge&supportedPlatforms=ios,android,web&name=flatlist-simple&description=Example%20usage&waitForData=true" target="_blank" rel="noopener">flatlist-simple</a></p>
 <pre class="line-numbers language-ts"><code class="language-ts"><span class="token keyword">import</span> React <span class="token keyword">from</span> <span class="token string">"react"</span><span class="token punctuation">;</span>
 <span class="token keyword">import</span> <span class="token punctuation">{</span> SafeAreaView<span class="token punctuation">,</span> View<span class="token punctuation">,</span> FlatList<span class="token punctuation">,</span> StyleSheet<span class="token punctuation">,</span> Text <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">"react-native"</span><span class="token punctuation">;</span>
 <span class="token keyword">import</span> Constants <span class="token keyword">from</span> <span class="token string">"expo-constants"</span><span class="token punctuation">;</span>
@@ -319,7 +318,7 @@
 <li>通过传<code>extraData={selected}</code>给<code>FlatList</code>,可以保证 state 变更时<code>FlatList</code>被重渲染。没有设置这个属性,<code>FlatList</code>将不会知道需要重渲染任何 item，因为它是个<code>PureComponent</code>对比属性发现没有任何改变。</li>
 <li><code>keyExtractor</code>告诉列表使用 id 来作为每项的 key</li>
 </ul>
-<p><a href="https://snack.expo.io/?session_id=snack-session-IO5CwSQUH&amp;preview=true&amp;platform=web&amp;iframeId=rua5k99frl&amp;supportedPlatforms=ios,android,web&amp;name=flatlist-selectable&amp;description=Example%20usage&amp;waitForData=true" target="_blank" rel="noopener">flatlist-selectable
+<p><a href="https://snack.expo.io/?session_id=snack-session-IO5CwSQUH&preview=true&platform=web&iframeId=rua5k99frl&supportedPlatforms=ios,android,web&name=flatlist-selectable&description=Example%20usage&waitForData=true" target="_blank" rel="noopener">flatlist-selectable
 </a></p>
 <pre class="line-numbers language-ts"><code class="language-ts"><span class="token keyword">import</span> React <span class="token keyword">from</span> <span class="token string">"react"</span><span class="token punctuation">;</span>
 <span class="token keyword">import</span> <span class="token punctuation">{</span>
@@ -530,25 +529,7 @@
 <h3 id="flashScrollIndicators"><a href="#flashScrollIndicators" class="headerlink" title="flashScrollIndicators()"></a>flashScrollIndicators()</h3><p>让滚动指示器显示短暂</p>
 <h3 id="getScrollResponder"><a href="#getScrollResponder" class="headerlink" title="getScrollResponder()"></a>getScrollResponder()</h3><p>提供滚动响应者的引用</p>
 <h3 id="getScrollableNode"><a href="#getScrollableNode" class="headerlink" title="getScrollableNode()"></a>getScrollableNode()</h3><p>提供滚动节点的引用</p>
-<script>
-        document.querySelectorAll('.github-emoji')
-          .forEach(el => {
-            if (!el.dataset.src) { return; }
-            const img = document.createElement('img');
-            img.style = 'display:none !important;';
-            img.src = el.dataset.src;
-            img.addEventListener('error', () => {
-              img.remove();
-              el.style.color = 'inherit';
-              el.style.backgroundImage = 'none';
-              el.style.background = 'none';
-            });
-            img.addEventListener('load', () => {
-              img.remove();
-            });
-            document.body.appendChild(img);
-          });
-      </script>
+
         </div>
         
 <blockquote class="copyright">

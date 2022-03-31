@@ -3,22 +3,19 @@
     <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, minimum-scale=1, initial-scale=1, maximum-scale=5, viewport-fit=cover">
-    <title>web api | keyboard3的博客</title>
-    <meta name="description" content="Page 可见性 API原文 使用选项卡浏览，任何 web 页面都有可能在后台，因此对用户不可见。这个页面可见性 API 提供了当 document 显示和隐藏的事件给你监听，以及查看当前页面可见性的状态。  注意：这个 API 对于保存资源和提高性能非常有用，它使得页面不显示的时候可以避免执行不必要的任务。  当用户缩小窗口或者切换其他 tab 页的时候，这个 API 会发送visibility">
+    <title>Page 可见性 API | keyboard3的博客</title>
+    <meta name="description" content="原文 使用选项卡浏览，任何 web 页面都有可能在后台，因此对用户不可见。这个页面可见性 API 提供了当 document 显示和隐藏的事件给你监听，以及查看当前页面可见性的状态。  注意：这个 API 对于保存资源和提高性能非常有用，它使得页面不显示的时候可以避免执行不必要的任务。  当用户缩小窗口或者切换其他 tab 页的时候，这个 API 会发送visibilitychange事件告诉监听">
 <meta property="og:type" content="article">
-<meta property="og:title" content="web api">
-<meta property="og:url" content="https://keyboard3.github.io/mdn-web-api/index.html">
+<meta property="og:title" content="Page 可见性 API">
+<meta property="og:url" content="https://keyboard3.github.io/page-visibility-api/index.html">
 <meta property="og:site_name" content="keyboard3的博客">
-<meta property="og:description" content="Page 可见性 API原文 使用选项卡浏览，任何 web 页面都有可能在后台，因此对用户不可见。这个页面可见性 API 提供了当 document 显示和隐藏的事件给你监听，以及查看当前页面可见性的状态。  注意：这个 API 对于保存资源和提高性能非常有用，它使得页面不显示的时候可以避免执行不必要的任务。  当用户缩小窗口或者切换其他 tab 页的时候，这个 API 会发送visibility">
+<meta property="og:description" content="原文 使用选项卡浏览，任何 web 页面都有可能在后台，因此对用户不可见。这个页面可见性 API 提供了当 document 显示和隐藏的事件给你监听，以及查看当前页面可见性的状态。  注意：这个 API 对于保存资源和提高性能非常有用，它使得页面不显示的时候可以避免执行不必要的任务。  当用户缩小窗口或者切换其他 tab 页的时候，这个 API 会发送visibilitychange事件告诉监听">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2020-04-11T08:49:15.000Z">
-<meta property="article:modified_time" content="2022-03-21T01:16:32.332Z">
+<meta property="article:modified_time" content="2022-03-31T15:26:05.876Z">
 <meta property="article:author" content="keyboard3">
-<meta property="article:tag" content="api">
 <meta property="article:tag" content="翻译">
-<meta property="article:tag" content="进行中">
 <meta property="article:tag" content="mdn">
-<meta property="article:tag" content="web">
 <meta name="twitter:card" content="summary">
 
     <link rel="alternate" type="application/atom+xml" href="/blog/atom.xml">
@@ -193,7 +190,7 @@
             
     
         <h1 class="article-title text-lg" itemprop="name">
-            web api
+            Page 可见性 API
         </h1>
     
 
@@ -202,7 +199,7 @@
             <p class="article-meta mb-3 text-xs">
                 <span class="article-date">
     <i class="iconfont icon-calendar-check"></i>
-	<a href="/blog/mdn-web-api/" class="article-date">
+	<a href="/blog/page-visibility-api/" class="article-date">
 	  <time datetime="2020-04-11T08:49:15.000Z" itemprop="datePublished">4月 11</time>
 	</a>
 </span>
@@ -212,28 +209,28 @@
                 
     <span class="article-tags">
     <i class="iconfont icon-tag"></i>
-    <a class="article-tag-link" href="/blog/tags/api/" rel="tag">api</a>, <a class="article-tag-link" href="/blog/tags/mdn/" rel="tag">mdn</a>, <a class="article-tag-link" href="/blog/tags/web/" rel="tag">web</a>, <a class="article-tag-link" href="/blog/tags/%E7%BF%BB%E8%AF%91/" rel="tag">翻译</a>, <a class="article-tag-link" href="/blog/tags/%E8%BF%9B%E8%A1%8C%E4%B8%AD/" rel="tag">进行中</a>
+    <a class="article-tag-link" href="/blog/tags/mdn/" rel="tag">mdn</a>, <a class="article-tag-link" href="/blog/tags/%E7%BF%BB%E8%AF%91/" rel="tag">翻译</a>
   </span>
 
 
                 <span class="_partial/post-comment"><i class="icon icon-comment"></i>
-                    <a href="/blog/mdn-web-api/#comments" class="article-comment-link">
+                    <a href="/blog/page-visibility-api/#comments" class="article-comment-link">
                         评论
                     </a>
                 </span>
                 
     
-        <span class="post-wordcount" itemprop="wordCount">字数统计: 1.6k(字)</span>
+        <span class="post-wordcount" itemprop="wordCount">字数统计: 1.5k(字)</span>
     
     
-        <span class="post-readcount" itemprop="timeRequired">阅读时长: 6(分)</span>
+        <span class="post-readcount" itemprop="timeRequired">阅读时长: 5(分)</span>
     
 
 
             </p>
         </header>
         <div class="marked-body article-body">
-            <h2 id="Page-可见性-API"><a href="#Page-可见性-API" class="headerlink" title="Page 可见性 API"></a>Page 可见性 API</h2><p><a href="https://developer.mozilla.org/en-US/docs/Web/API/Page_Visibility_API" target="_blank" rel="noopener">原文</a></p>
+            <p><a href="https://developer.mozilla.org/en-US/docs/Web/API/Page_Visibility_API" target="_blank" rel="noopener">原文</a></p>
 <p>使用选项卡浏览，任何 web 页面都有可能在后台，因此对用户不可见。这个页面可见性 API 提供了当 document 显示和隐藏的事件给你监听，以及查看当前页面可见性的状态。</p>
 <blockquote>
 <p>注意：这个 API 对于保存资源和提高性能非常有用，它使得页面不显示的时候可以避免执行不必要的任务。</p>
@@ -346,29 +343,11 @@
 document<span class="token punctuation">.</span><span class="token function">addEventListener</span><span class="token punctuation">(</span><span class="token string">"visibilitychange"</span><span class="token punctuation">,</span> handleVisibilityChange<span class="token punctuation">,</span> <span class="token boolean">false</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 </li>
 </ul>
-<pre><code></code></pre><script>
-        document.querySelectorAll('.github-emoji')
-          .forEach(el => {
-            if (!el.dataset.src) { return; }
-            const img = document.createElement('img');
-            img.style = 'display:none !important;';
-            img.src = el.dataset.src;
-            img.addEventListener('error', () => {
-              img.remove();
-              el.style.color = 'inherit';
-              el.style.backgroundImage = 'none';
-              el.style.background = 'none';
-            });
-            img.addEventListener('load', () => {
-              img.remove();
-            });
-            document.body.appendChild(img);
-          });
-      </script>
+
         </div>
         
 <blockquote class="copyright">
-    <p><strong>本文链接 : </strong><a class="permalink" href="https://keyboard3.github.io/mdn-web-api/">https://keyboard3.github.io/mdn-web-api/</a></p>
+    <p><strong>本文链接 : </strong><a class="permalink" href="https://keyboard3.github.io/page-visibility-api/">https://keyboard3.github.io/page-visibility-api/</a></p>
     <p><strong>This article is available under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank" rel="noopener noreferrer">Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0)</a> License</strong></p>
 </blockquote>
 
@@ -391,7 +370,7 @@ document<span class="token punctuation">.</span><span class="token function">add
     <div class="toc-sidebar">
         <nav id="toc" class="article-toc">
             <h3 class="toc-title">文章目录</h3>
-            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Page-可见性-API"><span class="toc-number">1.</span> <span class="toc-text">Page 可见性 API</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#使用场景"><span class="toc-number">1.1.</span> <span class="toc-text">使用场景</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#策略的目的是为了后台页面性能"><span class="toc-number">1.2.</span> <span class="toc-text">策略的目的是为了后台页面性能</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#案例"><span class="toc-number">1.3.</span> <span class="toc-text">案例</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#将属性添加到-Document-接口"><span class="toc-number">1.4.</span> <span class="toc-text">将属性添加到 Document 接口</span></a></li></ol></li></ol>
+            <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#使用场景"><span class="toc-number">1.</span> <span class="toc-text">使用场景</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#策略的目的是为了后台页面性能"><span class="toc-number">2.</span> <span class="toc-text">策略的目的是为了后台页面性能</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#案例"><span class="toc-number">3.</span> <span class="toc-text">案例</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#将属性添加到-Document-接口"><span class="toc-number">4.</span> <span class="toc-text">将属性添加到 Document 接口</span></a></li></ol>
         </nav>
     </div>
 </aside>

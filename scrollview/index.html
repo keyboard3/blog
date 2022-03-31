@@ -12,12 +12,11 @@
 <meta property="og:description" content="ScrollView参考这篇文章React-Native 之 ScrollView 使用结合了使用案例非常棒 介绍一个对原生 ScrollView 的包装组件，同时还集成了触摸锁定“响应者”系统记住 ScrollViews 需要有确定的高度才能正常工作，因为需要在确定的容器中填充不确定高度的子组件（这样就可以滚动操作）。为了确定 ScrollViews 的高度，可以直接给它设置高度或者让它所有的父">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2020-03-15T06:06:01.000Z">
-<meta property="article:modified_time" content="2022-03-21T01:16:32.329Z">
+<meta property="article:modified_time" content="2022-03-31T15:14:13.114Z">
 <meta property="article:author" content="keyboard3">
 <meta property="article:tag" content="react-native">
 <meta property="article:tag" content="api">
 <meta property="article:tag" content="翻译">
-<meta property="article:tag" content="完结">
 <meta name="twitter:card" content="summary">
 
     <link rel="alternate" type="application/atom+xml" href="/blog/atom.xml">
@@ -211,7 +210,7 @@
                 
     <span class="article-tags">
     <i class="iconfont icon-tag"></i>
-    <a class="article-tag-link" href="/blog/tags/api/" rel="tag">api</a>, <a class="article-tag-link" href="/blog/tags/react-native/" rel="tag">react-native</a>, <a class="article-tag-link" href="/blog/tags/%E5%AE%8C%E7%BB%93/" rel="tag">完结</a>, <a class="article-tag-link" href="/blog/tags/%E7%BF%BB%E8%AF%91/" rel="tag">翻译</a>
+    <a class="article-tag-link" href="/blog/tags/api/" rel="tag">api</a>, <a class="article-tag-link" href="/blog/tags/react-native/" rel="tag">react-native</a>, <a class="article-tag-link" href="/blog/tags/%E7%BF%BB%E8%AF%91/" rel="tag">翻译</a>
   </span>
 
 
@@ -222,10 +221,10 @@
                 </span>
                 
     
-        <span class="post-wordcount" itemprop="wordCount">字数统计: 3.2k(字)</span>
+        <span class="post-wordcount" itemprop="wordCount">字数统计: 3.1k(字)</span>
     
     
-        <span class="post-readcount" itemprop="timeRequired">阅读时长: 12(分)</span>
+        <span class="post-readcount" itemprop="timeRequired">阅读时长: 11(分)</span>
     
 
 
@@ -362,8 +361,8 @@
 <li>end 会将 snap 对齐到右侧（水平）或底部（垂直）</li>
 </ul>
 <h3 id="snapToEnd"><a href="#snapToEnd" class="headerlink" title="snapToEnd"></a>snapToEnd</h3><p>和<code>snapToOffsets</code>一起使用。默认，列表尾部作为 snap 的偏移量。设置<code>snapToEnd</code>为 false 禁用此行为，并允许列表在其结尾和最后一个 snapToOffsets 偏移量之间自由滚动。默认是 true</p>
-<h3 id="snapToInterval"><a href="#snapToInterval" class="headerlink" title="snapToInterval"></a>snapToInterval</h3><p>当设置了此属性时，会让滚动视图滚动停止后，停止在 snapToInterval 的倍数的位置。这可以在一些子视图比滚动视图本身小的时候用于实现分页显示 <code>snapToAlignment</code>以及<code>decelerationRate="fast"</code> 组合使用。覆盖可配置性较低的 pagesEnabled 属性。</p>
-<h3 id="snapToOffsets"><a href="#snapToOffsets" class="headerlink" title="snapToOffsets"></a>snapToOffsets</h3><p>设置后，使滚动视图在定义的偏移处停止。这可用于对长度小于滚动视图的各种大小的子项进行分页,通常与<code>decelerationRate ="fast"</code>结合使用。重写可配置性较低<code>pagesEnabled</code>和 s<code>snapToInterval</code>属性。</p>
+<h3 id="snapToInterval"><a href="#snapToInterval" class="headerlink" title="snapToInterval"></a>snapToInterval</h3><p>当设置了此属性时，会让滚动视图滚动停止后，停止在 snapToInterval 的倍数的位置。这可以在一些子视图比滚动视图本身小的时候用于实现分页显示 <code>snapToAlignment</code>以及<code>decelerationRate=&quot;fast&quot;</code> 组合使用。覆盖可配置性较低的 pagesEnabled 属性。</p>
+<h3 id="snapToOffsets"><a href="#snapToOffsets" class="headerlink" title="snapToOffsets"></a>snapToOffsets</h3><p>设置后，使滚动视图在定义的偏移处停止。这可用于对长度小于滚动视图的各种大小的子项进行分页,通常与<code>decelerationRate =&quot;fast&quot;</code>结合使用。重写可配置性较低<code>pagesEnabled</code>和 s<code>snapToInterval</code>属性。</p>
 <h3 id="snapToStart"><a href="#snapToStart" class="headerlink" title="snapToStart"></a>snapToStart</h3><p>与<code>snapToOffsets</code>一起使用。默认，列表的开始作为停住点的偏移。设置<code>snapToStart</code>false 可以禁止此行为，允许礼包在开始和第一个 snap 偏移量之间滚动。默认是 true</p>
 <h3 id="stickyHeaderIndices"><a href="#stickyHeaderIndices" class="headerlink" title="stickyHeaderIndices"></a>stickyHeaderIndices</h3><p>一组子元素索引，确定滚动时哪些子元素停靠在屏幕顶部。例子，传递<code>stickyHeaderIndices={[0]}</code>将固定第一个子元素显示在顶部。这个属性不支持与<code>horizontal={true}</code>一起使用。</p>
 <h3 id="zoomScale"><a href="#zoomScale" class="headerlink" title="zoomScale"></a>zoomScale</h3><p>仅 iOS。滚动内容的当前缩放比列。默认是 1</p>
@@ -371,25 +370,7 @@
 <h3 id="scrollTo"><a href="#scrollTo" class="headerlink" title="scrollTo()"></a>scrollTo()</h3><p>滚动到指定的 x,y 位置。可以带着动画滚动或者直接到该位置<br>注意：这个混乱的函数签名由于历史原因，这个函数接受分隔的参数而不是对象。由于 x，y 传值模棱两可，应该被废弃</p>
 <h3 id="scrollToEnd"><a href="#scrollToEnd" class="headerlink" title="scrollToEnd()"></a>scrollToEnd()</h3><p>竖直方向滚动到底部，水平方向滚动到右边。可以带动画滚动。Android 上可能需要制定滚动时常。如果不指定默认是包含动画</p>
 <h3 id="scrollWithoutAnimationTo"><a href="#scrollWithoutAnimationTo" class="headerlink" title="scrollWithoutAnimationTo()"></a>scrollWithoutAnimationTo()</h3><p>废弃应该用 scrollTo 代替</p>
-<script>
-        document.querySelectorAll('.github-emoji')
-          .forEach(el => {
-            if (!el.dataset.src) { return; }
-            const img = document.createElement('img');
-            img.style = 'display:none !important;';
-            img.src = el.dataset.src;
-            img.addEventListener('error', () => {
-              img.remove();
-              el.style.color = 'inherit';
-              el.style.backgroundImage = 'none';
-              el.style.background = 'none';
-            });
-            img.addEventListener('load', () => {
-              img.remove();
-            });
-            document.body.appendChild(img);
-          });
-      </script>
+
         </div>
         
 <blockquote class="copyright">

@@ -12,12 +12,11 @@
 <meta property="og:description" content="nextjs-docs 文档介绍如果你是新人，建议你学习该课程带有测试的交互课程会指导你完成使用 Next.js 所需要的知识如果你有任何有关 Next.js 的问题，你可以去社区中提问系统要求  Node.js 10 以上 MacOS，windows(包括 WSL),以及 Linux  设置我们建议使用 create-next-app 来创建 Next.js 应用，它将自动为你设置一切。运行以下">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2020-03-30T02:47:26.000Z">
-<meta property="article:modified_time" content="2022-03-21T01:16:32.333Z">
+<meta property="article:modified_time" content="2022-03-31T15:14:13.113Z">
 <meta property="article:author" content="keyboard3">
 <meta property="article:tag" content="翻译">
-<meta property="article:tag" content="完结">
-<meta property="article:tag" content="next.js">
 <meta property="article:tag" content="docs">
+<meta property="article:tag" content="next.js">
 <meta name="twitter:card" content="summary">
 
     <link rel="alternate" type="application/atom+xml" href="/blog/atom.xml">
@@ -211,7 +210,7 @@
                 
     <span class="article-tags">
     <i class="iconfont icon-tag"></i>
-    <a class="article-tag-link" href="/blog/tags/docs/" rel="tag">docs</a>, <a class="article-tag-link" href="/blog/tags/next-js/" rel="tag">next.js</a>, <a class="article-tag-link" href="/blog/tags/%E5%AE%8C%E7%BB%93/" rel="tag">完结</a>, <a class="article-tag-link" href="/blog/tags/%E7%BF%BB%E8%AF%91/" rel="tag">翻译</a>
+    <a class="article-tag-link" href="/blog/tags/docs/" rel="tag">docs</a>, <a class="article-tag-link" href="/blog/tags/next-js/" rel="tag">next.js</a>, <a class="article-tag-link" href="/blog/tags/%E7%BF%BB%E8%AF%91/" rel="tag">翻译</a>
   </span>
 
 
@@ -222,7 +221,7 @@
                 </span>
                 
     
-        <span class="post-wordcount" itemprop="wordCount">字数统计: 26.1k(字)</span>
+        <span class="post-wordcount" itemprop="wordCount">字数统计: 26.2k(字)</span>
     
     
         <span class="post-readcount" itemprop="timeRequired">阅读时长: 106(分)</span>
@@ -586,7 +585,7 @@ yarn create next-app</code></pre><p>安装完成之后，跟着说明启动开�
 <p>注意每个 params 的值都必须与页面名称中使用的参数匹配：</p>
 <ul>
 <li>如果页面名称是<code>pages/posts/[postId]/[commentId]</code>,params 应该包含 postId 和 commentId。</li>
-<li>如果页面名使用捕获所有的路由，比如<code>pages/[...slug]</code>，然后 params 应该包含 slug 是个数组。比如，如果数组是<code>['foo','bar']</code>，然后 Next.js 将静态生成页面在<code>/foo/bar</code></li>
+<li>如果页面名使用捕获所有的路由，比如<code>pages/[...slug]</code>，然后 params 应该包含 slug 是个数组。比如，如果数组是<code>[&#39;foo&#39;,&#39;bar&#39;]</code>，然后 Next.js 将静态生成页面在<code>/foo/bar</code></li>
 </ul>
 <p><strong>fallback 键必须</strong><br>getStaticPaths 返回的对象一定要包含 bool 类型的 fallback 键。</p>
 <p><code>fallback:false</code></p>
@@ -937,7 +936,7 @@ type Data <span class="token operator">=</span> <span class="token punctuation">
   res<span class="token punctuation">.</span><span class="token function">status</span><span class="token punctuation">(</span><span class="token number">200</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">json</span><span class="token punctuation">(</span><span class="token punctuation">{</span> name<span class="token punctuation">:</span> <span class="token string">"John Doe"</span> <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 <span class="token punctuation">}</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <h4 id="自定义-App"><a href="#自定义-App" class="headerlink" title="自定义 App"></a>自定义 App</h4><p>如果你有自定义的 App，你可以使用内置的 AppProps 类型，并将文件名改为 ./pages/_app.tsx：</p>
-<pre><code>import { AppProps } from 'next/app'
+<pre><code>import { AppProps } from &#39;next/app&#39;
 
 function MyApp({ Component, pageProps }: AppProps) {
   return &lt;Component {...pageProps} /&gt;
@@ -1027,7 +1026,7 @@ export default MyApp</code></pre><h2 id="路由"><a href="#路由" class="header
 </ul>
 <h3 id="动态路由"><a href="#动态路由" class="headerlink" title="动态路由"></a>动态路由</h3><p>通过预定义路径来定义路由对于复杂应用不够。在 Next.js 中，你可以添加中括号给页面([param])来创建动态路由（a.k.a url slug,纯 urls，或者其他）</p>
 <p>考虑下面的页面<code>pages/post/[pid].js</code>：</p>
-<pre><code>import { useRouter } from 'next/router'
+<pre><code>import { useRouter } from &#39;next/router&#39;
 
 const Post = () =&gt; {
   const router = useRouter()
@@ -1122,15 +1121,15 @@ Router<span class="token punctuation">.</span><span class="token function">push<
 <h2 id="API-路由-1"><a href="#API-路由-1" class="headerlink" title="API 路由"></a>API 路由</h2><p>Next.js 的 API routes 中提供了直接解决方案来构建你自己的 API<br>任何放到<code>pages/api</code>文件夹的文件会被映射成<code>/api/*</code>，会被认为是 API 还不是页面<br>比如，下面 API 路由<code>pages/api/user.js</code>处理一个简单的 json 响应：</p>
 <pre><code>export default (req, res) =&gt; {
   res.statusCode = 200
-  res.setHeader('Content-Type', 'application/json')
-  res.end(JSON.stringify({ name: 'John Doe' }))
+  res.setHeader(&#39;Content-Type&#39;, &#39;application/json&#39;)
+  res.end(JSON.stringify({ name: &#39;John Doe&#39; }))
 }</code></pre><p>为了 API 路由正常工作，你需要导出一个 default 函数(请求处理函数),它会接收下面的参数</p>
 <ul>
 <li><code>req</code>: 它是<a href="https://nodejs.org/api/http.html#http_class_http_incomingmessage" target="_blank" rel="noopener">http.IncomingMessage</a>实例，加一些预先构建的中间件，你可以看<a href="https://nextjs.org/docs/api-routes/api-middlewares" target="_blank" rel="noopener">这里</a></li>
 <li><code>res</code>: 它是<a href="https://nodejs.org/api/http.html#http_class_http_serverresponse" target="_blank" rel="noopener">http.ServerResponse</a>实例，添加一些帮助函数可以看<a href="https://nextjs.org/docs/api-routes/response-helpers" target="_blank" rel="noopener">这里</a><br>为了在一个 API 路由中处理不同的 http 方法，你可以使用<code>req.method</code>,比如</li>
 </ul>
 <pre><code>export default (req, res) =&gt; {
-  if (req.method === 'POST') {
+  if (req.method === &#39;POST&#39;) {
     // Process a POST request
   } else {
     // Handle any other HTTP method
@@ -1154,14 +1153,14 @@ Router<span class="token punctuation">.</span><span class="token function">push<
 <blockquote>
 <p>注意：你可以不用<code>slug</code>用其他的比如<code>[..param]</code><br>匹配参数将会作为查询参数发送给页面（这个例子是<code>slug</code>）,它经常是一个数组，路径<code>/api/post/a</code>的<code>query</code>对象为：</p>
 </blockquote>
-<pre><code>{ "slug": ["a"] }</code></pre><p><code>/api/post/a/b</code>路径的参数这样</p>
-<pre><code>{ "slug": ["a", "b"] }</code></pre><p><code>pages/api/post/[...slug].js</code>的 API 处理可以这样：</p>
+<pre><code>{ &quot;slug&quot;: [&quot;a&quot;] }</code></pre><p><code>/api/post/a/b</code>路径的参数这样</p>
+<pre><code>{ &quot;slug&quot;: [&quot;a&quot;, &quot;b&quot;] }</code></pre><p><code>pages/api/post/[...slug].js</code>的 API 处理可以这样：</p>
 <pre><code>export default (req, res) =&gt; {
   const {
     query: { slug },
   } = req
 
-  res.end(`Post: ${slug.join(', ')}`)
+  res.end(`Post: ${slug.join(&#39;, &#39;)}`)
 }</code></pre><p>现在，请求<code>/api/post/a/b/c</code>将返回<code>Post: a, b, c</code></p>
 <h4 id="注意事项-2"><a href="#注意事项-2" class="headerlink" title="注意事项"></a>注意事项</h4><ul>
 <li>预先定义的 API 路由优先级高于动态路由，动态路由会捕获剩下的所有 API。看下下面的例子：</li>
@@ -1179,25 +1178,25 @@ Router<span class="token punctuation">.</span><span class="token function">push<
 <pre><code>export const config = {
   api: {
     bodyParser: {
-      sizeLimit: '1mb',
+      sizeLimit: &#39;1mb&#39;,
     },
   },
 }</code></pre><p>这个<code>api</code>对象包含所有 API 路由的配置<br><code>bodyParser</code>启用 body 解析，你如果想要自己消费<code>Stream</code>可以禁用掉<br><code>bodyParser.sizeLimit</code>是最大允许解析的 Size，支持<a href="https://github.com/visionmedia/bytes.js" target="_blank" rel="noopener">bytes</a>，比如：</p>
 <pre><code>export const config = {
   api: {
     bodyParser: {
-      sizeLimit: '500kb',
+      sizeLimit: &#39;500kb&#39;,
     },
   },
 }</code></pre><h4 id="支持-Connect-Express-中间件"><a href="#支持-Connect-Express-中间件" class="headerlink" title="支持 Connect/Express 中间件"></a>支持 Connect/Express 中间件</h4><p>你也可以使用<a href="https://github.com/senchalabs/connect" target="_blank" rel="noopener">Connect</a>兼容中间件。<br>比如，利用[cors 包]为 API<a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS" target="_blank" rel="noopener">配置 CORS</a>。<br>首先，安装<code>cors</code>:</p>
 <pre><code>npm i cors
 # or
 yarn add cors</code></pre><p>现在，让我们添加<code>cors</code>到 API 路由</p>
-<pre><code>import Cors from 'cors'
+<pre><code>import Cors from &#39;cors&#39;
 
 // Initializing the cors middleware
 const cors = Cors({
-  methods: ['GET', 'HEAD'],
+  methods: [&#39;GET&#39;, &#39;HEAD&#39;],
 })
 
 // Helper method to wait for a middleware to execute before continuing
@@ -1219,12 +1218,12 @@ async function handler(req, res) {
   await runMiddleware(req, res, cors)
 
   // Rest of the API logic
-  res.json({ message: 'Hello Everyone!' })
+  res.json({ message: &#39;Hello Everyone!&#39; })
 }
 
 export default handler</code></pre><h4 id="响应帮助"><a href="#响应帮助" class="headerlink" title="响应帮助"></a>响应帮助</h4><p>响应<code>res</code>包含一些类似于 express.js 的函数，提高开发者的体验并加快创建一个 API 路由的效率。看下下面的案例。</p>
 <pre><code>export default (req, res) =&gt; {
-  res.status(200).json({ name: 'Next.js' })
+  res.status(200).json({ name: &#39;Next.js&#39; })
 }</code></pre><p>包含下面的帮助：</p>
 <ul>
 <li><code>res.status(code)</code> - 设置状态码，<code>code</code>一定是一个有效的 HTTP 状态码</li>
@@ -1656,7 +1655,7 @@ https://&lt;your-site&gt;/api/preview?secret=&lt;token&gt;&amp;slug=&lt;path&gt;
 <p>默认，[自定义属性](CSS 变量)是不兼容 IE11</p>
 <p>CSS 变量未编译，因为它还<a href="https://github.com/MadLittleMods/postcss-css-variables#caveats" target="_blank" rel="noopener">无法被安全的编译</a>。如果你一定要使用变量，考虑使用像 Sass 这样的变量，它被 Sass 给编译掉了。</p>
 <blockquote>
-<p>注意：为了支持<a href="https://developer.mozilla.org/en-US/docs/Web/CSS/grid" target="_blank" rel="noopener">Grid Layout</a>, 你需要启用<code>grid: "autoplace"</code>自动前缀，看下面的自定义插件</p>
+<p>注意：为了支持<a href="https://developer.mozilla.org/en-US/docs/Web/CSS/grid" target="_blank" rel="noopener">Grid Layout</a>, 你需要启用<code>grid: &quot;autoplace&quot;</code>自动前缀，看下面的自定义插件</p>
 </blockquote>
 <h4 id="自定义目标浏览器列表"><a href="#自定义目标浏览器列表" class="headerlink" title="自定义目标浏览器列表"></a>自定义目标浏览器列表</h4><p>Next.js 通过<a href="https://github.com/browserslist/browserslist" target="_blank" rel="noopener">Browserslist</a>允许你配置目标浏览器列表(补充前缀和编译 css)</p>
 <p>为了自定义 browserslist，在 package.json 中创建 browserslist 的 key：</p>
@@ -1838,7 +1837,7 @@ app<span class="token punctuation">.</span><span class="token function">prepare<
 <span class="token punctuation">}</span>
 
 <span class="token keyword">export</span> <span class="token keyword">default</span> MyDocument<span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-, , <main> and <nextscript> 页面正确渲染必须的。
+<Html>, <Head />, <Main /> and <NextScript /> 页面正确渲染必须的。
 
 <p>自定义的 attributes 允许作为 props，比如 lang</p>
 <pre class="line-numbers language-html"><code class="language-html"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>html</span> <span class="token attr-name">lang</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>en<span class="token punctuation">"</span></span><span class="token punctuation">></span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>html</span><span class="token punctuation">></span></span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
@@ -2148,9 +2147,9 @@ Options
 
 For more information run a command with the --help flag
   $ next build --help</code></pre><p>你可以像 next 命令传递任何 <a href="https://nodejs.org/api/cli.html#cli_node_options_options" target="_blank" rel="noopener">node 参数</a></p>
-<pre><code>NODE_OPTIONS='--throw-deprecation' next
-NODE_OPTIONS='-r esm' next
-NODE_OPTIONS='--inspect' next</code></pre><h3 id="构建"><a href="#构建" class="headerlink" title="构建"></a>构建</h3><p>next build 为你的应用穿件一个优化过的生产构建。每个路由输出的信息是这样的：</p>
+<pre><code>NODE_OPTIONS=&#39;--throw-deprecation&#39; next
+NODE_OPTIONS=&#39;-r esm&#39; next
+NODE_OPTIONS=&#39;--inspect&#39; next</code></pre><h3 id="构建"><a href="#构建" class="headerlink" title="构建"></a>构建</h3><p>next build 为你的应用穿件一个优化过的生产构建。每个路由输出的信息是这样的：</p>
 <ul>
 <li>Size -在客户端跳转到页面需要下载的资源大小。每个路由大小只包含它自己的依赖</li>
 <li>First Load JS - 访问服务端这个页面需要下载的资源大小。所有共享的 JS 大小作为单独的指标</li>
@@ -2332,14 +2331,14 @@ Router<span class="token punctuation">.</span>events<span class="token punctuati
   <span class="token punctuation">}</span><span class="token punctuation">;</span>
 <span class="token punctuation">}</span><span class="token punctuation">,</span> <span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <h2 id="next-head"><a href="#next-head" class="headerlink" title="next/head"></a>next/head</h2><p>我们暴露内置组件用于将元素添加到页面的顶部</p>
-<pre><code>import Head from 'next/head'
+<pre><code>import Head from &#39;next/head&#39;
 
 function IndexPage() {
   return (
     &lt;div&gt;
       &lt;Head&gt;
         &lt;title&gt;My page title&lt;/title&gt;
-        &lt;meta name="viewport" content="initial-scale=1.0, width=device-width" /&gt;
+        &lt;meta name=&quot;viewport&quot; content=&quot;initial-scale=1.0, width=device-width&quot; /&gt;
       &lt;/Head&gt;
       &lt;p&gt;Hello world!&lt;/p&gt;
     &lt;/div&gt;
@@ -2347,7 +2346,7 @@ function IndexPage() {
 }
 
 export default IndexPage</code></pre><p>为了避免在你的<code>head</code>中使用重复标签，你可以用<code>key</code>属性，这样会保证一个标签只会渲染一次。例子如下</p>
-<pre><code>import Head from 'next/head'
+<pre><code>import Head from &#39;next/head&#39;
 
 function IndexPage() {
   return (
@@ -2355,16 +2354,16 @@ function IndexPage() {
       &lt;Head&gt;
         &lt;title&gt;My page title&lt;/title&gt;
         &lt;meta
-          name="viewport"
-          content="initial-scale=1.0, width=device-width"
-          key="viewport"
+          name=&quot;viewport&quot;
+          content=&quot;initial-scale=1.0, width=device-width&quot;
+          key=&quot;viewport&quot;
         /&gt;
       &lt;/Head&gt;
       &lt;Head&gt;
         &lt;meta
-          name="viewport"
-          content="initial-scale=1.2, width=device-width"
-          key="viewport"
+          name=&quot;viewport&quot;
+          content=&quot;initial-scale=1.2, width=device-width&quot;
+          key=&quot;viewport&quot;
         /&gt;
       &lt;/Head&gt;
       &lt;p&gt;Hello world!&lt;/p&gt;
@@ -2445,25 +2444,25 @@ export default IndexPage</code></pre><p>在这个例子中只有第二个会被�
 <p><code>getInitialProps</code> 将禁用自动静态优化</p>
 </blockquote>
 <p>它是一个添加到任何页面的静态异步函数。看下面这些示例</p>
-<pre><code>import fetch from 'isomorphic-unfetch'
+<pre><code>import fetch from &#39;isomorphic-unfetch&#39;
 
 function Page({ stars }) {
   return &lt;div&gt;Next stars: {stars}&lt;/div&gt;
 }
 
 Page.getInitialProps = async ctx =&gt; {
-  const res = await fetch('https://api.github.com/repos/zeit/next.js')
+  const res = await fetch(&#39;https://api.github.com/repos/zeit/next.js&#39;)
   const json = await res.json()
   return { stars: json.stargazers_count }
 }
 
 export default Page</code></pre><p>或者使用 class 组件</p>
-<pre><code>import React from 'react'
-import fetch from 'isomorphic-unfetch'
+<pre><code>import React from &#39;react&#39;
+import fetch from &#39;isomorphic-unfetch&#39;
 
 class Page extends React.Component {
   static async getInitialProps(ctx) {
-    const res = await fetch('https://api.github.com/repos/zeit/next.js')
+    const res = await fetch(&#39;https://api.github.com/repos/zeit/next.js&#39;)
     const json = await res.json()
     return { stars: json.stargazers_count }
   }
@@ -2782,11 +2781,11 @@ console<span class="token punctuation">.</span><span class="token function">log<
     { dev, dir, outDir, distDir, buildId }
   ) {
     return {
-      '/': { page: '/' },
-      '/about': { page: '/about' },
-      '/p/hello-nextjs': { page: '/post', query: { title: 'hello-nextjs' } },
-      '/p/learn-nextjs': { page: '/post', query: { title: 'learn-nextjs' } },
-      '/p/deploy-nextjs': { page: '/post', query: { title: 'deploy-nextjs' } },
+      &#39;/&#39;: { page: &#39;/&#39; },
+      &#39;/about&#39;: { page: &#39;/about&#39; },
+      &#39;/p/hello-nextjs&#39;: { page: &#39;/post&#39;, query: { title: &#39;hello-nextjs&#39; } },
+      &#39;/p/learn-nextjs&#39;: { page: &#39;/post&#39;, query: { title: &#39;learn-nextjs&#39; } },
+      &#39;/p/deploy-nextjs&#39;: { page: &#39;/post&#39;, query: { title: &#39;deploy-nextjs&#39; } },
     }
   },
 }
@@ -2816,25 +2815,7 @@ console<span class="token punctuation">.</span><span class="token function">log<
 <li>在 getInitialProps 返回空对象<br><strong>为什么出现这个错误</strong><br>在页面组件中的<code>getInitialProps</code>返回空对象。它会取消自动静态化优化。如果你知道自己的操作并且知道后果。你可以在开发环境下忽略这个消息。<br><strong>修复的方法</strong> (我反正没看懂)<br>查看<code>getInitialProps</code>返回空对象的页面。如果它们存在传递的组件，你可能需要给更新高阶组件添加<code>getInitialProps</code><br><strong>有用链接</strong></li>
 <li>[自动静态优化文档](Automatic Static Optimization Documentation)</li>
 </ul>
-</nextscript></main><script>
-        document.querySelectorAll('.github-emoji')
-          .forEach(el => {
-            if (!el.dataset.src) { return; }
-            const img = document.createElement('img');
-            img.style = 'display:none !important;';
-            img.src = el.dataset.src;
-            img.addEventListener('error', () => {
-              img.remove();
-              el.style.color = 'inherit';
-              el.style.backgroundImage = 'none';
-              el.style.background = 'none';
-            });
-            img.addEventListener('load', () => {
-              img.remove();
-            });
-            document.body.appendChild(img);
-          });
-      </script>
+
         </div>
         
 <blockquote class="copyright">
