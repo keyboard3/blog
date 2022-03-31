@@ -6,7 +6,7 @@
   <link href="/blog/atom.xml" rel="self"/>
   
   <link href="https://keyboard3.github.io/"/>
-  <updated>2022-03-31T13:52:13.089Z</updated>
+  <updated>2022-03-31T14:32:42.688Z</updated>
   <id>https://keyboard3.github.io/</id>
   
   <author>
@@ -17,11 +17,11 @@
   <generator uri="https://hexo.io/">Hexo</generator>
   
   <entry>
-    <title>如何加速或减速一个视频</title>
-    <link href="https://keyboard3.github.io/how-to-speed-a-video/"/>
-    <id>https://keyboard3.github.io/how-to-speed-a-video/</id>
-    <published>2022-03-31T13:27:00.000Z</published>
-    <updated>2022-03-31T13:52:13.089Z</updated>
+    <title>Cannot Find Module &#39;XXX.scss&#39; or Its Corresponding Type Declarations</title>
+    <link href="https://keyboard3.github.io/cannot-find-module-scss/"/>
+    <id>https://keyboard3.github.io/cannot-find-module-scss/</id>
+    <published>2022-03-31T14:23:00.000Z</published>
+    <updated>2022-03-31T14:32:42.688Z</updated>
     
     <summary type="html">
     
@@ -29,8 +29,8 @@
       
         
         
-          &lt;p&gt;&lt;a href=&quot;http://trac.ffmpeg.org/wiki/How%20to%20speed%20up%20/%20slow%20down%20a%20video&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;原文&lt;/a&gt;&lt;/p&gt;
-&lt;h1
+          &lt;p&gt;&lt;a href=&quot;https://linuxize.com/post/linux-nohup-command/&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;原文&lt;/a&gt;&lt;/p&gt;
+&lt;h2 id=&quot;问题&quot;&gt;&lt;a href=&quot;#问题&quot;
         
       
     
@@ -40,7 +40,9 @@
     
       <category term="翻译" scheme="https://keyboard3.github.io/tags/%E7%BF%BB%E8%AF%91/"/>
     
-      <category term="FFmpeg" scheme="https://keyboard3.github.io/tags/FFmpeg/"/>
+      <category term="Linux" scheme="https://keyboard3.github.io/tags/Linux/"/>
+    
+      <category term="terminal" scheme="https://keyboard3.github.io/tags/terminal/"/>
     
   </entry>
   
@@ -71,6 +73,34 @@
       <category term="Linux" scheme="https://keyboard3.github.io/tags/Linux/"/>
     
       <category term="terminal" scheme="https://keyboard3.github.io/tags/terminal/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>如何加速或减速一个视频</title>
+    <link href="https://keyboard3.github.io/how-to-speed-a-video/"/>
+    <id>https://keyboard3.github.io/how-to-speed-a-video/</id>
+    <published>2022-03-31T13:27:00.000Z</published>
+    <updated>2022-03-31T13:52:13.089Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;p&gt;&lt;a href=&quot;http://trac.ffmpeg.org/wiki/How%20to%20speed%20up%20/%20slow%20down%20a%20video&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;原文&lt;/a&gt;&lt;/p&gt;
+&lt;h1
+        
+      
+    
+    </summary>
+    
+    
+    
+      <category term="翻译" scheme="https://keyboard3.github.io/tags/%E7%BF%BB%E8%AF%91/"/>
+    
+      <category term="FFmpeg" scheme="https://keyboard3.github.io/tags/FFmpeg/"/>
     
   </entry>
   
@@ -585,40 +615,6 @@
       <category term="进行中" scheme="https://keyboard3.github.io/tags/%E8%BF%9B%E8%A1%8C%E4%B8%AD/"/>
     
       <category term="git" scheme="https://keyboard3.github.io/tags/git/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>react hooks</title>
-    <link href="https://keyboard3.github.io/react-hooks/"/>
-    <id>https://keyboard3.github.io/react-hooks/</id>
-    <published>2020-04-08T17:12:43.000Z</published>
-    <updated>2022-03-21T01:16:32.335Z</updated>
-    
-    <summary type="html">
-    
-      
-      
-        
-        
-          &lt;blockquote&gt;
-&lt;p&gt;Hooks 是 React 16.8 新加的。它可以不写 Class 也能用到 State 以及 React 的其他特性&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;h2 id=&quot;介绍&quot;&gt;&lt;a href=&quot;#介绍&quot; class=&quot;headerlink&quot;
-        
-      
-    
-    </summary>
-    
-    
-    
-      <category term="翻译" scheme="https://keyboard3.github.io/tags/%E7%BF%BB%E8%AF%91/"/>
-    
-      <category term="进行中" scheme="https://keyboard3.github.io/tags/%E8%BF%9B%E8%A1%8C%E4%B8%AD/"/>
-    
-      <category term="react" scheme="https://keyboard3.github.io/tags/react/"/>
-    
-      <category term="docs" scheme="https://keyboard3.github.io/tags/docs/"/>
     
   </entry>
   
