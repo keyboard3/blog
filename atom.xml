@@ -45,6 +45,36 @@
   </entry>
   
   <entry>
+    <title>Linux Nohup 命令</title>
+    <link href="https://keyboard3.github.io/linux-nohup-command/"/>
+    <id>https://keyboard3.github.io/linux-nohup-command/</id>
+    <published>2022-03-31T13:27:00.000Z</published>
+    <updated>2022-03-31T14:17:04.906Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;p&gt;&lt;a href=&quot;https://linuxize.com/post/linux-nohup-command/&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;原文&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;nohup 命令执行另一个指定为其参数的程序并忽略所有
+        
+      
+    
+    </summary>
+    
+    
+    
+      <category term="翻译" scheme="https://keyboard3.github.io/tags/%E7%BF%BB%E8%AF%91/"/>
+    
+      <category term="Linux" scheme="https://keyboard3.github.io/tags/Linux/"/>
+    
+      <category term="terminal" scheme="https://keyboard3.github.io/tags/terminal/"/>
+    
+  </entry>
+  
+  <entry>
     <title>PayPal Payments Pro [2.4]</title>
     <link href="https://keyboard3.github.io/paypal-payments-pro/"/>
     <id>https://keyboard3.github.io/paypal-payments-pro/</id>
@@ -575,38 +605,6 @@
 &lt;p&gt;Hooks 是 React 16.8 新加的。它可以不写 Class 也能用到 State 以及 React 的其他特性&lt;/p&gt;
 &lt;/blockquote&gt;
 &lt;h2 id=&quot;介绍&quot;&gt;&lt;a href=&quot;#介绍&quot; class=&quot;headerlink&quot;
-        
-      
-    
-    </summary>
-    
-    
-    
-      <category term="翻译" scheme="https://keyboard3.github.io/tags/%E7%BF%BB%E8%AF%91/"/>
-    
-      <category term="进行中" scheme="https://keyboard3.github.io/tags/%E8%BF%9B%E8%A1%8C%E4%B8%AD/"/>
-    
-      <category term="react" scheme="https://keyboard3.github.io/tags/react/"/>
-    
-      <category term="docs" scheme="https://keyboard3.github.io/tags/docs/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>react advance</title>
-    <link href="https://keyboard3.github.io/react-advance/"/>
-    <id>https://keyboard3.github.io/react-advance/</id>
-    <published>2020-04-08T17:12:36.000Z</published>
-    <updated>2022-03-21T01:16:32.334Z</updated>
-    
-    <summary type="html">
-    
-      
-      
-        
-        
-          &lt;p&gt;&lt;a href=&quot;https://reactjs.org/docs/accessibility.html&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;原文&lt;/a&gt;&lt;/p&gt;
-&lt;h2 id=&quot;高级指南&quot;&gt;&lt;a href=&quot;#高级指南&quot;
         
       
     
