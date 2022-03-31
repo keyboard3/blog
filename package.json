@@ -3,12 +3,12 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "build": "hexo generate",
+    "theme": "cat ./_config.theme.yml > ./themes/purer/_config.yml ",
+    "build": "npm run theme && hexo generate",
     "clean": "hexo clean",
-    "deploy": "hexo deploy",
-    "server": "hexo server",
-    "local": "hexo clean && hexo g",
-    "buildDeploy": "hexo clean && hexo g && hexo deploy"
+    "deploy": "npm run theme && hexo deploy",
+    "server": "npm run theme && hexo server",
+    "buildDeploy": "npm run theme && hexo clean && hexo generate && hexo deploy"
   },
   "hexo": {
     "version": "4.2.0"
@@ -31,12 +31,9 @@
     "hexo-renderer-marked": "^2.0.0",
     "hexo-renderer-stylus": "^1.1.0",
     "hexo-server": "^1.0.0",
-    "hexo-wordcount": "^6.0.1",
-    "live2d-widget-model-shizuku": "^1.0.5",
-    "live2d-widget-model-tororo": "^1.0.5"
+    "hexo-wordcount": "^6.0.1"
   },
   "main": "index.js",
-  "devDependencies": {},
   "author": "keyboard3 <keyboard3@icloud.com>",
   "license": "ISC",
   "description": "",
