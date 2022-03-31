@@ -7,7 +7,7 @@ mathjax: true
 date: 2020-03-30 10:47:26
 password:
 summary:
-tags: [next.js, docs, 翻译, 完结]
+tags: [next.js, docs, 翻译]
 categories:
 ---
 

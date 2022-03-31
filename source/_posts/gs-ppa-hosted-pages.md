@@ -1,5 +1,5 @@
 ---
-title: 高级 PayPal 付款 托管页面入门
+title: PayPal Payments Advance
 top: false
 cover: false
 toc: true
@@ -7,7 +7,7 @@ mathjax: true
 date: 2022-03-29 15:49:03
 password:
 summary:
-tags: [paypal, 翻译]
+tags: [PayPal, 翻译]
 categories:
 ---
 

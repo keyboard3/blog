@@ -7,7 +7,7 @@ mathjax: true
 date: 2020-03-15 14:06:01
 password:
 summary:
-tags: [react-native, api, 翻译, 完结]
+tags: [react-native, api, 翻译]
 categories:
 ---
 

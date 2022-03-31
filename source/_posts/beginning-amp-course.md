@@ -7,7 +7,7 @@ mathjax: true
 date: 2020-06-06 19:51:23
 password:
 summary:
-tags: [amp, 教程, 翻译, 完结]
+tags: [amp, 翻译]
 categories:
 ---
 

@@ -1,5 +1,5 @@
 ---
-title: web api
+title: Page 可见性 API
 top: false
 cover: false
 toc: true
@@ -7,11 +7,9 @@ mathjax: true
 date: 2020-04-11 16:49:15
 password:
 summary:
-tags: [mdn, web, api, 翻译, 进行中]
+tags: [mdn, 翻译]
 categories:
 ---
-
-## Page 可见性 API
 
 [原文](https://developer.mozilla.org/en-US/docs/Web/API/Page_Visibility_API)
 
@@ -146,7 +144,3 @@ if (typeof document.addEventListener === "undefined" || hidden === undefined) {
   }
   document.addEventListener("visibilitychange", handleVisibilityChange, false);
   ```
-
-```
-
-```

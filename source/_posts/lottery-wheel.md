@@ -7,7 +7,7 @@ mathjax: true
 date: 2020-04-11 23:15:04
 password:
 summary:
-tags: [js, animate, library, 翻译, 完结]
+tags: [js, animate, library, 翻译]
 categories:
 ---
 

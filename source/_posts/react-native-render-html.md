@@ -4,7 +4,7 @@ title: "react native render html 简单解析"
 date: 2020-03-09
 Author: keyboard3
 categories:
-tags: [react-native, html, 翻译, 进行中]
+tags: [react-native, html, 翻译]
 comments: true
 ---
 
