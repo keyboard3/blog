@@ -6,7 +6,7 @@
   <link href="/blog/atom.xml" rel="self"/>
   
   <link href="https://keyboard3.github.io/"/>
-  <updated>2022-03-31T14:32:42.688Z</updated>
+  <updated>2022-03-31T14:37:27.356Z</updated>
   <id>https://keyboard3.github.io/</id>
   
   <author>
@@ -21,7 +21,7 @@
     <link href="https://keyboard3.github.io/cannot-find-module-scss/"/>
     <id>https://keyboard3.github.io/cannot-find-module-scss/</id>
     <published>2022-03-31T14:23:00.000Z</published>
-    <updated>2022-03-31T14:32:42.688Z</updated>
+    <updated>2022-03-31T14:37:27.356Z</updated>
     
     <summary type="html">
     
@@ -40,9 +40,37 @@
     
       <category term="翻译" scheme="https://keyboard3.github.io/tags/%E7%BF%BB%E8%AF%91/"/>
     
-      <category term="Linux" scheme="https://keyboard3.github.io/tags/Linux/"/>
+      <category term="scss" scheme="https://keyboard3.github.io/tags/scss/"/>
     
-      <category term="terminal" scheme="https://keyboard3.github.io/tags/terminal/"/>
+      <category term="ts" scheme="https://keyboard3.github.io/tags/ts/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>如何加速或减速一个视频</title>
+    <link href="https://keyboard3.github.io/how-to-speed-a-video/"/>
+    <id>https://keyboard3.github.io/how-to-speed-a-video/</id>
+    <published>2022-03-31T13:27:00.000Z</published>
+    <updated>2022-03-31T13:52:13.089Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;p&gt;&lt;a href=&quot;http://trac.ffmpeg.org/wiki/How%20to%20speed%20up%20/%20slow%20down%20a%20video&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;原文&lt;/a&gt;&lt;/p&gt;
+&lt;h1
+        
+      
+    
+    </summary>
+    
+    
+    
+      <category term="翻译" scheme="https://keyboard3.github.io/tags/%E7%BF%BB%E8%AF%91/"/>
+    
+      <category term="FFmpeg" scheme="https://keyboard3.github.io/tags/FFmpeg/"/>
     
   </entry>
   
@@ -73,34 +101,6 @@
       <category term="Linux" scheme="https://keyboard3.github.io/tags/Linux/"/>
     
       <category term="terminal" scheme="https://keyboard3.github.io/tags/terminal/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>如何加速或减速一个视频</title>
-    <link href="https://keyboard3.github.io/how-to-speed-a-video/"/>
-    <id>https://keyboard3.github.io/how-to-speed-a-video/</id>
-    <published>2022-03-31T13:27:00.000Z</published>
-    <updated>2022-03-31T13:52:13.089Z</updated>
-    
-    <summary type="html">
-    
-      
-      
-        
-        
-          &lt;p&gt;&lt;a href=&quot;http://trac.ffmpeg.org/wiki/How%20to%20speed%20up%20/%20slow%20down%20a%20video&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;原文&lt;/a&gt;&lt;/p&gt;
-&lt;h1
-        
-      
-    
-    </summary>
-    
-    
-    
-      <category term="翻译" scheme="https://keyboard3.github.io/tags/%E7%BF%BB%E8%AF%91/"/>
-    
-      <category term="FFmpeg" scheme="https://keyboard3.github.io/tags/FFmpeg/"/>
     
   </entry>
   
