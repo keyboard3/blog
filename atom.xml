@@ -6,7 +6,7 @@
   <link href="/blog/atom.xml" rel="self"/>
   
   <link href="https://keyboard3.github.io/"/>
-  <updated>2022-04-01T14:10:25.493Z</updated>
+  <updated>2022-04-01T14:22:09.563Z</updated>
   <id>https://keyboard3.github.io/</id>
   
   <author>
@@ -21,7 +21,7 @@
     <link href="https://keyboard3.github.io/paypal-pro-integration-guide-7/"/>
     <id>https://keyboard3.github.io/paypal-pro-integration-guide-7/</id>
     <published>2022-04-01T13:25:36.000Z</published>
-    <updated>2022-04-01T14:10:25.493Z</updated>
+    <updated>2022-04-01T14:22:09.563Z</updated>
     
     <summary type="html">
     
@@ -29,8 +29,36 @@
       
         
         
-          &lt;h1 id=&quot;订单处理&quot;&gt;&lt;a href=&quot;#订单处理&quot; class=&quot;headerlink&quot; title=&quot;订单处理&quot;&gt;&lt;/a&gt;订单处理&lt;/h1&gt;&lt;p&gt;本章将带领您体验终端订单处理的经验。它包括在执行订单之前验证订单状态和真&lt;br&gt;实性的信息。&lt;/p&gt;
-&lt;h2
+          &lt;p&gt;&lt;a href=&quot;https://www.paypalobjects.com/webstatic/en_AU/developer/docs/pdf/hostedsolution_au.pdf#page=61&amp;zoom=100,84,126&quot; target=&quot;_blank&quot;
+        
+      
+    
+    </summary>
+    
+    
+    
+      <category term="翻译" scheme="https://keyboard3.github.io/tags/%E7%BF%BB%E8%AF%91/"/>
+    
+      <category term="PayPal" scheme="https://keyboard3.github.io/tags/PayPal/"/>
+    
+      <category term="Guide" scheme="https://keyboard3.github.io/tags/Guide/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>PayPal 网站支付专业版托管解决方案集成指南 (6)</title>
+    <link href="https://keyboard3.github.io/paypal-pro-integration-guide-6/"/>
+    <id>https://keyboard3.github.io/paypal-pro-integration-guide-6/</id>
+    <published>2022-04-01T13:20:36.000Z</published>
+    <updated>2022-04-01T14:49:00.814Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;h1 id=&quot;在沙盒中测试您的集成&quot;&gt;&lt;a href=&quot;#在沙盒中测试您的集成&quot; class=&quot;headerlink&quot; title=&quot;在沙盒中测试您的集成&quot;&gt;&lt;/a&gt;在沙盒中测试您的集成&lt;/h1&gt;&lt;p&gt;PayPal 沙盒是一个独立的环境，你可以在其中原型和测试 PayPal
         
       
     
@@ -547,35 +575,6 @@
         
         
           &lt;h1 id=&quot;ScrollView&quot;&gt;&lt;a href=&quot;#ScrollView&quot; class=&quot;headerlink&quot; title=&quot;ScrollView&quot;&gt;&lt;/a&gt;&lt;a href=&quot;https://reactnative.dev/docs/scrollview&quot;
-        
-      
-    
-    </summary>
-    
-    
-    
-      <category term="react-native" scheme="https://keyboard3.github.io/tags/react-native/"/>
-    
-      <category term="api" scheme="https://keyboard3.github.io/tags/api/"/>
-    
-      <category term="翻译" scheme="https://keyboard3.github.io/tags/%E7%BF%BB%E8%AF%91/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>VirtualizedList</title>
-    <link href="https://keyboard3.github.io/virtualizedlist/"/>
-    <id>https://keyboard3.github.io/virtualizedlist/</id>
-    <published>2020-03-15T03:01:06.000Z</published>
-    <updated>2022-03-31T15:14:13.113Z</updated>
-    
-    <summary type="html">
-    
-      
-      
-        
-        
-          &lt;h1 id=&quot;VirtualizedList&quot;&gt;&lt;a href=&quot;#VirtualizedList&quot; class=&quot;headerlink&quot; title=&quot;VirtualizedList&quot;&gt;&lt;/a&gt;&lt;a
         
       
     
