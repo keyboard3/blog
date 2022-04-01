@@ -6,7 +6,7 @@
   <link href="/blog/atom.xml" rel="self"/>
   
   <link href="https://keyboard3.github.io/"/>
-  <updated>2022-03-31T14:40:11.156Z</updated>
+  <updated>2022-04-01T10:38:12.486Z</updated>
   <id>https://keyboard3.github.io/</id>
   
   <author>
@@ -15,6 +15,35 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>PayPal 网站支付专业版托管解决方案集成指南 (2)</title>
+    <link href="https://keyboard3.github.io/paypal-pro-integration-guide-2/"/>
+    <id>https://keyboard3.github.io/paypal-pro-integration-guide-2/</id>
+    <published>2022-04-01T06:21:36.000Z</published>
+    <updated>2022-04-01T10:38:12.486Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;p&gt;&lt;a href=&quot;https://www.paypalobjects.com/webstatic/en_AU/developer/docs/pdf/hostedsolution_au.pdf#page=22&amp;zoom=100,84,126&quot; target=&quot;_blank&quot;
+        
+      
+    
+    </summary>
+    
+    
+    
+      <category term="翻译" scheme="https://keyboard3.github.io/tags/%E7%BF%BB%E8%AF%91/"/>
+    
+      <category term="PayPal" scheme="https://keyboard3.github.io/tags/PayPal/"/>
+    
+      <category term="Guide" scheme="https://keyboard3.github.io/tags/Guide/"/>
+    
+  </entry>
   
   <entry>
     <title>Cannot Find Module &#39;XXX.scss&#39; or Its Corresponding Type Declarations</title>
@@ -554,35 +583,6 @@
     </summary>
     
     
-    
-  </entry>
-  
-  <entry>
-    <title>react native render html 简单解析</title>
-    <link href="https://keyboard3.github.io/react-native-render-html/"/>
-    <id>https://keyboard3.github.io/react-native-render-html/</id>
-    <published>2020-03-08T16:00:00.000Z</published>
-    <updated>2022-03-31T15:22:40.517Z</updated>
-    
-    <summary type="html">
-    
-      
-      
-        
-        
-          &lt;h1 id=&quot;react-native-render-html&quot;&gt;&lt;a href=&quot;#react-native-render-html&quot; class=&quot;headerlink&quot; title=&quot;react-native-render-html&quot;&gt;&lt;/a&gt;&lt;a
-        
-      
-    
-    </summary>
-    
-    
-    
-      <category term="react-native" scheme="https://keyboard3.github.io/tags/react-native/"/>
-    
-      <category term="翻译" scheme="https://keyboard3.github.io/tags/%E7%BF%BB%E8%AF%91/"/>
-    
-      <category term="html" scheme="https://keyboard3.github.io/tags/html/"/>
     
   </entry>
   
