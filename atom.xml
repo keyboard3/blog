@@ -6,7 +6,7 @@
   <link href="/blog/atom.xml" rel="self"/>
   
   <link href="https://keyboard3.github.io/"/>
-  <updated>2022-04-01T13:13:09.384Z</updated>
+  <updated>2022-04-01T14:10:25.493Z</updated>
   <id>https://keyboard3.github.io/</id>
   
   <author>
@@ -17,11 +17,41 @@
   <generator uri="https://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>PayPal 网站支付专业版托管解决方案集成指南 (7)</title>
+    <link href="https://keyboard3.github.io/paypal-pro-integration-guide-7/"/>
+    <id>https://keyboard3.github.io/paypal-pro-integration-guide-7/</id>
+    <published>2022-04-01T13:25:36.000Z</published>
+    <updated>2022-04-01T14:10:25.493Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;h1 id=&quot;订单处理&quot;&gt;&lt;a href=&quot;#订单处理&quot; class=&quot;headerlink&quot; title=&quot;订单处理&quot;&gt;&lt;/a&gt;订单处理&lt;/h1&gt;&lt;p&gt;本章将带领您体验终端订单处理的经验。它包括在执行订单之前验证订单状态和真&lt;br&gt;实性的信息。&lt;/p&gt;
+&lt;h2
+        
+      
+    
+    </summary>
+    
+    
+    
+      <category term="翻译" scheme="https://keyboard3.github.io/tags/%E7%BF%BB%E8%AF%91/"/>
+    
+      <category term="PayPal" scheme="https://keyboard3.github.io/tags/PayPal/"/>
+    
+      <category term="Guide" scheme="https://keyboard3.github.io/tags/Guide/"/>
+    
+  </entry>
+  
+  <entry>
     <title>PayPal 网站支付专业版托管解决方案集成指南 (4)</title>
     <link href="https://keyboard3.github.io/paypal-pro-integration-guide-4/"/>
     <id>https://keyboard3.github.io/paypal-pro-integration-guide-4/</id>
     <published>2022-04-01T13:11:36.000Z</published>
-    <updated>2022-04-01T13:13:09.384Z</updated>
+    <updated>2022-04-01T13:20:18.735Z</updated>
     
     <summary type="html">
     
@@ -546,35 +576,6 @@
         
         
           &lt;h1 id=&quot;VirtualizedList&quot;&gt;&lt;a href=&quot;#VirtualizedList&quot; class=&quot;headerlink&quot; title=&quot;VirtualizedList&quot;&gt;&lt;/a&gt;&lt;a
-        
-      
-    
-    </summary>
-    
-    
-    
-      <category term="react-native" scheme="https://keyboard3.github.io/tags/react-native/"/>
-    
-      <category term="api" scheme="https://keyboard3.github.io/tags/api/"/>
-    
-      <category term="翻译" scheme="https://keyboard3.github.io/tags/%E7%BF%BB%E8%AF%91/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>FlatList</title>
-    <link href="https://keyboard3.github.io/flatlist/"/>
-    <id>https://keyboard3.github.io/flatlist/</id>
-    <published>2020-03-14T10:05:38.000Z</published>
-    <updated>2022-03-31T15:14:13.113Z</updated>
-    
-    <summary type="html">
-    
-      
-      
-        
-        
-          &lt;h1 id=&quot;FlatList&quot;&gt;&lt;a href=&quot;#FlatList&quot; class=&quot;headerlink&quot; title=&quot;FlatList&quot;&gt;&lt;/a&gt;&lt;a href=&quot;https://reactnative.dev/docs/flatlist&quot;
         
       
     

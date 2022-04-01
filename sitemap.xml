@@ -2,9 +2,16 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://keyboard3.github.io/paypal-pro-integration-guide-7/</loc>
+    
+    <lastmod>2022-04-01T14:10:25.493Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://keyboard3.github.io/paypal-pro-integration-guide-4/</loc>
     
-    <lastmod>2022-04-01T13:13:09.384Z</lastmod>
+    <lastmod>2022-04-01T13:20:18.735Z</lastmod>
     
   </url>
   
@@ -58,14 +65,14 @@
   </url>
   
   <url>
-    <loc>https://keyboard3.github.io/scrollview/</loc>
+    <loc>https://keyboard3.github.io/lottery-wheel/</loc>
     
     <lastmod>2022-03-31T15:14:13.114Z</lastmod>
     
   </url>
   
   <url>
-    <loc>https://keyboard3.github.io/lottery-wheel/</loc>
+    <loc>https://keyboard3.github.io/scrollview/</loc>
     
     <lastmod>2022-03-31T15:14:13.114Z</lastmod>
     
@@ -79,14 +86,14 @@
   </url>
   
   <url>
-    <loc>https://keyboard3.github.io/virtualizedlist/</loc>
+    <loc>https://keyboard3.github.io/flatlist/</loc>
     
     <lastmod>2022-03-31T15:14:13.113Z</lastmod>
     
   </url>
   
   <url>
-    <loc>https://keyboard3.github.io/flatlist/</loc>
+    <loc>https://keyboard3.github.io/virtualizedlist/</loc>
     
     <lastmod>2022-03-31T15:14:13.113Z</lastmod>
     
@@ -142,13 +149,6 @@
   </url>
   
   <url>
-    <loc>https://keyboard3.github.io/about/index.html</loc>
-    
-    <lastmod>2022-03-21T01:16:32.337Z</lastmod>
-    
-  </url>
-  
-  <url>
     <loc>https://keyboard3.github.io/categories/index.html</loc>
     
     <lastmod>2022-03-21T01:16:32.337Z</lastmod>
@@ -156,7 +156,7 @@
   </url>
   
   <url>
-    <loc>https://keyboard3.github.io/friends/index.html</loc>
+    <loc>https://keyboard3.github.io/about/index.html</loc>
     
     <lastmod>2022-03-21T01:16:32.337Z</lastmod>
     
@@ -164,6 +164,13 @@
   
   <url>
     <loc>https://keyboard3.github.io/contact/index.html</loc>
+    
+    <lastmod>2022-03-21T01:16:32.337Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://keyboard3.github.io/friends/index.html</loc>
     
     <lastmod>2022-03-21T01:16:32.337Z</lastmod>
     

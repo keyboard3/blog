@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html  lang="zh-CN" >
+    <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, minimum-scale=1, initial-scale=1, maximum-scale=5, viewport-fit=cover">
+    <title>PayPal 网站支付专业版托管解决方案集成指南 (7) | keyboard3的博客</title>
+    <meta name="description" content="订单处理本章将带领您体验终端订单处理的经验。它包括在执行订单之前验证订单状态和真实性的信息。 验证交易状态和真实性当买方成功完成交易时，他们将被重定向到 PayPal 确认页面或者您在返回变量中指定的网站，或者在 Profile 部分的 Settings 页面(如第 15 页“ Simple Hosted Solution Integration”中概述的)。当浏览器被重定向到你指定的网站时，一个">
+<meta property="og:type" content="article">
+<meta property="og:title" content="PayPal 网站支付专业版托管解决方案集成指南 (7)">
+<meta property="og:url" content="https://keyboard3.github.io/paypal-pro-integration-guide-7/index.html">
+<meta property="og:site_name" content="keyboard3的博客">
+<meta property="og:description" content="订单处理本章将带领您体验终端订单处理的经验。它包括在执行订单之前验证订单状态和真实性的信息。 验证交易状态和真实性当买方成功完成交易时，他们将被重定向到 PayPal 确认页面或者您在返回变量中指定的网站，或者在 Profile 部分的 Settings 页面(如第 15 页“ Simple Hosted Solution Integration”中概述的)。当浏览器被重定向到你指定的网站时，一个">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2022-04-01T13:25:36.000Z">
+<meta property="article:modified_time" content="2022-04-01T14:10:25.493Z">
+<meta property="article:author" content="keyboard3">
+<meta property="article:tag" content="翻译">
+<meta property="article:tag" content="PayPal">
+<meta property="article:tag" content="Guide">
+<meta name="twitter:card" content="summary">
+
+    <link rel="alternate" type="application/atom+xml" href="/blog/atom.xml">
+    <link rel="icon" href="/images/favicon.ico" type="image/x-icon">
+
+    
+<link rel="stylesheet" href="/blog/css/common.min.css">
+
+
+
+    
+        <link href="//cdn.jsdelivr.net/npm/katex@0.9.0/dist/katex.min.css" rel="stylesheet">
+    
+    
+    
+    
+        <link href="//cdn.jsdelivr.net/npm/lightgallery.js@1.1.3/dist/css/lightgallery.min.css" rel="stylesheet">
+    
+    
+    
+<link rel="stylesheet" href="/blog/css/iconfont.min.css">
+
+    
+<meta name="generator" content="Hexo 4.2.0"><link rel="stylesheet" href="/blog/css/prism-tomorrow.css" type="text/css">
+<link rel="stylesheet" href="/blog/css/prism-line-numbers.css" type="text/css"></head>
+
+    <body>
+        <header class="header header-fixture">
+    <div class="profile-search-wrap flex sm:block">
+        
+        
+        <div class="profile sm:text-center md:px-1 lg:px-3 sm:pb-4 sm:pt-6">
+            <a id="avatar" role="link" href="https://github.com/keyboard3" class="inline-block lg:w-16 lg:h-16 w-8 h-8 m-2" target="_blank" rel="noopener" rel="noreferrer" >
+                <img src="https://www.gravatar.com/avatar/5a65c2880a8f2804b5af3dc39819bdf1?s=128" class="rounded-full" alt="avatar">
+            </a>
+            <h2 id="name" class="hidden lg:block">keyboard3</h2>
+            <h3 id="title" class="hidden lg:block">单身男青年</h3>
+            
+            <small id="location" class="hidden lg:block">
+                <i class="iconfont icon-map-icon"></i>
+                home
+            </small>
+            
+        </div>
+        
+        
+<div class="search flex-1 flex lg:inline-block sm:hidden lg:px-4 lg:mt-2 lg:mb-4 lg:w-full">
+    <form id="search-form" class="my-auto flex-1 lg:border lg:border-solid lg:border-gray-200">
+        <div class="input-group table bg-gray-100 lg:bg-white w-full">
+            <input id="search-input" type="text" placeholder="搜索" class="inline-block w-full bg-gray-100 lg:bg-white">
+            <span class="table-cell">
+                <button name="search tigger button" disabled>
+                    <i class="iconfont icon-search m-2"></i>
+                </button>
+            </span>
+        </div>
+    </form>
+        
+<div id="content-json" data-placeholder="搜索" class="invisible hidden">/content.json</div>
+<script id="search-teamplate" type="text/html" data-path="/blog/content.json">
+    <div>
+        <div class="search-header bg-gray-400">
+            <input id="actual-search-input" model="keyword" ref="input" class="inline-block w-full h-10 px-2 py-1" placeholder="搜索" type="text">
+        </div>
+        <div class="search-result bg-gray-200">
+            {{#each searchPosts}}
+            <a href="/{{ path }}" class="result-item block px-2 pb-3 mb-1 pt-1 hover:bg-indigo-100">
+                <i class="iconfont icon-file"></i>
+                <h1 class="result-title inline font-medium text-lg">{{ title }}</h1>
+                <p class="result-content text-gray-600 text-sm">{{{ text }}}</p>
+            </a>
+            {{/each}}
+        </div>
+    </div>
+</script>
+
+</div>
+
+
+        <button name="menu toogle button" id="menu-toggle-btn" class="block sm:hidden p-3" role="button" aria-expanded="false">
+            <i class="iconfont icon-hamburger"></i>
+        </button>
+    </div>
+    <nav id="menu-nav" class="hidden sm:flex flex-col">
+        
+        
+            <div class="menu-item menu-home" role="menuitem">
+                <a href="/blog/.">
+                    <i class="iconfont icon-home" aria-hidden="true"></i>
+                    <span class="menu-title">首页</span>
+                </a>
+            </div>
+        
+        
+            <div class="menu-item menu-archives" role="menuitem">
+                <a href="/blog/archives">
+                    <i class="iconfont icon-archive" aria-hidden="true"></i>
+                    <span class="menu-title">归档</span>
+                </a>
+            </div>
+        
+        
+            <div class="menu-item menu-repository" role="menuitem">
+                <a href="/blog/repository">
+                    <i class="iconfont icon-project" aria-hidden="true"></i>
+                    <span class="menu-title">项目</span>
+                </a>
+            </div>
+        
+        
+            <div class="menu-item menu-about" role="menuitem">
+                <a href="/blog/about">
+                    <i class="iconfont icon-cup" aria-hidden="true"></i>
+                    <span class="menu-title">关于</span>
+                </a>
+            </div>
+        
+        
+<div class="social-links flex sm:flex-col lg:hidden mt-5">
+    
+        <span class="social-item text-center">
+            <a href="https://github.com/keyboard3" target="_blank" rel="noopener">
+                <i class="iconfont social-icon icon-github"></i>
+                <span class="menu-title hidden lg:inline">menu.github</span>
+            </a>
+        </span>
+    
+        <span class="social-item text-center">
+            <a href="/blog/atom.xml">
+                <i class="iconfont social-icon icon-rss"></i>
+                <span class="menu-title hidden lg:inline">menu.rss</span>
+            </a>
+        </span>
+    
+</div>
+
+
+    </nav>
+</header>
+
+        <section class="main-section">
+            
+    <main class="flex-1 px-4 py-14 md:px-5 lg:px-8 lg:py-4 relative min-h-screen">
+    
+
+    <article class="content article article-archives article-type-list" itemscope="">
+        <header class="article-header">
+            
+    
+        <h1 class="article-title text-lg" itemprop="name">
+            PayPal 网站支付专业版托管解决方案集成指南 (7)
+        </h1>
+    
+
+
+
+            <p class="article-meta mb-3 text-xs">
+                <span class="article-date">
+    <i class="iconfont icon-calendar-check"></i>
+	<a href="/blog/paypal-pro-integration-guide-7/" class="article-date">
+	  <time datetime="2022-04-01T13:25:36.000Z" itemprop="datePublished">4月 1</time>
+	</a>
+</span>
+
+                
+
+                
+    <span class="article-tags">
+    <i class="iconfont icon-tag"></i>
+    <a class="article-tag-link" href="/blog/tags/Guide/" rel="tag">Guide</a>, <a class="article-tag-link" href="/blog/tags/PayPal/" rel="tag">PayPal</a>, <a class="article-tag-link" href="/blog/tags/%E7%BF%BB%E8%AF%91/" rel="tag">翻译</a>
+  </span>
+
+
+                <span class="_partial/post-comment"><i class="icon icon-comment"></i>
+                    <a href="/blog/paypal-pro-integration-guide-7/#comments" class="article-comment-link">
+                        评论
+                    </a>
+                </span>
+                
+    
+        <span class="post-wordcount" itemprop="wordCount">字数统计: 635(字)</span>
+    
+    
+        <span class="post-readcount" itemprop="timeRequired">阅读时长: 2(分)</span>
+    
+
+
+            </p>
+        </header>
+        <div class="marked-body article-body">
+            <h1 id="订单处理"><a href="#订单处理" class="headerlink" title="订单处理"></a>订单处理</h1><p>本章将带领您体验终端订单处理的经验。它包括在执行订单之前验证订单状态和真<br>实性的信息。</p>
+<h2 id="验证交易状态和真实性"><a href="#验证交易状态和真实性" class="headerlink" title="验证交易状态和真实性"></a>验证交易状态和真实性</h2><p>当买方成功完成交易时，他们将被重定向到 PayPal 确认页面或者您在返回变量中指定的网站，或者在 Profile 部分的 Settings 页面(如第 15 页“ Simple Hosted Solution Integration”中概述的)。当浏览器被重定向到你指定的网站时，一个交易 ID 被附加到它上面。</p>
+<p>注意: 为了确保交易 ID 被追加到返回的 URL，登录到您的 PayPal 商户帐户并选择 Profile。在 Profile 页面的 Website Payments Standard and Express Checkout 部分，选择 Preferences 并验证 Auto Return 是否设置为 On。<br>在同一个设置页面上，也确认 Payment Data Transfer 设置为 On。</p>
+<p>当您收到重定向(带有交易 ID 的 URL)时，您必须在将订单发送给买家之前验证订单是否在 PayPal 上成功完成。你可以通过检查 PayPal 发送给你的确认邮件或者验证交易历史来做到这一点。你也可以使用以下方法之一:</p>
+<h3 id="验证即时付款通知-IPN"><a href="#验证即时付款通知-IPN" class="headerlink" title="验证即时付款通知 (IPN)"></a>验证即时付款通知 (IPN)</h3><p>IPN 允许你通过异步、服务器到服务器的通信从 PayPal 接收有关交易支付和活动的消息。这允许你整合你的在线支付和你的订单执行过程。</p>
+<p>通过 IPN，您会收到以下消息：</p>
+<ul>
+<li>付款及其状态(待定、完成或拒绝)</li>
+<li>欺诈管理过滤行为</li>
+<li>定期付款活动</li>
+<li>授权，退款，纠纷，撤销和退款。</li>
+</ul>
+<p>处理完交易后，PayPal 将使用参数 notify_url 或在您的 PayPal 个人资料中向您在交易中指定的通知 URL 发送 IPN。您必须验证在 IPN 中发送的交易 ID、交易金额和其他订单特定参数（例如发票 ID）与您在订单处理系统中的信息匹配。有关更多详细信息，请参阅即时付款通知 (IPN) 集成指南。</p>
+<h3 id="执行-GetTransactionDetails-API-调用"><a href="#执行-GetTransactionDetails-API-调用" class="headerlink" title="执行 GetTransactionDetails API 调用"></a>执行 GetTransactionDetails API 调用</h3><p>使用 GetTransactionDetails API，您可以获得有关特定交易的信息。</p>
+<p>如果您集成了 PayPal api，您可以使用 web 重定向中返回的交易 ID 调用<br>GetTransactionDetails 来验证订单的真实性。</p>
+<p>有关详细信息，请参阅第 ”GetTransactionDetails API“</p>
+<h2 id="履行订单"><a href="#履行订单" class="headerlink" title="履行订单"></a>履行订单</h2><p>在您验证了付款金额和状态的真实性之后，您可以通过将货物运送给买方来履行订单。</p>
+
+        </div>
+        
+<blockquote class="copyright">
+    <p><strong>本文链接 : </strong><a class="permalink" href="https://keyboard3.github.io/paypal-pro-integration-guide-7/">https://keyboard3.github.io/paypal-pro-integration-guide-7/</a></p>
+    <p><strong>This article is available under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank" rel="noopener noreferrer">Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0)</a> License</strong></p>
+</blockquote>
+
+
+    </article>
+    
+    <section id="comments">
+        
+            <div id="vcomments"></div>
+        
+    </section>
+
+
+    
+
+</main>
+
+
+<aside style="" id="sidebar" class="aside aside-fixture">
+    <div class="toc-sidebar">
+        <nav id="toc" class="article-toc">
+            <h3 class="toc-title">文章目录</h3>
+            <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#订单处理"><span class="toc-number">1.</span> <span class="toc-text">订单处理</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#验证交易状态和真实性"><span class="toc-number">1.1.</span> <span class="toc-text">验证交易状态和真实性</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#验证即时付款通知-IPN"><span class="toc-number">1.1.1.</span> <span class="toc-text">验证即时付款通知 (IPN)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#执行-GetTransactionDetails-API-调用"><span class="toc-number">1.1.2.</span> <span class="toc-text">执行 GetTransactionDetails API 调用</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#履行订单"><span class="toc-number">1.2.</span> <span class="toc-text">履行订单</span></a></li></ol></li></ol>
+        </nav>
+    </div>
+</aside>
+
+
+
+
+
+        </section>
+        <footer class="hidden lg:block fixed bottom-0 left-0 sm:w-1/12 lg:w-1/6 bg-gray-100 z-40">
+    
+    <div class="footer-social-links">
+        
+            <a href="https://github.com/keyboard3" target="_blank" rel="noopener">
+                <i class="iconfont icon-github"></i>
+            </a>
+        
+            <a href="/blog/atom.xml">
+                <i class="iconfont icon-rss"></i>
+            </a>
+        
+    </div>
+    
+    
+</footer>
+
+        <div id="mask" class="hidden mask fixed inset-0 bg-gray-900 opacity-75 z-40"></div>
+        <div id="search-view-container" class="hidden shadow-xl"></div>
+        
+<script src="/blog/js/dom-event.min.js"></script>
+
+
+
+<script src="/blog/js/local-search.min.js"></script>
+
+
+    <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+<script src="//cdn.jsdelivr.net/npm/valine"></script>
+<script type="text/javascript">
+var GUEST = ['nick', 'mail', 'link'];
+var meta = '';
+meta = meta.split(',').filter(function(item) {
+  return GUEST.indexOf(item) > -1;
+});
+new Valine({
+  el: '#vcomments',
+  verify: 'false',
+  notify: 'false',
+  appId: '',
+  appKey: '',
+  placeholder: 'just go go',
+  avatar: 'mm',
+  meta: meta,
+  pageSize: '10' || 10,
+  visitor: 'true',
+  lang: ''
+});
+</script>
+
+
+
+    <script src="//cdn.jsdelivr.net/npm/lightgallery.js@1.1.3/dist/js/lightgallery.min.js"></script>
+    
+<script src="/blog/js/light-gallery.min.js"></script>
+
+
+
+
+
+
+    </body>
+</html>
