@@ -6,7 +6,7 @@
   <link href="/blog/atom.xml" rel="self"/>
   
   <link href="https://keyboard3.github.io/"/>
-  <updated>2022-04-01T10:44:50.151Z</updated>
+  <updated>2022-04-01T13:13:09.384Z</updated>
   <id>https://keyboard3.github.io/</id>
   
   <author>
@@ -15,6 +15,35 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>PayPal 网站支付专业版托管解决方案集成指南 (4)</title>
+    <link href="https://keyboard3.github.io/paypal-pro-integration-guide-4/"/>
+    <id>https://keyboard3.github.io/paypal-pro-integration-guide-4/</id>
+    <published>2022-04-01T13:11:36.000Z</published>
+    <updated>2022-04-01T13:13:09.384Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;p&gt;&lt;a href=&quot;https://www.paypalobjects.com/webstatic/en_AU/developer/docs/pdf/hostedsolution_au.pdf#page=41&amp;zoom=100,84,126&quot; target=&quot;_blank&quot;
+        
+      
+    
+    </summary>
+    
+    
+    
+      <category term="翻译" scheme="https://keyboard3.github.io/tags/%E7%BF%BB%E8%AF%91/"/>
+    
+      <category term="PayPal" scheme="https://keyboard3.github.io/tags/PayPal/"/>
+    
+      <category term="Guide" scheme="https://keyboard3.github.io/tags/Guide/"/>
+    
+  </entry>
   
   <entry>
     <title>PayPal 网站支付专业版托管解决方案集成指南 (2)</title>
@@ -558,31 +587,6 @@
       <category term="api" scheme="https://keyboard3.github.io/tags/api/"/>
     
       <category term="翻译" scheme="https://keyboard3.github.io/tags/%E7%BF%BB%E8%AF%91/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>关于我</title>
-    <link href="https://keyboard3.github.io/about/"/>
-    <id>https://keyboard3.github.io/about/</id>
-    <published>2020-03-09T16:00:00.000Z</published>
-    <updated>2022-03-31T15:41:41.789Z</updated>
-    
-    <summary type="html">
-    
-      
-      
-        
-        
-          &lt;p&gt;93 | 男 | 单身&lt;/p&gt;
-&lt;p&gt;啥都搞点, 前端, 移动端, 略微了解后端和CI/CD。还喜欢研究点操作系统和编译原理。擅长 javascript, c++ 略知一二, 喜欢看它们的 HOPL 书籍&lt;/p&gt;
-&lt;p&gt;最近在学习 Unity
-        
-      
-    
-    </summary>
-    
-    
     
   </entry>
   
