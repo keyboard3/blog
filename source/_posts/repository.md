@@ -17,5 +17,6 @@ permalink: /repository/
 - [SubPlayer](https://github.com/keyboard3/SubPlayer)
 对原作者的SubPlayer的改造，使之可以在浏览器端烧录字幕
 [https://keyboard3.com/sub-player/](https://keyboard3.com/sub-player/)
+![](https://github.com/keyboard3/SubPlayer/raw/master/public/screenshot.png)
 - [DropDownMenu](https://github.com/keyboard3/DropDownMenu)
 多年前对原作者的 Android 库的灵活扩展
