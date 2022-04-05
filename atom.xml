@@ -6,7 +6,7 @@
   <link href="/blog/atom.xml" rel="self"/>
   
   <link href="https://keyboard3.github.io/"/>
-  <updated>2022-04-01T14:22:09.563Z</updated>
+  <updated>2022-04-05T13:40:24.339Z</updated>
   <id>https://keyboard3.github.io/</id>
   
   <author>
@@ -15,6 +15,68 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>如何在Mac上安装闪迪安全</title>
+    <link href="https://keyboard3.github.io/how-to-install-sandisk-security/"/>
+    <id>https://keyboard3.github.io/how-to-install-sandisk-security/</id>
+    <published>2022-04-05T06:47:26.000Z</published>
+    <updated>2022-04-05T13:40:24.339Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;p&gt;SanDisk Security 允许设置密码保护和硬件加密，以保护驱动器免受未经授权的使用或访问。&lt;/p&gt;
+&lt;p&gt;SanDisk Security for Mac 入门：&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;重要: SanDisk Security
+        
+      
+    
+    </summary>
+    
+    
+    
+      <category term="翻译" scheme="https://keyboard3.github.io/tags/%E7%BF%BB%E8%AF%91/"/>
+    
+      <category term="disk" scheme="https://keyboard3.github.io/tags/disk/"/>
+    
+      <category term="security" scheme="https://keyboard3.github.io/tags/security/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>c++ addons</title>
+    <link href="https://keyboard3.github.io/nodejs-addons/"/>
+    <id>https://keyboard3.github.io/nodejs-addons/</id>
+    <published>2022-04-05T02:47:26.000Z</published>
+    <updated>2022-04-05T14:00:47.020Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;p&gt;&lt;a href=&quot;https://nodejs.org/docs/latest-v15.x/api/addons.html&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;Nodejs v15 c++ addons&lt;/a&gt;&lt;/p&gt;
+&lt;h1
+        
+      
+    
+    </summary>
+    
+    
+    
+      <category term="翻译" scheme="https://keyboard3.github.io/tags/%E7%BF%BB%E8%AF%91/"/>
+    
+      <category term="nodejs" scheme="https://keyboard3.github.io/tags/nodejs/"/>
+    
+      <category term="c++" scheme="https://keyboard3.github.io/tags/c/"/>
+    
+  </entry>
   
   <entry>
     <title>PayPal 网站支付专业版托管解决方案集成指南 (7)</title>
@@ -163,34 +225,6 @@
   </entry>
   
   <entry>
-    <title>如何加速或减速一个视频</title>
-    <link href="https://keyboard3.github.io/how-to-speed-a-video/"/>
-    <id>https://keyboard3.github.io/how-to-speed-a-video/</id>
-    <published>2022-03-31T13:27:00.000Z</published>
-    <updated>2022-03-31T13:52:13.089Z</updated>
-    
-    <summary type="html">
-    
-      
-      
-        
-        
-          &lt;p&gt;&lt;a href=&quot;http://trac.ffmpeg.org/wiki/How%20to%20speed%20up%20/%20slow%20down%20a%20video&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;原文&lt;/a&gt;&lt;/p&gt;
-&lt;h1
-        
-      
-    
-    </summary>
-    
-    
-    
-      <category term="翻译" scheme="https://keyboard3.github.io/tags/%E7%BF%BB%E8%AF%91/"/>
-    
-      <category term="FFmpeg" scheme="https://keyboard3.github.io/tags/FFmpeg/"/>
-    
-  </entry>
-  
-  <entry>
     <title>Linux Nohup 命令</title>
     <link href="https://keyboard3.github.io/linux-nohup-command/"/>
     <id>https://keyboard3.github.io/linux-nohup-command/</id>
@@ -217,6 +251,34 @@
       <category term="Linux" scheme="https://keyboard3.github.io/tags/Linux/"/>
     
       <category term="terminal" scheme="https://keyboard3.github.io/tags/terminal/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>如何加速或减速一个视频</title>
+    <link href="https://keyboard3.github.io/how-to-speed-a-video/"/>
+    <id>https://keyboard3.github.io/how-to-speed-a-video/</id>
+    <published>2022-03-31T13:27:00.000Z</published>
+    <updated>2022-03-31T13:52:13.089Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;p&gt;&lt;a href=&quot;http://trac.ffmpeg.org/wiki/How%20to%20speed%20up%20/%20slow%20down%20a%20video&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;原文&lt;/a&gt;&lt;/p&gt;
+&lt;h1
+        
+      
+    
+    </summary>
+    
+    
+    
+      <category term="翻译" scheme="https://keyboard3.github.io/tags/%E7%BF%BB%E8%AF%91/"/>
+    
+      <category term="FFmpeg" scheme="https://keyboard3.github.io/tags/FFmpeg/"/>
     
   </entry>
   
@@ -528,65 +590,6 @@
       <category term="docs" scheme="https://keyboard3.github.io/tags/docs/"/>
     
       <category term="进行中" scheme="https://keyboard3.github.io/tags/%E8%BF%9B%E8%A1%8C%E4%B8%AD/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>next.js docs</title>
-    <link href="https://keyboard3.github.io/nextjs-docs/"/>
-    <id>https://keyboard3.github.io/nextjs-docs/</id>
-    <published>2020-03-30T02:47:26.000Z</published>
-    <updated>2022-03-31T15:14:13.113Z</updated>
-    
-    <summary type="html">
-    
-      
-      
-        
-        
-          &lt;p&gt;&lt;a href=&quot;https://nextjs.org/docs/getting-started&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;nextjs-docs&lt;/a&gt;&lt;/p&gt;
-&lt;h1 id=&quot;文档&quot;&gt;&lt;a href=&quot;#文档&quot;
-        
-      
-    
-    </summary>
-    
-    
-    
-      <category term="翻译" scheme="https://keyboard3.github.io/tags/%E7%BF%BB%E8%AF%91/"/>
-    
-      <category term="docs" scheme="https://keyboard3.github.io/tags/docs/"/>
-    
-      <category term="next.js" scheme="https://keyboard3.github.io/tags/next-js/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>ScrollView</title>
-    <link href="https://keyboard3.github.io/scrollview/"/>
-    <id>https://keyboard3.github.io/scrollview/</id>
-    <published>2020-03-15T06:06:01.000Z</published>
-    <updated>2022-03-31T15:14:13.114Z</updated>
-    
-    <summary type="html">
-    
-      
-      
-        
-        
-          &lt;h1 id=&quot;ScrollView&quot;&gt;&lt;a href=&quot;#ScrollView&quot; class=&quot;headerlink&quot; title=&quot;ScrollView&quot;&gt;&lt;/a&gt;&lt;a href=&quot;https://reactnative.dev/docs/scrollview&quot;
-        
-      
-    
-    </summary>
-    
-    
-    
-      <category term="react-native" scheme="https://keyboard3.github.io/tags/react-native/"/>
-    
-      <category term="api" scheme="https://keyboard3.github.io/tags/api/"/>
-    
-      <category term="翻译" scheme="https://keyboard3.github.io/tags/%E7%BF%BB%E8%AF%91/"/>
     
   </entry>
   
