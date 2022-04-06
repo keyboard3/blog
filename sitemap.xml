@@ -2,6 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://keyboard3.github.io/func-comp-define-func-comp/</loc>
+    
+    <lastmod>2022-04-06T02:07:22.057Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://keyboard3.github.io/nodejs-addons/</loc>
     
     <lastmod>2022-04-05T14:00:47.020Z</lastmod>
@@ -107,14 +114,14 @@
   </url>
   
   <url>
-    <loc>https://keyboard3.github.io/virtualizedlist/</loc>
+    <loc>https://keyboard3.github.io/flatlist/</loc>
     
     <lastmod>2022-03-31T15:14:13.113Z</lastmod>
     
   </url>
   
   <url>
-    <loc>https://keyboard3.github.io/flatlist/</loc>
+    <loc>https://keyboard3.github.io/virtualizedlist/</loc>
     
     <lastmod>2022-03-31T15:14:13.113Z</lastmod>
     
@@ -170,14 +177,14 @@
   </url>
   
   <url>
-    <loc>https://keyboard3.github.io/about/index.html</loc>
+    <loc>https://keyboard3.github.io/categories/index.html</loc>
     
     <lastmod>2022-03-21T01:16:32.337Z</lastmod>
     
   </url>
   
   <url>
-    <loc>https://keyboard3.github.io/categories/index.html</loc>
+    <loc>https://keyboard3.github.io/about/index.html</loc>
     
     <lastmod>2022-03-21T01:16:32.337Z</lastmod>
     

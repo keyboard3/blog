@@ -165,6 +165,27 @@
     
     
     <entry>
+      <title>如何加速或减速一个视频</title>
+      <link href="/blog/how-to-speed-a-video/"/>
+      <url>/blog/how-to-speed-a-video/</url>
+      
+        <content type="html"><![CDATA[<p><a href="http://trac.ffmpeg.org/wiki/How%20to%20speed%20up%20/%20slow%20down%20a%20video" target="_blank" rel="noopener">原文</a></p><h1 id="加速-减速视频"><a href="#加速-减速视频" class="headerlink" title="加速/减速视频"></a>加速/减速视频</h1><p>可以通过更改每个视频帧的呈现时间戳 (PTS) 来更改视频流的速度。这可以通过两种方法完成：使用 setpts 视频过滤器（需要重新编码）或通过将视频导出为原始比特流格式并在创建新时间戳时复用到容器来擦除时间戳。</p><p>请注意，在以下示例中，音频流未更改，因此理想情况下应使用 -an 禁用它。</p><h3 id="原始比特流方法"><a href="#原始比特流方法" class="headerlink" title="原始比特流方法"></a>原始比特流方法</h3><p>这种方法是无损的，除了更改时间戳之外，还可以按原样复制视频流。如果您不需要对输入视频进行其他更改，请使用此选项。</p><p>首先，将视频复制为原始比特流格式。</p><p>对于 H.264：<br><code>ffmpeg -i input.mp4 -map 0:v -c:v copy -bsf:v h264_mp4toannexb raw.h264</code><br>对于 H.265：<br><code>ffmpeg -i input.mp4 -map 0:v -c:v copy -bsf:v hevc_mp4toannexb raw.h265</code><br>然后在复用到容器时生成新的时间戳：<br><code>ffmpeg -fflags +genpts -r 30 -i raw.h264 -c:v copy output.mp4</code><br>将 -r 的值更改为所需的播放帧速率。</p><h3 id="setpts-视频过滤器"><a href="#setpts-视频过滤器" class="headerlink" title="setpts 视频过滤器"></a>setpts 视频过滤器</h3><p>要使用 setpts 过滤器将视频速度加倍，您可以使用：<br><code>ffmpeg -i input.mkv -filter:v &quot;setpts=0.5*PTS&quot; output.mkv</code><br>该过滤器通过更改每个视频帧的呈现时间戳 (PTS) 来工作。例如，如果在时间戳 1 和 2 处连续显示两个帧，并且您想加快视频速度，则这些时间戳需要分别变为 0.5 和 1。因此，我们必须将它们乘以 0.5。</p><p>请注意，此方法将丢帧以达到所需的速度。您可以通过指定比输入更高的输出帧速率来避免丢帧。例如，从 4 FPS 的输入到加速到 4 倍（16 FPS）的输入：<br><code>ffmpeg -i input.mkv -r 16 -filter:v &quot;setpts=0.25*PTS&quot; output.mkv</code><br>要减慢视频速度，您必须使用大于 1 的乘数：<br><code>ffmpeg -i input.mkv -filter:v &quot;setpts=2.0*PTS&quot; output.mkv</code></p><h4 id="平滑"><a href="#平滑" class="headerlink" title="平滑"></a>平滑</h4><p>您可以使用插值视频过滤器平滑慢/快视频。这也称为“运动插值”或“光流”。<br><code>ffmpeg -i input.mkv -filter:v &quot;minterpolate=&#39;mi_mode=mci:mc_mode=aobmc:vsbmc=1:fps=120&#39;&quot; output.mkv</code><br>其他选项包括<a href="https://github.com/slowmoVideo/slowmoVideo/" target="_blank" rel="noopener">​slowmoVideo</a> 和<a href="https://github.com/dthpham/butterflow" target="_blank" rel="noopener">​Butterflow</a>。</p><h3 id="加快-减慢音频"><a href="#加快-减慢音频" class="headerlink" title="加快/减慢音频"></a>加快/减慢音频</h3><p>您可以使用 <a href="http://ffmpeg.org/ffmpeg-all.html#atempo" target="_blank" rel="noopener">​atempo</a> 音频过滤器加快或减慢音频。将音频速度加倍：<br><code>ffmpeg -i input.mkv -filter:a &quot;atempo=2.0&quot; -vn output.mkv</code><br>atempo 过滤器仅限于使用 0.5 到 2.0 之间的值（因此它可以将其减慢到不低于原始速度的一半，并且加速不超过输入的两倍）。如果需要，您可以通过将多个 atempo 过滤器串在一起来绕过此限制。以下是音频速度的四倍：<br><code>ffmpeg -i input.mkv -filter:a &quot;atempo=2.0,atempo=2.0&quot; -vn output.mkv</code><br>使用复杂的过滤器图，您可以同时加速视频和音频：<br><code>ffmpeg -i input.mkv -filter_complex &quot;[0:v]setpts=0.5*PTS[v];[0:a]atempo=2.0[a]&quot; -map &quot;[v]&quot; -map &quot;[a]&quot; output.mkv</code><br>使用上面的原始比特流方法示例，不需要复杂的过滤器图。您可以通过以下方式同时减慢 30 fps 的视频和音频：<br><code>ffmpeg -fflags +genpts -r 15 -i raw.h264 -i input.mp4 -map 0:v -c:v copy -map 1:a -af atempo=0.5 -movflags faststart output.mp4</code></p>]]></content>
+      
+      
+      
+        <tags>
+            
+            <tag> 翻译 </tag>
+            
+            <tag> FFmpeg </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>Linux Nohup 命令</title>
       <link href="/blog/linux-nohup-command/"/>
       <url>/blog/linux-nohup-command/</url>
@@ -180,27 +201,6 @@
             <tag> Linux </tag>
             
             <tag> terminal </tag>
-            
-        </tags>
-      
-    </entry>
-    
-    
-    
-    <entry>
-      <title>如何加速或减速一个视频</title>
-      <link href="/blog/how-to-speed-a-video/"/>
-      <url>/blog/how-to-speed-a-video/</url>
-      
-        <content type="html"><![CDATA[<p><a href="http://trac.ffmpeg.org/wiki/How%20to%20speed%20up%20/%20slow%20down%20a%20video" target="_blank" rel="noopener">原文</a></p><h1 id="加速-减速视频"><a href="#加速-减速视频" class="headerlink" title="加速/减速视频"></a>加速/减速视频</h1><p>可以通过更改每个视频帧的呈现时间戳 (PTS) 来更改视频流的速度。这可以通过两种方法完成：使用 setpts 视频过滤器（需要重新编码）或通过将视频导出为原始比特流格式并在创建新时间戳时复用到容器来擦除时间戳。</p><p>请注意，在以下示例中，音频流未更改，因此理想情况下应使用 -an 禁用它。</p><h3 id="原始比特流方法"><a href="#原始比特流方法" class="headerlink" title="原始比特流方法"></a>原始比特流方法</h3><p>这种方法是无损的，除了更改时间戳之外，还可以按原样复制视频流。如果您不需要对输入视频进行其他更改，请使用此选项。</p><p>首先，将视频复制为原始比特流格式。</p><p>对于 H.264：<br><code>ffmpeg -i input.mp4 -map 0:v -c:v copy -bsf:v h264_mp4toannexb raw.h264</code><br>对于 H.265：<br><code>ffmpeg -i input.mp4 -map 0:v -c:v copy -bsf:v hevc_mp4toannexb raw.h265</code><br>然后在复用到容器时生成新的时间戳：<br><code>ffmpeg -fflags +genpts -r 30 -i raw.h264 -c:v copy output.mp4</code><br>将 -r 的值更改为所需的播放帧速率。</p><h3 id="setpts-视频过滤器"><a href="#setpts-视频过滤器" class="headerlink" title="setpts 视频过滤器"></a>setpts 视频过滤器</h3><p>要使用 setpts 过滤器将视频速度加倍，您可以使用：<br><code>ffmpeg -i input.mkv -filter:v &quot;setpts=0.5*PTS&quot; output.mkv</code><br>该过滤器通过更改每个视频帧的呈现时间戳 (PTS) 来工作。例如，如果在时间戳 1 和 2 处连续显示两个帧，并且您想加快视频速度，则这些时间戳需要分别变为 0.5 和 1。因此，我们必须将它们乘以 0.5。</p><p>请注意，此方法将丢帧以达到所需的速度。您可以通过指定比输入更高的输出帧速率来避免丢帧。例如，从 4 FPS 的输入到加速到 4 倍（16 FPS）的输入：<br><code>ffmpeg -i input.mkv -r 16 -filter:v &quot;setpts=0.25*PTS&quot; output.mkv</code><br>要减慢视频速度，您必须使用大于 1 的乘数：<br><code>ffmpeg -i input.mkv -filter:v &quot;setpts=2.0*PTS&quot; output.mkv</code></p><h4 id="平滑"><a href="#平滑" class="headerlink" title="平滑"></a>平滑</h4><p>您可以使用插值视频过滤器平滑慢/快视频。这也称为“运动插值”或“光流”。<br><code>ffmpeg -i input.mkv -filter:v &quot;minterpolate=&#39;mi_mode=mci:mc_mode=aobmc:vsbmc=1:fps=120&#39;&quot; output.mkv</code><br>其他选项包括<a href="https://github.com/slowmoVideo/slowmoVideo/" target="_blank" rel="noopener">​slowmoVideo</a> 和<a href="https://github.com/dthpham/butterflow" target="_blank" rel="noopener">​Butterflow</a>。</p><h3 id="加快-减慢音频"><a href="#加快-减慢音频" class="headerlink" title="加快/减慢音频"></a>加快/减慢音频</h3><p>您可以使用 <a href="http://ffmpeg.org/ffmpeg-all.html#atempo" target="_blank" rel="noopener">​atempo</a> 音频过滤器加快或减慢音频。将音频速度加倍：<br><code>ffmpeg -i input.mkv -filter:a &quot;atempo=2.0&quot; -vn output.mkv</code><br>atempo 过滤器仅限于使用 0.5 到 2.0 之间的值（因此它可以将其减慢到不低于原始速度的一半，并且加速不超过输入的两倍）。如果需要，您可以通过将多个 atempo 过滤器串在一起来绕过此限制。以下是音频速度的四倍：<br><code>ffmpeg -i input.mkv -filter:a &quot;atempo=2.0,atempo=2.0&quot; -vn output.mkv</code><br>使用复杂的过滤器图，您可以同时加速视频和音频：<br><code>ffmpeg -i input.mkv -filter_complex &quot;[0:v]setpts=0.5*PTS[v];[0:a]atempo=2.0[a]&quot; -map &quot;[v]&quot; -map &quot;[a]&quot; output.mkv</code><br>使用上面的原始比特流方法示例，不需要复杂的过滤器图。您可以通过以下方式同时减慢 30 fps 的视频和音频：<br><code>ffmpeg -fflags +genpts -r 15 -i raw.h264 -i input.mp4 -map 0:v -c:v copy -map 1:a -af atempo=0.5 -movflags faststart output.mp4</code></p>]]></content>
-      
-      
-      
-        <tags>
-            
-            <tag> 翻译 </tag>
-            
-            <tag> FFmpeg </tag>
             
         </tags>
       
@@ -277,6 +277,29 @@
             <tag> 翻译 </tag>
             
             <tag> Kubernetes </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>函数组件中定义函数组件弊端</title>
+      <link href="/blog/func-comp-define-func-comp/"/>
+      <url>/blog/func-comp-define-func-comp/</url>
+      
+        <content type="html"><![CDATA[<p>嵌套函数定义在执行的时候，每次生成的是个新函数对象。这个告诉我们，不要在函数组件里定义子函数组件，函数执行的时候子函数组件会被先卸载再挂载的。</p><h2 id="示例"><a href="#示例" class="headerlink" title="示例"></a>示例</h2><pre class="line-numbers language-js"><code class="language-js"><span class="token keyword">const</span> funs1<span class="token operator">=</span><span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">,</span>funs2<span class="token operator">=</span><span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">;</span><span class="token keyword">function</span> <span class="token function">funParent</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>    <span class="token function">funChil1</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>    <span class="token function">funChil2</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>    <span class="token keyword">function</span> <span class="token function">funChil1</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>      funs1<span class="token punctuation">.</span><span class="token function">push</span><span class="token punctuation">(</span>funChil1<span class="token punctuation">)</span><span class="token punctuation">;</span>    <span class="token punctuation">}</span><span class="token punctuation">}</span><span class="token keyword">function</span> <span class="token function">funChil2</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>  funs2<span class="token punctuation">.</span><span class="token function">push</span><span class="token punctuation">(</span>funChil2<span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token punctuation">}</span><span class="token function">funParent</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token function">funParent</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token string">"fun1:"</span><span class="token punctuation">,</span>funs1<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token operator">===</span>funs1<span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token string">"fun2:"</span><span class="token punctuation">,</span>funs2<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token operator">===</span>funs2<span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre><h2 id="ECMAScript-标准文档查找过程"><a href="#ECMAScript-标准文档查找过程" class="headerlink" title="ECMAScript 标准文档查找过程"></a>ECMAScript 标准文档查找过程</h2><ul><li>[Function Object [[Call]]](<a href="https://262.ecma-international.org/12.0/#sec-ecmascript-function-objects-call-thisargument-argumentslist" target="_blank" rel="noopener">https://262.ecma-international.org/12.0/#sec-ecmascript-function-objects-call-thisargument-argumentslist</a>)<ul><li><a href="https://262.ecma-international.org/12.0/#sec-prepareforordinarycall" target="_blank" rel="noopener">PrepareForOrdinaryCall</a><ul><li><a href="https://262.ecma-international.org/12.0/#sec-newfunctionenvironment" target="_blank" rel="noopener">NewFunctionEnvironment</a><ul><li><a href="https://262.ecma-international.org/12.0/#sec-function-environment-records" target="_blank" rel="noopener">Function Environment Records</a></li></ul></li></ul></li><li><a href="https://262.ecma-international.org/12.0/#sec-ordinarycallevaluatebody" target="_blank" rel="noopener">OrdinaryCallEvaluateBody</a><ul><li><a href="https://262.ecma-international.org/12.0/#sec-runtime-semantics-evaluatebody" target="_blank" rel="noopener">Runtime Semantics: EvaluateBody</a></li><li><a href="https://262.ecma-international.org/12.0/#sec-functiondeclarationinstantiation" target="_blank" rel="noopener">Runtime Semantics: EvaluateFunctionBody</a><ul><li><a href="https://262.ecma-international.org/12.0/#sec-functiondeclarationinstantiation" target="_blank" rel="noopener">FunctionDeclarationInstantiation</a><ul><li>b.  Let fo be <a href="https://262.ecma-international.org/12.0/#sec-runtime-semantics-instantiatefunctionobject" target="_blank" rel="noopener">InstantiateFunctionObject</a> of f with argument lexEnv.<ul><li><ol start="2"><li>Let F be <a href="https://262.ecma-international.org/12.0/#sec-ordinaryfunctioncreate" target="_blank" rel="noopener">OrdinaryFunctionCreate</a>(<a href="https://262.ecma-international.org/12.0/#sec-properties-of-the-function-prototype-object" target="_blank" rel="noopener">%Function.prototype%</a>, sourceText, <a href="https://262.ecma-international.org/12.0/#prod-FormalParameters" target="_blank" rel="noopener">FormalParameters</a>, <a href="https://262.ecma-international.org/12.0/#prod-FunctionBody" target="_blank" rel="noopener">FunctionBody</a>, non-lexical-this, scope)</li></ol><ul><li>Let F be ! <a href="https://262.ecma-international.org/12.0/#sec-ordinaryobjectcreate" target="_blank" rel="noopener">OrdinaryObjectCreate</a>(functionPrototype, internalSlotsList).</li></ul></li></ul></li></ul></li></ul></li></ul></li></ul></li></ul>]]></content>
+      
+      
+      
+        <tags>
+            
+            <tag> react </tag>
+            
+            <tag> ecmascript </tag>
+            
+            <tag> function </tag>
             
         </tags>
       

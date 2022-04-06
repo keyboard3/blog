@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html  lang="zh-CN" >
+    <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, minimum-scale=1, initial-scale=1, maximum-scale=5, viewport-fit=cover">
+    <title>函数组件中定义函数组件弊端 | keyboard3的博客</title>
+    <meta name="description" content="嵌套函数定义在执行的时候，每次生成的是个新函数对象。这个告诉我们，不要在函数组件里定义子函数组件，函数执行的时候子函数组件会被先卸载再挂载的。 示例const funs1&#x3D;[],funs2&#x3D;[]; function funParent() {     funChil1();     funChil2();     function funChil1() {       funs1.push(fun">
+<meta property="og:type" content="article">
+<meta property="og:title" content="函数组件中定义函数组件弊端">
+<meta property="og:url" content="https://keyboard3.github.io/func-comp-define-func-comp/index.html">
+<meta property="og:site_name" content="keyboard3的博客">
+<meta property="og:description" content="嵌套函数定义在执行的时候，每次生成的是个新函数对象。这个告诉我们，不要在函数组件里定义子函数组件，函数执行的时候子函数组件会被先卸载再挂载的。 示例const funs1&#x3D;[],funs2&#x3D;[]; function funParent() {     funChil1();     funChil2();     function funChil1() {       funs1.push(fun">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2021-10-29T06:47:26.000Z">
+<meta property="article:modified_time" content="2022-04-06T02:07:22.057Z">
+<meta property="article:author" content="keyboard3">
+<meta property="article:tag" content="react">
+<meta property="article:tag" content="ecmascript">
+<meta property="article:tag" content="function">
+<meta name="twitter:card" content="summary">
+
+    <link rel="alternate" type="application/atom+xml" href="/blog/atom.xml">
+    <link rel="icon" href="/images/favicon.ico" type="image/x-icon">
+
+    
+<link rel="stylesheet" href="/blog/css/common.min.css">
+
+
+
+    
+        <link href="//cdn.jsdelivr.net/npm/katex@0.9.0/dist/katex.min.css" rel="stylesheet">
+    
+    
+    
+    
+        <link href="//cdn.jsdelivr.net/npm/lightgallery.js@1.1.3/dist/css/lightgallery.min.css" rel="stylesheet">
+    
+    
+    
+<link rel="stylesheet" href="/blog/css/iconfont.min.css">
+
+    
+<meta name="generator" content="Hexo 4.2.0"><link rel="stylesheet" href="/blog/css/prism-tomorrow.css" type="text/css">
+<link rel="stylesheet" href="/blog/css/prism-line-numbers.css" type="text/css"></head>
+
+    <body>
+        <header class="header header-fixture">
+    <div class="profile-search-wrap flex sm:block">
+        
+        
+        <div class="profile sm:text-center md:px-1 lg:px-3 sm:pb-4 sm:pt-6">
+            <a id="avatar" role="link" href="https://github.com/keyboard3" class="inline-block lg:w-16 lg:h-16 w-8 h-8 m-2" target="_blank" rel="noopener" rel="noreferrer" >
+                <img src="https://www.gravatar.com/avatar/5a65c2880a8f2804b5af3dc39819bdf1?s=128" class="rounded-full" alt="avatar">
+            </a>
+            <h2 id="name" class="hidden lg:block">keyboard3</h2>
+            <h3 id="title" class="hidden lg:block">单身男青年</h3>
+            
+            <small id="location" class="hidden lg:block">
+                <i class="iconfont icon-map-icon"></i>
+                home
+            </small>
+            
+        </div>
+        
+        
+<div class="search flex-1 flex lg:inline-block sm:hidden lg:px-4 lg:mt-2 lg:mb-4 lg:w-full">
+    <form id="search-form" class="my-auto flex-1 lg:border lg:border-solid lg:border-gray-200">
+        <div class="input-group table bg-gray-100 lg:bg-white w-full">
+            <input id="search-input" type="text" placeholder="搜索" class="inline-block w-full bg-gray-100 lg:bg-white">
+            <span class="table-cell">
+                <button name="search tigger button" disabled>
+                    <i class="iconfont icon-search m-2"></i>
+                </button>
+            </span>
+        </div>
+    </form>
+        
+<div id="content-json" data-placeholder="搜索" class="invisible hidden">/content.json</div>
+<script id="search-teamplate" type="text/html" data-path="/blog/content.json">
+    <div>
+        <div class="search-header bg-gray-400">
+            <input id="actual-search-input" model="keyword" ref="input" class="inline-block w-full h-10 px-2 py-1" placeholder="搜索" type="text">
+        </div>
+        <div class="search-result bg-gray-200">
+            {{#each searchPosts}}
+            <a href="/{{ path }}" class="result-item block px-2 pb-3 mb-1 pt-1 hover:bg-indigo-100">
+                <i class="iconfont icon-file"></i>
+                <h1 class="result-title inline font-medium text-lg">{{ title }}</h1>
+                <p class="result-content text-gray-600 text-sm">{{{ text }}}</p>
+            </a>
+            {{/each}}
+        </div>
+    </div>
+</script>
+
+</div>
+
+
+        <button name="menu toogle button" id="menu-toggle-btn" class="block sm:hidden p-3" role="button" aria-expanded="false">
+            <i class="iconfont icon-hamburger"></i>
+        </button>
+    </div>
+    <nav id="menu-nav" class="hidden sm:flex flex-col">
+        
+        
+            <div class="menu-item menu-home" role="menuitem">
+                <a href="/blog/.">
+                    <i class="iconfont icon-home" aria-hidden="true"></i>
+                    <span class="menu-title">首页</span>
+                </a>
+            </div>
+        
+        
+            <div class="menu-item menu-archives" role="menuitem">
+                <a href="/blog/archives">
+                    <i class="iconfont icon-archive" aria-hidden="true"></i>
+                    <span class="menu-title">归档</span>
+                </a>
+            </div>
+        
+        
+            <div class="menu-item menu-repository" role="menuitem">
+                <a href="/blog/repository">
+                    <i class="iconfont icon-project" aria-hidden="true"></i>
+                    <span class="menu-title">项目</span>
+                </a>
+            </div>
+        
+        
+            <div class="menu-item menu-about" role="menuitem">
+                <a href="/blog/about">
+                    <i class="iconfont icon-cup" aria-hidden="true"></i>
+                    <span class="menu-title">关于</span>
+                </a>
+            </div>
+        
+        
+<div class="social-links flex sm:flex-col lg:hidden mt-5">
+    
+        <span class="social-item text-center">
+            <a href="https://github.com/keyboard3" target="_blank" rel="noopener">
+                <i class="iconfont social-icon icon-github"></i>
+                <span class="menu-title hidden lg:inline">menu.github</span>
+            </a>
+        </span>
+    
+        <span class="social-item text-center">
+            <a href="/blog/atom.xml">
+                <i class="iconfont social-icon icon-rss"></i>
+                <span class="menu-title hidden lg:inline">menu.rss</span>
+            </a>
+        </span>
+    
+</div>
+
+
+    </nav>
+</header>
+
+        <section class="main-section">
+            
+    <main class="flex-1 px-4 py-14 md:px-5 lg:px-8 lg:py-4 relative min-h-screen">
+    
+
+    <article class="content article article-archives article-type-list" itemscope="">
+        <header class="article-header">
+            
+    
+        <h1 class="article-title text-lg" itemprop="name">
+            函数组件中定义函数组件弊端
+        </h1>
+    
+
+
+
+            <p class="article-meta mb-3 text-xs">
+                <span class="article-date">
+    <i class="iconfont icon-calendar-check"></i>
+	<a href="/blog/func-comp-define-func-comp/" class="article-date">
+	  <time datetime="2021-10-29T06:47:26.000Z" itemprop="datePublished">10月 29</time>
+	</a>
+</span>
+
+                
+
+                
+    <span class="article-tags">
+    <i class="iconfont icon-tag"></i>
+    <a class="article-tag-link" href="/blog/tags/ecmascript/" rel="tag">ecmascript</a>, <a class="article-tag-link" href="/blog/tags/function/" rel="tag">function</a>, <a class="article-tag-link" href="/blog/tags/react/" rel="tag">react</a>
+  </span>
+
+
+                <span class="_partial/post-comment"><i class="icon icon-comment"></i>
+                    <a href="/blog/func-comp-define-func-comp/#comments" class="article-comment-link">
+                        评论
+                    </a>
+                </span>
+                
+    
+        <span class="post-wordcount" itemprop="wordCount">字数统计: 169(字)</span>
+    
+    
+        <span class="post-readcount" itemprop="timeRequired">阅读时长: 1(分)</span>
+    
+
+
+            </p>
+        </header>
+        <div class="marked-body article-body">
+            <p>嵌套函数定义在执行的时候，每次生成的是个新函数对象。这个告诉我们，不要在函数组件里定义子函数组件，函数执行的时候子函数组件会被先卸载再挂载的。</p>
+<h2 id="示例"><a href="#示例" class="headerlink" title="示例"></a>示例</h2><pre class="line-numbers language-js"><code class="language-js"><span class="token keyword">const</span> funs1<span class="token operator">=</span><span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">,</span>funs2<span class="token operator">=</span><span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+<span class="token keyword">function</span> <span class="token function">funParent</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token function">funChil1</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token function">funChil2</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">function</span> <span class="token function">funChil1</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+      funs1<span class="token punctuation">.</span><span class="token function">push</span><span class="token punctuation">(</span>funChil1<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+<span class="token keyword">function</span> <span class="token function">funChil2</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  funs2<span class="token punctuation">.</span><span class="token function">push</span><span class="token punctuation">(</span>funChil2<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+<span class="token function">funParent</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token function">funParent</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token string">"fun1:"</span><span class="token punctuation">,</span>funs1<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token operator">===</span>funs1<span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token string">"fun2:"</span><span class="token punctuation">,</span>funs2<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token operator">===</span>funs2<span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h2 id="ECMAScript-标准文档查找过程"><a href="#ECMAScript-标准文档查找过程" class="headerlink" title="ECMAScript 标准文档查找过程"></a>ECMAScript 标准文档查找过程</h2><ul>
+<li>[Function Object [[Call]]](<a href="https://262.ecma-international.org/12.0/#sec-ecmascript-function-objects-call-thisargument-argumentslist" target="_blank" rel="noopener">https://262.ecma-international.org/12.0/#sec-ecmascript-function-objects-call-thisargument-argumentslist</a>)<ul>
+<li><a href="https://262.ecma-international.org/12.0/#sec-prepareforordinarycall" target="_blank" rel="noopener">PrepareForOrdinaryCall</a><ul>
+<li><a href="https://262.ecma-international.org/12.0/#sec-newfunctionenvironment" target="_blank" rel="noopener">NewFunctionEnvironment</a><ul>
+<li><a href="https://262.ecma-international.org/12.0/#sec-function-environment-records" target="_blank" rel="noopener">Function Environment Records</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="https://262.ecma-international.org/12.0/#sec-ordinarycallevaluatebody" target="_blank" rel="noopener">OrdinaryCallEvaluateBody</a><ul>
+<li><a href="https://262.ecma-international.org/12.0/#sec-runtime-semantics-evaluatebody" target="_blank" rel="noopener">Runtime Semantics: EvaluateBody</a></li>
+<li><a href="https://262.ecma-international.org/12.0/#sec-functiondeclarationinstantiation" target="_blank" rel="noopener">Runtime Semantics: EvaluateFunctionBody</a><ul>
+<li><a href="https://262.ecma-international.org/12.0/#sec-functiondeclarationinstantiation" target="_blank" rel="noopener">FunctionDeclarationInstantiation</a><ul>
+<li>b.  Let fo be <a href="https://262.ecma-international.org/12.0/#sec-runtime-semantics-instantiatefunctionobject" target="_blank" rel="noopener">InstantiateFunctionObject</a> of f with argument lexEnv.<ul>
+<li><ol start="2">
+<li>Let F be <a href="https://262.ecma-international.org/12.0/#sec-ordinaryfunctioncreate" target="_blank" rel="noopener">OrdinaryFunctionCreate</a>(<a href="https://262.ecma-international.org/12.0/#sec-properties-of-the-function-prototype-object" target="_blank" rel="noopener">%Function.prototype%</a>, sourceText, <a href="https://262.ecma-international.org/12.0/#prod-FormalParameters" target="_blank" rel="noopener">FormalParameters</a>, <a href="https://262.ecma-international.org/12.0/#prod-FunctionBody" target="_blank" rel="noopener">FunctionBody</a>, non-lexical-this, scope)</li>
+</ol>
+<ul>
+<li>Let F be ! <a href="https://262.ecma-international.org/12.0/#sec-ordinaryobjectcreate" target="_blank" rel="noopener">OrdinaryObjectCreate</a>(functionPrototype, internalSlotsList).</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+        </div>
+        
+<blockquote class="copyright">
+    <p><strong>本文链接 : </strong><a class="permalink" href="https://keyboard3.github.io/func-comp-define-func-comp/">https://keyboard3.github.io/func-comp-define-func-comp/</a></p>
+    <p><strong>This article is available under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank" rel="noopener noreferrer">Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0)</a> License</strong></p>
+</blockquote>
+
+
+    </article>
+    
+    <section id="comments">
+        
+            <div id="vcomments"></div>
+        
+    </section>
+
+
+    
+
+</main>
+
+
+<aside style="" id="sidebar" class="aside aside-fixture">
+    <div class="toc-sidebar">
+        <nav id="toc" class="article-toc">
+            <h3 class="toc-title">文章目录</h3>
+            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#示例"><span class="toc-number">1.</span> <span class="toc-text">示例</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#ECMAScript-标准文档查找过程"><span class="toc-number">2.</span> <span class="toc-text">ECMAScript 标准文档查找过程</span></a></li></ol>
+        </nav>
+    </div>
+</aside>
+
+
+
+
+
+        </section>
+        <footer class="hidden lg:block fixed bottom-0 left-0 sm:w-1/12 lg:w-1/6 bg-gray-100 z-40">
+    
+    <div class="footer-social-links">
+        
+            <a href="https://github.com/keyboard3" target="_blank" rel="noopener">
+                <i class="iconfont icon-github"></i>
+            </a>
+        
+            <a href="/blog/atom.xml">
+                <i class="iconfont icon-rss"></i>
+            </a>
+        
+    </div>
+    
+    
+        <p class="footer-custom">浙ICP备2022008282号</p>
+        <p class="theme-brand">Theme by <a href="https://github.com/fengkx/hexo-theme-purer" target="_blank" rel="nofollow noopener noreferrer noopener">hexo-theme-purer</a></p>
+    
+</footer>
+
+        <div id="mask" class="hidden mask fixed inset-0 bg-gray-900 opacity-75 z-40"></div>
+        <div id="search-view-container" class="hidden shadow-xl"></div>
+        
+<script src="/blog/js/dom-event.min.js"></script>
+
+
+
+<script src="/blog/js/local-search.min.js"></script>
+
+
+    <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+<script src="//cdn.jsdelivr.net/npm/valine"></script>
+<script type="text/javascript">
+var GUEST = ['nick', 'mail', 'link'];
+var meta = '';
+meta = meta.split(',').filter(function(item) {
+  return GUEST.indexOf(item) > -1;
+});
+new Valine({
+  el: '#vcomments',
+  verify: 'false',
+  notify: 'false',
+  appId: '',
+  appKey: '',
+  placeholder: 'just go go',
+  avatar: 'mm',
+  meta: meta,
+  pageSize: '10' || 10,
+  visitor: 'true',
+  lang: ''
+});
+</script>
+
+
+
+    <script src="//cdn.jsdelivr.net/npm/lightgallery.js@1.1.3/dist/js/lightgallery.min.js"></script>
+    
+<script src="/blog/js/light-gallery.min.js"></script>
+
+
+
+
+
+
+    </body>
+</html>
