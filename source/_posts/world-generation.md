@@ -4,10 +4,10 @@ top: false
 cover: false
 toc: true
 mathjax: true
-date: 2022-04-24 19:15:23
+date: 2022-04-25 19:15:23
 password:
 summary:
-tags: [tModLoader, terraria, 翻译]
+tags: [tModLoader, terraria, 翻译,c#]
 categories:
 ---
 [World Generation](https://github.com/tModLoader/tModLoader/wiki/World-Generation)
@@ -54,7 +54,8 @@ Framing 是游戏调整 Tile 的 Tile.frameX 和 Tile.frameY 值以调整其外�
 ## 设置
 - 1. 下载并启用以下模组：HEROs Mod 和 Modders Toolkit
 - 2. 将以下代码添加到您的项目中，确保修复命名空间。熟悉此过程后，您可以稍后替换 WorldGen.TileRunner 方法：
-```c#
+
+```csharp
 using Terraria;
 using Terraria.ModLoader;
 using Microsoft.Xna.Framework.Input;
@@ -85,6 +86,7 @@ namespace WorldGenTutorial
 	}
 }
 ```
+
 - 3. 确保 tModLoader 已关闭，然后开始调试您的 mod。在 mod 构建后，tModLoader 将启动。当 tModLoader 启动时，打开一个你不关心的世界。将 Visual Studio 放在屏幕的一侧，将 tModLoader 置于窗口模式的另一侧：
 ![](https://camo.githubusercontent.com/1939ad854c7ae33a5b5b644bcea82275763e3773a328289e516f3fbd4ec9d2d0/68747470733a2f2f692e696d6775722e636f6d2f4b7a62356f6b6b2e706e67)
 - 4. 在 HEROsMod 中，单击按钮禁用敌人生成，将 Light Hack 设置为 100%，打开上帝模式，然后显示地图。这些设置将让您专注。
@@ -135,7 +137,7 @@ namespace WorldGenTutorial
 
 # 代码设置
 现在您已经了解了先决条件并进行了高效的设置，现在是学习世界生成代码的基本布局的时候了。所有代码都放在扩展 ModWorld 的类中。这个例子将涵盖产生矿石，一些简单但通常需要的东西。请继续阅读并阅读评论。
-```c#
+```csharp
 // 1. 你需要各种 using 语句。如果缺少这些，Visual Studio 会建议这些，但为了方便起见，它们在此处列出。
 using System.Collections.Generic;
 using Terraria;
@@ -184,14 +186,14 @@ public class WorldGenTutorialWorld : ModWorld
 如果我们想生成额外的矿石，我们可以简单地在上面的 WorldGenTutorialOres 示例中添加另一个 for 循环，并调整数字以适应新矿石。这将被称为在传递中添加一个步骤。
 
 如果我们想放置箱子，我们会在 ModifyWorldGenTasks 中添加类似于以下的代码：
-```c#
+```csharp
 int BuriedChestsIndex = tasks.FindIndex(genpass => genpass.Name.Equals("Buried Chests"));
 if (BuriedChestsIndex != -1) {
 	tasks.Insert(BuriedChestsIndex + 1, new PassLegacy("World Gen Tutorial Chests", WorldGenTutorialChests));
 }
 ```
 然后也添加 WorldGenTutorialChests 方法。确保不要弄乱 c# 语法：
-```c#
+```csharp
 private void WorldGenTutorialChests(GenerationProgress progress) {
     // Chest placement code here
 }
@@ -199,7 +201,7 @@ private void WorldGenTutorialChests(GenerationProgress progress) {
 
 ## 调试注意事项
 如果您使用上述调试设置，我们需要进一步分解我们的代码以方便测试。在这里，我们可以看到可以从 PostUpdate 中的热键代码和名为 WorldGenTutorialOres 的世界生成步骤中调用 PlaceOresAtLocation，从而允许对代码进行独立测试。
-```c#
+```csharp
 public override void PostUpdate() {
     if (JustPressed(Microsoft.Xna.Framework.Input.Keys.D1))
         PlaceOresAtLocation((int)Main.MouseWorld.X / 16, (int)Main.MouseWorld.Y / 16);
@@ -244,7 +246,7 @@ TODO：地图中心、重生点周围的安全区、海洋位置
 
 ## Depth
 从下到下，以下是 worldgen 期间可用的深度：0、Worldgen.worldSurfaceLow、Worldgen.worldSurfaceHigh、Worldgen.rockLayerLow、Worldgen.rockLayerHigh、Main.maxTilesY。通过调整提供给 WorldGen.genRand.Next 方法的最小值和最大值，我们可以告诉游戏我们希望我们的矿石生成的深度范围。以下是游戏中的铜矿生成代码，它使用 3 个具有不同参数和循环乘数的独立 for 循环来使矿床越深越频繁：
-```c#
+```csharp
 for (int i = 0; i < (int)((double)(Main.maxTilesX * Main.maxTilesY) * 6E-05); i++) {
 	TileRunner(WorldGen.genRand.Next(0, Main.maxTilesX), WorldGen.genRand.Next((int)WorldGen.worldSurfaceLow, (int)WorldGen.worldSurfaceHigh), WorldGen.genRand.Next(3, 6), WorldGen.genRand.Next(2, 6), copper);
 }
@@ -265,7 +267,7 @@ for (int i = 0; i < (int)((double)(Main.maxTilesX * Main.maxTilesY) * 0.0002); i
 
 ## 生物群落
 我们可以在随机坐标处检查现有的 Tile 以确定所选位置的生物群落。例如，如果我们只想在雪附近放置矿石，我们可以检查雪砖：
-```c#
+```csharp
 Tile tile = Main.tile[x, y];
 if (tile.active() && tile.type == TileID.SnowBlock) {
     // TileRunner code here
@@ -291,7 +293,7 @@ TODO：使用反射来检索通过闭包示例捕获的局部变量的 FieldInfo
 
 ## 查找表面位置
 要找到表面坐标，首先选择一个随机的 X 坐标，然后从世界顶部开始检查所有 Tile，直到找到第一个实心 Tile。这是一个例子：
-```c#
+```csharp
 int x = WorldGen.genRand.Next(0, Main.maxTilesX);
 bool foundSurface = false;
 int y = 1;
@@ -310,7 +312,7 @@ while (y < Main.worldSurface) {
 为许多世界生成操作寻找合适的位置可能很困难。例如，放置一个箱子需要 2 个并排的实心 Tile，上面有 2x2 的空间，没有任何 Tile。编写一个算法来搜索具有这种情况的位置可能很困难并且容易出错。虽然有时搜索特定上下文很有用，但以更懒惰的方式生成世界代码是非常常见的。这种更懒惰的方式是尝试在随机坐标上做某事，直到获得所需的成功次数。例如，如果您希望每个世界生成 4 个特殊箱子，您可能会尝试将箱子随机放置在所需区域，直到 PlaceChest 报告成功 4 次。执行此方法时，存在搜索区域不包含任何满足您条件的位置的可能性，因此限制尝试很有用。如果您不限制尝试，您的代码可能会陷入无限循环。这个尝试限制应该足够大，以至于它不会过早失败，但又足够小，以至于世界生成不会暂停太久，导致用户假设代码陷入了无限循环。
 
 例如，让我们尝试在世界上放置 10 个箱子：
-```c#
+```csharp
 for (int i = 0; i < 10; i++) {
 	bool success = false;
 	int attempts = 0;
@@ -337,7 +339,7 @@ for (int i = 0; i < 10; i++) {
 
 ## 影响所有 Tile
 有时你想对所有的 Tile 做一些事情。例如，将所有铁矿石图块更改为 MyCoolOre 图块。您可以这样做，但请注意，像这样应用一揽子更改可能会与其他 mod 的期望相冲突。此外，最好在 PostWorldGen 或后期通行证中执行此操作，以允许查找这些图块的其他代码首先完成其工作。为此，我们使用双 for 循环：
-```c#
+```csharp
 for (int i = 0; i < Main.maxTilesX; i++) {
 	for (int j = 0; j < Main.maxTilesY; j++) {
 		Tile tile = Main.tile[i, j];
@@ -355,7 +357,7 @@ TODO：必须手动放置，因为它们没有以正常方式放置
 
 ### 将物品放入新箱子
 以下示例显示了添加项目的许多方法。要记住的重要一点是正确跟踪您正在编辑的 Item 插槽的当前索引。此示例在末尾添加所有项目以简化此操作。
-```c#
+```csharp
 // 放置箱子 Tile，使用Style 10，即冰冷的箱子 style
 int chestIndex = WorldGen.PlaceChest(x, y, style: 10);
 // 如果箱子成功放置...
@@ -412,7 +414,7 @@ ExampleWorld.cs 显示了一个将单个项目放置在由其他代码放置的�
 液体存储在与实际 tile 共存的 Tile 对象中（如果存在）。
 
 许多大规模地形方法都有参数，可以选择在生成的地形中放置水。例如，Worlgen.digTunnel 有一个湿参数，它会在挖完洞后用一些水填充洞。在其他方法中寻找类似的参数。要手动放置单块水，您可以通过以下方式设置该块的液体类型和液体量：
-```c#
+```csharp
 Main.tile[i,j].liquid = 255;
 Main.tile[i,j].liquidType(Tile.Liquid_Water);
 ```
@@ -434,14 +436,14 @@ TODO:
 
 ## 快速示例
 作为这种方法的快速入门，这里有一个简单的例子：
-```c#
+```csharp
 Point point = new Point(x, y);
 WorldUtils.Gen(point, new Shapes.Circle(8, 8), new Actions.SetTile(TileID.RubyGemspark));
 ```
 这段代码令人生畏，但如果你学会阅读它，它确实还不错。 WorldUtils.Gen 方法基本上采用 Point、GenShape 和 GenAction。从 Point 表示的坐标开始，GenShape 的代码在每个坐标上运行 GenAction 代码的同时追踪所需的形状。此代码在圆内的每个坐标上运行 SetTile 方法，创建一个半径为 8 且填充有 Gemspark Tile的圆。
 ![](https://camo.githubusercontent.com/4bf7dedc965e54e1dcf0f2a0f1bdbd7e5f87066fb9be13c71de1b71fee67e0b8/68747470733a2f2f692e696d6775722e636f6d2f4a56726d7473322e706e67)
 
-```c#
+```csharp
 Point point = new Point(x, y);
 WorldUtils.Gen(point, new Shapes.Circle(8, 4), Actions.Chain(new GenAction[]
 {
@@ -461,7 +463,7 @@ GenShapes 用于指定动作发生的位置。圆形和矩形等香草形状是�
 
 ### 自定义 GenShape
 从 GenShape 继承允许使用自定义形状。
-```c#
+```csharp
 // World Gen Code
 Point point = new Point(x, y);
 WorldUtils.Gen(point, new AngularSpiral(8), new Actions.SetTile(TileID.RubyGemspark));
@@ -500,7 +502,7 @@ GenActions 指示影响由 GenShape 提供的坐标的代码。一些常见的�
 
 ### Scanner
 Scanner 可用于计算当前有多少块满足 Actions.Chain 的条件。这对于查找主要是某种情况或其他情况的斑点很有用。例如，如果您想查找 90% 实心 Tile 的位置，您可以将扫描仪的结果与检查的 Tile 总数进行比较。这个例子展示了如何通过 `Ref<int>` 使用 Scanner。此示例还显示了 Actions.ContinueWrapper，它允许将条件分成子链，当它们失败时不会停止其他链。 （通常，当 Action 返回 false 时，链将终止。）
-```c#
+```csharp
 Ref<int> anyCount = new Ref<int>(0);
 Ref<int> solidCount = new Ref<int>(0);
 Ref<int> notsolidCount = new Ref<int>(0);
@@ -526,7 +528,7 @@ Main.NewText($"Any {anyCount.Value}, Solid {solidCount.Value}, NotSolid {notsoli
 
 ### TileScanner
 TileScanner 按给定形状中的类型计算图块。 TileScanner 通过检查附近的 Tile 来帮助计算位置是否合适。它有助于避免与其他世界生成元素重叠，并有助于将世界生成要素放置在与所需位置完全匹配的位置。以下示例使用 TileScanner 检查测试区域中 50% 的 Tile 是石头还是泥土。通过调整我们的标准，我们可以保证我们的世界生成元素的放置令人愉悦。
-```c#
+```csharp
 Point point = new Point(x, y);
 Dictionary<ushort, int> dictionary = new Dictionary<ushort, int>();
 WorldUtils.Gen(point, new Shapes.Rectangle(20, 10), new Actions.TileScanner(TileID.Dirt, TileID.Stone).Output(dictionary));
@@ -542,13 +544,13 @@ Dust.QuickBox(new Vector2(x, y) * 16, new Vector2(x + 20, y + 10) * 16, 20, Colo
 
 ### 自定义
 Actions.Custom GenAction 允许执行任意代码。您想用 GenActions 做的大多数典型事情已经被现有的类所涵盖，但是使用它的一个例子是产生灰尘：
-```c#
+```csharp
 new Actions.Custom((i, j, args) => { Dust.QuickDust(new Point(i, j), Color.Red); return true; }),
 ```
 
 ### 自定义 GenAction 
 从 GenAction 继承可用于在每个坐标上运行自定义代码。这是一个以 ActionVines 为模型的名为 ActionRope 的示例。自定义 GenAction 类可以帮助组织代码的可重用部分。
-```c#
+```csharp
 public class ActionRope : GenAction
 {
 	private int _minLength;
@@ -589,7 +591,7 @@ WorldUtils.Gen(point, new ModShapes.All(shapeData), Actions.Chain(
 
 ## Modifier
 修饰符是特殊的 GenAction，它限制后续链接的 GenAction 的执行。一个简单的例子是抖动修改器。抖动随机终止动作链。在下面的示例中，圆圈内的所有 Tile 都会产生黄尘，但抖动修改器会在 20% 的时间提前终止链，从而导致如下所示的破烂放置。
-```c#
+```csharp
 WorldUtils.Gen(point, new Shapes.Circle(8, 4), Actions.Chain(new GenAction[]
 {
 	new Actions.Custom((i, j, args) => {Dust.QuickDust(new Point(i, j), Color.Yellow); return true; }),
@@ -601,7 +603,7 @@ WorldUtils.Gen(point, new Shapes.Circle(8, 4), Actions.Chain(new GenAction[]
 
 ## Output
 输出可用于记住特定 GenAction 处的坐标集。在此示例中，我们将 2 个单独的 Circles 的结果输出到共享的 ShapeData。此 ShapeData 被传递给 InnerOutline，后者计算来自该数据的哪些图块形成内部轮廓。通过这种方式，我们基本上合并了两个 GenShapes 的结果，并使用这些结果来制作 Lava Moss Tile 的独特形状。
-```c#
+```csharp
 ShapeData shapeData = new ShapeData();
 WorldUtils.Gen(point, new Shapes.Circle(5, 5), new Actions.Blank().Output(shapeData));
 WorldUtils.Gen(point, new Shapes.Circle(3, 3), Actions.Chain(new GenAction[]
@@ -630,7 +632,7 @@ Not 可以应用于 AreaAnd、AreaOr 或没有区域的 GenCondition。没有区
 
 ## Find
 WorldUtils.Find 可用于搜索满足特定条件的位置。通过使用搜索和许多 GenCondition，该方法尝试找到满足所有条件的坐标。Searches.Down 指示 Find 从输入点开始并向下移动最多 20 个 Tile 以寻找合适的位置。如果搜索成功，该方法返回 true。此示例中的条件尝试查找全部为实心和沙色的 5x5 正方形Tile。如果找到了，黑曜石就会放在中间。黄色的尘埃显示了发现的符合条件的区域。光标显示搜索从地面开始并向下搜索，直到找到最终结果。
-```c#
+```csharp
 Point resultPoint;
 bool searchSuccessful = WorldUtils.Find(point, Searches.Chain(new Searches.Down(20), new GenCondition[]
 {
@@ -648,7 +650,7 @@ if (searchSuccessful) {
 
 ### 附魔剑神殿
 Enchanted Sword Shrine 的代码可在 Terraria.GameContent.Biomes.EnchantedSwordBiome 类中找到。本节将研究 EnchantedSwordBiome 如何使用各种技术在合适的位置干净地生成神殿而不会出现问题。跟随下面的评论和视频。
-```c#
+```csharp
 public override bool Place(Point origin, StructureMap structures) {
 // 通过使用 TileScanner，检查以原点为中心的 50x50 区域主要是 Dirt 或 Stone
 Dictionary<ushort, int> tileDictionary = new Dictionary<ushort, int>();
@@ -733,7 +735,7 @@ return true;
 
 ## [Terraria.WorldGen] public static Point RandomWorldPoint(int top = 0, int right = 0, int bottom = 0, int left = 0)
 一种在世界中寻找随机 Tile 坐标的更简化的方法。 Point point = WorldGen.RandomWorldPoint((int)Main.worldSurface, 50, 500, 50) 等价于
-```c#
+```csharp
 int x = WorldGen.genRand.Next(50, Main.maxTilesX - 50);
 int y = WorldGen.genRand.Next((int)Main.worldSurface, Main.maxTilesY - 500);
 ```

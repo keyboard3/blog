@@ -1,5 +1,5 @@
 ---
-title: 改装教程：世界生成
+title: 改装教程：世界生成(论坛版)
 top: false
 cover: false
 toc: true
@@ -7,7 +7,7 @@ mathjax: true
 date: 2022-04-24 19:15:23
 password:
 summary:
-tags: [tModLoader, terraria, 翻译]
+tags: [tModLoader, terraria, 翻译,c#]
 categories:
 ---
 [Modding Tutorial: World Generation](https://forums.terraria.org/index.php?threads/modding-tutorial-world-generation.47601/)
@@ -28,7 +28,7 @@ categories:
 最后，您必须始终牢记的是，tile 存储在 2D 数组中。其后果如下：
 - 1.如果超出数组的边界（即尝试访问(-1, 0)处的tile），则会崩溃或无法生成；
 - 2.如果您要使用例如玩家位置，您需要将玩家位置除以 16 才能访问同一位置的tile - 例如，如果我想获得玩家正上方的 tile，我将使用以下代码：
-```c#
+```csharp
 Framing.GetTileSafely((int)(player.position.X / 16f), (int)(player.position.Y / 16f) - 1)
 ```
 对弹丸、NPC、灰尘和血块进行相同的除法操作。
@@ -37,7 +37,7 @@ Framing.GetTileSafely((int)(player.position.X / 16f), (int)(player.position.Y / 
 
 # 基本
 因此，除了所有这些，我们可以从最简单的方法和工具开始，您可以使用它们来创建或检查或做任何事情：
-```c#
+```csharp
 WorldGen.PlaceTile(int i, int j, int type, bool mute = false, bool forced = false, int plr = -1, int style = 0)
 ```
 正如您可能猜到的那样，这会在 i、j 处放置一个类型为 type 的 tile，
@@ -46,20 +46,20 @@ WorldGen.PlaceTile(int i, int j, int type, bool mute = false, bool forced = fals
 至于plr - 我不知道这是什么。完全没有。应该不重要吧？
 最后，style 很难解释——它用于显示单个 tile 的替代版本。我将使用 PlaceObject 对此进行更多解释。
 
-```c#
+```csharp
 WorldGen.KillTile(int i, int j, bool fail= false, bool effectOnly = false, bool noItem = false)
 ```
 也很简单 - 破坏 i, j 处的 tile。如果fail为true，则不会删除该 tile 。例如，这用于当您挖掘镐但需要多次击打时。
 如果 effectOnly 为true，则tile只会产生灰尘，但不会破裂。通常与失败同时出现。例如，挖掘一个镐力太低的tile。
 noItem 很简单，当 tile 被破坏时不会掉落物品。
 
-```c#
+```csharp
 Framing.GetTileSafely(int i, int j)
 ```
 为了完全透明，我只知道这是抓取任何给定 tile 的更好方法。如果你试图通过 Main.tile[x, y] 抓取一个 tile ，我建议你改用这个。
 这对于检查给定 tile 的类型、它是否处于活动状态或它的某些特性非常有用。
 
-```c#
+```csharp
 WorldGen.TileRunner(int i, int j, int strength, int steps, int type, bool addTile = false, float speedX = 0, float speedY = 0, bool noYChange = false, bool overRide = true)
 ```
 好吧，这要复杂得多。 TileRunner 是一种方法，我可以解释的唯一方法是，如果选择的话，它会创建一个带有嘈杂边缘的“钻石”。
@@ -76,7 +76,7 @@ strength 是产生的块有多大——在某种程度上是“半径”。
 </div>
 
 作为参考，每个 TileRunner 都有以下一行：
-```c#
+```csharp
 WorldGen.TileRunner((int)(Main.MouseWorld.X / 16f), (int)(Main.MouseWorld.Y / 16f), STRENGTH, 5, TileID.Dirt, true, 0, 0, false, true);
 ```
 其中 STRENGTH = 展示的强度值。
@@ -87,7 +87,7 @@ noYChange 是……奇怪。我从来没有测试过它，但我猜它只会让 
 最后，overRide。如果可能，这将使用您的类型的 tile 替换现有 tile 。例如，如果我要放置我的矿石 BananaOre，我希望将 overRide 设置为 true，这样它就会在石头、泥土和泥土中生成。当您只想添加 tile 时设置为 false。
 
 TileRunner 对于较小规模的 tile 非常有用，例如矿床（矿石是 TileRunner 最常见的用途之一）、沙子、泥土和石块以及类似的东西。但是，我建议不要将其用于大型生物群落和结构，因为当您想要完全填充一个区域而又不会低效时，它真的很难使用。同样，也很难准确地控制你想要的方式。
-```c#
+```csharp
 WorldGen.digTunnel(int i, int j, float xDir, float yDir, int Steps, int Size, bool Wet = false)
 ```
 现在，想象一下 TileRunner，但它会删除tile。就是这样。它的工作原理相同，只是杀死tile。
@@ -120,20 +120,20 @@ GenPass 再次成为泰拉瑞亚处理世界生成的方式。它按顺序运行
 
 老实说，GenPass 本身最终成为最简单易用的东西之一。
 在 ModifyWorldGenTasks 方法下，如图所示，
-```c#
+```csharp
 public override void ModifyWorldGenTasks(List<GenPass> tasks, ref float totalWeight)
 ```
 您只需将您的方法甚至代码直接添加到新任务中，如下所示，
-```c#
+```csharp
 tasks.Add(new PassLegacy("My Custom Generation", MyGenCode));
 ```
 您需要做的就是创建一个名为 MyGenCode 的方法，并带有 GenerationProgress 参数，例如，
-```c#
+```csharp
 public void MyGenCode(GenerationProgress p)
 ```
 但是，在大多数情况下，您不希望将您的 gen 传递给任务列表。
 通常，您希望将您的通行证插入某个特定位置，如前言的“生成顺序”小节中所述。例如，
-```c#
+```csharp
             int shiniesIndex = tasks.FindIndex(genpass => genpass.Name.Equals("Shinies"));
             if (shiniesIndex != -1)
                 tasks.Insert(shiniesIndex + 1, new PassLegacy("MyGenPass", MyGenPass));
@@ -147,22 +147,22 @@ public void MyGenCode(GenerationProgress p)
 箱子自然是设计生物群落或结构并填充内容的非常重要的部分。
 
 在 worldgen 期间（甚至在游戏期间）填充箱子非常简单：
-```c#
+```csharp
 WorldGen.PlaceChest(x, y, type, notNearOtherChests, style)
 ```
 PlaceChest 是 worldgen 期间使用的一种方法，它可以放置一个箱子。如果箱子放置成功，它还会返回 Main.chest 中与 tile 关联的 Chest 对象的索引。如果没有成功放置，它只返回-1。
 所以，我们可以这样做：
-```c#
+```csharp
 int ChestIndex = WorldGen.PlaceChest(x, y, (ushort)type, false, style);
 if (ChestIndex != -1)
 ```
 检查，当我们放下一个箱子时，它是否成功。
 然后，在 if 语句中，我们可以这样做：
-```c#
+```csharp
 Main.chest[ChestIndex].item[0].SetDefaults(ItemID.Bananarang);
 ```
 这会将您放置的箱子中的第一个物品设置为一个香蕉郎。 如果要增加数量，只需执行以下操作：
-```c#
+```csharp
 Main.chest[ChestIndex].item[0].stack = 20;
 ```
 boom，你有20 个香蕉郎。
