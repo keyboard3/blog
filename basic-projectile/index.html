@@ -1,0 +1,546 @@
+<!DOCTYPE html>
+<html  lang="zh-CN" >
+    <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, minimum-scale=1, initial-scale=1, maximum-scale=5, viewport-fit=cover">
+    <title>弹丸基础 | keyboard3的博客</title>
+    <meta name="description" content="Basic Projectile 什么是弹丸在开始修改射弹之前，您应该了解物品和射弹之间的区别。物品是可以存储在您的库存中的对象，而射弹是例如从武器或敌人射出的对象。 怎么使用弹丸泰拉瑞亚中的许多物品由于射弹而具有功能，包括枪和弓（分别是子弹和箭）、激光、炸弹和其他投掷物品，以及大多数魔法武器。您可能认为不是射弹的其他一些物品包括：抓钩、连枷、长矛、宠物、召唤物、钻头和悠悠球。许多敌人也会产生射弹">
+<meta property="og:type" content="article">
+<meta property="og:title" content="弹丸基础">
+<meta property="og:url" content="https://keyboard3.github.io/basic-projectile/index.html">
+<meta property="og:site_name" content="keyboard3的博客">
+<meta property="og:description" content="Basic Projectile 什么是弹丸在开始修改射弹之前，您应该了解物品和射弹之间的区别。物品是可以存储在您的库存中的对象，而射弹是例如从武器或敌人射出的对象。 怎么使用弹丸泰拉瑞亚中的许多物品由于射弹而具有功能，包括枪和弓（分别是子弹和箭）、激光、炸弹和其他投掷物品，以及大多数魔法武器。您可能认为不是射弹的其他一些物品包括：抓钩、连枷、长矛、宠物、召唤物、钻头和悠悠球。许多敌人也会产生射弹">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://camo.githubusercontent.com/507c1c4b98cf977713066cbb25ed56bc96e857941f2615698fdb05e83132503c/68747470733a2f2f692e696d6775722e636f6d2f525361785636542e706e67">
+<meta property="og:image" content="https://camo.githubusercontent.com/5f1a9878e94ecadf7955bdfdb4538b982150b3c5ba4ca828d811dc32ac297d4f/68747470733a2f2f692e696d6775722e636f6d2f434c324d7761462e706e67">
+<meta property="og:image" content="https://camo.githubusercontent.com/e90932fdde6de995464aeb36a3d1fd699eb606133f60cad535a0af811887935f/68747470733a2f2f692e696d6775722e636f6d2f79344f634a41762e706e67">
+<meta property="og:image" content="https://camo.githubusercontent.com/67da99f7836624d24205426df162fa44f2060da111a54a3fd9cae5f5c8ecb4a9/68747470733a2f2f7468756d62732e6766796361742e636f6d2f53696d706c654d696e6f72496d70657269616c6561676c652d736d616c6c2e676966">
+<meta property="og:image" content="https://camo.githubusercontent.com/1e36d8d6b9576f9c7815842c5271dcd6fa3f32e061a5031b1935c718d254c1ea/68747470733a2f2f692e696d6775722e636f6d2f6d3544786b426d2e706e67">
+<meta property="og:image" content="https://camo.githubusercontent.com/d3b84c4db81b1fe4945faff5e15403273a915acb2894929779176e01dbe851d1/68747470733a2f2f7468756d62732e6766796361742e636f6d2f4d696e7479436861726d696e67436f70706572686561642d736d616c6c2e676966">
+<meta property="og:image" content="https://camo.githubusercontent.com/ec354146b5e2cf2ae6e9f958c225a8976f4ebbd043850acbd366212f0696a5a2/68747470733a2f2f7468756d62732e6766796361742e636f6d2f576562626564556e74696d656c79486172626f727365616c2d736d616c6c2e676966">
+<meta property="og:image" content="https://camo.githubusercontent.com/1890e343532b2167208182fb792490093144707c32ea5ceb204ac3eb8a981e50/68747470733a2f2f692e696d6775722e636f6d2f734b557139347a2e706e67">
+<meta property="og:image" content="https://camo.githubusercontent.com/50ae94fce4701dd258883d5046ed5c7f0466e59a9e5b1e3e8171954b501878a9/68747470733a2f2f692e696d6775722e636f6d2f7733414c6844582e706e67">
+<meta property="og:image" content="https://camo.githubusercontent.com/4e315f1f5909320efcaa4aa7ce7aa774ec16f92106227483e24e0e175e6cdad7/68747470733a2f2f692e696d6775722e636f6d2f65747a627a73302e706e67">
+<meta property="og:image" content="https://camo.githubusercontent.com/9cb069d29281f657fbc1aecdb7275b0d8bffd1eb4d0408bb3d9aa2fcf543ef54/68747470733a2f2f7468756d62732e6766796361742e636f6d2f436f6e6675736564536172646f6e6963436f77626972642d736d616c6c2e676966">
+<meta property="og:image" content="https://camo.githubusercontent.com/d9baf48d02d866637c9516dfad0839b02f8699af166332b121d70dc691c2a887/68747470733a2f2f692e696d6775722e636f6d2f7a516678584d332e706e67">
+<meta property="og:image" content="https://camo.githubusercontent.com/545bd7f90d30f567a653f1e1b162b5d86e852c87a14e319a97f88af7e03a37ba/68747470733a2f2f692e696d6775722e636f6d2f76664b72527a5a2e706e67">
+<meta property="og:image" content="https://camo.githubusercontent.com/564dc03d1f5c3a2e8686769b151af5cbf5a918e6532ce51d791b88a35617bd93/68747470733a2f2f692e696d6775722e636f6d2f464b66687451302e706e67">
+<meta property="article:published_time" content="2022-04-27T01:29:23.000Z">
+<meta property="article:modified_time" content="2022-05-09T06:56:48.246Z">
+<meta property="article:author" content="keyboard3">
+<meta property="article:tag" content="翻译">
+<meta property="article:tag" content="tModLoader">
+<meta property="article:tag" content="terraria">
+<meta property="article:tag" content="c#">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://camo.githubusercontent.com/507c1c4b98cf977713066cbb25ed56bc96e857941f2615698fdb05e83132503c/68747470733a2f2f692e696d6775722e636f6d2f525361785636542e706e67">
+
+    <link rel="alternate" type="application/atom+xml" href="/blog/atom.xml">
+    <link rel="icon" href="/images/favicon.ico" type="image/x-icon">
+
+    
+<link rel="stylesheet" href="/blog/css/common.min.css">
+
+
+
+    
+        <link href="//cdn.jsdelivr.net/npm/katex@0.9.0/dist/katex.min.css" rel="stylesheet">
+    
+    
+    
+    
+        <link href="//cdn.jsdelivr.net/npm/lightgallery.js@1.1.3/dist/css/lightgallery.min.css" rel="stylesheet">
+    
+    
+    
+<link rel="stylesheet" href="/blog/css/iconfont.min.css">
+
+    
+<meta name="generator" content="Hexo 4.2.0"><link rel="stylesheet" href="/blog/css/prism-tomorrow.css" type="text/css">
+<link rel="stylesheet" href="/blog/css/prism-line-numbers.css" type="text/css"></head>
+
+    <body>
+        <header class="header header-fixture">
+    <div class="profile-search-wrap flex sm:block">
+        
+        
+        <div class="profile sm:text-center md:px-1 lg:px-3 sm:pb-4 sm:pt-6">
+            <a id="avatar" role="link" href="https://github.com/keyboard3" class="inline-block lg:w-16 lg:h-16 w-8 h-8 m-2" target="_blank" rel="noopener" rel="noreferrer" >
+                <img src="https://www.gravatar.com/avatar/5a65c2880a8f2804b5af3dc39819bdf1?s=128" class="rounded-full" alt="avatar">
+            </a>
+            <h2 id="name" class="hidden lg:block">keyboard3</h2>
+            <h3 id="title" class="hidden lg:block">单身男青年</h3>
+            
+            <small id="location" class="hidden lg:block">
+                <i class="iconfont icon-map-icon"></i>
+                home
+            </small>
+            
+        </div>
+        
+        
+<div class="search flex-1 flex lg:inline-block sm:hidden lg:px-4 lg:mt-2 lg:mb-4 lg:w-full">
+    <form id="search-form" class="my-auto flex-1 lg:border lg:border-solid lg:border-gray-200">
+        <div class="input-group table bg-gray-100 lg:bg-white w-full">
+            <input id="search-input" type="text" placeholder="搜索" class="inline-block w-full bg-gray-100 lg:bg-white">
+            <span class="table-cell">
+                <button name="search tigger button" disabled>
+                    <i class="iconfont icon-search m-2"></i>
+                </button>
+            </span>
+        </div>
+    </form>
+        
+<div id="content-json" data-placeholder="搜索" class="invisible hidden">/content.json</div>
+<script id="search-teamplate" type="text/html" data-path="/blog/content.json">
+    <div>
+        <div class="search-header bg-gray-400">
+            <input id="actual-search-input" model="keyword" ref="input" class="inline-block w-full h-10 px-2 py-1" placeholder="搜索" type="text">
+        </div>
+        <div class="search-result bg-gray-200">
+            {{#each searchPosts}}
+            <a href="/{{ path }}" class="result-item block px-2 pb-3 mb-1 pt-1 hover:bg-indigo-100">
+                <i class="iconfont icon-file"></i>
+                <h1 class="result-title inline font-medium text-lg">{{ title }}</h1>
+                <p class="result-content text-gray-600 text-sm">{{{ text }}}</p>
+            </a>
+            {{/each}}
+        </div>
+    </div>
+</script>
+
+</div>
+
+
+        <button name="menu toogle button" id="menu-toggle-btn" class="block sm:hidden p-3" role="button" aria-expanded="false">
+            <i class="iconfont icon-hamburger"></i>
+        </button>
+    </div>
+    <nav id="menu-nav" class="hidden sm:flex flex-col">
+        
+        
+            <div class="menu-item menu-home" role="menuitem">
+                <a href="/blog/.">
+                    <i class="iconfont icon-home" aria-hidden="true"></i>
+                    <span class="menu-title">首页</span>
+                </a>
+            </div>
+        
+        
+            <div class="menu-item menu-archives" role="menuitem">
+                <a href="/blog/archives">
+                    <i class="iconfont icon-archive" aria-hidden="true"></i>
+                    <span class="menu-title">归档</span>
+                </a>
+            </div>
+        
+        
+            <div class="menu-item menu-repository" role="menuitem">
+                <a href="/blog/repository">
+                    <i class="iconfont icon-project" aria-hidden="true"></i>
+                    <span class="menu-title">项目</span>
+                </a>
+            </div>
+        
+        
+            <div class="menu-item menu-about" role="menuitem">
+                <a href="/blog/about">
+                    <i class="iconfont icon-cup" aria-hidden="true"></i>
+                    <span class="menu-title">关于</span>
+                </a>
+            </div>
+        
+        
+<div class="social-links flex sm:flex-col lg:hidden mt-5">
+    
+        <span class="social-item text-center">
+            <a href="https://github.com/keyboard3" target="_blank" rel="noopener">
+                <i class="iconfont social-icon icon-github"></i>
+                <span class="menu-title hidden lg:inline">menu.github</span>
+            </a>
+        </span>
+    
+        <span class="social-item text-center">
+            <a href="/blog/atom.xml">
+                <i class="iconfont social-icon icon-rss"></i>
+                <span class="menu-title hidden lg:inline">menu.rss</span>
+            </a>
+        </span>
+    
+</div>
+
+
+    </nav>
+</header>
+
+        <section class="main-section">
+            
+    <main class="flex-1 px-4 py-14 md:px-5 lg:px-8 lg:py-4 relative min-h-screen">
+    
+
+    <article class="content article article-archives article-type-list" itemscope="">
+        <header class="article-header">
+            
+    
+        <h1 class="article-title text-lg" itemprop="name">
+            弹丸基础
+        </h1>
+    
+
+
+
+            <p class="article-meta mb-3 text-xs">
+                <span class="article-date">
+    <i class="iconfont icon-calendar-check"></i>
+	<a href="/blog/basic-projectile/" class="article-date">
+	  <time datetime="2022-04-27T01:29:23.000Z" itemprop="datePublished">4月 27</time>
+	</a>
+</span>
+
+                
+
+                
+    <span class="article-tags">
+    <i class="iconfont icon-tag"></i>
+    <a class="article-tag-link" href="/blog/tags/c/" rel="tag">c#</a>, <a class="article-tag-link" href="/blog/tags/tModLoader/" rel="tag">tModLoader</a>, <a class="article-tag-link" href="/blog/tags/terraria/" rel="tag">terraria</a>, <a class="article-tag-link" href="/blog/tags/%E7%BF%BB%E8%AF%91/" rel="tag">翻译</a>
+  </span>
+
+
+                <span class="_partial/post-comment"><i class="icon icon-comment"></i>
+                    <a href="/blog/basic-projectile/#comments" class="article-comment-link">
+                        评论
+                    </a>
+                </span>
+                
+    
+        <span class="post-wordcount" itemprop="wordCount">字数统计: 5k(字)</span>
+    
+    
+        <span class="post-readcount" itemprop="timeRequired">阅读时长: 19(分)</span>
+    
+
+
+            </p>
+        </header>
+        <div class="marked-body article-body">
+            <p><a href="https://github.com/tModLoader/tModLoader/wiki/Basic-Projectile" target="_blank" rel="noopener">Basic Projectile</a></p>
+<h1 id="什么是弹丸"><a href="#什么是弹丸" class="headerlink" title="什么是弹丸"></a>什么是弹丸</h1><p>在开始修改射弹之前，您应该了解物品和射弹之间的区别。物品是可以存储在您的库存中的对象，而射弹是例如从武器或敌人射出的对象。</p>
+<h1 id="怎么使用弹丸"><a href="#怎么使用弹丸" class="headerlink" title="怎么使用弹丸"></a>怎么使用弹丸</h1><p>泰拉瑞亚中的许多物品由于射弹而具有功能，包括枪和弓（分别是子弹和箭）、激光、炸弹和其他投掷物品，以及大多数魔法武器。您可能认为不是射弹的其他一些物品包括：抓钩、连枷、长矛、宠物、召唤物、钻头和悠悠球。许多敌人也会产生射弹。</p>
+<h1 id="制作弹丸"><a href="#制作弹丸" class="headerlink" title="制作弹丸"></a>制作弹丸</h1><p>要在泰拉瑞亚中创建弹丸，您必须首先创建一个“继承”自 ModProjectile 的类。为此，请在您的 mod 源目录 (My Games\Terraria\ModLoader\Mod Sources\MyModName) 中创建一个 .cs 文件，然后在文本编辑器中打开该文件。将以下内容粘贴到该文件中，将 NameHere 替换为您的项目的内部名称，并将 ModNamespaceHere 替换为您的 mod 的文件夹名称/命名空间。 （一个常见的错误是在内部名称中使用撇号或空格，不要这样做，计算机不会理解。）</p>
+<pre class="line-numbers language-csharp"><code class="language-csharp"><span class="token keyword">using</span> Terraria<span class="token punctuation">;</span>
+<span class="token keyword">using</span> Terraria<span class="token punctuation">.</span>ID<span class="token punctuation">;</span>
+<span class="token keyword">using</span> Terraria<span class="token punctuation">.</span>ModLoader<span class="token punctuation">;</span>
+
+<span class="token keyword">namespace</span> ModNamespaceHere
+<span class="token punctuation">{</span>
+    <span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">NameHere</span> <span class="token punctuation">:</span> ModProjectile
+    <span class="token punctuation">{</span>
+        <span class="token keyword">public</span> <span class="token keyword">override</span> <span class="token keyword">void</span> <span class="token function">SetStaticDefaults</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+        <span class="token punctuation">{</span>
+            DisplayName<span class="token punctuation">.</span><span class="token function">SetDefault</span><span class="token punctuation">(</span><span class="token string">"English Display Name Here"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+
+        <span class="token keyword">public</span> <span class="token keyword">override</span> <span class="token keyword">void</span> <span class="token function">SetDefaults</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+        <span class="token punctuation">{</span>
+            projectile<span class="token punctuation">.</span>arrow <span class="token operator">=</span> <span class="token keyword">true</span><span class="token punctuation">;</span>
+            projectile<span class="token punctuation">.</span>width <span class="token operator">=</span> <span class="token number">10</span><span class="token punctuation">;</span>
+            projectile<span class="token punctuation">.</span>height <span class="token operator">=</span> <span class="token number">10</span><span class="token punctuation">;</span>
+            projectile<span class="token punctuation">.</span>aiStyle <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">;</span>
+            projectile<span class="token punctuation">.</span>friendly <span class="token operator">=</span> <span class="token keyword">true</span><span class="token punctuation">;</span>
+            projectile<span class="token punctuation">.</span>ranged <span class="token operator">=</span> <span class="token keyword">true</span><span class="token punctuation">;</span>
+            aiType <span class="token operator">=</span> ProjectileID<span class="token punctuation">.</span>WoodenArrowFriendly<span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+
+        <span class="token comment" spellcheck="true">// Additional hooks/methods here.</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>现在您有了一个 .cs 文件，将您的纹理文件（您制作的一个 .png 图像文件）放入该 .cs 文件所在的文件夹中。确保阅读自动加载，这样您就知道如何满足计算机对其文件名和文件夹结构的期望。</p>
+<h1 id="我找不到我的投射物"><a href="#我找不到我的投射物" class="headerlink" title="我找不到我的投射物"></a>我找不到我的投射物</h1><p>请记住，物品和射弹是不同的。一个常见的错误是模组制作者会制造弹丸，但不明白他们需要使用该弹丸制造一些东西。例如，对于投掷刀武器，您需要同时制作物品和射弹。弹药物品也需要一个与之相关的独特射弹。您并不总是需要和项目和射弹，例如如果射弹是由 npc 生成的。测试弹丸的最简单方法是制作一个物品并将 item.shoot 设置为弹丸。例如，item.shoot = ModContent.ProjectileType<MyProjectile>()。参见 ExampleMod 以获取由 Items 生成的 Projectiles 的许多示例，它们位于不同的文件夹中，但很容易找到。</p>
+<h1 id="SetDefaults"><a href="#SetDefaults" class="headerlink" title="SetDefaults"></a>SetDefaults</h1><p>弹丸最重要的部分是 SetDefaults。 SetDefaults 是您为射弹设置值的地方，例如命中框的宽度和高度，射弹是友好还是敌对，以及射弹将使用哪个 AI。请参阅 <a href="https://github.com/tModLoader/tModLoader/wiki/Projectile-Class-Documentation" target="_blank" rel="noopener">Projectile 类文档</a>以查看 SetDefaults 中通常设置的值的含义。您还可以通过访问<a href="https://github.com/tModLoader/tModLoader/wiki/Vanilla-Projectile-Field-Values" target="_blank" rel="noopener">Vanilla弹丸字段值</a>来查看Vanilla弹丸值。可以在 <a href="https://github.com/tModLoader/tModLoader/tree/master/ExampleMod/Projectiles" target="_blank" rel="noopener">ExampleMod.Projectiles</a> 中找到许多不同射弹的示例</p>
+<h2 id="projectile-damage"><a href="#projectile-damage" class="headerlink" title="projectile.damage"></a>projectile.damage</h2><p>一个常见的错误是在 SetDefaults 中设置 projectile.damage，这不起作用，因为在生成射弹时，射弹的伤害值总是被传递给 Projectile.NewProjectile 的值覆盖。通常物品或生成该物品的NPC会影响伤害。</p>
+<h2 id="drawOffsetX-drawOriginOffsetY-drawOffsetX"><a href="#drawOffsetX-drawOriginOffsetY-drawOffsetX" class="headerlink" title="drawOffsetX, drawOriginOffsetY, drawOffsetX"></a>drawOffsetX, drawOriginOffsetY, drawOffsetX</h2><p>这些是 ModProjectile 字段，与正确将命中框居中到精灵相关。阅读<a href="https://github.com/tModLoader/tModLoader/wiki/Basic-Projectile#drawing-and-collision" target="_blank" rel="noopener">绘图和碰撞</a>了解更多信息。</p>
+<h1 id="其他-Hooks-Methods"><a href="#其他-Hooks-Methods" class="headerlink" title="其他 Hooks/Methods"></a>其他 Hooks/Methods</h1><p><a href="http://tmodloader.github.io/tModLoader/html/class_terraria_1_1_mod_loader_1_1_mod_projectile.html" target="_blank" rel="noopener">ModProjectile 文档</a>列出了您将要使用的许多其他 Hooks/Methods 来使您的射弹独一无二。例如，如果您想在弹丸击中时应用减益效果，您可以使用 OnHitNPC。要在弹丸击中 Tile 时执行某些操作，请使用 OnTileCollide。请参阅 ExampleMod 中的文档和用法以了解如何正确使用它们。</p>
+<h1 id="什么是-AI"><a href="#什么是-AI" class="headerlink" title="什么是 AI"></a>什么是 AI</h1><p>射弹的 AI 是射弹最重要的方面，它控制射弹在生成后如何移动和动作。新模组最容易通过分配 projectile.aiStyle = #; 来首先依赖其他原版射弹中已经使用过的 AI 代码。和 aiType = ProjectileID.NameHere;。这被称为模仿Vanilla弹丸。当你渴望更高级的运动时，你会意识到模仿Vanilla射弹 AI 是非常有限的。我们将在下面讨论模仿和自定义 AI。</p>
+<h1 id="使用-Vanilla-AI"><a href="#使用-Vanilla-AI" class="headerlink" title="使用 Vanilla AI"></a>使用 Vanilla AI</h1><p>我们可以使用Vanilla AI 来制作我们的射弹原型。让我们做一个回旋镖。使用与像回旋镖一样移动的Vanilla弹丸相同的aiStyle，我们可以制作回旋镖。您可以在 Vanilla Projectile Field Values 中查找回旋镖弹丸，您会发现回旋镖都使用 3 的 aiStyle：<br><img src="https://camo.githubusercontent.com/507c1c4b98cf977713066cbb25ed56bc96e857941f2615698fdb05e83132503c/68747470733a2f2f692e696d6775722e636f6d2f525361785636542e706e67" alt=""></p>
+<p>我们现在可以使用 projectile.aiStyle = 3;在我们的代码中。为了使这个回旋镖更容易，我们可以使用 projectile.CloneDefaults(ProjectileID.EnchantedBoomerang)，它也将复制所有其他默认值。这样做，你会得到一个几乎和原版射弹一样的射弹：<br><img src="https://camo.githubusercontent.com/5f1a9878e94ecadf7955bdfdb4538b982150b3c5ba4ca828d811dc32ac297d4f/68747470733a2f2f692e696d6775722e636f6d2f434c324d7761462e706e67" alt=""></p>
+<p>这是生成的代码。</p>
+<pre class="line-numbers language-csharp"><code class="language-csharp"><span class="token keyword">public</span> <span class="token keyword">override</span> <span class="token keyword">void</span> <span class="token function">SetDefaults</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    projectile<span class="token punctuation">.</span><span class="token function">CloneDefaults</span><span class="token punctuation">(</span>ProjectileID<span class="token punctuation">.</span>EnchantedBoomerang<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token comment" spellcheck="true">// projectile.aiStyle = 3; This line is not needed since CloneDefaults sets it.</span>
+    aiType <span class="token operator">=</span> ProjectileID<span class="token punctuation">.</span>EnchantedBoomerang<span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>那个灰尘很酷，但是如果你想改变那个灰尘或其他任何小东西的颜色，你不能依赖 aiStyle 和 aiType。要进行更改，您需要查阅 <a href="https://github.com/tModLoader/tModLoader/wiki/Advanced-Vanilla-Code-Adaption" target="_blank" rel="noopener">Vanilla Code Adaption 指南</a>以调整现有代码或继续阅读以了解如何从头开始编写 AI 代码。请记住，使用 projectile.aiStyle 和 aiType 是一种原型设计工具，任何在 mod 中远程有趣的东西都可能需要编写自己的 AI 代码或改编 vanilla 代码。</p>
+<h1 id="自定义-AI"><a href="#自定义-AI" class="headerlink" title="自定义 AI"></a>自定义 AI</h1><p>本节将讨论可以合并到 AI 中的元素。如果您使用 projectile.CloneDefaults 复制其他射弹默认值，请记住将 projectile.aiStyle 设置回 0。自定义 AI 的所有代码都进入 ModProjectile.AI 方法。</p>
+<h2 id="Timers"><a href="#Timers" class="headerlink" title="Timers"></a>Timers</h2><p>许多射弹使用计时器来延迟动作。通常我们使用 projectile.ai[0] 或 projectile.ai[1] 因为这些值会自动同步，但我们也可以使用类字段。在这里，我们数到 30，或者换句话说，半秒。</p>
+<pre class="line-numbers language-csharp"><code class="language-csharp">projectile<span class="token punctuation">.</span>ai<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span> <span class="token operator">+</span><span class="token operator">=</span> <span class="token number">1f</span><span class="token punctuation">;</span>
+<span class="token keyword">if</span> <span class="token punctuation">(</span>projectile<span class="token punctuation">.</span>ai<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span> <span class="token operator">>=</span> <span class="token number">30f</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token comment" spellcheck="true">// 半秒过去了。重置定时器</span>
+    projectile<span class="token punctuation">.</span>ai<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token number">0f</span><span class="token punctuation">;</span>
+    projectile<span class="token punctuation">.</span>netUpdate <span class="token operator">=</span> <span class="token keyword">true</span><span class="token punctuation">;</span>
+    <span class="token comment" spellcheck="true">// 在这里做点什么，也许换一个新的状态。</span>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h2 id="重力"><a href="#重力" class="headerlink" title="重力"></a>重力</h2><p>抛射物实际上并不存在重力，每个随着重力移动的抛射物实际上只是在其 AI 中具有代码。要实现重力，只需向 projectile.velocity.Y 添加一个小值：</p>
+<pre class="line-numbers language-csharp"><code class="language-csharp">projectile<span class="token punctuation">.</span>velocity<span class="token punctuation">.</span>Y <span class="token operator">=</span> projectile<span class="token punctuation">.</span>velocity<span class="token punctuation">.</span>Y <span class="token operator">+</span> <span class="token number">0.1f</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// 箭重力0.1f，刀重力0.4f</span>
+<span class="token keyword">if</span> <span class="token punctuation">(</span>projectile<span class="token punctuation">.</span>velocity<span class="token punctuation">.</span>Y <span class="token operator">></span> <span class="token number">16f</span><span class="token punctuation">)</span> <span class="token comment" spellcheck="true">//这个检查实现了“终端速度”。我们不希望弹丸越来越快。超过 16f 这个射弹会穿过方块，所以这个检查很有用。</span>
+<span class="token punctuation">{</span>
+    projectile<span class="token punctuation">.</span>velocity<span class="token punctuation">.</span>Y <span class="token operator">=</span> <span class="token number">16f</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h3 id="延迟重力"><a href="#延迟重力" class="headerlink" title="延迟重力"></a>延迟重力</h3><p>箭和飞刀射弹在受到重力影响之前都会等待几帧：</p>
+<pre class="line-numbers language-csharp"><code class="language-csharp">projectile<span class="token punctuation">.</span>ai<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span> <span class="token operator">+</span><span class="token operator">=</span> <span class="token number">1f</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// 在应用重力之前使用计时器等待 15 个滴答声。</span>
+<span class="token keyword">if</span> <span class="token punctuation">(</span>projectile<span class="token punctuation">.</span>ai<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span> <span class="token operator">>=</span> <span class="token number">15f</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    projectile<span class="token punctuation">.</span>ai<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token number">15f</span><span class="token punctuation">;</span>
+    projectile<span class="token punctuation">.</span>velocity<span class="token punctuation">.</span>Y <span class="token operator">=</span> projectile<span class="token punctuation">.</span>velocity<span class="token punctuation">.</span>Y <span class="token operator">+</span> <span class="token number">0.1f</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+<span class="token keyword">if</span> <span class="token punctuation">(</span>projectile<span class="token punctuation">.</span>velocity<span class="token punctuation">.</span>Y <span class="token operator">></span> <span class="token number">16f</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    projectile<span class="token punctuation">.</span>velocity<span class="token punctuation">.</span>Y <span class="token operator">=</span> <span class="token number">16f</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h2 id="抗风能力"><a href="#抗风能力" class="headerlink" title="抗风能力"></a>抗风能力</h2><p>通过减少 projectile.velocity.X 的多重性，我们可以轻松实现风阻。结合计时器有条件地产生这种效果。</p>
+<pre class="line-numbers language-csharp"><code class="language-csharp">projectile<span class="token punctuation">.</span>velocity<span class="token punctuation">.</span>X <span class="token operator">=</span> projectile<span class="token punctuation">.</span>velocity<span class="token punctuation">.</span>X <span class="token operator">*</span> <span class="token number">0.97f</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// 0.99f 用于滚动手榴弹减速。尝试 0.9f 和 0.99f 之间的值</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<h2 id="Rotation"><a href="#Rotation" class="headerlink" title="Rotation"></a>Rotation</h2><h3 id="恒定旋转"><a href="#恒定旋转" class="headerlink" title="恒定旋转"></a>恒定旋转</h3><p>我们可以增加 AI 中的 projectile.rotation 使其像回旋镖一样旋转。</p>
+<pre class="line-numbers language-csharp"><code class="language-csharp">projectile<span class="token punctuation">.</span>rotation <span class="token operator">+</span><span class="token operator">=</span> <span class="token number">0.4f</span> <span class="token operator">*</span> <span class="token punctuation">(</span><span class="token keyword">float</span><span class="token punctuation">)</span>projectile<span class="token punctuation">.</span>direction<span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<h3 id="面向前方"><a href="#面向前方" class="headerlink" title="面向前方"></a>面向前方</h3><p>沿行进方向旋转通常用于箭头等射弹。如果您的弹丸朝向正确，则无需添加 MathHelper.PiOver2（可在 Microsoft.Xna.Framework 中找到）。如果您的弹丸指向上方，则需要这样做。</p>
+<pre class="line-numbers language-csharp"><code class="language-csharp">projectile<span class="token punctuation">.</span>rotation <span class="token operator">=</span> projectile<span class="token punctuation">.</span>velocity<span class="token punctuation">.</span><span class="token function">ToRotation</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">+</span> MathHelper<span class="token punctuation">.</span>PiOver2<span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// projectile sprite faces up</span>
+<span class="token comment" spellcheck="true">// or</span>
+projectile<span class="token punctuation">.</span>rotation <span class="token operator">=</span> projectile<span class="token punctuation">.</span>velocity<span class="token punctuation">.</span><span class="token function">ToRotation</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// projectile faces sprite right</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+<h3 id="spriteDirection"><a href="#spriteDirection" class="headerlink" title="spriteDirection"></a>spriteDirection</h3><p>如果你的精灵在向左射击时是倒置的，你需要设置这个：projectile.spriteDirection = projectile.direction;有关说明和示例，请参阅<a href="https://github.com/tModLoader/tModLoader/wiki/Basic-Projectile#drawing-and-collision" target="_blank" rel="noopener">绘图和碰撞</a>。</p>
+<h2 id="Dust"><a href="#Dust" class="headerlink" title="Dust"></a>Dust</h2><p>在 AI 中生成灰尘以获得视觉效果。随机放置、灰尘和频率在视觉上令人愉悦。这是 Enchanted Boomerang 尘土生成（aiStyle 3，aiType ProjectileID.EnchantedBoomerang）：</p>
+<pre class="line-numbers language-csharp"><code class="language-csharp"><span class="token keyword">if</span> <span class="token punctuation">(</span>Main<span class="token punctuation">.</span>rand<span class="token punctuation">.</span><span class="token function">Next</span><span class="token punctuation">(</span><span class="token number">5</span><span class="token punctuation">)</span> <span class="token operator">==</span> <span class="token number">0</span><span class="token punctuation">)</span> <span class="token comment" spellcheck="true">// only spawn 20% of the time</span>
+<span class="token punctuation">{</span>
+    <span class="token keyword">int</span> choice <span class="token operator">=</span> Main<span class="token punctuation">.</span>rand<span class="token punctuation">.</span><span class="token function">Next</span><span class="token punctuation">(</span><span class="token number">3</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// choose a random number: 0, 1, or 2</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>choice <span class="token operator">==</span> <span class="token number">0</span><span class="token punctuation">)</span> <span class="token comment" spellcheck="true">// use that number to select dustID: 15, 57, or 58</span>
+    <span class="token punctuation">{</span>
+        choice <span class="token operator">=</span> <span class="token number">15</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+    <span class="token keyword">else</span> <span class="token keyword">if</span> <span class="token punctuation">(</span>choice <span class="token operator">==</span> <span class="token number">1</span><span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>
+        choice <span class="token operator">=</span> <span class="token number">57</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+    <span class="token keyword">else</span>
+    <span class="token punctuation">{</span>
+        choice <span class="token operator">=</span> <span class="token number">58</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+    <span class="token comment" spellcheck="true">// Spawn the dust</span>
+    Dust<span class="token punctuation">.</span><span class="token function">NewDust</span><span class="token punctuation">(</span>projectile<span class="token punctuation">.</span>position<span class="token punctuation">,</span> projectile<span class="token punctuation">.</span>width<span class="token punctuation">,</span> projectile<span class="token punctuation">.</span>height<span class="token punctuation">,</span> choice<span class="token punctuation">,</span> projectile<span class="token punctuation">.</span>velocity<span class="token punctuation">.</span>X <span class="token operator">*</span> <span class="token number">0.25f</span><span class="token punctuation">,</span> projectile<span class="token punctuation">.</span>velocity<span class="token punctuation">.</span>Y <span class="token operator">*</span> <span class="token number">0.25f</span><span class="token punctuation">,</span> <span class="token number">150</span><span class="token punctuation">,</span> <span class="token keyword">default</span><span class="token punctuation">(</span>Color<span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token number">0.7f</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h3 id="Dust-Trail"><a href="#Dust-Trail" class="headerlink" title="Dust Trail"></a>Dust Trail</h3><p>每次 AI 更新都会产生 1 个灰尘来完成一条灰尘轨迹。</p>
+<h2 id="Lighting"><a href="#Lighting" class="headerlink" title="Lighting"></a>Lighting</h2><p>模组制作者对照明有许多不同的定义。如果要添加粒子，请参阅“灰尘”部分。如果您希望射弹纹理不受光照影响，请参阅 ModProjectile.GetAlpha。如果你想让弹丸发出白光，你可以设置 projectile.light = 1f; （或 0 到 1 之间的任何数字）在 SetDefaults 中。最后，如果你想发出彩色光而不是产生的灰尘，照亮附近 Tile 的光，在你的 AI 方法中使用 Lighting.AddLight：</p>
+<pre class="line-numbers language-csharp"><code class="language-csharp">Lighting<span class="token punctuation">.</span><span class="token function">AddLight</span><span class="token punctuation">(</span>projectile<span class="token punctuation">.</span>Center<span class="token punctuation">,</span> <span class="token number">0.9f</span><span class="token punctuation">,</span> <span class="token number">0.1f</span><span class="token punctuation">,</span> <span class="token number">0.3f</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// R G B 值从 0 到 1f。这是猩红之心宠物的红色</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<h2 id="Sound"><a href="#Sound" class="headerlink" title="Sound"></a>Sound</h2><h3 id="重复声音"><a href="#重复声音" class="headerlink" title="重复声音"></a>重复声音</h3><p>soundDelay 字段将自动减少每一帧。检查它是否为 0，然后将其设置为一个值并播放声音将导致重复声音。此示例来自回旋镖 aiStyle (3)。</p>
+<pre class="line-numbers language-csharp"><code class="language-csharp"><span class="token keyword">if</span> <span class="token punctuation">(</span>projectile<span class="token punctuation">.</span>soundDelay <span class="token operator">==</span> <span class="token number">0</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    projectile<span class="token punctuation">.</span>soundDelay <span class="token operator">=</span> <span class="token number">8</span><span class="token punctuation">;</span>
+    Main<span class="token punctuation">.</span><span class="token function">PlaySound</span><span class="token punctuation">(</span>SoundID<span class="token punctuation">.</span>Item7<span class="token punctuation">,</span> projectile<span class="token punctuation">.</span>position<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h2 id="Splitting-Spawning-Projectiles"><a href="#Splitting-Spawning-Projectiles" class="headerlink" title="Splitting/Spawning Projectiles"></a>Splitting/Spawning Projectiles</h2><p>Crystal Bullet 和腐化者天灾 (EatersBite) 在死亡时都会生成新的投射物。我们通常会在 Kill 或 OnTileCollide 中看到生成的射弹，但我们也可以在 AI 中做到这一点。生成射弹时，我们需要注意多人游戏兼容性，并确保仅在 Main.myPlayer == projectile.owner 为 true 时生成射弹以防止出现问题。缩小射弹伤害是典型的。请参阅 Projectile.NewProjectile 以了解多人游戏的参数和用法。</p>
+<pre class="line-numbers language-csharp"><code class="language-csharp"><span class="token comment" spellcheck="true">// 此代码生成 3 个与射弹相反方向的射弹，速度随机变化。</span>
+<span class="token keyword">if</span> <span class="token punctuation">(</span>OptionallySomeCondition <span class="token operator">&amp;&amp;</span> projectile<span class="token punctuation">.</span>owner <span class="token operator">==</span> Main<span class="token punctuation">.</span>myPlayer<span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> <span class="token number">3</span><span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>
+        <span class="token comment" spellcheck="true">// 计算其他射弹的新速度。</span>
+        <span class="token comment" spellcheck="true">// 以 40% 到 70% 的速度反弹，加上 -8 到 8 之间的随机值</span>
+        <span class="token keyword">float</span> speedX <span class="token operator">=</span> <span class="token operator">-</span>projectile<span class="token punctuation">.</span>velocity<span class="token punctuation">.</span>X <span class="token operator">*</span> Main<span class="token punctuation">.</span>rand<span class="token punctuation">.</span><span class="token function">NextFloat</span><span class="token punctuation">(</span><span class="token punctuation">.</span><span class="token number">4f</span><span class="token punctuation">,</span> <span class="token punctuation">.</span><span class="token number">7f</span><span class="token punctuation">)</span> <span class="token operator">+</span> Main<span class="token punctuation">.</span>rand<span class="token punctuation">.</span><span class="token function">NextFloat</span><span class="token punctuation">(</span><span class="token operator">-</span><span class="token number">8f</span><span class="token punctuation">,</span> <span class="token number">8f</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">float</span> speedY <span class="token operator">=</span> <span class="token operator">-</span>projectile<span class="token punctuation">.</span>velocity<span class="token punctuation">.</span>Y <span class="token operator">*</span> Main<span class="token punctuation">.</span>rand<span class="token punctuation">.</span><span class="token function">Next</span><span class="token punctuation">(</span><span class="token number">40</span><span class="token punctuation">,</span> <span class="token number">70</span><span class="token punctuation">)</span> <span class="token operator">*</span> <span class="token number">0.01f</span> <span class="token operator">+</span> Main<span class="token punctuation">.</span>rand<span class="token punctuation">.</span><span class="token function">Next</span><span class="token punctuation">(</span><span class="token operator">-</span><span class="token number">20</span><span class="token punctuation">,</span> <span class="token number">21</span><span class="token punctuation">)</span> <span class="token operator">*</span> <span class="token number">0.4f</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// This is Vanilla code, a little more obscure.</span>
+        <span class="token comment" spellcheck="true">// 生成射弹。</span>
+        Projectile<span class="token punctuation">.</span><span class="token function">NewProjectile</span><span class="token punctuation">(</span>projectile<span class="token punctuation">.</span>position<span class="token punctuation">.</span>X <span class="token operator">+</span> speedX<span class="token punctuation">,</span> projectile<span class="token punctuation">.</span>position<span class="token punctuation">.</span>Y <span class="token operator">+</span> speedY<span class="token punctuation">,</span> speedX<span class="token punctuation">,</span> speedY<span class="token punctuation">,</span> <span class="token number">90</span><span class="token punctuation">,</span> <span class="token punctuation">(</span><span class="token keyword">int</span><span class="token punctuation">)</span><span class="token punctuation">(</span>projectile<span class="token punctuation">.</span>damage <span class="token operator">*</span> <span class="token number">0.5</span><span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token number">0f</span><span class="token punctuation">,</span> projectile<span class="token punctuation">.</span>owner<span class="token punctuation">,</span> <span class="token number">0f</span><span class="token punctuation">,</span> <span class="token number">0f</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h2 id="Homing"><a href="#Homing" class="headerlink" title="Homing"></a>Homing</h2><p>// TODO 简而言之：您可以循环 Main.npc，并选择一个有效的目标。然后，对于您的射弹所具有的目标，您调整射弹的速度，使其向目标移动。</p>
+<h2 id="Follow-Mouse"><a href="#Follow-Mouse" class="headerlink" title="Follow Mouse"></a>Follow Mouse</h2><p>// TODO 如果你想让弹丸正好在光标上，只需在 AI 中将 projectile.position 设置为 Main.MouseWorld： projectile.position = Main.MouseWorld</p>
+<h2 id="Held-Projectile"><a href="#Held-Projectile" class="headerlink" title="Held Projectile"></a>Held Projectile</h2><p>// TODO</p>
+<h2 id="Fade-In-Out"><a href="#Fade-In-Out" class="headerlink" title="Fade In/Out"></a>Fade In/Out</h2><p>许多子弹会逐渐消失，因此当它们产生时它们不会与它们出现的枪口重叠。您可以使用 projectile.alpha = 255 将弹丸设置为透明生成；在 SetDefaults 中。</p>
+<pre class="line-numbers language-csharp"><code class="language-csharp"><span class="token keyword">if</span> <span class="token punctuation">(</span>projectile<span class="token punctuation">.</span>alpha <span class="token operator">></span> <span class="token number">0</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    projectile<span class="token punctuation">.</span>alpha <span class="token operator">-</span><span class="token operator">=</span> <span class="token number">15</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// Decrease alpha, increasing visibility.</span>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+<p>ExampleAnimatedPierce 显示同时使用淡入和淡出。</p>
+<h2 id="Animation-Multiple-Frames"><a href="#Animation-Multiple-Frames" class="headerlink" title="Animation/Multiple Frames"></a>Animation/Multiple Frames</h2><p>弹丸动画，切换要绘制精灵的哪一帧，发生在 AI 中。确保设置 Main.projFrames[projectile.type] = #;首先在 SetStaticDefaults 中。您可以将 projectile.frame 设置为您想要绘制的任何帧。</p>
+<h3 id="Looping-Cycling"><a href="#Looping-Cycling" class="headerlink" title="Looping/Cycling"></a>Looping/Cycling</h3><p>您可以使用 projectile.frameCounter 和 Main.projFrames[projectile.type] 来实现循环动画。示例：ExampleAnimatedPierce</p>
+<pre class="line-numbers language-csharp"><code class="language-csharp"><span class="token comment" spellcheck="true">// 循环遍历 4 个动画帧，每个帧花费 5 个刻度。</span>
+<span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">++</span>projectile<span class="token punctuation">.</span>frameCounter <span class="token operator">>=</span> <span class="token number">5</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    projectile<span class="token punctuation">.</span>frameCounter <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">++</span>projectile<span class="token punctuation">.</span>frame <span class="token operator">>=</span> Main<span class="token punctuation">.</span>projFrames<span class="token punctuation">[</span>projectile<span class="token punctuation">.</span>type<span class="token punctuation">]</span><span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>
+        projectile<span class="token punctuation">.</span>frame <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+<span class="token comment" spellcheck="true">// Or, more compactly:</span>
+<span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">++</span>projectile<span class="token punctuation">.</span>frameCounter <span class="token operator">>=</span> <span class="token number">5</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    projectile<span class="token punctuation">.</span>frameCounter <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+    projectile<span class="token punctuation">.</span>frame <span class="token operator">=</span> <span class="token operator">++</span>projectile<span class="token punctuation">.</span>frame <span class="token operator">%</span> Main<span class="token punctuation">.</span>projFrames<span class="token punctuation">[</span>projectile<span class="token punctuation">.</span>type<span class="token punctuation">]</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h2 id="例子"><a href="#例子" class="headerlink" title="例子"></a>例子</h2><h3 id="AiStyle-1"><a href="#AiStyle-1" class="headerlink" title="AiStyle 1"></a>AiStyle 1</h3><p>弹丸AiStyle 1，用于游戏中的许多简单弹丸，长度超过3000行。如果您尝试使用 <a href="https://github.com/tModLoader/tModLoader/wiki/Advanced-Vanilla-Code-Adaption" target="_blank" rel="noopener">Advanced Vanilla Code Adaption</a> 指南调整此 AI，您可能会感到沮丧。这是没有所有 ProjectileID 特定代码的 AiStyle 的简要概述：</p>
+<pre class="line-numbers language-csharp"><code class="language-csharp"><span class="token comment" spellcheck="true">// 可选：如果弹丸应该淡入，淡入：</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>projectile<span class="token punctuation">.</span>alpha <span class="token operator">></span> <span class="token number">0</span><span class="token punctuation">)</span>
+        projectile<span class="token punctuation">.</span>alpha <span class="token operator">-</span><span class="token operator">=</span> <span class="token number">15</span><span class="token punctuation">;</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>projectile<span class="token punctuation">.</span>alpha <span class="token operator">&lt;</span> <span class="token number">0</span><span class="token punctuation">)</span>
+        projectile<span class="token punctuation">.</span>alpha <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+<span class="token comment" spellcheck="true">// 设置旋转面向当前轨迹：</span>
+projectile<span class="token punctuation">.</span>rotation <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token keyword">float</span><span class="token punctuation">)</span>Math<span class="token punctuation">.</span><span class="token function">Atan2</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token keyword">double</span><span class="token punctuation">)</span>projectile<span class="token punctuation">.</span>velocity<span class="token punctuation">.</span>Y<span class="token punctuation">,</span> <span class="token punctuation">(</span><span class="token keyword">double</span><span class="token punctuation">)</span>projectile<span class="token punctuation">.</span>velocity<span class="token punctuation">.</span>X<span class="token punctuation">)</span> <span class="token operator">+</span> <span class="token number">1.57f</span><span class="token punctuation">;</span>
+<span class="token comment" spellcheck="true">// 或者，这个版本更容易阅读：</span>
+projectile<span class="token punctuation">.</span>rotation <span class="token operator">=</span> projectile<span class="token punctuation">.</span>velocity<span class="token punctuation">.</span><span class="token function">ToRotation</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">+</span> MathHelper<span class="token punctuation">.</span>PiOver2<span class="token punctuation">;</span>
+<span class="token comment" spellcheck="true">// 限制向下的速度，以防你向这个射弹添加重力</span>
+<span class="token keyword">if</span> <span class="token punctuation">(</span>projectile<span class="token punctuation">.</span>velocity<span class="token punctuation">.</span>Y <span class="token operator">></span> <span class="token number">16f</span><span class="token punctuation">)</span>
+    projectile<span class="token punctuation">.</span>velocity<span class="token punctuation">.</span>Y <span class="token operator">=</span> <span class="token number">16f</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>如您所见，没有所有 ProjectileID 特定代码的 1 的 Projectile AiStyle 只有几行代码，并且与上面的淡入和旋转示例相匹配。</p>
+<h1 id="Bounce-and-OnTileCollide"><a href="#Bounce-and-OnTileCollide" class="headerlink" title="Bounce and OnTileCollide"></a>Bounce and OnTileCollide</h1><p>许多射弹在与实心 Tile 碰撞时会反弹。这种行为在技术上不是 AI 的一部分，因为它发生在称为 OnTileCollide 的方法中。默认情况下，当弹丸与 Tile 碰撞时，速度会迅速降低，这样弹丸就会停下来，弹丸就会被杀死。通过覆盖 ModProjectile.OnTileCollide 并返回 false，我们可以避免该逻辑并实现我们自己的逻辑。如果我们返回 true，我们可以在保留原版逻辑的同时添加额外的逻辑。最常见的用途是让你的弹丸反弹。一些弹丸通过失去一些速度而真实地弹跳，而另一些弹丸则不切实际地弹跳并在新的方向上保持其原始速度。一些射弹的反弹有限，这通常是通过利用 projectile.penetrate 来完成的。当覆盖 ModProjectile.OnTileCollide 时，杀死射弹、产生 Tile 碰撞灰尘和播放碰撞声音都是可能需要实现的东西。</p>
+<h2 id="OnTileCollide-示例"><a href="#OnTileCollide-示例" class="headerlink" title="OnTileCollide 示例"></a>OnTileCollide 示例</h2><p><a href="https://github.com/tModLoader/tModLoader/blob/master/ExampleMod/Projectiles/ExampleBullet.cs#L34" target="_blank" rel="noopener">ExampleBullet.cs</a> 展示了有限的反弹、Tile 碰撞灰尘、Tile 碰撞声音和弹跳，同时完全保持速度。</p>
+<p><a href="https://github.com/tModLoader/tModLoader/blob/master/ExampleMod/Projectiles/ExampleCloneProjectile.cs#L24" target="_blank" rel="noopener">ExampleCloneProjectile.cs</a> 展示了返回 true 以保留原始碰撞逻辑，同时还产生少量次要射弹。</p>
+<p><a href="https://github.com/tModLoader/tModLoader/blob/master/ExampleMod/Projectiles/SparklingBall.cs#L27" target="_blank" rel="noopener">SparklingBall.cs</a> 与 <a href="https://github.com/tModLoader/tModLoader/blob/master/ExampleMod/Projectiles/ExampleBullet.cs#L34" target="_blank" rel="noopener">ExampleBullet.cs</a> 类似，不同之处在于速度按 0.75f 缩放，从而在每次反弹时减慢弹丸的速度。</p>
+<p><a href="https://github.com/tModLoader/tModLoader/blob/master/ExampleMod/Projectiles/ExampleFlailProjectile.cs#L134" target="_blank" rel="noopener">ExampleFlailProjectile.cs</a> 也类似，只是速度降低到原来速度的五分之一，让武器感觉很重。此代码还显示了使用弹丸的速度来影响声音和灰尘的产生。这允许连枷仅在速度足够快的情况下才会发出碰撞声音，而如果连枷只是缓慢滚动则静音。 ExampleFlailProjectile 也跳过使用 projectile.projectile 操作，因为它不会像 SparklingBall 和 ExampleBullet 那样在弹跳一定次数后杀死自己。</p>
+<p>通过上述示例，您可以制作所需的 Tile 碰撞行为。如果您尝试克隆原版射弹行为，请在 Projectile.HandleMovement 中搜索 ProjectileID 编号或射弹 aiStyle 编号以查找相关代码。改编指南中的 <a href="https://github.com/tModLoader/tModLoader/wiki/Advanced-Vanilla-Code-Adaption#example-item-and-projectile-shadowbeam-staff-clone" target="_blank" rel="noopener">Shadowbeam Staff Clone</a> 示例显示了查找 AI 代码未涵盖的普通代码片段所需的这一思考过程和其他思考过程。</p>
+<h1 id="Drawing-and-Collision"><a href="#Drawing-and-Collision" class="headerlink" title="Drawing and Collision"></a>Drawing and Collision</h1><p>你可能会发现自己注意到你的射弹在不应该撞到墙壁的时候会撞到墙壁，或者有一个奇怪的碰撞箱。首先，值得重申的是 projectile.width 和 projectile.height 对应于射弹的碰撞箱，而不是使用的精灵。您几乎从不希望宽度或高度不同，它应该是方形的。你也永远不想使用 projectile.scale 因为原版绘图代码并没有真正正确地考虑到它。 sprite 的绘制试图用 sprite 覆盖 hitbox，这个 sprite 的绘制受到 Main.DrawProj 方法中完成的各种数学位的影响。</p>
+<h2 id="Vertical-Sprite-Example"><a href="#Vertical-Sprite-Example" class="headerlink" title="Vertical Sprite Example"></a>Vertical Sprite Example</h2><p>让我们通过这个例子来探索碰撞和绘图问题并努力解决它们。这是精灵，它是 48x70 像素：<br><img src="https://camo.githubusercontent.com/e90932fdde6de995464aeb36a3d1fd699eb606133f60cad535a0af811887935f/68747470733a2f2f692e696d6775722e636f6d2f79344f634a41762e706e67" alt=""><br>这个 ModProjectile 的重要部分如下：</p>
+<pre class="line-numbers language-csharp"><code class="language-csharp"><span class="token comment" spellcheck="true">// SetDefatults</span>
+projectile<span class="token punctuation">.</span>width <span class="token operator">=</span> <span class="token number">8</span><span class="token punctuation">;</span>
+projectile<span class="token punctuation">.</span>height <span class="token operator">=</span> <span class="token number">8</span><span class="token punctuation">;</span>
+<span class="token comment" spellcheck="true">// AI</span>
+projectile<span class="token punctuation">.</span>rotation <span class="token operator">=</span> projectile<span class="token punctuation">.</span>velocity<span class="token punctuation">.</span><span class="token function">ToRotation</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">+</span> MathHelper<span class="token punctuation">.</span><span class="token function">ToRadians</span><span class="token punctuation">(</span><span class="token number">90f</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>我们的目标是让这个射弹的黄色部分成为碰撞箱。黄色区域是 8 x 8 像素，所以我们已经将宽度和高度设置为 8。那里的 projectile.rotation 代码将旋转设置为速度，同时添加 90 度旋转，因为我们使用的精灵碰巧面朝上，而不是游戏预期的向右。在本指南中，我们将使用 <a href="https://forums.terraria.org/index.php?threads/modders-toolkit-a-mod-for-modders-doing-modding.55738/" target="_blank" rel="noopener">Modders Toolkit</a> mod 来可视化命中框。这非常有用。</p>
+<p>在这里，我们看到碰撞框，黄色方块，与我们的精灵的尖端不匹配：<a href="https://gfycat.com/SimpleMinorImperialeagle" target="_blank" rel="noopener">高清视频</a><br><img src="https://camo.githubusercontent.com/67da99f7836624d24205426df162fa44f2060da111a54a3fd9cae5f5c8ecb4a9/68747470733a2f2f7468756d62732e6766796361742e636f6d2f53696d706c654d696e6f72496d70657269616c6561676c652d736d616c6c2e676966" alt=""></p>
+<p>vanilla 代码所做的数学运算有点令人困惑，但基本上我们需要将 drawOffsetX 和 drawOriginOffsetY 设置为偏移我们的精灵绘制的值，以尝试将精灵正确放置在命中框上。如果您尝试这样做，请使用 Modders Toolkit 更改游戏中的偏移值或使用编辑并继续调整游戏中的值。另一种方法是仅在图形程序中对精灵本身进行测量：<br><img src="https://camo.githubusercontent.com/1e36d8d6b9576f9c7815842c5271dcd6fa3f32e061a5031b1935c718d254c1ea/68747470733a2f2f692e696d6775722e636f6d2f6d3544786b426d2e706e67" alt=""></p>
+<p>在这里，我们看到使用 Modders Toolkit 测试各种值。确保在您的 SetDefaults 代码中复制这些值：<a href="https://camo.githubusercontent.com/d3b84c4db81b1fe4945faff5e15403273a915acb2894929779176e01dbe851d1/68747470733a2f2f7468756d62732e6766796361742e636f6d2f4d696e7479436861726d696e67436f70706572686561642d736d616c6c2e676966" target="_blank" rel="noopener">高清视频</a><br><img src="https://camo.githubusercontent.com/d3b84c4db81b1fe4945faff5e15403273a915acb2894929779176e01dbe851d1/68747470733a2f2f7468756d62732e6766796361742e636f6d2f4d696e7479436861726d696e67436f70706572686561642d736d616c6c2e676966" alt=""></p>
+<p>经过一些实验或测量，我们知道添加 drawOffsetX = -20;对此 ModProjectile.SetDefaults 将修复绘图相对于命中框的位置。</p>
+<p>现在让我们尝试将 hitbox 定位在精灵的蓝色部分上。这一次，让我们使用<a href="https://github.com/tModLoader/tModLoader/wiki/Why-Use-an-IDE#edit-and-continue" target="_blank" rel="noopener">编辑并继续</a>来完成此操作。在下面的剪辑中，您可以看到我们测试新值的速度有多快： <a href="https://gfycat.com/WebbedUntimelyHarborseal" target="_blank" rel="noopener">高质量视频</a><br><img src="https://camo.githubusercontent.com/ec354146b5e2cf2ae6e9f958c225a8976f4ebbd043850acbd366212f0696a5a2/68747470733a2f2f7468756d62732e6766796361742e636f6d2f576562626564556e74696d656c79486172626f727365616c2d736d616c6c2e676966" alt=""><br>如您所见，我们添加了 drawOriginOffsetY = -16;将碰撞箱定位在精灵的下方。</p>
+<h3 id="Fixing-upside-down-sprite-problem"><a href="#Fixing-upside-down-sprite-problem" class="headerlink" title="Fixing upside-down sprite problem"></a>Fixing upside-down sprite problem</h3><p>您可能已经注意到，当向左侧发射时，精灵是颠倒的。请记住，在我们的 AI 中，我们有这行代码：projectile.rotation = projectile.velocity.ToRotation() + MathHelper.ToRadians(90f);。如果我们将精灵向左旋转，那么它是颠倒的。我们可以用 spriteDirection 解决这个问题。 spriteDirection 将水平翻转精灵的绘图。要实现这一点，只需添加 projectile.spriteDirection = projectile.direction;到 projectile.rotation = 行之后的 AI 代码。<br>未修复:<br><img src="https://camo.githubusercontent.com/1890e343532b2167208182fb792490093144707c32ea5ceb204ac3eb8a981e50/68747470733a2f2f692e696d6775722e636f6d2f734b557139347a2e706e67" alt=""></p>
+<p>已修复:<br><img src="https://camo.githubusercontent.com/50ae94fce4701dd258883d5046ed5c7f0466e59a9e5b1e3e8171954b501878a9/68747470733a2f2f692e696d6775722e636f6d2f7733414c6844582e706e67" alt=""></p>
+<h2 id="Horizontal-Sprite-Example"><a href="#Horizontal-Sprite-Example" class="headerlink" title="Horizontal Sprite Example"></a>Horizontal Sprite Example</h2><p>如果你的精灵是水平方向的，情况会发生一些变化。这是我们新的水平精灵，它现在是 70x48 并且水平定向，指向右侧而不是像以前那样指向上方：<br><img src="https://camo.githubusercontent.com/4e315f1f5909320efcaa4aa7ce7aa774ec16f92106227483e24e0e175e6cdad7/68747470733a2f2f692e696d6775722e636f6d2f65747a627a73302e706e67" alt=""><br>再一次，我们可以看到 hitbox 没有对齐：<br><img src="https://camo.githubusercontent.com/9cb069d29281f657fbc1aecdb7275b0d8bffd1eb4d0408bb3d9aa2fcf543ef54/68747470733a2f2f7468756d62732e6766796361742e636f6d2f436f6e6675736564536172646f6e6963436f77626972642d736d616c6c2e676966" alt=""></p>
+<p>与水平示例不同，这次我们设置 projectile.rotation = projectile.velocity.ToRotation();直接而不是增加额外的 90 度。经过一些实验，我们得出了以下提示的碰撞框：</p>
+<pre class="line-numbers language-csharp"><code class="language-csharp">drawOffsetX <span class="token operator">=</span> <span class="token operator">-</span><span class="token number">62</span><span class="token punctuation">;</span>
+drawOriginOffsetY <span class="token operator">=</span> <span class="token operator">-</span><span class="token number">20</span><span class="token punctuation">;</span> 
+drawOriginOffsetX <span class="token operator">=</span> <span class="token number">31</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+<p>这些值有点奇怪，因为泰拉瑞亚正在做一些数学运算，所以这里是计算它们的算法：</p>
+<pre class="line-numbers language-csharp"><code class="language-csharp">drawOffsetX <span class="token operator">=</span> Negative X pixel position of the top left corner of the intended hitbox
+drawOriginOffsetY <span class="token operator">=</span> Negative Y pixel position of the top left corner of the intended hitbox
+drawOriginOffsetX <span class="token operator">=</span> X pixel position of center of hitbox minus Texture Width divided by <span class="token number">2</span> <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+<p>这是一个图表：<br><img src="https://camo.githubusercontent.com/d9baf48d02d866637c9516dfad0839b02f8699af166332b121d70dc691c2a887/68747470733a2f2f692e696d6775722e636f6d2f7a516678584d332e706e67" alt=""><br>如果您不喜欢与原版弹丸渲染代码作斗争，您可以随时自己绘制弹丸，如 <a href="https://github.com/tModLoader/tModLoader/blob/master/ExampleMod/Projectiles/ExampleAnimatedPierce.cs#L114" target="_blank" rel="noopener">ExampleAnimatedPierce Projectile</a> 中所示</p>
+<h3 id="Fixing-upside-down-sprite-problem-again"><a href="#Fixing-upside-down-sprite-problem-again" class="headerlink" title="Fixing upside-down sprite problem again"></a>Fixing upside-down sprite problem again</h3><p>对于垂直精灵，使用 projectile.spriteDirection 是有效的，因为它控制了射弹精灵的水平翻转。使用水平精灵，水平翻转使精灵面朝后移动：<br><img src="https://camo.githubusercontent.com/545bd7f90d30f567a653f1e1b162b5d86e852c87a14e319a97f88af7e03a37ba/68747470733a2f2f692e696d6775722e636f6d2f76664b72527a5a2e706e67" alt=""><br>为了解决这个问题，我们需要动态调整偏移量，并有条件地将 180 度或 Pi 添加到旋转中。这是代码：</p>
+<pre class="line-numbers language-csharp"><code class="language-csharp"><span class="token comment" spellcheck="true">// 将方向和 spriteDirection 都设置为 1 或 -1（分别为右和左）</span>
+<span class="token comment" spellcheck="true">// projectile.direction 在 Projectile.Update 中自动设置正确，但我们需要在这里设置它，否则纹理将在第一帧绘制不正确。</span>
+projectile<span class="token punctuation">.</span>spriteDirection <span class="token operator">=</span> projectile<span class="token punctuation">.</span>direction <span class="token operator">=</span> <span class="token punctuation">(</span>projectile<span class="token punctuation">.</span>velocity<span class="token punctuation">.</span>X <span class="token operator">></span> <span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">ToDirectionInt</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token comment" spellcheck="true">// 如果朝左，则将 Pi 添加到旋转中以更正绘图</span>
+projectile<span class="token punctuation">.</span>rotation <span class="token operator">=</span> projectile<span class="token punctuation">.</span>velocity<span class="token punctuation">.</span><span class="token function">ToRotation</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">+</span> <span class="token punctuation">(</span>projectile<span class="token punctuation">.</span>spriteDirection <span class="token operator">==</span> <span class="token number">1</span> <span class="token operator">?</span> <span class="token number">0f</span> <span class="token punctuation">:</span> MathHelper<span class="token punctuation">.</span>Pi<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">if</span> <span class="token punctuation">(</span>projectile<span class="token punctuation">.</span>spriteDirection <span class="token operator">==</span> <span class="token number">1</span><span class="token punctuation">)</span> <span class="token comment" spellcheck="true">// facing right</span>
+<span class="token punctuation">{</span>
+    drawOffsetX <span class="token operator">=</span> <span class="token operator">-</span><span class="token number">62</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// 这些值与 SetDefaults 中的值匹配</span>
+    drawOriginOffsetY <span class="token operator">=</span> <span class="token operator">-</span><span class="token number">20</span><span class="token punctuation">;</span>
+    drawOriginOffsetX <span class="token operator">=</span> <span class="token number">31</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+<span class="token keyword">else</span>
+<span class="token punctuation">{</span>
+    <span class="token comment" spellcheck="true">// Facing left.</span>
+    <span class="token comment" spellcheck="true">// 如果您在绘图程序中翻转精灵，您可以计算出这些值。</span>
+    drawOffsetX <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// 0 因为现在hitbox的左上角在最左边的像素上。</span>
+    drawOriginOffsetY <span class="token operator">=</span> <span class="token operator">-</span><span class="token number">20</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// doesn't change</span>
+    drawOriginOffsetX <span class="token operator">=</span> <span class="token operator">-</span><span class="token number">31</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// 数学计算出这是另一个值的负数。</span>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p><img src="https://camo.githubusercontent.com/564dc03d1f5c3a2e8686769b151af5cbf5a918e6532ce51d791b88a35617bd93/68747470733a2f2f692e696d6775722e636f6d2f464b66687451302e706e67" alt=""><br>希望这些答案可以帮助您解决弹丸碰撞箱和绘图问题。</p>
+
+        </div>
+        
+<blockquote class="copyright">
+    <p><strong>本文链接 : </strong><a class="permalink" href="https://keyboard3.github.io/basic-projectile/">https://keyboard3.github.io/basic-projectile/</a></p>
+    <p><strong>This article is available under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank" rel="noopener noreferrer">Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0)</a> License</strong></p>
+</blockquote>
+
+
+    </article>
+    
+    <section id="comments">
+        
+            <div id="vcomments"></div>
+        
+    </section>
+
+
+    
+
+</main>
+
+
+<aside style="" id="sidebar" class="aside aside-fixture">
+    <div class="toc-sidebar">
+        <nav id="toc" class="article-toc">
+            <h3 class="toc-title">文章目录</h3>
+            <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#什么是弹丸"><span class="toc-number">1.</span> <span class="toc-text">什么是弹丸</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#怎么使用弹丸"><span class="toc-number">2.</span> <span class="toc-text">怎么使用弹丸</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#制作弹丸"><span class="toc-number">3.</span> <span class="toc-text">制作弹丸</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#我找不到我的投射物"><span class="toc-number">4.</span> <span class="toc-text">我找不到我的投射物</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#SetDefaults"><span class="toc-number">5.</span> <span class="toc-text">SetDefaults</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#projectile-damage"><span class="toc-number">5.1.</span> <span class="toc-text">projectile.damage</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#drawOffsetX-drawOriginOffsetY-drawOffsetX"><span class="toc-number">5.2.</span> <span class="toc-text">drawOffsetX, drawOriginOffsetY, drawOffsetX</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#其他-Hooks-Methods"><span class="toc-number">6.</span> <span class="toc-text">其他 Hooks&#x2F;Methods</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#什么是-AI"><span class="toc-number">7.</span> <span class="toc-text">什么是 AI</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#使用-Vanilla-AI"><span class="toc-number">8.</span> <span class="toc-text">使用 Vanilla AI</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#自定义-AI"><span class="toc-number">9.</span> <span class="toc-text">自定义 AI</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Timers"><span class="toc-number">9.1.</span> <span class="toc-text">Timers</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#重力"><span class="toc-number">9.2.</span> <span class="toc-text">重力</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#延迟重力"><span class="toc-number">9.2.1.</span> <span class="toc-text">延迟重力</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#抗风能力"><span class="toc-number">9.3.</span> <span class="toc-text">抗风能力</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Rotation"><span class="toc-number">9.4.</span> <span class="toc-text">Rotation</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#恒定旋转"><span class="toc-number">9.4.1.</span> <span class="toc-text">恒定旋转</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#面向前方"><span class="toc-number">9.4.2.</span> <span class="toc-text">面向前方</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#spriteDirection"><span class="toc-number">9.4.3.</span> <span class="toc-text">spriteDirection</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Dust"><span class="toc-number">9.5.</span> <span class="toc-text">Dust</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Dust-Trail"><span class="toc-number">9.5.1.</span> <span class="toc-text">Dust Trail</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Lighting"><span class="toc-number">9.6.</span> <span class="toc-text">Lighting</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Sound"><span class="toc-number">9.7.</span> <span class="toc-text">Sound</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#重复声音"><span class="toc-number">9.7.1.</span> <span class="toc-text">重复声音</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Splitting-Spawning-Projectiles"><span class="toc-number">9.8.</span> <span class="toc-text">Splitting&#x2F;Spawning Projectiles</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Homing"><span class="toc-number">9.9.</span> <span class="toc-text">Homing</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Follow-Mouse"><span class="toc-number">9.10.</span> <span class="toc-text">Follow Mouse</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Held-Projectile"><span class="toc-number">9.11.</span> <span class="toc-text">Held Projectile</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Fade-In-Out"><span class="toc-number">9.12.</span> <span class="toc-text">Fade In&#x2F;Out</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Animation-Multiple-Frames"><span class="toc-number">9.13.</span> <span class="toc-text">Animation&#x2F;Multiple Frames</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Looping-Cycling"><span class="toc-number">9.13.1.</span> <span class="toc-text">Looping&#x2F;Cycling</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#例子"><span class="toc-number">9.14.</span> <span class="toc-text">例子</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#AiStyle-1"><span class="toc-number">9.14.1.</span> <span class="toc-text">AiStyle 1</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Bounce-and-OnTileCollide"><span class="toc-number">10.</span> <span class="toc-text">Bounce and OnTileCollide</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#OnTileCollide-示例"><span class="toc-number">10.1.</span> <span class="toc-text">OnTileCollide 示例</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Drawing-and-Collision"><span class="toc-number">11.</span> <span class="toc-text">Drawing and Collision</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Vertical-Sprite-Example"><span class="toc-number">11.1.</span> <span class="toc-text">Vertical Sprite Example</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Fixing-upside-down-sprite-problem"><span class="toc-number">11.1.1.</span> <span class="toc-text">Fixing upside-down sprite problem</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Horizontal-Sprite-Example"><span class="toc-number">11.2.</span> <span class="toc-text">Horizontal Sprite Example</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Fixing-upside-down-sprite-problem-again"><span class="toc-number">11.2.1.</span> <span class="toc-text">Fixing upside-down sprite problem again</span></a></li></ol></li></ol></li></ol>
+        </nav>
+    </div>
+</aside>
+
+
+
+
+
+        </section>
+        <footer class="hidden lg:block fixed bottom-0 left-0 sm:w-1/12 lg:w-1/6 bg-gray-100 z-40">
+    
+    <div class="footer-social-links">
+        
+            <a href="https://github.com/keyboard3" target="_blank" rel="noopener">
+                <i class="iconfont icon-github"></i>
+            </a>
+        
+            <a href="/blog/atom.xml">
+                <i class="iconfont icon-rss"></i>
+            </a>
+        
+    </div>
+    
+    
+        <p class="footer-custom">浙ICP备2022008282号</p>
+        <p class="theme-brand">Theme by <a href="https://github.com/fengkx/hexo-theme-purer" target="_blank" rel="nofollow noopener noreferrer noopener">hexo-theme-purer</a></p>
+    
+</footer>
+
+        <div id="mask" class="hidden mask fixed inset-0 bg-gray-900 opacity-75 z-40"></div>
+        <div id="search-view-container" class="hidden shadow-xl"></div>
+        
+<script src="/blog/js/dom-event.min.js"></script>
+
+
+
+<script src="/blog/js/local-search.min.js"></script>
+
+
+    <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+<script src="//cdn.jsdelivr.net/npm/valine"></script>
+<script type="text/javascript">
+var GUEST = ['nick', 'mail', 'link'];
+var meta = '';
+meta = meta.split(',').filter(function(item) {
+  return GUEST.indexOf(item) > -1;
+});
+new Valine({
+  el: '#vcomments',
+  verify: 'false',
+  notify: 'false',
+  appId: '',
+  appKey: '',
+  placeholder: 'just go go',
+  avatar: 'mm',
+  meta: meta,
+  pageSize: '10' || 10,
+  visitor: 'true',
+  lang: ''
+});
+</script>
+
+
+
+    <script src="//cdn.jsdelivr.net/npm/lightgallery.js@1.1.3/dist/js/lightgallery.min.js"></script>
+    
+<script src="/blog/js/light-gallery.min.js"></script>
+
+
+
+
+
+
+    </body>
+</html>

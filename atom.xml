@@ -6,7 +6,7 @@
   <link href="/blog/atom.xml" rel="self"/>
   
   <link href="https://keyboard3.github.io/"/>
-  <updated>2022-04-05T13:40:24.339Z</updated>
+  <updated>2022-05-09T06:56:48.246Z</updated>
   <id>https://keyboard3.github.io/</id>
   
   <author>
@@ -17,11 +17,11 @@
   <generator uri="https://hexo.io/">Hexo</generator>
   
   <entry>
-    <title>如何在Mac上安装闪迪安全</title>
-    <link href="https://keyboard3.github.io/how-to-install-sandisk-security/"/>
-    <id>https://keyboard3.github.io/how-to-install-sandisk-security/</id>
-    <published>2022-04-05T06:47:26.000Z</published>
-    <updated>2022-04-05T13:40:24.339Z</updated>
+    <title>NPC 生成基础</title>
+    <link href="https://keyboard3.github.io/basic-npc-spawning/"/>
+    <id>https://keyboard3.github.io/basic-npc-spawning/</id>
+    <published>2022-04-27T03:10:23.000Z</published>
+    <updated>2022-05-09T06:56:48.246Z</updated>
     
     <summary type="html">
     
@@ -29,10 +29,8 @@
       
         
         
-          &lt;p&gt;SanDisk Security 允许设置密码保护和硬件加密，以保护驱动器免受未经授权的使用或访问。&lt;/p&gt;
-&lt;p&gt;SanDisk Security for Mac 入门：&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;p&gt;重要: SanDisk Security
+          &lt;p&gt;&lt;a href=&quot;https://github.com/tModLoader/tModLoader/wiki/Basic-NPC-Spawning&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;Basic NPC Spawning&lt;/a&gt;&lt;/p&gt;
+&lt;h1
         
       
     
@@ -42,9 +40,137 @@
     
       <category term="翻译" scheme="https://keyboard3.github.io/tags/%E7%BF%BB%E8%AF%91/"/>
     
-      <category term="disk" scheme="https://keyboard3.github.io/tags/disk/"/>
+      <category term="tModLoader" scheme="https://keyboard3.github.io/tags/tModLoader/"/>
     
-      <category term="security" scheme="https://keyboard3.github.io/tags/security/"/>
+      <category term="terraria" scheme="https://keyboard3.github.io/tags/terraria/"/>
+    
+      <category term="c#" scheme="https://keyboard3.github.io/tags/c/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>NPC 掉落和战利品基础</title>
+    <link href="https://keyboard3.github.io/basic-npc-drops-and-loot/"/>
+    <id>https://keyboard3.github.io/basic-npc-drops-and-loot/</id>
+    <published>2022-04-27T02:33:23.000Z</published>
+    <updated>2022-05-09T06:56:48.245Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;p&gt;&lt;a href=&quot;https://github.com/tModLoader/tModLoader/wiki/Basic-NPC-Drops-and-Loot&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;Basic NPC Drops and
+        
+      
+    
+    </summary>
+    
+    
+    
+      <category term="翻译" scheme="https://keyboard3.github.io/tags/%E7%BF%BB%E8%AF%91/"/>
+    
+      <category term="tModLoader" scheme="https://keyboard3.github.io/tags/tModLoader/"/>
+    
+      <category term="terraria" scheme="https://keyboard3.github.io/tags/terraria/"/>
+    
+      <category term="c#" scheme="https://keyboard3.github.io/tags/c/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>弹丸基础</title>
+    <link href="https://keyboard3.github.io/basic-projectile/"/>
+    <id>https://keyboard3.github.io/basic-projectile/</id>
+    <published>2022-04-27T01:29:23.000Z</published>
+    <updated>2022-05-09T06:56:48.246Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;p&gt;&lt;a href=&quot;https://github.com/tModLoader/tModLoader/wiki/Basic-Projectile&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;Basic Projectile&lt;/a&gt;&lt;/p&gt;
+&lt;h1
+        
+      
+    
+    </summary>
+    
+    
+    
+      <category term="翻译" scheme="https://keyboard3.github.io/tags/%E7%BF%BB%E8%AF%91/"/>
+    
+      <category term="tModLoader" scheme="https://keyboard3.github.io/tags/tModLoader/"/>
+    
+      <category term="terraria" scheme="https://keyboard3.github.io/tags/terraria/"/>
+    
+      <category term="c#" scheme="https://keyboard3.github.io/tags/c/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>改装教程：世界生成</title>
+    <link href="https://keyboard3.github.io/world-generation/"/>
+    <id>https://keyboard3.github.io/world-generation/</id>
+    <published>2022-04-25T11:15:23.000Z</published>
+    <updated>2022-05-09T06:56:48.247Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;p&gt;&lt;a href=&quot;https://github.com/tModLoader/tModLoader/wiki/World-Generation&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;World Generation&lt;/a&gt;&lt;/p&gt;
+&lt;h1
+        
+      
+    
+    </summary>
+    
+    
+    
+      <category term="翻译" scheme="https://keyboard3.github.io/tags/%E7%BF%BB%E8%AF%91/"/>
+    
+      <category term="tModLoader" scheme="https://keyboard3.github.io/tags/tModLoader/"/>
+    
+      <category term="terraria" scheme="https://keyboard3.github.io/tags/terraria/"/>
+    
+      <category term="c#" scheme="https://keyboard3.github.io/tags/c/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>改装教程：世界生成(论坛版)</title>
+    <link href="https://keyboard3.github.io/modding-tutorial-world-generation/"/>
+    <id>https://keyboard3.github.io/modding-tutorial-world-generation/</id>
+    <published>2022-04-24T11:15:23.000Z</published>
+    <updated>2022-05-09T06:56:48.247Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;p&gt;&lt;a href=&quot;https://forums.terraria.org/index.php?threads/modding-tutorial-world-generation.47601/&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;Modding
+        
+      
+    
+    </summary>
+    
+    
+    
+      <category term="翻译" scheme="https://keyboard3.github.io/tags/%E7%BF%BB%E8%AF%91/"/>
+    
+      <category term="tModLoader" scheme="https://keyboard3.github.io/tags/tModLoader/"/>
+    
+      <category term="terraria" scheme="https://keyboard3.github.io/tags/terraria/"/>
+    
+      <category term="c#" scheme="https://keyboard3.github.io/tags/c/"/>
     
   </entry>
   
@@ -467,127 +593,6 @@
       <category term="翻译" scheme="https://keyboard3.github.io/tags/%E7%BF%BB%E8%AF%91/"/>
     
       <category term="amp" scheme="https://keyboard3.github.io/tags/amp/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>转盘抽奖库 lottery-wheel</title>
-    <link href="https://keyboard3.github.io/lottery-wheel/"/>
-    <id>https://keyboard3.github.io/lottery-wheel/</id>
-    <published>2020-04-11T15:15:04.000Z</published>
-    <updated>2022-03-31T15:14:13.114Z</updated>
-    
-    <summary type="html">
-    
-      
-      
-        
-        
-          &lt;p&gt;&lt;a href=&quot;https://github.com/fralonra/lottery-wheel&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;原文&lt;/a&gt;&lt;br&gt;一个帮助你实现转盘抽奖游戏的库。使用了&lt;a
-        
-      
-    
-    </summary>
-    
-    
-    
-      <category term="翻译" scheme="https://keyboard3.github.io/tags/%E7%BF%BB%E8%AF%91/"/>
-    
-      <category term="js" scheme="https://keyboard3.github.io/tags/js/"/>
-    
-      <category term="animate" scheme="https://keyboard3.github.io/tags/animate/"/>
-    
-      <category term="library" scheme="https://keyboard3.github.io/tags/library/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Page 可见性 API</title>
-    <link href="https://keyboard3.github.io/page-visibility-api/"/>
-    <id>https://keyboard3.github.io/page-visibility-api/</id>
-    <published>2020-04-11T08:49:15.000Z</published>
-    <updated>2022-03-31T15:26:05.876Z</updated>
-    
-    <summary type="html">
-    
-      
-      
-        
-        
-          &lt;p&gt;&lt;a href=&quot;https://developer.mozilla.org/en-US/docs/Web/API/Page_Visibility_API&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;原文&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;使用选项卡浏览，任何
-        
-      
-    
-    </summary>
-    
-    
-    
-      <category term="翻译" scheme="https://keyboard3.github.io/tags/%E7%BF%BB%E8%AF%91/"/>
-    
-      <category term="mdn" scheme="https://keyboard3.github.io/tags/mdn/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>react 主要概念</title>
-    <link href="https://keyboard3.github.io/react-main-concepts/"/>
-    <id>https://keyboard3.github.io/react-main-concepts/</id>
-    <published>2020-04-09T06:00:27.000Z</published>
-    <updated>2022-03-31T15:14:13.114Z</updated>
-    
-    <summary type="html">
-    
-      
-      
-        
-        
-          &lt;h2 id=&quot;Hello-World&quot;&gt;&lt;a href=&quot;#Hello-World&quot; class=&quot;headerlink&quot; title=&quot;Hello World&quot;&gt;&lt;/a&gt;Hello World&lt;/h2&gt;&lt;p&gt;最简单的 React 示例如下：&lt;/p&gt;
-&lt;pre
-        
-      
-    
-    </summary>
-    
-    
-    
-      <category term="翻译" scheme="https://keyboard3.github.io/tags/%E7%BF%BB%E8%AF%91/"/>
-    
-      <category term="react" scheme="https://keyboard3.github.io/tags/react/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>react hooks</title>
-    <link href="https://keyboard3.github.io/react-hooks/"/>
-    <id>https://keyboard3.github.io/react-hooks/</id>
-    <published>2020-04-08T17:12:43.000Z</published>
-    <updated>2022-03-21T01:16:32.335Z</updated>
-    
-    <summary type="html">
-    
-      
-      
-        
-        
-          &lt;blockquote&gt;
-&lt;p&gt;Hooks 是 React 16.8 新加的。它可以不写 Class 也能用到 State 以及 React 的其他特性&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;h2 id=&quot;介绍&quot;&gt;&lt;a href=&quot;#介绍&quot; class=&quot;headerlink&quot;
-        
-      
-    
-    </summary>
-    
-    
-    
-      <category term="翻译" scheme="https://keyboard3.github.io/tags/%E7%BF%BB%E8%AF%91/"/>
-    
-      <category term="react" scheme="https://keyboard3.github.io/tags/react/"/>
-    
-      <category term="docs" scheme="https://keyboard3.github.io/tags/docs/"/>
-    
-      <category term="进行中" scheme="https://keyboard3.github.io/tags/%E8%BF%9B%E8%A1%8C%E4%B8%AD/"/>
     
   </entry>
   

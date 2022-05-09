@@ -1,0 +1,434 @@
+<!DOCTYPE html>
+<html  lang="zh-CN" >
+    <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, minimum-scale=1, initial-scale=1, maximum-scale=5, viewport-fit=cover">
+    <title>NPC 生成基础 | keyboard3的博客</title>
+    <meta name="description" content="Basic NPC Spawning NPC 生成基础本指南将教授生成敌人的基础知识。 基本思想您需要首先了解一些想法： 平衡很难猜测 ModNPC.SpawnChance 的返回值是否合适。与普通 NPC 相比，我们不希望我们的 NPC 频繁生成。通常 0.1f 或更小的值是好的，但你应该使用 Modders Toolkit 的 NPC Spawn Tool 来比较你的 NPC 与原版和其他 M">
+<meta property="og:type" content="article">
+<meta property="og:title" content="NPC 生成基础">
+<meta property="og:url" content="https://keyboard3.github.io/basic-npc-spawning/index.html">
+<meta property="og:site_name" content="keyboard3的博客">
+<meta property="og:description" content="Basic NPC Spawning NPC 生成基础本指南将教授生成敌人的基础知识。 基本思想您需要首先了解一些想法： 平衡很难猜测 ModNPC.SpawnChance 的返回值是否合适。与普通 NPC 相比，我们不希望我们的 NPC 频繁生成。通常 0.1f 或更小的值是好的，但你应该使用 Modders Toolkit 的 NPC Spawn Tool 来比较你的 NPC 与原版和其他 M">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://camo.githubusercontent.com/38c32bf6a91f4f83f30a027f7f0bfc507f1e531af29eff461c140542d12202d3/68747470733a2f2f692e696d6775722e636f6d2f39724967534d742e706e67">
+<meta property="article:published_time" content="2022-04-27T03:10:23.000Z">
+<meta property="article:modified_time" content="2022-05-09T06:56:48.246Z">
+<meta property="article:author" content="keyboard3">
+<meta property="article:tag" content="翻译">
+<meta property="article:tag" content="tModLoader">
+<meta property="article:tag" content="terraria">
+<meta property="article:tag" content="c#">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://camo.githubusercontent.com/38c32bf6a91f4f83f30a027f7f0bfc507f1e531af29eff461c140542d12202d3/68747470733a2f2f692e696d6775722e636f6d2f39724967534d742e706e67">
+
+    <link rel="alternate" type="application/atom+xml" href="/blog/atom.xml">
+    <link rel="icon" href="/images/favicon.ico" type="image/x-icon">
+
+    
+<link rel="stylesheet" href="/blog/css/common.min.css">
+
+
+
+    
+        <link href="//cdn.jsdelivr.net/npm/katex@0.9.0/dist/katex.min.css" rel="stylesheet">
+    
+    
+    
+    
+        <link href="//cdn.jsdelivr.net/npm/lightgallery.js@1.1.3/dist/css/lightgallery.min.css" rel="stylesheet">
+    
+    
+    
+<link rel="stylesheet" href="/blog/css/iconfont.min.css">
+
+    
+<meta name="generator" content="Hexo 4.2.0"><link rel="stylesheet" href="/blog/css/prism-tomorrow.css" type="text/css">
+<link rel="stylesheet" href="/blog/css/prism-line-numbers.css" type="text/css"></head>
+
+    <body>
+        <header class="header header-fixture">
+    <div class="profile-search-wrap flex sm:block">
+        
+        
+        <div class="profile sm:text-center md:px-1 lg:px-3 sm:pb-4 sm:pt-6">
+            <a id="avatar" role="link" href="https://github.com/keyboard3" class="inline-block lg:w-16 lg:h-16 w-8 h-8 m-2" target="_blank" rel="noopener" rel="noreferrer" >
+                <img src="https://www.gravatar.com/avatar/5a65c2880a8f2804b5af3dc39819bdf1?s=128" class="rounded-full" alt="avatar">
+            </a>
+            <h2 id="name" class="hidden lg:block">keyboard3</h2>
+            <h3 id="title" class="hidden lg:block">单身男青年</h3>
+            
+            <small id="location" class="hidden lg:block">
+                <i class="iconfont icon-map-icon"></i>
+                home
+            </small>
+            
+        </div>
+        
+        
+<div class="search flex-1 flex lg:inline-block sm:hidden lg:px-4 lg:mt-2 lg:mb-4 lg:w-full">
+    <form id="search-form" class="my-auto flex-1 lg:border lg:border-solid lg:border-gray-200">
+        <div class="input-group table bg-gray-100 lg:bg-white w-full">
+            <input id="search-input" type="text" placeholder="搜索" class="inline-block w-full bg-gray-100 lg:bg-white">
+            <span class="table-cell">
+                <button name="search tigger button" disabled>
+                    <i class="iconfont icon-search m-2"></i>
+                </button>
+            </span>
+        </div>
+    </form>
+        
+<div id="content-json" data-placeholder="搜索" class="invisible hidden">/content.json</div>
+<script id="search-teamplate" type="text/html" data-path="/blog/content.json">
+    <div>
+        <div class="search-header bg-gray-400">
+            <input id="actual-search-input" model="keyword" ref="input" class="inline-block w-full h-10 px-2 py-1" placeholder="搜索" type="text">
+        </div>
+        <div class="search-result bg-gray-200">
+            {{#each searchPosts}}
+            <a href="/{{ path }}" class="result-item block px-2 pb-3 mb-1 pt-1 hover:bg-indigo-100">
+                <i class="iconfont icon-file"></i>
+                <h1 class="result-title inline font-medium text-lg">{{ title }}</h1>
+                <p class="result-content text-gray-600 text-sm">{{{ text }}}</p>
+            </a>
+            {{/each}}
+        </div>
+    </div>
+</script>
+
+</div>
+
+
+        <button name="menu toogle button" id="menu-toggle-btn" class="block sm:hidden p-3" role="button" aria-expanded="false">
+            <i class="iconfont icon-hamburger"></i>
+        </button>
+    </div>
+    <nav id="menu-nav" class="hidden sm:flex flex-col">
+        
+        
+            <div class="menu-item menu-home" role="menuitem">
+                <a href="/blog/.">
+                    <i class="iconfont icon-home" aria-hidden="true"></i>
+                    <span class="menu-title">首页</span>
+                </a>
+            </div>
+        
+        
+            <div class="menu-item menu-archives" role="menuitem">
+                <a href="/blog/archives">
+                    <i class="iconfont icon-archive" aria-hidden="true"></i>
+                    <span class="menu-title">归档</span>
+                </a>
+            </div>
+        
+        
+            <div class="menu-item menu-repository" role="menuitem">
+                <a href="/blog/repository">
+                    <i class="iconfont icon-project" aria-hidden="true"></i>
+                    <span class="menu-title">项目</span>
+                </a>
+            </div>
+        
+        
+            <div class="menu-item menu-about" role="menuitem">
+                <a href="/blog/about">
+                    <i class="iconfont icon-cup" aria-hidden="true"></i>
+                    <span class="menu-title">关于</span>
+                </a>
+            </div>
+        
+        
+<div class="social-links flex sm:flex-col lg:hidden mt-5">
+    
+        <span class="social-item text-center">
+            <a href="https://github.com/keyboard3" target="_blank" rel="noopener">
+                <i class="iconfont social-icon icon-github"></i>
+                <span class="menu-title hidden lg:inline">menu.github</span>
+            </a>
+        </span>
+    
+        <span class="social-item text-center">
+            <a href="/blog/atom.xml">
+                <i class="iconfont social-icon icon-rss"></i>
+                <span class="menu-title hidden lg:inline">menu.rss</span>
+            </a>
+        </span>
+    
+</div>
+
+
+    </nav>
+</header>
+
+        <section class="main-section">
+            
+    <main class="flex-1 px-4 py-14 md:px-5 lg:px-8 lg:py-4 relative min-h-screen">
+    
+
+    <article class="content article article-archives article-type-list" itemscope="">
+        <header class="article-header">
+            
+    
+        <h1 class="article-title text-lg" itemprop="name">
+            NPC 生成基础
+        </h1>
+    
+
+
+
+            <p class="article-meta mb-3 text-xs">
+                <span class="article-date">
+    <i class="iconfont icon-calendar-check"></i>
+	<a href="/blog/basic-npc-spawning/" class="article-date">
+	  <time datetime="2022-04-27T03:10:23.000Z" itemprop="datePublished">4月 27</time>
+	</a>
+</span>
+
+                
+
+                
+    <span class="article-tags">
+    <i class="iconfont icon-tag"></i>
+    <a class="article-tag-link" href="/blog/tags/c/" rel="tag">c#</a>, <a class="article-tag-link" href="/blog/tags/tModLoader/" rel="tag">tModLoader</a>, <a class="article-tag-link" href="/blog/tags/terraria/" rel="tag">terraria</a>, <a class="article-tag-link" href="/blog/tags/%E7%BF%BB%E8%AF%91/" rel="tag">翻译</a>
+  </span>
+
+
+                <span class="_partial/post-comment"><i class="icon icon-comment"></i>
+                    <a href="/blog/basic-npc-spawning/#comments" class="article-comment-link">
+                        评论
+                    </a>
+                </span>
+                
+    
+        <span class="post-wordcount" itemprop="wordCount">字数统计: 2.3k(字)</span>
+    
+    
+        <span class="post-readcount" itemprop="timeRequired">阅读时长: 9(分)</span>
+    
+
+
+            </p>
+        </header>
+        <div class="marked-body article-body">
+            <p><a href="https://github.com/tModLoader/tModLoader/wiki/Basic-NPC-Spawning" target="_blank" rel="noopener">Basic NPC Spawning</a></p>
+<h1 id="NPC-生成基础"><a href="#NPC-生成基础" class="headerlink" title="NPC 生成基础"></a>NPC 生成基础</h1><p>本指南将教授生成敌人的基础知识。</p>
+<h1 id="基本思想"><a href="#基本思想" class="headerlink" title="基本思想"></a>基本思想</h1><p>您需要首先了解一些想法：</p>
+<h2 id="平衡"><a href="#平衡" class="headerlink" title="平衡"></a>平衡</h2><p>很难猜测 ModNPC.SpawnChance 的返回值是否合适。与普通 NPC 相比，我们不希望我们的 NPC 频繁生成。通常 0.1f 或更小的值是好的，但你应该使用 <a href="https://forums.terraria.org/index.php?threads/modders-toolkit-a-mod-for-modders-doing-modding.55738/" target="_blank" rel="noopener">Modders Toolkit</a> 的 NPC Spawn Tool 来比较你的 NPC 与原版和其他 Mod 的 NPC 的生成率。</p>
+<h2 id="Terraria-生成"><a href="#Terraria-生成" class="headerlink" title="Terraria 生成"></a>Terraria 生成</h2><p>泰拉瑞亚通过首先决定生成 NPC 的位置，然后询问每个 NPC 是否愿意在该位置生成来生成 NPC。每次泰拉瑞亚决定生成一个 NPC 时，它将与一个玩家对象 (NPCSpawnInfo.player) 结合使用。在多人游戏中，服务器处理所有生成决策。如果你在你的模组中创建了一个自定义生物群系并注意到生成在多人游戏中无法正常工作，你的 ModPlayer.SendCustomBiomes 和相关钩子需要正确实现，以便服务器知道自定义生物群系布尔值的正确值，以便它可以做出正确的决定。</p>
+<h2 id="返回值"><a href="#返回值" class="headerlink" title="返回值"></a>返回值</h2><p>ModNPC.SpawnChance 钩子返回一个浮点数。不明白的谷歌一下。 ModNPC.CanTownNPCSpawn 钩子返回一个布尔值。</p>
+<h2 id="ModNPC-SpawnChance"><a href="#ModNPC-SpawnChance" class="headerlink" title="ModNPC.SpawnChance"></a>ModNPC.SpawnChance</h2><p>这是本指南的主要重点。所有自然生成的非boss、非城镇NPC ModNPC 类都应该覆盖这个钩子：</p>
+<pre class="line-numbers language-csharp"><code class="language-csharp"><span class="token keyword">public</span> <span class="token keyword">override</span> <span class="token keyword">float</span> <span class="token function">SpawnChance</span><span class="token punctuation">(</span>NPCSpawnInfo spawnInfo<span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token comment" spellcheck="true">// Code goes here</span>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+<h2 id="ModNPC-CanTownNPCSpawn"><a href="#ModNPC-CanTownNPCSpawn" class="headerlink" title="ModNPC.CanTownNPCSpawn"></a>ModNPC.CanTownNPCSpawn</h2><p>仅适用于 townNPC ModNPC。请注意，此类返回布尔值而不是浮点数。在满足某些条件（例如击败boss）后，使用它让您的城镇 NPC 生成。</p>
+<pre class="line-numbers language-csharp"><code class="language-csharp"><span class="token keyword">public</span> <span class="token keyword">override</span> <span class="token keyword">bool</span> <span class="token function">CanTownNPCSpawn</span><span class="token punctuation">(</span><span class="token keyword">int</span> numTownNPCs<span class="token punctuation">,</span> <span class="token keyword">int</span> money<span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token comment" spellcheck="true">// Code goes here</span>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+<h2 id="条件句（if-else）"><a href="#条件句（if-else）" class="headerlink" title="条件句（if-else）"></a>条件句（if-else）</h2><p>生成 NPC 归结为决定是否生成我们的 ModNPC。在<a href="https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/keywords/if-else" target="_blank" rel="noopener">此处</a>阅读 if-else。</p>
+<h3 id="Not-Operator"><a href="#Not-Operator" class="headerlink" title="Not Operator (!)"></a>Not Operator (!)</h3><p>在<a href="https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/operators/logical-negation-operator" target="_blank" rel="noopener">这里</a>阅读。</p>
+<pre class="line-numbers language-csharp"><code class="language-csharp"><span class="token keyword">if</span><span class="token punctuation">(</span>Main<span class="token punctuation">.</span>dayTime<span class="token punctuation">)</span> <span class="token comment" spellcheck="true">// if day time</span>
+
+<span class="token keyword">if</span><span class="token punctuation">(</span><span class="token operator">!</span>Main<span class="token punctuation">.</span>dayTime<span class="token punctuation">)</span> <span class="token comment" spellcheck="true">// if night time</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+<h3 id="And-and-OR-amp-amp-and"><a href="#And-and-OR-amp-amp-and" class="headerlink" title="And and OR (&amp;&amp; and ||)"></a>And and OR (&amp;&amp; and ||)</h3><p>阅读 <a href="https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/operators/conditional-and-operator" target="_blank" rel="noopener">&amp;&amp;</a> 和 <a href="https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/operators/conditional-or-operator" target="_blank" rel="noopener">||</a>。请注意 &amp;&amp; 的优先级高于 ||。我们将使用它来组合条件。</p>
+<h3 id="vs"><a href="#vs" class="headerlink" title="= vs =="></a>= vs ==</h3><p>不要把这两个混为一谈。 = 为变量赋值， == 比较两个值。确保永远不要做 if(Main.hardMode = true) 之类的事情，否则你会困惑为什么你的世界突然进入困难模式。</p>
+<h3 id="三元"><a href="#三元" class="headerlink" title="三元"></a>三元</h3><p>if-else 条件的更紧凑版本是三元。在<a href="https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/operators/conditional-operator" target="_blank" rel="noopener">这里</a>阅读它。基本上它会改变：</p>
+<pre class="line-numbers language-csharp"><code class="language-csharp"><span class="token keyword">if</span> <span class="token punctuation">(</span>condition<span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token keyword">return</span> <span class="token punctuation">.</span><span class="token number">1f</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+<span class="token keyword">else</span>
+<span class="token punctuation">{</span>
+    <span class="token keyword">return</span> <span class="token number">0f</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>对此：</p>
+<pre class="line-numbers language-csharp"><code class="language-csharp"><span class="token keyword">return</span> condition <span class="token operator">?</span> <span class="token punctuation">.</span><span class="token number">1f</span> <span class="token punctuation">:</span> <span class="token number">0f</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<h1 id="NPCSpawnInfo"><a href="#NPCSpawnInfo" class="headerlink" title="NPCSpawnInfo"></a>NPCSpawnInfo</h1><p>NPCSpawnInfo 是一个结构，其中包含与泰拉瑞亚希望生成 NPC 的生成位置有关的所有信息。请参阅有关字段的<a href="http://tmodloader.github.io/tModLoader/html/struct_terraria_1_1_mod_loader_1_1_n_p_c_spawn_info.html" target="_blank" rel="noopener">文档</a>。我们将使用该结构中的值来指导我们的逻辑并做出最终决定。</p>
+<h2 id="玩家生物群系"><a href="#玩家生物群系" class="headerlink" title="玩家生物群系"></a>玩家生物群系</h2><p>使用在 NPCSpawnInfo 中传入的玩家对象而不是 Main.LocalPlayer 在生成逻辑中使用玩家生物群系。<a href="http://tmodloader.github.io/tModLoader/html/struct_terraria_1_1_mod_loader_1_1_n_p_c_spawn_info.html#a894868167c60f17bea09fba0aea811a8" target="_blank" rel="noopener">List of Zone Booleans</a></p>
+<pre class="line-numbers language-csharp"><code class="language-csharp"><span class="token keyword">if</span><span class="token punctuation">(</span>spawnInfo<span class="token punctuation">.</span>player<span class="token punctuation">.</span>ZoneJungle<span class="token punctuation">)</span> <span class="token comment" spellcheck="true">// Vanilla Biome aka Zone</span>
+
+<span class="token keyword">if</span><span class="token punctuation">(</span>spawnInfo<span class="token punctuation">.</span>player<span class="token punctuation">.</span><span class="token generic-method function">GetModPlayer<span class="token punctuation">&lt;</span>ExamplePlayer<span class="token punctuation">></span></span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span>ZoneExample<span class="token punctuation">)</span> <span class="token comment" spellcheck="true">// Mod Biome</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+<h2 id="Heights"><a href="#Heights" class="headerlink" title="Heights"></a>Heights</h2><p>生成世界时，会与世界一起保存一些值以指定各种高度。 Main.worldSurface 在 spawn 下方几格，而 Main.rockLayer 在岩石变得比泥土更普遍的地方。 Main.maxTilesY 是世界上 Y 的最大值，最低点。我们可以使用这些值和数学来驱动我们的生成条件。我们还可以使用如下图所示的预定义区域，而不是搞乱数学。<br><img src="https://camo.githubusercontent.com/38c32bf6a91f4f83f30a027f7f0bfc507f1e531af29eff461c140542d12202d3/68747470733a2f2f692e696d6775722e636f6d2f39724967534d742e706e67" alt=""><br>在图像的右侧，我们看到为我们预定义的区域，在左侧，我们看到驱动这些区域的数学。例如，以下是等价的：</p>
+<pre class="line-numbers language-csharp"><code class="language-csharp"><span class="token keyword">if</span><span class="token punctuation">(</span>spawnInfo<span class="token punctuation">.</span>player<span class="token punctuation">.</span>ZoneRockLayerHeight<span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<pre class="line-numbers language-csharp"><code class="language-csharp"><span class="token keyword">if</span><span class="token punctuation">(</span>spawnInfo<span class="token punctuation">.</span>spawnTileY <span class="token operator">&lt;=</span> Main<span class="token punctuation">.</span>maxTilesY <span class="token operator">-</span> <span class="token number">200</span> <span class="token operator">&amp;&amp;</span> spawnInfo<span class="token punctuation">.</span>spawnTileY <span class="token operator">></span> Main<span class="token punctuation">.</span>rockLayer<span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p>我们可以使用简单的数学来制作更精确的基于高度的生成条件。例如 if(spawnInfo.spawnTileY &lt;= Main.maxTilesY - 200 &amp;&amp; spawnInfo.spawnTileY &gt; (Main.rockLayer + Main.maxTilesY - 200) / 2) 可用于指定 ZoneRockLayerHeight 下半部分的生成条件，如图所示多于。预定义的基于高度的区域易于使用，但请记住，您可以将数学用于更具体的行为。还请记住，Y 坐标在天空中从 0 开始，并且随着您在世界中下降，值会增加。不要被 WorldGen.lavaLine、WorldGen.waterLine、WorldGen.worldSurfaceHigh 以及这里没有提到的其他值所迷惑，它们不会保存在世界文件中，并且不适用于 NPC 生成。</p>
+<h1 id="Other-Values"><a href="#Other-Values" class="headerlink" title="Other Values"></a>Other Values</h1><p>除了 NPCSpawnInfo，我们还可以在 SpawnChance 逻辑中使用其他字段：</p>
+<ul>
+<li><code>Main.dayTime</code> - 白天为true，晚上为false</li>
+<li><code>NPC.downedGolemBoss</code> 和 <a href="https://github.com/tModLoader/tModLoader/wiki/NPC-Class-Documentation#downedboss1" target="_blank" rel="noopener">other</a> - 如果指定的 Boss 在这个世界上被击败，则为 true</li>
+<li><code>Main.hardMode</code> - 如果处于困难模式，则为true</li>
+<li><code>Main.expertMode</code> - 如果处于专家模式，则为 true</li>
+<li><code>Main.time</code> - 白天介于 0 (4:30 AM) 和 54000 (7:30 PM) 之间以及夜间介于 0 (7:30 PM) 和 32400 (4:30 AM) 之间的值。与 Main.dayTime 一起使用。 Main.time 通常每个刻度增加 1。每个游戏小时是 3600 滴答声。<ul>
+<li>示例：Main.dayTime &amp;&amp; Main.time &lt; 18000.0 - 早上 4:30 到 9:30 之间（因为 18000/3600 == 5）</li>
+</ul>
+</li>
+<li><code>Main.raining</code> - 如果当前正在下雨则为 true</li>
+<li><code>NPC.AnyNPCs(NPCID.IceGolem)</code> - 如果世界上有任何冰傀儡，则为 true。与 !以防止重复生成迷你 Boss。<ul>
+<li>NPC.AnyNPCs(mod.NPCType<PartyZombie>()) 或 NPC.AnyNPCs(mod.NPCType(“PartyZombie”)) - 相同，但适用于修改后的 NPC</li>
+</ul>
+</li>
+<li><code>NPC.CountNPCS(NPCID.AngryNimbus) &lt; 2</code> - 如果世界上存在的 NPC 少于 2 个，则为真</li>
+<li><code>TileID.Sets.Conversion.Sand[spawnInfo.spawnTileType]</code> - 如果生成图块是任何类型的沙子图块，则为 true。 TileID.Sets.Conversion 中还有其他可能有用的集合</li>
+<li><code>Math.Abs(spawnInfo.spawnTileX - Main.spawnTileX) &gt; Main.maxTilesX / 3</code> - 如果生成图块位于地图的外三分之一处，则为 true</li>
+<li><code>NPC.waveNumber</code> - 事件期间的波数</li>
+<li>需要更多？在 Discord 上向我们寻求帮助，我们可以在此列表中添加更多内容。</li>
+</ul>
+<h1 id="SpawnCondition"><a href="#SpawnCondition" class="headerlink" title="SpawnCondition"></a>SpawnCondition</h1><p>SpawnCondition 是一个包含一组即用型字段的类，这些字段模拟各种 Vanilla NPC 生成条件的逻辑。有关可用的 SpawnConditions，请参阅<a href="http://tmodloader.github.io/tModLoader/html/class_terraria_1_1_mod_loader_1_1_spawn_condition.html" target="_blank" rel="noopener">文档</a>。使用 SpawnCondition 字段可以简化 SpawnChance 逻辑。例如，可以像这样轻松实现白天的粘土</p>
+<pre class="line-numbers language-csharp"><code class="language-csharp"><span class="token keyword">return</span> SpawnCondition<span class="token punctuation">.</span>OverworldDaySlime<span class="token punctuation">.</span>Chance <span class="token operator">*</span> <span class="token number">0.1f</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p>与</p>
+<pre class="line-numbers language-csharp"><code class="language-csharp"><span class="token keyword">return</span> Main<span class="token punctuation">.</span>dayTime <span class="token operator">&amp;&amp;</span> info<span class="token punctuation">.</span>spawnTileY <span class="token operator">&lt;=</span> Main<span class="token punctuation">.</span>worldSurface <span class="token operator">?</span> <span class="token number">0.1f</span> <span class="token punctuation">:</span> <span class="token number">0f</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<h1 id="示例"><a href="#示例" class="headerlink" title="示例"></a>示例</h1><p>下面的每个示例都好像它们在 ModNPC.SpawnChance 方法中一样：</p>
+<pre class="line-numbers language-csharp"><code class="language-csharp"><span class="token keyword">public</span> <span class="token keyword">override</span> <span class="token keyword">float</span> <span class="token function">SpawnChance</span><span class="token punctuation">(</span>NPCSpawnInfo spawnInfo<span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token comment" spellcheck="true">// Example Code Here</span>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+<h3 id="在我的-Mod-块上生成"><a href="#在我的-Mod-块上生成" class="headerlink" title="在我的 Mod 块上生成"></a>在我的 Mod 块上生成</h3><pre class="line-numbers language-csharp"><code class="language-csharp"><span class="token keyword">return</span> spawnInfo<span class="token punctuation">.</span>spawnTileType <span class="token operator">==</span> mod<span class="token punctuation">.</span><span class="token generic-method function">TileType<span class="token punctuation">&lt;</span>Tiles<span class="token punctuation">.</span>CrystalBlock<span class="token punctuation">></span></span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">?</span> <span class="token punctuation">.</span><span class="token number">1f</span> <span class="token punctuation">:</span> <span class="token number">0f</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<h3 id="如果玩家在自定义生物群系-区域中生成"><a href="#如果玩家在自定义生物群系-区域中生成" class="headerlink" title="如果玩家在自定义生物群系/区域中生成"></a>如果玩家在自定义生物群系/区域中生成</h3><pre class="line-numbers language-csharp"><code class="language-csharp"><span class="token keyword">return</span> spawnInfo<span class="token punctuation">.</span>player<span class="token punctuation">.</span><span class="token generic-method function">GetModPlayer<span class="token punctuation">&lt;</span>CrystalPlayer<span class="token punctuation">></span></span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span>ZoneCrystal <span class="token operator">?</span> <span class="token punctuation">.</span><span class="token number">1f</span> <span class="token punctuation">:</span> <span class="token number">0f</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<h3 id="生成于丛林神殿"><a href="#生成于丛林神殿" class="headerlink" title="生成于丛林神殿"></a>生成于丛林神殿</h3><pre class="line-numbers language-csharp"><code class="language-csharp"><span class="token keyword">return</span> spawnInfo<span class="token punctuation">.</span>spawnTileType <span class="token operator">==</span> TileID<span class="token punctuation">.</span>LihzahrdBrick <span class="token operator">&amp;&amp;</span> spawnInfo<span class="token punctuation">.</span>lihzahrd <span class="token operator">?</span> <span class="token punctuation">.</span><span class="token number">1f</span> <span class="token punctuation">:</span> <span class="token number">0f</span><span class="token punctuation">;</span>
+<span class="token comment" spellcheck="true">// or</span>
+<span class="token keyword">return</span> SpawnCondition<span class="token punctuation">.</span>JungleTemple<span class="token punctuation">.</span>Chance <span class="token operator">*</span> <span class="token number">0.1f</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+<h3 id="在日食期间生成"><a href="#在日食期间生成" class="headerlink" title="在日食期间生成"></a>在日食期间生成</h3><pre class="line-numbers language-csharp"><code class="language-csharp"><span class="token keyword">return</span> spawnInfo<span class="token punctuation">.</span>spawnTileY <span class="token operator">&lt;=</span> Main<span class="token punctuation">.</span>worldSurface <span class="token operator">&amp;&amp;</span> Main<span class="token punctuation">.</span>dayTime <span class="token operator">&amp;&amp;</span> Main<span class="token punctuation">.</span>eclipse<span class="token punctuation">;</span>
+<span class="token comment" spellcheck="true">// or</span>
+<span class="token keyword">return</span> SpawnCondition<span class="token punctuation">.</span>SolarEclipse<span class="token punctuation">.</span>Chance <span class="token operator">*</span> <span class="token number">0.05f</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// 记住要测试这个值是否平衡</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+<h3 id="玩家站在太阳板块上"><a href="#玩家站在太阳板块上" class="headerlink" title="玩家站在太阳板块上"></a>玩家站在太阳板块上</h3><pre class="line-numbers language-csharp"><code class="language-csharp"><span class="token comment" spellcheck="true">// 这里我展示了两种将 boolean 转换为 int 的方法。 （false为 0，true 为 1）</span>
+<span class="token keyword">return</span> <span class="token punctuation">(</span>Main<span class="token punctuation">.</span>tile<span class="token punctuation">[</span>spawnInfo<span class="token punctuation">.</span>playerFloorX<span class="token punctuation">,</span> spawnInfo<span class="token punctuation">.</span>playerFloorY<span class="token punctuation">]</span><span class="token punctuation">.</span>type <span class="token operator">==</span> TileID<span class="token punctuation">.</span>Sunplate<span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">ToInt</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">*</span> <span class="token number">0.2f</span><span class="token punctuation">;</span>
+<span class="token comment" spellcheck="true">// or</span>
+<span class="token keyword">return</span> Convert<span class="token punctuation">.</span><span class="token function">ToInt32</span><span class="token punctuation">(</span>Main<span class="token punctuation">.</span>tile<span class="token punctuation">[</span>spawnInfo<span class="token punctuation">.</span>playerFloorX<span class="token punctuation">,</span> spawnInfo<span class="token punctuation">.</span>playerFloorY<span class="token punctuation">]</span><span class="token punctuation">.</span>type <span class="token operator">==</span> TileID<span class="token punctuation">.</span>Sunplate<span class="token punctuation">)</span> <span class="token operator">*</span> <span class="token number">0.2f</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// using System;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+<h1 id="组合片段"><a href="#组合片段" class="headerlink" title="组合片段"></a>组合片段</h1><p>就像上面的例子一样，我们结合逻辑片段来构建我们的最终决定。参见 !、&amp;&amp; 和 ||多于。</p>
+<h2 id="结合-bool-和-float"><a href="#结合-bool-和-float" class="headerlink" title="结合 bool 和 float"></a>结合 bool 和 float</h2><p>SpawnCondition 字段返回代表机会的浮点值，而许多其他条件只是布尔值。这可能会导致一些棘手的代码。让我们尝试为应该在蜘蛛洞穴中但仅在晚上生成的 NPC 组合 SpawnChance 代码。我们可以为此使用 SpawnCondition.SpiderCave 和 Main.dayTime。</p>
+<h3 id="简单的语法"><a href="#简单的语法" class="headerlink" title="简单的语法"></a>简单的语法</h3><p>如果你不是很了解 c#，就将 bool 和 float 分开。使用 !、&amp;&amp; 和 || 在 if 语句中使用布尔值如果需要，然后如果我们通过这些条件，请在返回中使用 SpawnCondition。如果条件失败，代码将返回 0，表示 NPC 不会生成：</p>
+<pre class="line-numbers language-csharp"><code class="language-csharp"><span class="token keyword">if</span><span class="token punctuation">(</span><span class="token operator">!</span>Main<span class="token punctuation">.</span>dayTime<span class="token punctuation">)</span>
+    <span class="token keyword">return</span> SpawnCondition<span class="token punctuation">.</span>SpiderCave<span class="token punctuation">.</span>Chance <span class="token operator">*</span> <span class="token number">0.1f</span><span class="token punctuation">;</span>
+<span class="token keyword">return</span> <span class="token number">0</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+<h3 id="中等语法"><a href="#中等语法" class="headerlink" title="中等语法"></a>中等语法</h3><p>使用我们上面学到的三元组，我们可以使我们的生成条件逻辑更加紧凑。</p>
+<pre class="line-numbers language-csharp"><code class="language-csharp"><span class="token keyword">return</span> <span class="token operator">!</span>Main<span class="token punctuation">.</span>dayTime <span class="token operator">?</span> SpawnCondition<span class="token punctuation">.</span>SpiderCave<span class="token punctuation">.</span>Chance <span class="token operator">*</span> <span class="token number">0.1f</span> <span class="token punctuation">:</span> <span class="token number">0</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<h3 id="复杂的语法"><a href="#复杂的语法" class="headerlink" title="复杂的语法"></a>复杂的语法</h3><p>如果您发现将布尔值分别解释为 false 和 true 时的 0 和 1 时您的逻辑更有意义，那么您可以这样做。这种方法并不是很常见，但可能很有用：</p>
+<pre class="line-numbers language-csharp"><code class="language-csharp"><span class="token keyword">return</span> <span class="token punctuation">(</span><span class="token operator">!</span>Main<span class="token punctuation">.</span>dayTime<span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">ToInt</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">*</span> SpawnCondition<span class="token punctuation">.</span>SpiderCave<span class="token punctuation">.</span>Chance <span class="token operator">*</span> <span class="token number">0.1f</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<h1 id="常见错误"><a href="#常见错误" class="headerlink" title="常见错误"></a>常见错误</h1><h3 id="为什么我的世界突然进入困难模式？"><a href="#为什么我的世界突然进入困难模式？" class="headerlink" title="为什么我的世界突然进入困难模式？"></a>为什么我的世界突然进入困难模式？</h3><p>许多新程序员混淆了 = 和 ==。 = 为变量赋值， == 比较值。</p>
+<p>如果你这样做 if(Main.hardMode = true) 你将 true 分配给 hardMode，本质上是让世界直接进入 hardmode，而不是你想要的。确保执行 if(Main.hardMode == true) 或更好的 if(Main.hardMode)。</p>
+<h3 id="CS0161-‘-ClassName-SpawnChance-NPCSpawnInfo-’：并非所有代码路径都返回值"><a href="#CS0161-‘-ClassName-SpawnChance-NPCSpawnInfo-’：并非所有代码路径都返回值" class="headerlink" title="CS0161 ‘[ClassName].SpawnChance(NPCSpawnInfo)’：并非所有代码路径都返回值"></a>CS0161 ‘[ClassName].SpawnChance(NPCSpawnInfo)’：并非所有代码路径都返回值</h3><p>这意味着您的代码有机会不返回值。例如。</p>
+<pre class="line-numbers language-csharp"><code class="language-csharp"><span class="token keyword">if</span> <span class="token punctuation">(</span>spawnInfo<span class="token punctuation">.</span>granite<span class="token punctuation">)</span>
+    <span class="token keyword">return</span> <span class="token number">0.2f</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+<p>需要像这样修复：</p>
+<pre class="line-numbers language-csharp"><code class="language-csharp"><span class="token keyword">if</span> <span class="token punctuation">(</span>spawnInfo<span class="token punctuation">.</span>granite<span class="token punctuation">)</span>
+    <span class="token keyword">return</span> <span class="token number">0.2f</span><span class="token punctuation">;</span>
+<span class="token keyword">return</span> <span class="token number">0f</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+<h3 id="CS0029-无法将类型“bool”隐式转换为“float”"><a href="#CS0029-无法将类型“bool”隐式转换为“float”" class="headerlink" title="CS0029 无法将类型“bool”隐式转换为“float”"></a>CS0029 无法将类型“bool”隐式转换为“float”</h3><p>这意味着您可能忘记使用您的逻辑来决定要返回的值。往上看。</p>
+<h1 id="相关参考资料"><a href="#相关参考资料" class="headerlink" title="相关参考资料"></a>相关参考资料</h1><ul>
+<li><a href="http://tmodloader.github.io/tModLoader/html/class_terraria_1_1_mod_loader_1_1_mod_n_p_c.html#ae7713bbbd313012944b958e8eafc35e0" target="_blank" rel="noopener">ModNPC.SpawnChance Documentation</a></li>
+<li><a href="http://tmodloader.github.io/tModLoader/html/struct_terraria_1_1_mod_loader_1_1_n_p_c_spawn_info.html" target="_blank" rel="noopener">NPCSpawnInfo Documentation</a></li>
+<li><a href="http://tmodloader.github.io/tModLoader/html/class_terraria_1_1_mod_loader_1_1_spawn_condition.html" target="_blank" rel="noopener">SpawnCondition Documentation</a></li>
+</ul>
+<h1 id="基础级别未涵盖"><a href="#基础级别未涵盖" class="headerlink" title="基础级别未涵盖"></a>基础级别未涵盖</h1><ul>
+<li>ModNPC.CheckConditions - 自定义 TownNPC 房屋条件（如 Truffle）</li>
+<li>Mod Boss Booleans - 请参阅 ExampleMod 以了解正确的同步和使用</li>
+<li>使用 ModNPC.SpawnNPC - 在生成时操纵 NPC</li>
+<li>GlobalNPC.EditSpawnRate - 操纵最大生成和生成率（水蜡烛）</li>
+<li>GlobalNPC.EditSpawnRange</li>
+<li>GlobalNPC.EditSpawnPool - 填充选项后操作生成池</li>
+<li>GlobalNPC.SpawnNPC</li>
+</ul>
+
+        </div>
+        
+<blockquote class="copyright">
+    <p><strong>本文链接 : </strong><a class="permalink" href="https://keyboard3.github.io/basic-npc-spawning/">https://keyboard3.github.io/basic-npc-spawning/</a></p>
+    <p><strong>This article is available under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank" rel="noopener noreferrer">Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0)</a> License</strong></p>
+</blockquote>
+
+
+    </article>
+    
+    <section id="comments">
+        
+            <div id="vcomments"></div>
+        
+    </section>
+
+
+    
+
+</main>
+
+
+<aside style="" id="sidebar" class="aside aside-fixture">
+    <div class="toc-sidebar">
+        <nav id="toc" class="article-toc">
+            <h3 class="toc-title">文章目录</h3>
+            <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#NPC-生成基础"><span class="toc-number">1.</span> <span class="toc-text">NPC 生成基础</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#基本思想"><span class="toc-number">2.</span> <span class="toc-text">基本思想</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#平衡"><span class="toc-number">2.1.</span> <span class="toc-text">平衡</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Terraria-生成"><span class="toc-number">2.2.</span> <span class="toc-text">Terraria 生成</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#返回值"><span class="toc-number">2.3.</span> <span class="toc-text">返回值</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#ModNPC-SpawnChance"><span class="toc-number">2.4.</span> <span class="toc-text">ModNPC.SpawnChance</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#ModNPC-CanTownNPCSpawn"><span class="toc-number">2.5.</span> <span class="toc-text">ModNPC.CanTownNPCSpawn</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#条件句（if-else）"><span class="toc-number">2.6.</span> <span class="toc-text">条件句（if-else）</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Not-Operator"><span class="toc-number">2.6.1.</span> <span class="toc-text">Not Operator (!)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#And-and-OR-amp-amp-and"><span class="toc-number">2.6.2.</span> <span class="toc-text">And and OR (&amp;&amp; and ||)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#vs"><span class="toc-number">2.6.3.</span> <span class="toc-text">&#x3D; vs &#x3D;&#x3D;</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#三元"><span class="toc-number">2.6.4.</span> <span class="toc-text">三元</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#NPCSpawnInfo"><span class="toc-number">3.</span> <span class="toc-text">NPCSpawnInfo</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#玩家生物群系"><span class="toc-number">3.1.</span> <span class="toc-text">玩家生物群系</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Heights"><span class="toc-number">3.2.</span> <span class="toc-text">Heights</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Other-Values"><span class="toc-number">4.</span> <span class="toc-text">Other Values</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#SpawnCondition"><span class="toc-number">5.</span> <span class="toc-text">SpawnCondition</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#示例"><span class="toc-number">6.</span> <span class="toc-text">示例</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#在我的-Mod-块上生成"><span class="toc-number">6.0.1.</span> <span class="toc-text">在我的 Mod 块上生成</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#如果玩家在自定义生物群系-区域中生成"><span class="toc-number">6.0.2.</span> <span class="toc-text">如果玩家在自定义生物群系&#x2F;区域中生成</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#生成于丛林神殿"><span class="toc-number">6.0.3.</span> <span class="toc-text">生成于丛林神殿</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#在日食期间生成"><span class="toc-number">6.0.4.</span> <span class="toc-text">在日食期间生成</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#玩家站在太阳板块上"><span class="toc-number">6.0.5.</span> <span class="toc-text">玩家站在太阳板块上</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#组合片段"><span class="toc-number">7.</span> <span class="toc-text">组合片段</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#结合-bool-和-float"><span class="toc-number">7.1.</span> <span class="toc-text">结合 bool 和 float</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#简单的语法"><span class="toc-number">7.1.1.</span> <span class="toc-text">简单的语法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#中等语法"><span class="toc-number">7.1.2.</span> <span class="toc-text">中等语法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#复杂的语法"><span class="toc-number">7.1.3.</span> <span class="toc-text">复杂的语法</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#常见错误"><span class="toc-number">8.</span> <span class="toc-text">常见错误</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#为什么我的世界突然进入困难模式？"><span class="toc-number">8.0.1.</span> <span class="toc-text">为什么我的世界突然进入困难模式？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#CS0161-‘-ClassName-SpawnChance-NPCSpawnInfo-’：并非所有代码路径都返回值"><span class="toc-number">8.0.2.</span> <span class="toc-text">CS0161 ‘[ClassName].SpawnChance(NPCSpawnInfo)’：并非所有代码路径都返回值</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#CS0029-无法将类型“bool”隐式转换为“float”"><span class="toc-number">8.0.3.</span> <span class="toc-text">CS0029 无法将类型“bool”隐式转换为“float”</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#相关参考资料"><span class="toc-number">9.</span> <span class="toc-text">相关参考资料</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#基础级别未涵盖"><span class="toc-number">10.</span> <span class="toc-text">基础级别未涵盖</span></a></li></ol>
+        </nav>
+    </div>
+</aside>
+
+
+
+
+
+        </section>
+        <footer class="hidden lg:block fixed bottom-0 left-0 sm:w-1/12 lg:w-1/6 bg-gray-100 z-40">
+    
+    <div class="footer-social-links">
+        
+            <a href="https://github.com/keyboard3" target="_blank" rel="noopener">
+                <i class="iconfont icon-github"></i>
+            </a>
+        
+            <a href="/blog/atom.xml">
+                <i class="iconfont icon-rss"></i>
+            </a>
+        
+    </div>
+    
+    
+        <p class="footer-custom">浙ICP备2022008282号</p>
+        <p class="theme-brand">Theme by <a href="https://github.com/fengkx/hexo-theme-purer" target="_blank" rel="nofollow noopener noreferrer noopener">hexo-theme-purer</a></p>
+    
+</footer>
+
+        <div id="mask" class="hidden mask fixed inset-0 bg-gray-900 opacity-75 z-40"></div>
+        <div id="search-view-container" class="hidden shadow-xl"></div>
+        
+<script src="/blog/js/dom-event.min.js"></script>
+
+
+
+<script src="/blog/js/local-search.min.js"></script>
+
+
+    <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+<script src="//cdn.jsdelivr.net/npm/valine"></script>
+<script type="text/javascript">
+var GUEST = ['nick', 'mail', 'link'];
+var meta = '';
+meta = meta.split(',').filter(function(item) {
+  return GUEST.indexOf(item) > -1;
+});
+new Valine({
+  el: '#vcomments',
+  verify: 'false',
+  notify: 'false',
+  appId: '',
+  appKey: '',
+  placeholder: 'just go go',
+  avatar: 'mm',
+  meta: meta,
+  pageSize: '10' || 10,
+  visitor: 'true',
+  lang: ''
+});
+</script>
+
+
+
+    <script src="//cdn.jsdelivr.net/npm/lightgallery.js@1.1.3/dist/js/lightgallery.min.js"></script>
+    
+<script src="/blog/js/light-gallery.min.js"></script>
+
+
+
+
+
+
+    </body>
+</html>

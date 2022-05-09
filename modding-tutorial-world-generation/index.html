@@ -1,0 +1,432 @@
+<!DOCTYPE html>
+<html  lang="zh-CN" >
+    <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, minimum-scale=1, initial-scale=1, maximum-scale=5, viewport-fit=cover">
+    <title>改装教程：世界生成(论坛版) | keyboard3的博客</title>
+    <meta name="description" content="Modding Tutorial: World Generation 前言世界生成涉及很多细节。即使在你做最基本的结构时，它们也会不断地笼罩着你，并且对于理解你的代码为什么工作或不工作至关重要。 这些概念中最基本的是泰拉瑞亚使用的坐标系，其中位置 (0, 0) 是世界的最左上角。然后，您可以使用公共变量 Main.maxTilesX 和 Main.maxTilesY 来分别获取世界的宽度和高度。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="改装教程：世界生成(论坛版)">
+<meta property="og:url" content="https://keyboard3.github.io/modding-tutorial-world-generation/index.html">
+<meta property="og:site_name" content="keyboard3的博客">
+<meta property="og:description" content="Modding Tutorial: World Generation 前言世界生成涉及很多细节。即使在你做最基本的结构时，它们也会不断地笼罩着你，并且对于理解你的代码为什么工作或不工作至关重要。 这些概念中最基本的是泰拉瑞亚使用的坐标系，其中位置 (0, 0) 是世界的最左上角。然后，您可以使用公共变量 Main.maxTilesX 和 Main.maxTilesY 来分别获取世界的宽度和高度。">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://forums.terraria.org/index.php?attachments/1612298483774-png.306777/">
+<meta property="og:image" content="https://forums.terraria.org/index.php?attachments/1611985758319-png.306278/">
+<meta property="og:image" content="https://forums.terraria.org/index.php?attachments/1611985817752-png.306279/">
+<meta property="og:image" content="https://forums.terraria.org/index.php?attachments/1611985961872-png.306280/">
+<meta property="og:image" content="https://forums.terraria.org/index.php?attachments/1611986005783-png.306281/">
+<meta property="og:image" content="https://forums.terraria.org/index.php?attachments/1611986233247-png.306282/">
+<meta property="article:published_time" content="2022-04-24T11:15:23.000Z">
+<meta property="article:modified_time" content="2022-05-09T06:56:48.247Z">
+<meta property="article:author" content="keyboard3">
+<meta property="article:tag" content="翻译">
+<meta property="article:tag" content="tModLoader">
+<meta property="article:tag" content="terraria">
+<meta property="article:tag" content="c#">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://forums.terraria.org/index.php?attachments/1612298483774-png.306777/">
+
+    <link rel="alternate" type="application/atom+xml" href="/blog/atom.xml">
+    <link rel="icon" href="/images/favicon.ico" type="image/x-icon">
+
+    
+<link rel="stylesheet" href="/blog/css/common.min.css">
+
+
+
+    
+        <link href="//cdn.jsdelivr.net/npm/katex@0.9.0/dist/katex.min.css" rel="stylesheet">
+    
+    
+    
+    
+        <link href="//cdn.jsdelivr.net/npm/lightgallery.js@1.1.3/dist/css/lightgallery.min.css" rel="stylesheet">
+    
+    
+    
+<link rel="stylesheet" href="/blog/css/iconfont.min.css">
+
+    
+<meta name="generator" content="Hexo 4.2.0"><link rel="stylesheet" href="/blog/css/prism-tomorrow.css" type="text/css">
+<link rel="stylesheet" href="/blog/css/prism-line-numbers.css" type="text/css"></head>
+
+    <body>
+        <header class="header header-fixture">
+    <div class="profile-search-wrap flex sm:block">
+        
+        
+        <div class="profile sm:text-center md:px-1 lg:px-3 sm:pb-4 sm:pt-6">
+            <a id="avatar" role="link" href="https://github.com/keyboard3" class="inline-block lg:w-16 lg:h-16 w-8 h-8 m-2" target="_blank" rel="noopener" rel="noreferrer" >
+                <img src="https://www.gravatar.com/avatar/5a65c2880a8f2804b5af3dc39819bdf1?s=128" class="rounded-full" alt="avatar">
+            </a>
+            <h2 id="name" class="hidden lg:block">keyboard3</h2>
+            <h3 id="title" class="hidden lg:block">单身男青年</h3>
+            
+            <small id="location" class="hidden lg:block">
+                <i class="iconfont icon-map-icon"></i>
+                home
+            </small>
+            
+        </div>
+        
+        
+<div class="search flex-1 flex lg:inline-block sm:hidden lg:px-4 lg:mt-2 lg:mb-4 lg:w-full">
+    <form id="search-form" class="my-auto flex-1 lg:border lg:border-solid lg:border-gray-200">
+        <div class="input-group table bg-gray-100 lg:bg-white w-full">
+            <input id="search-input" type="text" placeholder="搜索" class="inline-block w-full bg-gray-100 lg:bg-white">
+            <span class="table-cell">
+                <button name="search tigger button" disabled>
+                    <i class="iconfont icon-search m-2"></i>
+                </button>
+            </span>
+        </div>
+    </form>
+        
+<div id="content-json" data-placeholder="搜索" class="invisible hidden">/content.json</div>
+<script id="search-teamplate" type="text/html" data-path="/blog/content.json">
+    <div>
+        <div class="search-header bg-gray-400">
+            <input id="actual-search-input" model="keyword" ref="input" class="inline-block w-full h-10 px-2 py-1" placeholder="搜索" type="text">
+        </div>
+        <div class="search-result bg-gray-200">
+            {{#each searchPosts}}
+            <a href="/{{ path }}" class="result-item block px-2 pb-3 mb-1 pt-1 hover:bg-indigo-100">
+                <i class="iconfont icon-file"></i>
+                <h1 class="result-title inline font-medium text-lg">{{ title }}</h1>
+                <p class="result-content text-gray-600 text-sm">{{{ text }}}</p>
+            </a>
+            {{/each}}
+        </div>
+    </div>
+</script>
+
+</div>
+
+
+        <button name="menu toogle button" id="menu-toggle-btn" class="block sm:hidden p-3" role="button" aria-expanded="false">
+            <i class="iconfont icon-hamburger"></i>
+        </button>
+    </div>
+    <nav id="menu-nav" class="hidden sm:flex flex-col">
+        
+        
+            <div class="menu-item menu-home" role="menuitem">
+                <a href="/blog/.">
+                    <i class="iconfont icon-home" aria-hidden="true"></i>
+                    <span class="menu-title">首页</span>
+                </a>
+            </div>
+        
+        
+            <div class="menu-item menu-archives" role="menuitem">
+                <a href="/blog/archives">
+                    <i class="iconfont icon-archive" aria-hidden="true"></i>
+                    <span class="menu-title">归档</span>
+                </a>
+            </div>
+        
+        
+            <div class="menu-item menu-repository" role="menuitem">
+                <a href="/blog/repository">
+                    <i class="iconfont icon-project" aria-hidden="true"></i>
+                    <span class="menu-title">项目</span>
+                </a>
+            </div>
+        
+        
+            <div class="menu-item menu-about" role="menuitem">
+                <a href="/blog/about">
+                    <i class="iconfont icon-cup" aria-hidden="true"></i>
+                    <span class="menu-title">关于</span>
+                </a>
+            </div>
+        
+        
+<div class="social-links flex sm:flex-col lg:hidden mt-5">
+    
+        <span class="social-item text-center">
+            <a href="https://github.com/keyboard3" target="_blank" rel="noopener">
+                <i class="iconfont social-icon icon-github"></i>
+                <span class="menu-title hidden lg:inline">menu.github</span>
+            </a>
+        </span>
+    
+        <span class="social-item text-center">
+            <a href="/blog/atom.xml">
+                <i class="iconfont social-icon icon-rss"></i>
+                <span class="menu-title hidden lg:inline">menu.rss</span>
+            </a>
+        </span>
+    
+</div>
+
+
+    </nav>
+</header>
+
+        <section class="main-section">
+            
+    <main class="flex-1 px-4 py-14 md:px-5 lg:px-8 lg:py-4 relative min-h-screen">
+    
+
+    <article class="content article article-archives article-type-list" itemscope="">
+        <header class="article-header">
+            
+    
+        <h1 class="article-title text-lg" itemprop="name">
+            改装教程：世界生成(论坛版)
+        </h1>
+    
+
+
+
+            <p class="article-meta mb-3 text-xs">
+                <span class="article-date">
+    <i class="iconfont icon-calendar-check"></i>
+	<a href="/blog/modding-tutorial-world-generation/" class="article-date">
+	  <time datetime="2022-04-24T11:15:23.000Z" itemprop="datePublished">4月 24</time>
+	</a>
+</span>
+
+                
+
+                
+    <span class="article-tags">
+    <i class="iconfont icon-tag"></i>
+    <a class="article-tag-link" href="/blog/tags/c/" rel="tag">c#</a>, <a class="article-tag-link" href="/blog/tags/tModLoader/" rel="tag">tModLoader</a>, <a class="article-tag-link" href="/blog/tags/terraria/" rel="tag">terraria</a>, <a class="article-tag-link" href="/blog/tags/%E7%BF%BB%E8%AF%91/" rel="tag">翻译</a>
+  </span>
+
+
+                <span class="_partial/post-comment"><i class="icon icon-comment"></i>
+                    <a href="/blog/modding-tutorial-world-generation/#comments" class="article-comment-link">
+                        评论
+                    </a>
+                </span>
+                
+    
+        <span class="post-wordcount" itemprop="wordCount">字数统计: 3k(字)</span>
+    
+    
+        <span class="post-readcount" itemprop="timeRequired">阅读时长: 11(分)</span>
+    
+
+
+            </p>
+        </header>
+        <div class="marked-body article-body">
+            <p><a href="https://forums.terraria.org/index.php?threads/modding-tutorial-world-generation.47601/" target="_blank" rel="noopener">Modding Tutorial: World Generation</a></p>
+<h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>世界生成涉及很多细节。即使在你做最基本的结构时，它们也会不断地笼罩着你，并且对于理解你的代码为什么工作或不工作至关重要。</p>
+<p>这些概念中最基本的是泰拉瑞亚使用的坐标系，其中位置 (0, 0) 是世界的最左上角。然后，您可以使用公共变量 Main.maxTilesX 和 Main.maxTilesY 来分别获取世界的宽度和高度。</p>
+<p>但是，在执行此操作时，请注意可玩世界在玩家实际到达任一轴上的坐标 0 之前停止 - 我从未测试过，但世界在真正停止之前停止滚动可能 40 或 50 个 tile。当您想向世界的边缘添加东西（例如海洋或太空内容）时，请记住这一点。</p>
+<p>参考这个以获得更好的世界高度的视觉表示：<br><img src="https://forums.terraria.org/index.php?attachments/1612298483774-png.306777/" alt=""></p>
+<p>另一个需要注意的非常重要的事情是生成顺序 - 在泰拉瑞亚中，游戏使用了一个名为 GenPasses 的任务列表，告诉世界如何按顺序生成。记住这一点非常重要 - 例如，如果您过早生成矿石，它们很容易被紧随其后的新一代取代。比如我前段时间做了一个生物群系，经过一番测试，发现地牢或者丛林神殿可以覆盖它，使其基本不存在。因此，我不得不将其在 gen 列表中向前移动，以免我的生物群落消失。如果您了解您的世代在列表中的位置，您还会发现更容易调试。<br>有关 vanilla 生成步骤顺序的进一步参考，请在此处遵循此<a href="https://github.com/tModLoader/tModLoader/wiki/Vanilla-World-Generation-Steps" target="_blank" rel="noopener">列表</a>。</p>
+<p>最后，您必须始终牢记的是，tile 存储在 2D 数组中。其后果如下：</p>
+<ul>
+<li>1.如果超出数组的边界（即尝试访问(-1, 0)处的tile），则会崩溃或无法生成；</li>
+<li>2.如果您要使用例如玩家位置，您需要将玩家位置除以 16 才能访问同一位置的tile - 例如，如果我想获得玩家正上方的 tile，我将使用以下代码：<pre class="line-numbers language-csharp"><code class="language-csharp">Framing<span class="token punctuation">.</span><span class="token function">GetTileSafely</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token keyword">int</span><span class="token punctuation">)</span><span class="token punctuation">(</span>player<span class="token punctuation">.</span>position<span class="token punctuation">.</span>X <span class="token operator">/</span> <span class="token number">16f</span><span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token punctuation">(</span><span class="token keyword">int</span><span class="token punctuation">)</span><span class="token punctuation">(</span>player<span class="token punctuation">.</span>position<span class="token punctuation">.</span>Y <span class="token operator">/</span> <span class="token number">16f</span><span class="token punctuation">)</span> <span class="token operator">-</span> <span class="token number">1</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+对弹丸、NPC、灰尘和血块进行相同的除法操作。</li>
+<li><ol start="3">
+<li>这些 tile位置也始终是整数，而不是任何类型的小数。如果您尝试访问 1.2f, 2 处的 tile，您将收到错误消息。</li>
+</ol>
+</li>
+<li><ol start="4">
+<li>最后，每个 tile 总是加载到世界中，但只有当 tile 实际放置在世界中时才会激活 - 因此，如果您访问空气 tile，您可能会得到非空气类型（即沙子），但是它将是空的。</li>
+</ol>
+</li>
+</ul>
+<h1 id="基本"><a href="#基本" class="headerlink" title="基本"></a>基本</h1><p>因此，除了所有这些，我们可以从最简单的方法和工具开始，您可以使用它们来创建或检查或做任何事情：</p>
+<pre class="line-numbers language-csharp"><code class="language-csharp">WorldGen<span class="token punctuation">.</span><span class="token function">PlaceTile</span><span class="token punctuation">(</span><span class="token keyword">int</span> i<span class="token punctuation">,</span> <span class="token keyword">int</span> j<span class="token punctuation">,</span> <span class="token keyword">int</span> type<span class="token punctuation">,</span> <span class="token keyword">bool</span> mute <span class="token operator">=</span> <span class="token keyword">false</span><span class="token punctuation">,</span> <span class="token keyword">bool</span> forced <span class="token operator">=</span> <span class="token keyword">false</span><span class="token punctuation">,</span> <span class="token keyword">int</span> plr <span class="token operator">=</span> <span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token keyword">int</span> style <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p>正如您可能猜到的那样，这会在 i、j 处放置一个类型为 type 的 tile，<br>如果 mute 为假，则播放声音。<br>至于forced - 我想它会强制放置 tile，但我不经常使用它。<br>至于plr - 我不知道这是什么。完全没有。应该不重要吧？<br>最后，style 很难解释——它用于显示单个 tile 的替代版本。我将使用 PlaceObject 对此进行更多解释。</p>
+<pre class="line-numbers language-csharp"><code class="language-csharp">WorldGen<span class="token punctuation">.</span><span class="token function">KillTile</span><span class="token punctuation">(</span><span class="token keyword">int</span> i<span class="token punctuation">,</span> <span class="token keyword">int</span> j<span class="token punctuation">,</span> <span class="token keyword">bool</span> fail<span class="token operator">=</span> <span class="token keyword">false</span><span class="token punctuation">,</span> <span class="token keyword">bool</span> effectOnly <span class="token operator">=</span> <span class="token keyword">false</span><span class="token punctuation">,</span> <span class="token keyword">bool</span> noItem <span class="token operator">=</span> <span class="token keyword">false</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p>也很简单 - 破坏 i, j 处的 tile。如果fail为true，则不会删除该 tile 。例如，这用于当您挖掘镐但需要多次击打时。<br>如果 effectOnly 为true，则tile只会产生灰尘，但不会破裂。通常与失败同时出现。例如，挖掘一个镐力太低的tile。<br>noItem 很简单，当 tile 被破坏时不会掉落物品。</p>
+<pre class="line-numbers language-csharp"><code class="language-csharp">Framing<span class="token punctuation">.</span><span class="token function">GetTileSafely</span><span class="token punctuation">(</span><span class="token keyword">int</span> i<span class="token punctuation">,</span> <span class="token keyword">int</span> j<span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p>为了完全透明，我只知道这是抓取任何给定 tile 的更好方法。如果你试图通过 Main.tile[x, y] 抓取一个 tile ，我建议你改用这个。<br>这对于检查给定 tile 的类型、它是否处于活动状态或它的某些特性非常有用。</p>
+<pre class="line-numbers language-csharp"><code class="language-csharp">WorldGen<span class="token punctuation">.</span><span class="token function">TileRunner</span><span class="token punctuation">(</span><span class="token keyword">int</span> i<span class="token punctuation">,</span> <span class="token keyword">int</span> j<span class="token punctuation">,</span> <span class="token keyword">int</span> strength<span class="token punctuation">,</span> <span class="token keyword">int</span> steps<span class="token punctuation">,</span> <span class="token keyword">int</span> type<span class="token punctuation">,</span> <span class="token keyword">bool</span> addTile <span class="token operator">=</span> <span class="token keyword">false</span><span class="token punctuation">,</span> <span class="token keyword">float</span> speedX <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">,</span> <span class="token keyword">float</span> speedY <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">,</span> <span class="token keyword">bool</span> noYChange <span class="token operator">=</span> <span class="token keyword">false</span><span class="token punctuation">,</span> <span class="token keyword">bool</span> overRide <span class="token operator">=</span> <span class="token keyword">true</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p>好吧，这要复杂得多。 TileRunner 是一种方法，我可以解释的唯一方法是，如果选择的话，它会创建一个带有嘈杂边缘的“钻石”。<br>i 和 j 是 TileRunner 的位置。同样，这是在平铺位置。因此，如果您想使用玩家或 npc 位置来生成某些东西，则必须除以 16。<br>strength 是产生的块有多大——在某种程度上是“半径”。<br>我认为更好的解释方法是视觉参考：</p>
+<h2 id="Spoiler-Strength-of-2"><a href="#Spoiler-Strength-of-2" class="headerlink" title="Spoiler: Strength of 2"></a>Spoiler: Strength of 2</h2><div style="display:flex;flex-direction:row;flex-wrap:wrap;">
+<img src="https://forums.terraria.org/index.php?attachments/1611985758319-png.306278/"/>
+<img src="https://forums.terraria.org/index.php?attachments/1611985817752-png.306279/"/>
+<img src="https://forums.terraria.org/index.php?attachments/1611985961872-png.306280/"/>
+<img src="https://forums.terraria.org/index.php?attachments/1611986005783-png.306281/"/>
+<img src="https://forums.terraria.org/index.php?attachments/1611986233247-png.306282/">
+</div>
+
+<p>作为参考，每个 TileRunner 都有以下一行：</p>
+<pre class="line-numbers language-csharp"><code class="language-csharp">WorldGen<span class="token punctuation">.</span><span class="token function">TileRunner</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token keyword">int</span><span class="token punctuation">)</span><span class="token punctuation">(</span>Main<span class="token punctuation">.</span>MouseWorld<span class="token punctuation">.</span>X <span class="token operator">/</span> <span class="token number">16f</span><span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token punctuation">(</span><span class="token keyword">int</span><span class="token punctuation">)</span><span class="token punctuation">(</span>Main<span class="token punctuation">.</span>MouseWorld<span class="token punctuation">.</span>Y <span class="token operator">/</span> <span class="token number">16f</span><span class="token punctuation">)</span><span class="token punctuation">,</span> STRENGTH<span class="token punctuation">,</span> <span class="token number">5</span><span class="token punctuation">,</span> TileID<span class="token punctuation">.</span>Dirt<span class="token punctuation">,</span> <span class="token keyword">true</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">,</span> <span class="token keyword">false</span><span class="token punctuation">,</span> <span class="token keyword">true</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p>其中 STRENGTH = 展示的强度值。<br>step 对我来说有点混乱 - 据我所知，它是重复的数量，循环的数量，你在这个 TileRunner 调用上做的。如果需要使用 speedX 和 speedY，您可以将东西排成一行，在 addTile 之后解释。<br>addTile 告诉 TileRunner 是否要添加 tile 。如果将此设置为 true，它将放置新的瓷砖。如果不是，它只会替换旧 tile ，只要将 overRide 设置为 true。<br>speedX 和 speedY 指的是循环后新块的位移。例如，如果我有一个任意大小的 TileRunner，在任意位置，有 3 个步骤，speedX 为 5，speedY 为 0，它将放置 3 个块，每 5 个块相隔，从原始位置开始（i，j ) 并向右走。或者，如果我将 speedX 设置为负数，它将从 (i, j) 开始并向左移动。同样的原则也适用于 speedY；只是负速度 Y 上升，而正速度 Y 下降，分别对应于 (i, j)。这可能是一个有点冗长的解释，但如果你稍微弄乱它应该是有道理的。<br>noYChange 是……奇怪。我从来没有测试过它，但我猜它只会让 TileRunner 忽略 speedY。我不知道。我猜只是保持这个错误。<br>最后，overRide。如果可能，这将使用您的类型的 tile 替换现有 tile 。例如，如果我要放置我的矿石 BananaOre，我希望将 overRide 设置为 true，这样它就会在石头、泥土和泥土中生成。当您只想添加 tile 时设置为 false。</p>
+<p>TileRunner 对于较小规模的 tile 非常有用，例如矿床（矿石是 TileRunner 最常见的用途之一）、沙子、泥土和石块以及类似的东西。但是，我建议不要将其用于大型生物群落和结构，因为当您想要完全填充一个区域而又不会低效时，它真的很难使用。同样，也很难准确地控制你想要的方式。</p>
+<pre class="line-numbers language-csharp"><code class="language-csharp">WorldGen<span class="token punctuation">.</span><span class="token function">digTunnel</span><span class="token punctuation">(</span><span class="token keyword">int</span> i<span class="token punctuation">,</span> <span class="token keyword">int</span> j<span class="token punctuation">,</span> <span class="token keyword">float</span> xDir<span class="token punctuation">,</span> <span class="token keyword">float</span> yDir<span class="token punctuation">,</span> <span class="token keyword">int</span> Steps<span class="token punctuation">,</span> <span class="token keyword">int</span> Size<span class="token punctuation">,</span> <span class="token keyword">bool</span> Wet <span class="token operator">=</span> <span class="token keyword">false</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p>现在，想象一下 TileRunner，但它会删除tile。就是这样。它的工作原理相同，只是杀死tile。<br>唯一的区别是 Wet 的作用。这会将水放入它挖掘的隧道中。很简单。</p>
+<h1 id="定位"><a href="#定位" class="headerlink" title="定位"></a>定位</h1><p>考虑到所有这些方法，我看到做生成的人最大的问题是 定位。我应该把我的结构放在哪里才能让它在 <x> 生物群系中？天空在哪里？表面在哪里？这些都是有效的问题，值得庆幸的是，它们很容易解决——尤其是当你像我一样做 gen 的时候。</p>
+<p>你有五个主要的值——</p>
+<ul>
+<li><ol>
+<li>0，世界的顶部</li>
+</ol>
+</li>
+<li><ol start="2">
+<li>Main.worldSurface，世界的表面和下面的坐标被认为是“地下”；</li>
+</ol>
+</li>
+<li><ol start="3">
+<li>Main.rockLayer，世界上更深的洞穴和下面的坐标被认为是“洞穴”；</li>
+</ol>
+</li>
+<li><ol start="4">
+<li>Main.maxTilesY - 200，或Underworld层，此时往下意味着你​​在Underworld；</li>
+</ol>
+</li>
+<li><ol start="5">
+<li>最后是 Main.maxTilesY，世界的底部。</li>
+</ol>
+</li>
+</ul>
+<p>使用这些的任意组合可以确保您的给定结构或生物群系或任何可能的东西可以仅在特定区域内生成，例如仅在黑社会中或仅在地表下。明智地使用这些。</p>
+<p>至于 X 坐标，它有点模棱两可，只有四个主要值（我用过）——</p>
+<ul>
+<li><ol>
+<li>0，世界的最左边</li>
+</ol>
+</li>
+<li><ol start="2">
+<li>Main.maxTilesX / 2，世界中心；</li>
+</ol>
+</li>
+<li><ol start="3">
+<li>Main.maxTilesX，世界的最右边；</li>
+</ol>
+</li>
+<li><ol start="4">
+<li>最后是 Main.dungeonX。该值可以位于世界中心的左侧或右侧，这样您就可以知道雪地和丛林生物群系的位置。如果 Main.dungeonX 小于 Main.maxTilesX / 2，则雪地生物群系和地牢在 spawn 的左侧。否则，它们在生成的右侧。请注意，如果在地牢生成步骤之前使用地牢X，则可能不会设置。</li>
+</ol>
+</li>
+</ul>
+<p>这也使您通常可以猜测地点和生物群落的位置。<br>值得注意的是变量 WorldGen.UndergroundDesertLocation，一个 Rectangle。这通过 WorldGen.UndergroundDesertLocation.Location 存储地下沙漠的左上角，并通过 WorldGen.UndergroundDesertLocation.Size() 存储大小。这在灾难的沉没之海或星光河的玻璃沙漠生物群系等情况下很有用。</p>
+<h1 id="生成阶段续"><a href="#生成阶段续" class="headerlink" title="生成阶段续"></a>生成阶段续</h1><p>现在通过自己。<br>GenPass 再次成为泰拉瑞亚处理世界生成的方式。它按顺序运行GenPass by GenPass，逐步构建世界。这些通行证与整个地牢一样大，或与早期世界中添加的沙子一样小。重要的是您要如何对其进行分区。</p>
+<p>老实说，GenPass 本身最终成为最简单易用的东西之一。<br>在 ModifyWorldGenTasks 方法下，如图所示，</p>
+<pre class="line-numbers language-csharp"><code class="language-csharp"><span class="token keyword">public</span> <span class="token keyword">override</span> <span class="token keyword">void</span> <span class="token function">ModifyWorldGenTasks</span><span class="token punctuation">(</span>List<span class="token operator">&lt;</span>GenPass<span class="token operator">></span> tasks<span class="token punctuation">,</span> <span class="token keyword">ref</span> <span class="token keyword">float</span> totalWeight<span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p>您只需将您的方法甚至代码直接添加到新任务中，如下所示，</p>
+<pre class="line-numbers language-csharp"><code class="language-csharp">tasks<span class="token punctuation">.</span><span class="token function">Add</span><span class="token punctuation">(</span><span class="token keyword">new</span> <span class="token class-name">PassLegacy</span><span class="token punctuation">(</span><span class="token string">"My Custom Generation"</span><span class="token punctuation">,</span> MyGenCode<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p>您需要做的就是创建一个名为 MyGenCode 的方法，并带有 GenerationProgress 参数，例如，</p>
+<pre class="line-numbers language-csharp"><code class="language-csharp"><span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">MyGenCode</span><span class="token punctuation">(</span>GenerationProgress p<span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p>但是，在大多数情况下，您不希望将您的 gen 传递给任务列表。<br>通常，您希望将您的通行证插入某个特定位置，如前言的“生成顺序”小节中所述。例如，</p>
+<pre class="line-numbers language-csharp"><code class="language-csharp">            <span class="token keyword">int</span> shiniesIndex <span class="token operator">=</span> tasks<span class="token punctuation">.</span><span class="token function">FindIndex</span><span class="token punctuation">(</span>genpass <span class="token operator">=</span><span class="token operator">></span> genpass<span class="token punctuation">.</span>Name<span class="token punctuation">.</span><span class="token function">Equals</span><span class="token punctuation">(</span><span class="token string">"Shinies"</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token keyword">if</span> <span class="token punctuation">(</span>shiniesIndex <span class="token operator">!=</span> <span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">)</span>
+                tasks<span class="token punctuation">.</span><span class="token function">Insert</span><span class="token punctuation">(</span>shiniesIndex <span class="token operator">+</span> <span class="token number">1</span><span class="token punctuation">,</span> <span class="token keyword">new</span> <span class="token class-name">PassLegacy</span><span class="token punctuation">(</span><span class="token string">"MyGenPass"</span><span class="token punctuation">,</span> MyGenPass<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+<p>这将在 Shinies 步骤之后插入您的一代，这是最常用于放置矿石的步骤。<br>同样，您可以在<a href="https://github.com/tModLoader/tModLoader/wiki/Vanilla-World-Generation-Steps" target="_blank" rel="noopener">此处</a>找到所有香草通行证的名称。</p>
+<p>您可以根据需要将您的 worldgen 组织成尽可能多（或尽可能少）的 genpass，但是，我建议您尝试将它们保持在您认为合适的不同步骤中。特别是对于可能放置在不同位置且重叠不同的不同生物群系，有时您希望将一个生物群系或结构放置在与您可能添加的另一个生物群系相比不同的位置。只要确保您始终了解您的生物群落的位置和时间，您就应该做得很好。</p>
+<h1 id="箱子"><a href="#箱子" class="headerlink" title="箱子"></a>箱子</h1><p>箱子自然是设计生物群落或结构并填充内容的非常重要的部分。</p>
+<p>在 worldgen 期间（甚至在游戏期间）填充箱子非常简单：</p>
+<pre class="line-numbers language-csharp"><code class="language-csharp">WorldGen<span class="token punctuation">.</span><span class="token function">PlaceChest</span><span class="token punctuation">(</span>x<span class="token punctuation">,</span> y<span class="token punctuation">,</span> type<span class="token punctuation">,</span> notNearOtherChests<span class="token punctuation">,</span> style<span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p>PlaceChest 是 worldgen 期间使用的一种方法，它可以放置一个箱子。如果箱子放置成功，它还会返回 Main.chest 中与 tile 关联的 Chest 对象的索引。如果没有成功放置，它只返回-1。<br>所以，我们可以这样做：</p>
+<pre class="line-numbers language-csharp"><code class="language-csharp"><span class="token keyword">int</span> ChestIndex <span class="token operator">=</span> WorldGen<span class="token punctuation">.</span><span class="token function">PlaceChest</span><span class="token punctuation">(</span>x<span class="token punctuation">,</span> y<span class="token punctuation">,</span> <span class="token punctuation">(</span><span class="token keyword">ushort</span><span class="token punctuation">)</span>type<span class="token punctuation">,</span> <span class="token keyword">false</span><span class="token punctuation">,</span> style<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">if</span> <span class="token punctuation">(</span>ChestIndex <span class="token operator">!=</span> <span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+<p>检查，当我们放下一个箱子时，它是否成功。<br>然后，在 if 语句中，我们可以这样做：</p>
+<pre class="line-numbers language-csharp"><code class="language-csharp">Main<span class="token punctuation">.</span>chest<span class="token punctuation">[</span>ChestIndex<span class="token punctuation">]</span><span class="token punctuation">.</span>item<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">.</span><span class="token function">SetDefaults</span><span class="token punctuation">(</span>ItemID<span class="token punctuation">.</span>Bananarang<span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p>这会将您放置的箱子中的第一个物品设置为一个香蕉郎。 如果要增加数量，只需执行以下操作：</p>
+<pre class="line-numbers language-csharp"><code class="language-csharp">Main<span class="token punctuation">.</span>chest<span class="token punctuation">[</span>ChestIndex<span class="token punctuation">]</span><span class="token punctuation">.</span>item<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">.</span>stack <span class="token operator">=</span> <span class="token number">20</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p>boom，你有20 个香蕉郎。<br>对箱子及其库存的进一步操作只需要一些逻辑和思考，因此大约对本节进行了四舍五入。</p>
+
+        </div>
+        
+<blockquote class="copyright">
+    <p><strong>本文链接 : </strong><a class="permalink" href="https://keyboard3.github.io/modding-tutorial-world-generation/">https://keyboard3.github.io/modding-tutorial-world-generation/</a></p>
+    <p><strong>This article is available under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank" rel="noopener noreferrer">Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0)</a> License</strong></p>
+</blockquote>
+
+
+    </article>
+    
+    <section id="comments">
+        
+            <div id="vcomments"></div>
+        
+    </section>
+
+
+    
+
+</main>
+
+
+<aside style="" id="sidebar" class="aside aside-fixture">
+    <div class="toc-sidebar">
+        <nav id="toc" class="article-toc">
+            <h3 class="toc-title">文章目录</h3>
+            <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#前言"><span class="toc-number">1.</span> <span class="toc-text">前言</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#基本"><span class="toc-number">2.</span> <span class="toc-text">基本</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Spoiler-Strength-of-2"><span class="toc-number">2.1.</span> <span class="toc-text">Spoiler: Strength of 2</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#定位"><span class="toc-number">3.</span> <span class="toc-text">定位</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#生成阶段续"><span class="toc-number">4.</span> <span class="toc-text">生成阶段续</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#箱子"><span class="toc-number">5.</span> <span class="toc-text">箱子</span></a></li></ol>
+        </nav>
+    </div>
+</aside>
+
+
+
+
+
+        </section>
+        <footer class="hidden lg:block fixed bottom-0 left-0 sm:w-1/12 lg:w-1/6 bg-gray-100 z-40">
+    
+    <div class="footer-social-links">
+        
+            <a href="https://github.com/keyboard3" target="_blank" rel="noopener">
+                <i class="iconfont icon-github"></i>
+            </a>
+        
+            <a href="/blog/atom.xml">
+                <i class="iconfont icon-rss"></i>
+            </a>
+        
+    </div>
+    
+    
+        <p class="footer-custom">浙ICP备2022008282号</p>
+        <p class="theme-brand">Theme by <a href="https://github.com/fengkx/hexo-theme-purer" target="_blank" rel="nofollow noopener noreferrer noopener">hexo-theme-purer</a></p>
+    
+</footer>
+
+        <div id="mask" class="hidden mask fixed inset-0 bg-gray-900 opacity-75 z-40"></div>
+        <div id="search-view-container" class="hidden shadow-xl"></div>
+        
+<script src="/blog/js/dom-event.min.js"></script>
+
+
+
+<script src="/blog/js/local-search.min.js"></script>
+
+
+    <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+<script src="//cdn.jsdelivr.net/npm/valine"></script>
+<script type="text/javascript">
+var GUEST = ['nick', 'mail', 'link'];
+var meta = '';
+meta = meta.split(',').filter(function(item) {
+  return GUEST.indexOf(item) > -1;
+});
+new Valine({
+  el: '#vcomments',
+  verify: 'false',
+  notify: 'false',
+  appId: '',
+  appKey: '',
+  placeholder: 'just go go',
+  avatar: 'mm',
+  meta: meta,
+  pageSize: '10' || 10,
+  visitor: 'true',
+  lang: ''
+});
+</script>
+
+
+
+    <script src="//cdn.jsdelivr.net/npm/lightgallery.js@1.1.3/dist/js/lightgallery.min.js"></script>
+    
+<script src="/blog/js/light-gallery.min.js"></script>
+
+
+
+
+
+
+    </body>
+</html>
