@@ -6,7 +6,7 @@
   <link href="/blog/atom.xml" rel="self"/>
   
   <link href="https://keyboard3.github.io/"/>
-  <updated>2022-05-09T06:56:48.246Z</updated>
+  <updated>2022-05-09T08:15:46.790Z</updated>
   <id>https://keyboard3.github.io/</id>
   
   <author>
@@ -15,6 +15,37 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>自定义UI的高级指南</title>
+    <link href="https://keyboard3.github.io/advanced-guide-to-custom-ui/"/>
+    <id>https://keyboard3.github.io/advanced-guide-to-custom-ui/</id>
+    <published>2022-05-09T07:03:23.000Z</published>
+    <updated>2022-05-09T08:15:46.790Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;p&gt;&lt;a href=&quot;https://github.com/tModLoader/tModLoader/wiki/Advanced-guide-to-custom-UI&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;Advanced guide to
+        
+      
+    
+    </summary>
+    
+    
+    
+      <category term="翻译" scheme="https://keyboard3.github.io/tags/%E7%BF%BB%E8%AF%91/"/>
+    
+      <category term="tModLoader" scheme="https://keyboard3.github.io/tags/tModLoader/"/>
+    
+      <category term="terraria" scheme="https://keyboard3.github.io/tags/terraria/"/>
+    
+      <category term="c#" scheme="https://keyboard3.github.io/tags/c/"/>
+    
+  </entry>
   
   <entry>
     <title>NPC 生成基础</title>
@@ -566,33 +597,6 @@
     </summary>
     
     
-    
-  </entry>
-  
-  <entry>
-    <title>amp教程</title>
-    <link href="https://keyboard3.github.io/beginning-amp-course/"/>
-    <id>https://keyboard3.github.io/beginning-amp-course/</id>
-    <published>2020-06-06T11:51:23.000Z</published>
-    <updated>2022-03-31T15:22:46.878Z</updated>
-    
-    <summary type="html">
-    
-      
-      
-        
-        
-          &lt;p&gt;&lt;a href=&quot;https://amp.dev/zh_cn/documentation/courses/beginning-course/?format=websites&amp;level=beginner&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;原文
-        
-      
-    
-    </summary>
-    
-    
-    
-      <category term="翻译" scheme="https://keyboard3.github.io/tags/%E7%BF%BB%E8%AF%91/"/>
-    
-      <category term="amp" scheme="https://keyboard3.github.io/tags/amp/"/>
     
   </entry>
   

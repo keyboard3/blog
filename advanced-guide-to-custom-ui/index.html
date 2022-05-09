@@ -1,0 +1,680 @@
+<!DOCTYPE html>
+<html  lang="zh-CN" >
+    <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, minimum-scale=1, initial-scale=1, maximum-scale=5, viewport-fit=cover">
+    <title>自定义UI的高级指南 | keyboard3的博客</title>
+    <meta name="description" content="Advanced guide to custom UI 在本指南中，您将了解 vanilla 中存在的各种 UI 类，您可以使用它们来修改自己的 UI。在遵循本指南之前，您应该了解以下主题：  类层次结构和继承 Abstract &#x2F; virtual and override 面向对象编程（与类继承有关）  交待Terraria 中的 UI 由各种类组成，最值得注意的是：UIElement、UISt">
+<meta property="og:type" content="article">
+<meta property="og:title" content="自定义UI的高级指南">
+<meta property="og:url" content="https://keyboard3.github.io/advanced-guide-to-custom-ui/index.html">
+<meta property="og:site_name" content="keyboard3的博客">
+<meta property="og:description" content="Advanced guide to custom UI 在本指南中，您将了解 vanilla 中存在的各种 UI 类，您可以使用它们来修改自己的 UI。在遵循本指南之前，您应该了解以下主题：  类层次结构和继承 Abstract &#x2F; virtual and override 面向对象编程（与类继承有关）  交待Terraria 中的 UI 由各种类组成，最值得注意的是：UIElement、UISt">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2022-05-09T07:03:23.000Z">
+<meta property="article:modified_time" content="2022-05-09T08:15:46.790Z">
+<meta property="article:author" content="keyboard3">
+<meta property="article:tag" content="翻译">
+<meta property="article:tag" content="tModLoader">
+<meta property="article:tag" content="terraria">
+<meta property="article:tag" content="c#">
+<meta name="twitter:card" content="summary">
+
+    <link rel="alternate" type="application/atom+xml" href="/blog/atom.xml">
+    <link rel="icon" href="/images/favicon.ico" type="image/x-icon">
+
+    
+<link rel="stylesheet" href="/blog/css/common.min.css">
+
+
+
+    
+        <link href="//cdn.jsdelivr.net/npm/katex@0.9.0/dist/katex.min.css" rel="stylesheet">
+    
+    
+    
+    
+        <link href="//cdn.jsdelivr.net/npm/lightgallery.js@1.1.3/dist/css/lightgallery.min.css" rel="stylesheet">
+    
+    
+    
+<link rel="stylesheet" href="/blog/css/iconfont.min.css">
+
+    
+<meta name="generator" content="Hexo 4.2.0"><link rel="stylesheet" href="/blog/css/prism-tomorrow.css" type="text/css">
+<link rel="stylesheet" href="/blog/css/prism-line-numbers.css" type="text/css"></head>
+
+    <body>
+        <header class="header header-fixture">
+    <div class="profile-search-wrap flex sm:block">
+        
+        
+        <div class="profile sm:text-center md:px-1 lg:px-3 sm:pb-4 sm:pt-6">
+            <a id="avatar" role="link" href="https://github.com/keyboard3" class="inline-block lg:w-16 lg:h-16 w-8 h-8 m-2" target="_blank" rel="noopener" rel="noreferrer" >
+                <img src="https://www.gravatar.com/avatar/5a65c2880a8f2804b5af3dc39819bdf1?s=128" class="rounded-full" alt="avatar">
+            </a>
+            <h2 id="name" class="hidden lg:block">keyboard3</h2>
+            <h3 id="title" class="hidden lg:block">单身男青年</h3>
+            
+            <small id="location" class="hidden lg:block">
+                <i class="iconfont icon-map-icon"></i>
+                home
+            </small>
+            
+        </div>
+        
+        
+<div class="search flex-1 flex lg:inline-block sm:hidden lg:px-4 lg:mt-2 lg:mb-4 lg:w-full">
+    <form id="search-form" class="my-auto flex-1 lg:border lg:border-solid lg:border-gray-200">
+        <div class="input-group table bg-gray-100 lg:bg-white w-full">
+            <input id="search-input" type="text" placeholder="搜索" class="inline-block w-full bg-gray-100 lg:bg-white">
+            <span class="table-cell">
+                <button name="search tigger button" disabled>
+                    <i class="iconfont icon-search m-2"></i>
+                </button>
+            </span>
+        </div>
+    </form>
+        
+<div id="content-json" data-placeholder="搜索" class="invisible hidden">/content.json</div>
+<script id="search-teamplate" type="text/html" data-path="/blog/content.json">
+    <div>
+        <div class="search-header bg-gray-400">
+            <input id="actual-search-input" model="keyword" ref="input" class="inline-block w-full h-10 px-2 py-1" placeholder="搜索" type="text">
+        </div>
+        <div class="search-result bg-gray-200">
+            {{#each searchPosts}}
+            <a href="/{{ path }}" class="result-item block px-2 pb-3 mb-1 pt-1 hover:bg-indigo-100">
+                <i class="iconfont icon-file"></i>
+                <h1 class="result-title inline font-medium text-lg">{{ title }}</h1>
+                <p class="result-content text-gray-600 text-sm">{{{ text }}}</p>
+            </a>
+            {{/each}}
+        </div>
+    </div>
+</script>
+
+</div>
+
+
+        <button name="menu toogle button" id="menu-toggle-btn" class="block sm:hidden p-3" role="button" aria-expanded="false">
+            <i class="iconfont icon-hamburger"></i>
+        </button>
+    </div>
+    <nav id="menu-nav" class="hidden sm:flex flex-col">
+        
+        
+            <div class="menu-item menu-home" role="menuitem">
+                <a href="/blog/.">
+                    <i class="iconfont icon-home" aria-hidden="true"></i>
+                    <span class="menu-title">首页</span>
+                </a>
+            </div>
+        
+        
+            <div class="menu-item menu-archives" role="menuitem">
+                <a href="/blog/archives">
+                    <i class="iconfont icon-archive" aria-hidden="true"></i>
+                    <span class="menu-title">归档</span>
+                </a>
+            </div>
+        
+        
+            <div class="menu-item menu-repository" role="menuitem">
+                <a href="/blog/repository">
+                    <i class="iconfont icon-project" aria-hidden="true"></i>
+                    <span class="menu-title">项目</span>
+                </a>
+            </div>
+        
+        
+            <div class="menu-item menu-about" role="menuitem">
+                <a href="/blog/about">
+                    <i class="iconfont icon-cup" aria-hidden="true"></i>
+                    <span class="menu-title">关于</span>
+                </a>
+            </div>
+        
+        
+<div class="social-links flex sm:flex-col lg:hidden mt-5">
+    
+        <span class="social-item text-center">
+            <a href="https://github.com/keyboard3" target="_blank" rel="noopener">
+                <i class="iconfont social-icon icon-github"></i>
+                <span class="menu-title hidden lg:inline">menu.github</span>
+            </a>
+        </span>
+    
+        <span class="social-item text-center">
+            <a href="/blog/atom.xml">
+                <i class="iconfont social-icon icon-rss"></i>
+                <span class="menu-title hidden lg:inline">menu.rss</span>
+            </a>
+        </span>
+    
+</div>
+
+
+    </nav>
+</header>
+
+        <section class="main-section">
+            
+    <main class="flex-1 px-4 py-14 md:px-5 lg:px-8 lg:py-4 relative min-h-screen">
+    
+
+    <article class="content article article-archives article-type-list" itemscope="">
+        <header class="article-header">
+            
+    
+        <h1 class="article-title text-lg" itemprop="name">
+            自定义UI的高级指南
+        </h1>
+    
+
+
+
+            <p class="article-meta mb-3 text-xs">
+                <span class="article-date">
+    <i class="iconfont icon-calendar-check"></i>
+	<a href="/blog/advanced-guide-to-custom-ui/" class="article-date">
+	  <time datetime="2022-05-09T07:03:23.000Z" itemprop="datePublished">5月 9</time>
+	</a>
+</span>
+
+                
+
+                
+    <span class="article-tags">
+    <i class="iconfont icon-tag"></i>
+    <a class="article-tag-link" href="/blog/tags/c/" rel="tag">c#</a>, <a class="article-tag-link" href="/blog/tags/tModLoader/" rel="tag">tModLoader</a>, <a class="article-tag-link" href="/blog/tags/terraria/" rel="tag">terraria</a>, <a class="article-tag-link" href="/blog/tags/%E7%BF%BB%E8%AF%91/" rel="tag">翻译</a>
+  </span>
+
+
+                <span class="_partial/post-comment"><i class="icon icon-comment"></i>
+                    <a href="/blog/advanced-guide-to-custom-ui/#comments" class="article-comment-link">
+                        评论
+                    </a>
+                </span>
+                
+    
+        <span class="post-wordcount" itemprop="wordCount">字数统计: 3.8k(字)</span>
+    
+    
+        <span class="post-readcount" itemprop="timeRequired">阅读时长: 15(分)</span>
+    
+
+
+            </p>
+        </header>
+        <div class="marked-body article-body">
+            <p><a href="https://github.com/tModLoader/tModLoader/wiki/Advanced-guide-to-custom-UI" target="_blank" rel="noopener">Advanced guide to custom UI</a></p>
+<p>在本指南中，您将了解 vanilla 中存在的各种 UI 类，您可以使用它们来修改自己的 UI。在遵循本指南之前，您应该了解以下主题：</p>
+<ul>
+<li>类层次结构和继承</li>
+<li>Abstract / virtual and override</li>
+<li>面向对象编程（与类继承有关）</li>
+</ul>
+<h1 id="交待"><a href="#交待" class="headerlink" title="交待"></a>交待</h1><p>Terraria 中的 UI 由各种类组成，最值得注意的是：UIElement、UIState 和 UserInterface。我们将讨论每个类及其在创建 UI 过程中的重要性。</p>
+<h1 id="对象关系"><a href="#对象关系" class="headerlink" title="对象关系"></a>对象关系</h1><p>自定义 UI 只不过是一个自定义 UserInterface，它的状态设置为自定义 UIState。一般来说，一个 UserInterface 可以有一个活动的 UIState（但是它可以保存状态历史，直到上限，您可以返回到该状态），然后该状态当前显示在该 UserInterface 中。</p>
+<h1 id="UserInterface"><a href="#UserInterface" class="headerlink" title="UserInterface"></a>UserInterface</h1><p>没有理由创建派生自 UserInterface 的自定义类。 （虽然你可以，因为类不是密封的）在大多数情况下，只需在你的 mod 类（或专用的 UI 类）中声明一个 UserInterface 类型的新字段。我们稍后再讨论这个问题。</p>
+<h1 id="UIState"><a href="#UIState" class="headerlink" title="UIState"></a>UIState</h1><p>UIState 代表界面所处的状态。类本身非常简单：它实际上是一个跨越整个屏幕宽度和高度的 UIElement，允许您在屏幕上的任何位置添加元素。</p>
+<h1 id="UIElement"><a href="#UIElement" class="headerlink" title="UIElement"></a>UIElement</h1><p>UIElement 表示一个类，它是可以成为接口一部分的任何类型的 UIElement。普通示例是 UIPanel、UIImage 和 UIImageButton 类。每个都有特定的功能。 （分别显示背景面板、显示图像或显示可点击按钮图像）您可以通过从 UIElement 派生类来制作自己的自定义元素。我们将回到这一点。</p>
+<h1 id="初始设置"><a href="#初始设置" class="headerlink" title="初始设置"></a>初始设置</h1><p>所以，你需要一个 UserInterface 和 UIState。首先在您的 Mod 类中定义这些新字段：</p>
+<pre class="line-numbers language-csharp"><code class="language-csharp"><span class="token keyword">internal</span> UserInterface MyInterface<span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p>对于您的 UIState，您应该创建一个新的自定义类：</p>
+<pre class="line-numbers language-csharp"><code class="language-csharp"><span class="token keyword">class</span> <span class="token class-name">TheUI</span> <span class="token punctuation">:</span> UIState <span class="token punctuation">{</span> <span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p>然后在你的 Mod 类中为它创建一个字段：</p>
+<pre class="line-numbers language-csharp"><code class="language-csharp"><span class="token keyword">internal</span> TheUI MyUI<span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<h1 id="初始化用户界面"><a href="#初始化用户界面" class="headerlink" title="初始化用户界面"></a>初始化用户界面</h1><p>因为 UI 是只有玩家才能看到的东西，所以你不应该在服务器上初始化 UI。这会浪费资源，服务器不玩游戏也看不到任何图形。仅在客户端上初始化。在您的 Mod.Load() 中，初始化您的 UI：</p>
+<pre class="line-numbers language-csharp"><code class="language-csharp"><span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span>Main<span class="token punctuation">.</span>dedServ<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    MyInterface <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">UserInterface</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    MyUI <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">TheUI</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    MyUI<span class="token punctuation">.</span><span class="token function">Activate</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// 如果未初始化，Activate 在 UIState 上调用 Initialize()，然后调用 OnActivate，然后在每个子元素上调用 Activate</span>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>在您的 Mod.Unload() 中，您可以在 UI 上调用您可能需要的任何卸载操作，然后将其设置为 null：</p>
+<pre class="line-numbers language-csharp"><code class="language-csharp">MyUI<span class="token operator">?</span><span class="token punctuation">.</span><span class="token function">SomeKindOfUnload</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// 如果你持有需要卸载的数据，在OO-fashion中调用它</span>
+MyUI <span class="token operator">=</span> <span class="token keyword">null</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+<p>不建议在 UI 上卸载如上所示，因为通常让 UI 负责数据是不好的做法。但是，如果您的 UI 包含诸如纹理之类的静态引用，这将很有用。</p>
+<h1 id="更新和绘制-UI"><a href="#更新和绘制-UI" class="headerlink" title="更新和绘制 UI"></a>更新和绘制 UI</h1><p>设置界面的状态很好，但 UI 不会被神奇地调用来更新或绘制自身。为此，您必须覆盖 Mod.UpdateUI(Gametime gameTime) 和 Mod.ModifyInterfaceLayers(List<GameInterfaceLayer> 层)：</p>
+<pre class="line-numbers language-csharp"><code class="language-csharp"><span class="token keyword">private</span> GameTime _lastUpdateUiGameTime<span class="token punctuation">;</span>
+
+<span class="token keyword">public</span> <span class="token keyword">override</span> <span class="token keyword">void</span> <span class="token function">UpdateUI</span><span class="token punctuation">(</span>GameTime gameTime<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  _lastUpdateUiGameTime <span class="token operator">=</span> gameTime<span class="token punctuation">;</span>
+  <span class="token keyword">if</span> <span class="token punctuation">(</span>MyInterface<span class="token operator">?</span><span class="token punctuation">.</span>CurrentState <span class="token operator">!=</span> <span class="token keyword">null</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+      MyInterface<span class="token punctuation">.</span><span class="token function">Update</span><span class="token punctuation">(</span>gameTime<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>上面的代码片段将在您的界面上调用 .Update 并将其传播到其状态和底层元素。</p>
+<pre class="line-numbers language-csharp"><code class="language-csharp"><span class="token keyword">public</span> <span class="token keyword">override</span> <span class="token keyword">void</span> <span class="token function">ModifyInterfaceLayers</span><span class="token punctuation">(</span>List<span class="token operator">&lt;</span>GameInterfaceLayer<span class="token operator">></span> layers<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  <span class="token keyword">int</span> mouseTextIndex <span class="token operator">=</span> layers<span class="token punctuation">.</span><span class="token function">FindIndex</span><span class="token punctuation">(</span>layer <span class="token operator">=</span><span class="token operator">></span> layer<span class="token punctuation">.</span>Name<span class="token punctuation">.</span><span class="token function">Equals</span><span class="token punctuation">(</span><span class="token string">"Vanilla: Mouse Text"</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token keyword">if</span> <span class="token punctuation">(</span>mouseTextIndex <span class="token operator">!=</span> <span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    layers<span class="token punctuation">.</span><span class="token function">Insert</span><span class="token punctuation">(</span>mouseTextIndex<span class="token punctuation">,</span> <span class="token keyword">new</span> <span class="token class-name">LegacyGameInterfaceLayer</span><span class="token punctuation">(</span>
+        <span class="token string">"MyMod: MyInterface"</span><span class="token punctuation">,</span>
+        <span class="token keyword">delegate</span>
+            <span class="token punctuation">{</span>
+            <span class="token keyword">if</span> <span class="token punctuation">(</span> _lastUpdateUiGameTime <span class="token operator">!=</span> <span class="token keyword">null</span> <span class="token operator">&amp;&amp;</span> MyInterface<span class="token operator">?</span><span class="token punctuation">.</span>CurrentState <span class="token operator">!=</span> <span class="token keyword">null</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+                MyInterface<span class="token punctuation">.</span><span class="token function">Draw</span><span class="token punctuation">(</span>Main<span class="token punctuation">.</span>spriteBatch<span class="token punctuation">,</span> _lastUpdateUiGameTime<span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token punctuation">}</span>
+               <span class="token keyword">return</span> <span class="token keyword">true</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span><span class="token punctuation">,</span>
+           InterfaceScaleType<span class="token punctuation">.</span>UI<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>上面的代码片段将一个自定义层添加到普通层列表中，如果它有状态，它将在你的界面上调用 .Draw。这将使您的 UI 真正绘制并显示在屏幕上。将 InterfaceScaleType 设置为 UI 以进行适当的 UI 缩放。</p>
+<h1 id="显示-UI"><a href="#显示-UI" class="headerlink" title="显示 UI"></a>显示 UI</h1><p>出于测试目的，建议添加热键或其他易于访问的方式来切换 UI。要显示您的 UI，您需要将界面的状态设置为您的 UI 实例。你应该通过访问你的 mod 的实例并调用 .SetState 来做到这一点：</p>
+<pre class="line-numbers language-csharp"><code class="language-csharp">MyMod<span class="token punctuation">.</span>Instance<span class="token punctuation">.</span>MyInterface<span class="token punctuation">.</span><span class="token function">SetState</span><span class="token punctuation">(</span>MyMod<span class="token punctuation">.</span>Instance<span class="token punctuation">.</span>MyUI<span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p>此代码段将为您的 UI 设置状态，使其显示。如果要隐藏 UI，只需将 null 传递给方法调用。</p>
+<p>您可以看到为什么为您的 UI 使用专用类很有用。为此制作辅助方法很有用，例如：</p>
+<pre class="line-numbers language-csharp"><code class="language-csharp"><span class="token keyword">internal</span> <span class="token keyword">void</span> <span class="token function">ShowMyUI</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    MyInterface<span class="token operator">?</span><span class="token punctuation">.</span><span class="token function">SetState</span><span class="token punctuation">(</span>MyUI<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">internal</span> <span class="token keyword">void</span> <span class="token function">HideMyUI</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    MyInterface<span class="token operator">?</span><span class="token punctuation">.</span><span class="token function">SetState</span><span class="token punctuation">(</span><span class="token keyword">null</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>然后简单地调用它们：</p>
+<pre class="line-numbers language-csharp"><code class="language-csharp">MyMod<span class="token punctuation">.</span>Instance<span class="token punctuation">.</span><span class="token function">ShowMyUI</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+MyMod<span class="token punctuation">.</span>Instance<span class="token punctuation">.</span><span class="token function">HideMyUI</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+<h2 id="State-history"><a href="#State-history" class="headerlink" title="State history"></a>State history</h2><p>该接口跟踪状态历史。如果你想回到之前的状态，你可以调用 MyInterface.GoBack()，如果有的话，它会激活历史中之前的状态。请记住，它将从历史记录中删除激活状态，因此您需要调用 .SetState 或 .AddToHistory 将其恢复。历史记录最多可保存 32 个状态，如果您在历史记录中添加新状态（如果已有 32 个状态），则会删除最旧的 4 个状态。如果您的界面状态不断变化，例如如果是渐进式 UI（例如分页或选项卡），则状态历史记录很有用</p>
+<h1 id="添加元素"><a href="#添加元素" class="headerlink" title="添加元素"></a>添加元素</h1><p>如果您现在激活您的 UI，您可能会感到困惑，因为没有任何显示。这是因为您的 UI 是空的。你可以向 UIState 添加任何你想要的元素，然后它们就会显示出来。</p>
+<p>在您的 MyUI 类中，重写 OnInitialize 方法。例如添加一个新的 UIPanel 到状态：</p>
+<pre class="line-numbers language-csharp"><code class="language-csharp"><span class="token keyword">public</span> <span class="token keyword">override</span> <span class="token keyword">void</span> <span class="token function">OnInitialize</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span> <span class="token comment" spellcheck="true">// 1</span>
+  UIPanel panel <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">UIPanel</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// 2</span>
+  panel<span class="token punctuation">.</span>Width<span class="token punctuation">.</span><span class="token function">Set</span><span class="token punctuation">(</span><span class="token number">300</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// 3</span>
+  panel<span class="token punctuation">.</span>Height<span class="token punctuation">.</span><span class="token function">Set</span><span class="token punctuation">(</span><span class="token number">300</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// 3</span>
+  <span class="token function">Append</span><span class="token punctuation">(</span>panel<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// 4</span>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<ul>
+<li>重写 OnInitialize 方法。当我们在加载我们的模组时初始化 UI 时调用它。</li>
+<li>创建一个新的 UIPanel 实例。这是一个香草类，将在此元素上绘制香草风格的背景。</li>
+<li>将宽度和高度设置为更大的值，以便我们可以看到它。</li>
+<li>将面板附加到我们的 UIState。 Append 是 UIElement 类的一个方法，它允许您向该元素添加子元素。子元素相对于该元素放置。由于 UIState 覆盖了整个屏幕，我们的 UIPanel 将显示在屏幕的左上角。</li>
+</ul>
+<h2 id="添加一些文本"><a href="#添加一些文本" class="headerlink" title="添加一些文本"></a>添加一些文本</h2><p>让我们通过向我们的 UIPanel 添加一些文本来增加趣味性。我们可以用同样的方式做到这一点，但是这次将元素附加到我们的面板变量中：</p>
+<pre class="line-numbers language-csharp"><code class="language-csharp"><span class="token keyword">public</span> <span class="token keyword">override</span> <span class="token keyword">void</span> <span class="token function">OnInitialize</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  UIPanel panel <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">UIPanel</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  panel<span class="token punctuation">.</span>Width<span class="token punctuation">.</span><span class="token function">Set</span><span class="token punctuation">(</span><span class="token number">300</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  panel<span class="token punctuation">.</span>Height<span class="token punctuation">.</span><span class="token function">Set</span><span class="token punctuation">(</span><span class="token number">300</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token function">Append</span><span class="token punctuation">(</span>panel<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+  UIText text <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">UIText</span><span class="token punctuation">(</span><span class="token string">"Hello world!"</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// 1</span>
+  panel<span class="token punctuation">.</span><span class="token function">Append</span><span class="token punctuation">(</span>text<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// 2</span>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<ul>
+<li>初始化 UIText</li>
+<li>UIText 元素现在是 UIPanel 元素的子元素。文本应显示在 UIPanel 中。</li>
+</ul>
+<h2 id="中心元素"><a href="#中心元素" class="headerlink" title="中心元素"></a>中心元素</h2><p>您的大部分时间将花在完善 UI 中元素的位置上。您将弄乱 UIElement 类上的各种字段：</p>
+<pre class="line-numbers language-csharp"><code class="language-csharp"><span class="token keyword">public</span> StyleDimension Top<span class="token punctuation">;</span>
+<span class="token keyword">public</span> StyleDimension Left<span class="token punctuation">;</span>
+<span class="token keyword">public</span> StyleDimension Width<span class="token punctuation">;</span>
+<span class="token keyword">public</span> StyleDimension Height<span class="token punctuation">;</span>
+<span class="token keyword">public</span> StyleDimension MaxWidth <span class="token operator">=</span> StyleDimension<span class="token punctuation">.</span>Fill<span class="token punctuation">;</span>
+<span class="token keyword">public</span> StyleDimension MaxHeight <span class="token operator">=</span> StyleDimension<span class="token punctuation">.</span>Fill<span class="token punctuation">;</span>
+<span class="token keyword">public</span> StyleDimension MinWidth <span class="token operator">=</span> StyleDimension<span class="token punctuation">.</span>Empty<span class="token punctuation">;</span>
+<span class="token keyword">public</span> StyleDimension MinHeight <span class="token operator">=</span> StyleDimension<span class="token punctuation">.</span>Empty<span class="token punctuation">;</span>
+<span class="token keyword">public</span> <span class="token keyword">bool</span> OverflowHidden<span class="token punctuation">;</span>
+<span class="token keyword">public</span> <span class="token keyword">float</span> PaddingTop<span class="token punctuation">;</span>
+<span class="token keyword">public</span> <span class="token keyword">float</span> PaddingLeft<span class="token punctuation">;</span>
+<span class="token keyword">public</span> <span class="token keyword">float</span> PaddingRight<span class="token punctuation">;</span>
+<span class="token keyword">public</span> <span class="token keyword">float</span> PaddingBottom<span class="token punctuation">;</span>
+<span class="token keyword">public</span> <span class="token keyword">float</span> MarginTop<span class="token punctuation">;</span>
+<span class="token keyword">public</span> <span class="token keyword">float</span> MarginLeft<span class="token punctuation">;</span>
+<span class="token keyword">public</span> <span class="token keyword">float</span> MarginRight<span class="token punctuation">;</span>
+<span class="token keyword">public</span> <span class="token keyword">float</span> MarginBottom<span class="token punctuation">;</span>
+<span class="token keyword">public</span> <span class="token keyword">float</span> HAlign<span class="token punctuation">;</span>
+<span class="token keyword">public</span> <span class="token keyword">float</span> VAlign<span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>使元素居中是修改器的常见用例。相对于其父元素居中元素很容易。为了使 UIPanel 中的文本居中，我们可以使用 HAlign 和 VAlign，并将两者都设置为 0.5f：</p>
+<pre class="line-numbers language-csharp"><code class="language-csharp"><span class="token keyword">public</span> <span class="token keyword">override</span> <span class="token keyword">void</span> <span class="token function">OnInitialize</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  UIPanel panel <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">UIPanel</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  panel<span class="token punctuation">.</span>Width<span class="token punctuation">.</span><span class="token function">Set</span><span class="token punctuation">(</span><span class="token number">300</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  panel<span class="token punctuation">.</span>Height<span class="token punctuation">.</span><span class="token function">Set</span><span class="token punctuation">(</span><span class="token number">300</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token function">Append</span><span class="token punctuation">(</span>panel<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+  UIText text <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">UIText</span><span class="token punctuation">(</span><span class="token string">"Hello world!"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  text<span class="token punctuation">.</span>HAlign <span class="token operator">=</span> <span class="token number">0.5f</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// 1</span>
+  text<span class="token punctuation">.</span>VAlign <span class="token operator">=</span> <span class="token number">0.5f</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// 1</span>
+  panel<span class="token punctuation">.</span><span class="token function">Append</span><span class="token punctuation">(</span>text<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>这基本上是将我们的水平和垂直对齐设置为 50%，使我们的元素居中。</p>
+<h3 id="类似标题的文本"><a href="#类似标题的文本" class="headerlink" title="类似标题的文本"></a>类似标题的文本</h3><p>如果需要，我们可以使用这些对齐技巧来像标题一样完美地对齐文本。我们可以将 HAlign 设置为 50% 以使文本水平居中，我们可以通过设置 Top 位置将 VAlign 设置为较低的值或固定的绝对值。推荐后者：</p>
+<pre class="line-numbers language-csharp"><code class="language-csharp"><span class="token keyword">public</span> <span class="token keyword">override</span> <span class="token keyword">void</span> <span class="token function">OnInitialize</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  UIPanel panel <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">UIPanel</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  panel<span class="token punctuation">.</span>Width<span class="token punctuation">.</span><span class="token function">Set</span><span class="token punctuation">(</span><span class="token number">300</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  panel<span class="token punctuation">.</span>Height<span class="token punctuation">.</span><span class="token function">Set</span><span class="token punctuation">(</span><span class="token number">300</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token function">Append</span><span class="token punctuation">(</span>panel<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+  UIText header <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">UIText</span><span class="token punctuation">(</span><span class="token string">"My UI Header"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  header<span class="token punctuation">.</span>HAlign <span class="token operator">=</span> <span class="token number">0.5f</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// 1</span>
+  header<span class="token punctuation">.</span>Top<span class="token punctuation">.</span><span class="token function">Set</span><span class="token punctuation">(</span><span class="token number">15</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// 2</span>
+  panel<span class="token punctuation">.</span><span class="token function">Append</span><span class="token punctuation">(</span>header<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<ul>
+<li><ol>
+<li>将水平对齐设置为 50%</li>
+</ol>
+</li>
+<li><ol start="2">
+<li>将顶部位置设置为 15 像素。文本应该相对于 UIPanel 向下 15 像素。请记住，您可以为此使用 VAlign，但它会随着您的 UIPanel 更改大小而缩放。当您更改 UIPanel 的大小时，这可能会搞砸事情。</li>
+</ol>
+</li>
+</ul>
+<h3 id="居中-UIPanel"><a href="#居中-UIPanel" class="headerlink" title="居中 UIPanel"></a>居中 UIPanel</h3><p>您的 UI 可能仍显示在 UIState 的左上角。大多数模组制作者都希望他们的 UI 显示在屏幕中央。因为 UIState 跨越整个屏幕大小，我们可以使用 HAlign 和 VAlign 技巧来使我们的 UIPanel 居中：</p>
+<pre class="line-numbers language-csharp"><code class="language-csharp"><span class="token keyword">public</span> <span class="token keyword">override</span> <span class="token keyword">void</span> <span class="token function">OnInitialize</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  UIPanel panel <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">UIPanel</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  panel<span class="token punctuation">.</span>Width<span class="token punctuation">.</span><span class="token function">Set</span><span class="token punctuation">(</span><span class="token number">300</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  panel<span class="token punctuation">.</span>Height<span class="token punctuation">.</span><span class="token function">Set</span><span class="token punctuation">(</span><span class="token number">300</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  panel<span class="token punctuation">.</span>HAlign <span class="token operator">=</span> panel<span class="token punctuation">.</span>VAlign <span class="token operator">=</span> <span class="token number">0.5f</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// 1</span>
+  <span class="token function">Append</span><span class="token punctuation">(</span>panel<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<ul>
+<li>这是将两个字段设置为相同值的巧妙技巧。</li>
+</ul>
+<p>但是，如果您更改 UIState 跨越屏幕的方式，或者如果您的 UIPanel 未附加到 UIState 本身，则此技巧将不起作用。当心你的 UIPanel 的父级并相应地对齐它。</p>
+<h1 id="与-UIElement-的交互"><a href="#与-UIElement-的交互" class="headerlink" title="与 UIElement 的交互"></a>与 UIElement 的交互</h1><p>模组制作者想要的最常见的交互是在单击某个项目时执行某些操作，例如按钮。让我们通过交互向 UI 添加一个按钮：</p>
+<pre class="line-numbers language-csharp"><code class="language-csharp"><span class="token keyword">public</span> <span class="token keyword">override</span> <span class="token keyword">void</span> <span class="token function">OnInitialize</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  UIPanel panel <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">UIPanel</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  panel<span class="token punctuation">.</span>Width<span class="token punctuation">.</span><span class="token function">Set</span><span class="token punctuation">(</span><span class="token number">300</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  panel<span class="token punctuation">.</span>Height<span class="token punctuation">.</span><span class="token function">Set</span><span class="token punctuation">(</span><span class="token number">300</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token function">Append</span><span class="token punctuation">(</span>panel<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+  UIText header <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">UIText</span><span class="token punctuation">(</span><span class="token string">"My UI Header"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  header<span class="token punctuation">.</span>HAlign <span class="token operator">=</span> <span class="token number">0.5f</span><span class="token punctuation">;</span>
+  header<span class="token punctuation">.</span>Top<span class="token punctuation">.</span><span class="token function">Set</span><span class="token punctuation">(</span><span class="token number">15</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  panel<span class="token punctuation">.</span><span class="token function">Append</span><span class="token punctuation">(</span>header<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+  UIPanel button <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">UIPanel</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// 1</span>
+  button<span class="token punctuation">.</span>Width<span class="token punctuation">.</span><span class="token function">Set</span><span class="token punctuation">(</span><span class="token number">100</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">;</span>  
+  button<span class="token punctuation">.</span>Height<span class="token punctuation">.</span><span class="token function">Set</span><span class="token punctuation">(</span><span class="token number">50</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  button<span class="token punctuation">.</span>HAlign <span class="token operator">=</span> <span class="token number">0.5f</span><span class="token punctuation">;</span>
+  button<span class="token punctuation">.</span>Top<span class="token punctuation">.</span><span class="token function">Set</span><span class="token punctuation">(</span><span class="token number">25</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// 2</span>
+  button<span class="token punctuation">.</span>OnClick <span class="token operator">+</span><span class="token operator">=</span> OnButtonClick<span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// 3</span>
+  panel<span class="token punctuation">.</span><span class="token function">Append</span><span class="token punctuation">(</span>button<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+  UIText text <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">UIText</span><span class="token punctuation">(</span><span class="token string">"Click me!"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  text<span class="token punctuation">.</span>HAlign <span class="token operator">=</span> text<span class="token punctuation">.</span>VAlign <span class="token operator">=</span> <span class="token number">0.5f</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// 4</span>
+  button<span class="token punctuation">.</span><span class="token function">Append</span><span class="token punctuation">(</span>text<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// 5</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">private</span> <span class="token keyword">void</span> <span class="token function">OnButtonClick</span><span class="token punctuation">(</span>UIMouseEvent evt<span class="token punctuation">,</span> UIElement listeningElement<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  <span class="token comment" spellcheck="true">// We can do stuff in here!</span>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<ul>
+<li><ol>
+<li>初始化一个新的 UIPanel。因为没有 UIButton 类（只有 UIImageButton），我们将为此使用 UIPanel 和 UIText。</li>
+</ol>
+</li>
+<li><ol start="2">
+<li>将顶部位置设置为略低于我们的标题。</li>
+</ol>
+</li>
+<li><ol start="3">
+<li>添加新的 OnClick 事件。重要的是要注意事件将通过父子链传播。这意味着如果我们点击 UIText，点击事件也将在我们的 UIPanel（按钮）中结束，因为它是父级。出于这个原因，我们只需要将处理程序添加到 UIPanel。</li>
+</ol>
+</li>
+<li><ol start="4">
+<li>设置文本对齐方式，使其在我们的按钮面板中居中。</li>
+</ol>
+</li>
+<li><ol start="5">
+<li>将文本附加到我们的按钮。该按钮被附加到我们的背景面板。</li>
+</ol>
+</li>
+</ul>
+<p>OnButtonClick 目前什么都不做。让我们改变我们的文本。为了做到这一点，我们必须使我们的按钮文本成为类级别的字段，而不是仅限于 OnInitialize 方法：</p>
+<pre class="line-numbers language-csharp"><code class="language-csharp"><span class="token keyword">private</span> UIText text<span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// Init later</span>
+
+<span class="token keyword">public</span> <span class="token keyword">override</span> <span class="token keyword">void</span> <span class="token function">OnInitialize</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token comment" spellcheck="true">// ... code</span>
+    text <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">UIText</span><span class="token punctuation">(</span><span class="token string">"Click me!"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token comment" spellcheck="true">// ... other code</span>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>现在我们可以在 OnButtonClick 方法中访问文本：</p>
+<pre class="line-numbers language-csharp"><code class="language-csharp"><span class="token keyword">private</span> <span class="token keyword">void</span> <span class="token function">OnButtonClick</span><span class="token punctuation">(</span>UIMouseEvent evt<span class="token punctuation">,</span> UIElement listeningElement<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    text<span class="token punctuation">.</span><span class="token function">SetText</span><span class="token punctuation">(</span><span class="token string">"I was clicked!"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+<h3 id="事件"><a href="#事件" class="headerlink" title="事件"></a>事件</h3><p>有很多像 OnClick 这样的事件，这里是它们的列表：</p>
+<pre class="line-numbers language-csharp"><code class="language-csharp"><span class="token keyword">public</span> <span class="token keyword">event</span> UIElement<span class="token punctuation">.</span>MouseEvent OnMouseDown<span class="token punctuation">;</span>
+<span class="token keyword">public</span> <span class="token keyword">event</span> UIElement<span class="token punctuation">.</span>MouseEvent OnMouseUp<span class="token punctuation">;</span>
+<span class="token keyword">public</span> <span class="token keyword">event</span> UIElement<span class="token punctuation">.</span>MouseEvent OnClick<span class="token punctuation">;</span>
+<span class="token keyword">public</span> <span class="token keyword">event</span> UIElement<span class="token punctuation">.</span>MouseEvent OnMouseOver<span class="token punctuation">;</span>
+<span class="token keyword">public</span> <span class="token keyword">event</span> UIElement<span class="token punctuation">.</span>MouseEvent OnMouseOut<span class="token punctuation">;</span>
+<span class="token keyword">public</span> <span class="token keyword">event</span> UIElement<span class="token punctuation">.</span>MouseEvent OnDoubleClick<span class="token punctuation">;</span>
+<span class="token keyword">public</span> <span class="token keyword">event</span> UIElement<span class="token punctuation">.</span>MouseEvent OnRightMouseDown<span class="token punctuation">;</span>
+<span class="token keyword">public</span> <span class="token keyword">event</span> UIElement<span class="token punctuation">.</span>MouseEvent OnRightMouseUp<span class="token punctuation">;</span>
+<span class="token keyword">public</span> <span class="token keyword">event</span> UIElement<span class="token punctuation">.</span>MouseEvent OnRightClick<span class="token punctuation">;</span>
+<span class="token keyword">public</span> <span class="token keyword">event</span> UIElement<span class="token punctuation">.</span>MouseEvent OnRightDoubleClick<span class="token punctuation">;</span>
+<span class="token keyword">public</span> <span class="token keyword">event</span> UIElement<span class="token punctuation">.</span>MouseEvent OnMiddleMouseDown<span class="token punctuation">;</span>
+<span class="token keyword">public</span> <span class="token keyword">event</span> UIElement<span class="token punctuation">.</span>MouseEvent OnMiddleMouseUp<span class="token punctuation">;</span>
+<span class="token keyword">public</span> <span class="token keyword">event</span> UIElement<span class="token punctuation">.</span>MouseEvent OnMiddleClick<span class="token punctuation">;</span>
+<span class="token keyword">public</span> <span class="token keyword">event</span> UIElement<span class="token punctuation">.</span>MouseEvent OnMiddleDoubleClick<span class="token punctuation">;</span>
+<span class="token keyword">public</span> <span class="token keyword">event</span> UIElement<span class="token punctuation">.</span>MouseEvent OnXButton1MouseDown<span class="token punctuation">;</span>
+<span class="token keyword">public</span> <span class="token keyword">event</span> UIElement<span class="token punctuation">.</span>MouseEvent OnXButton1MouseUp<span class="token punctuation">;</span>
+<span class="token keyword">public</span> <span class="token keyword">event</span> UIElement<span class="token punctuation">.</span>MouseEvent OnXButton1Click<span class="token punctuation">;</span>
+<span class="token keyword">public</span> <span class="token keyword">event</span> UIElement<span class="token punctuation">.</span>MouseEvent OnXButton1DoubleClick<span class="token punctuation">;</span>
+<span class="token keyword">public</span> <span class="token keyword">event</span> UIElement<span class="token punctuation">.</span>MouseEvent OnXButton2MouseDown<span class="token punctuation">;</span>
+<span class="token keyword">public</span> <span class="token keyword">event</span> UIElement<span class="token punctuation">.</span>MouseEvent OnXButton2MouseUp<span class="token punctuation">;</span>
+<span class="token keyword">public</span> <span class="token keyword">event</span> UIElement<span class="token punctuation">.</span>MouseEvent OnXButton2Click<span class="token punctuation">;</span>
+<span class="token keyword">public</span> <span class="token keyword">event</span> UIElement<span class="token punctuation">.</span>MouseEvent OnXButton2DoubleClick<span class="token punctuation">;</span>
+<span class="token keyword">public</span> <span class="token keyword">event</span> UIElement<span class="token punctuation">.</span>ScrollWheelEvent OnScrollWheel<span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h1 id="悬停工具提示-Tooltip"><a href="#悬停工具提示-Tooltip" class="headerlink" title="悬停工具提示(Tooltip)"></a>悬停工具提示(Tooltip)</h1><p>另一个有用的交互修改器通常希望在悬停元素时显示工具提示。这最好通过重写 OnUpdate 方法并检查鼠标是否悬停在元素上，然后更改 Main.hoverItemName 来完成。如果我们悬停按钮，让我们显示此工具提示：（您需要将按钮设置为类级别的字段，就像我们对文本所做的那样）</p>
+<pre class="line-numbers language-csharp"><code class="language-csharp"><span class="token keyword">public</span> <span class="token keyword">override</span> <span class="token keyword">void</span> <span class="token function">Update</span><span class="token punctuation">(</span>GameTime gameTime<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>text<span class="token punctuation">.</span>IsMouseHovering <span class="token operator">||</span> button<span class="token punctuation">.</span>isMouseHovering<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        Main<span class="token punctuation">.</span>hoverItemName <span class="token operator">=</span> <span class="token string">"Click to see what happens"</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h1 id="UI-显示或隐藏时的交互"><a href="#UI-显示或隐藏时的交互" class="headerlink" title="UI 显示或隐藏时的交互"></a>UI 显示或隐藏时的交互</h1><p>覆盖方法 .OnActivate() 和 .OnDeactivate() 以分别在您的 UI 激活或停用时执行操作。例如，激活可用于检索最新数据以填充 UI，停用可重置存储此数据的变量。使用 deactivate 使您的 UI 在下次激活时保持新鲜，因此它在不使用时在内存中保存的项目更少。 （理想情况下将事物设置为 null 以取消分配内存）</p>
+<h1 id="自定义-UIElement"><a href="#自定义-UIElement" class="headerlink" title="自定义 UIElement"></a>自定义 UIElement</h1><p>制作自己的元素很容易。您必须创建一个继承 UIElement 类的自定义类。 OnInitialize、OnActivate、OnDeactivate、DrawSelf 和 Update 方法将是要重写的主要方法。</p>
+<p>一个简单的例子是制作我们自己的自定义按钮类来方便我们在上面做的事情。让我们从基础开始：首先定义我们的类是什么以及应该做什么。按钮类必须显示一些文本并且是可点击的，点击时可以执行指定的操作。很好，现在我们知道了该类的用例，我们可以对其进行建模：</p>
+<pre class="line-numbers language-csharp"><code class="language-csharp"><span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">UIClickableButton</span> <span class="token punctuation">:</span> UIElement <span class="token punctuation">{</span>
+
+    <span class="token comment" spellcheck="true">// 1</span>
+    <span class="token keyword">private</span> <span class="token keyword">object</span> _text<span class="token punctuation">;</span>
+    <span class="token keyword">private</span> UIElement<span class="token punctuation">.</span>MouseEvent _clickAction<span class="token punctuation">;</span>
+    <span class="token keyword">private</span> UIPanel _uiPanel<span class="token punctuation">;</span>
+    <span class="token keyword">private</span> UIText _uiText<span class="token punctuation">;</span>
+
+    <span class="token comment" spellcheck="true">// 2</span>
+    <span class="token keyword">public</span> <span class="token keyword">string</span> Text 
+    <span class="token punctuation">{</span>
+        <span class="token keyword">get</span> <span class="token operator">=</span><span class="token operator">></span> _uiText<span class="token operator">?</span><span class="token punctuation">.</span>Text <span class="token operator">?</span><span class="token operator">?</span> <span class="token keyword">string</span><span class="token punctuation">.</span>Empty<span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// 3</span>
+        <span class="token keyword">set</span> <span class="token operator">=</span><span class="token operator">></span> _text <span class="token operator">=</span> <span class="token keyword">value</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token keyword">public</span> <span class="token function">UIClickableButton</span><span class="token punctuation">(</span><span class="token keyword">object</span> text<span class="token punctuation">,</span> UIElement<span class="token punctuation">.</span>MouseEvent clickAction<span class="token punctuation">)</span> <span class="token punctuation">:</span> <span class="token keyword">base</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span> <span class="token comment" spellcheck="true">// 4</span>
+        _text <span class="token operator">=</span> text<span class="token operator">?</span><span class="token punctuation">.</span><span class="token function">toString</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">?</span><span class="token operator">?</span> <span class="token keyword">string</span><span class="token punctuation">.</span>Empty<span class="token punctuation">;</span>
+        _clickAction <span class="token operator">=</span> clickAction<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token keyword">public</span> <span class="token keyword">override</span> <span class="token keyword">void</span> <span class="token function">OnInitialize</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span> 
+        _uiPanel <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">UIPanel</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// 5</span>
+        _uiPanel<span class="token punctuation">.</span>Width <span class="token operator">=</span> StyleDimension<span class="token punctuation">.</span>Fill<span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// 5</span>
+        _uiPanel<span class="token punctuation">.</span>Height <span class="token operator">=</span> StyleDimension<span class="token punctuation">.</span>Fill<span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// 5</span>
+        <span class="token function">Append</span><span class="token punctuation">(</span>_uiPanel<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+        _uiText <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">UIText</span><span class="token punctuation">(</span><span class="token string">""</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// 6</span>
+        _uiText<span class="token punctuation">.</span>VAlign <span class="token operator">=</span> _uiText<span class="token punctuation">.</span>HAlign <span class="token operator">=</span> <span class="token number">0.5f</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// 6</span>
+        _uiPanel<span class="token punctuation">.</span><span class="token function">Append</span><span class="token punctuation">(</span>_uiText<span class="token punctuation">)</span><span class="token punctuation">;</span>    
+
+        _uiPanel<span class="token punctuation">.</span>OnClick <span class="token operator">+</span><span class="token operator">=</span> _clickAction<span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// 7</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token keyword">public</span> <span class="token keyword">override</span> <span class="token keyword">void</span> <span class="token function">Update</span><span class="token punctuation">(</span>GameTime gameTime<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>_text <span class="token operator">!=</span> <span class="token keyword">null</span><span class="token punctuation">)</span> <span class="token punctuation">{</span> <span class="token comment" spellcheck="true">// 8</span>
+            _uiText<span class="token punctuation">.</span><span class="token function">SetText</span><span class="token punctuation">(</span>_text<span class="token punctuation">.</span><span class="token function">ToString</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            _text <span class="token operator">=</span> <span class="token keyword">null</span><span class="token punctuation">;</span>
+            <span class="token function">Recalculate</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// 9</span>
+            <span class="token keyword">base</span><span class="token punctuation">.</span>MinWidth <span class="token operator">=</span> _uiText<span class="token punctuation">.</span>MinWidth<span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// 9</span>
+            <span class="token keyword">base</span><span class="token punctuation">.</span>MinHeight <span class="token operator">=</span> _uiText<span class="token punctuation">.</span>MinHeight<span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// 9</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>有很多事情发生，让我们看看：</p>
+<ul>
+<li><ol>
+<li>我们定义自定义按钮所需的变量。</li>
+</ol>
+</li>
+<li><ol start="2">
+<li>一个公共属性，我们可以使用它来获取和设置文本支持字段。第 8 点对此进行了更多说明。</li>
+</ol>
+</li>
+<li><ol start="3">
+<li>只需返回我们的 _uiText 的文本，如果它为 null，则返回空字符串。 （尚未初始化）</li>
+</ol>
+</li>
+<li><ol start="4">
+<li>我们的构造函数。我们必须传递一个文本和点击动作。文本是对象类型，仿照 UIText 类。</li>
+</ol>
+</li>
+<li><ol start="5">
+<li>创建一个新的 UIPanel 作为基础背景。我们将大小设置为Fill，相当于调用Set(0, 1f)； 1f 代表 100%，所以在这种情况下，我们将拉伸 UIPanel 与我们制作这个元素一样大。</li>
+</ol>
+</li>
+<li><ol start="6">
+<li>创建一个新的 UIText，我们在 UIPanel 中居中对齐。</li>
+</ol>
+</li>
+<li><ol start="7">
+<li>将点击操作注册到 UIPanel。请记住，子项上的单击操作通过父子链传播，因此单击事件将最终出现在我们的 UIPanel OnClick 处理程序上。</li>
+</ol>
+</li>
+<li><ol start="8">
+<li>通过在更新期间更新 UIText 的文本，我们可以使我们的文本更改线程安全并避免在绘制文本时编辑文本时出现错误。</li>
+</ol>
+</li>
+<li><ol start="9">
+<li>重新计算强制此元素及其子元素重新计算大小、填充等。如果内容发生更改，例如本例中的文本，则应执行此操作。在这种情况下，我们可以在 Recalculate() 期间复制从 UIText 类计算的最小宽度和最小高度。</li>
+</ol>
+</li>
+</ul>
+<p>现在我们可以使用这个类，而不是我们之前所做的：</p>
+<pre class="line-numbers language-csharp"><code class="language-csharp"><span class="token keyword">private</span> UIClickableButton _button<span class="token punctuation">;</span>
+
+<span class="token keyword">public</span> <span class="token keyword">override</span> <span class="token keyword">void</span> <span class="token function">OnInitialize</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  UIPanel panel <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">UIPanel</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  panel<span class="token punctuation">.</span>Width<span class="token punctuation">.</span><span class="token function">Set</span><span class="token punctuation">(</span><span class="token number">300</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  panel<span class="token punctuation">.</span>Height<span class="token punctuation">.</span><span class="token function">Set</span><span class="token punctuation">(</span><span class="token number">300</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token function">Append</span><span class="token punctuation">(</span>panel<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+  UIText header <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">UIText</span><span class="token punctuation">(</span><span class="token string">"My UI Header"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  header<span class="token punctuation">.</span>HAlign <span class="token operator">=</span> <span class="token number">0.5f</span><span class="token punctuation">;</span>
+  header<span class="token punctuation">.</span>Top<span class="token punctuation">.</span><span class="token function">Set</span><span class="token punctuation">(</span><span class="token number">15</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  panel<span class="token punctuation">.</span><span class="token function">Append</span><span class="token punctuation">(</span>header<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+  _button <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">UIClickableButton</span><span class="token punctuation">(</span><span class="token string">"Click me!"</span><span class="token punctuation">,</span> OnButtonClick<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  _button<span class="token punctuation">.</span>Width<span class="token punctuation">.</span><span class="token function">Set</span><span class="token punctuation">(</span><span class="token number">100</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">;</span>  
+  _button<span class="token punctuation">.</span>Height<span class="token punctuation">.</span><span class="token function">Set</span><span class="token punctuation">(</span><span class="token number">50</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  _button<span class="token punctuation">.</span>HAlign <span class="token operator">=</span> <span class="token number">0.5f</span><span class="token punctuation">;</span>
+  _button<span class="token punctuation">.</span>Top<span class="token punctuation">.</span><span class="token function">Set</span><span class="token punctuation">(</span><span class="token number">25</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+   panel<span class="token punctuation">.</span><span class="token function">Append</span><span class="token punctuation">(</span>_button<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">private</span> <span class="token keyword">void</span> <span class="token function">OnButtonClick</span><span class="token punctuation">(</span>UIMouseEvent evt<span class="token punctuation">,</span> UIElement listeningElement<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    _button<span class="token punctuation">.</span>Text <span class="token operator">=</span> <span class="token string">"I was clicked!"</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+        </div>
+        
+<blockquote class="copyright">
+    <p><strong>本文链接 : </strong><a class="permalink" href="https://keyboard3.github.io/advanced-guide-to-custom-ui/">https://keyboard3.github.io/advanced-guide-to-custom-ui/</a></p>
+    <p><strong>This article is available under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank" rel="noopener noreferrer">Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0)</a> License</strong></p>
+</blockquote>
+
+
+    </article>
+    
+    <section id="comments">
+        
+            <div id="vcomments"></div>
+        
+    </section>
+
+
+    
+
+</main>
+
+
+<aside style="" id="sidebar" class="aside aside-fixture">
+    <div class="toc-sidebar">
+        <nav id="toc" class="article-toc">
+            <h3 class="toc-title">文章目录</h3>
+            <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#交待"><span class="toc-number">1.</span> <span class="toc-text">交待</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#对象关系"><span class="toc-number">2.</span> <span class="toc-text">对象关系</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#UserInterface"><span class="toc-number">3.</span> <span class="toc-text">UserInterface</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#UIState"><span class="toc-number">4.</span> <span class="toc-text">UIState</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#UIElement"><span class="toc-number">5.</span> <span class="toc-text">UIElement</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#初始设置"><span class="toc-number">6.</span> <span class="toc-text">初始设置</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#初始化用户界面"><span class="toc-number">7.</span> <span class="toc-text">初始化用户界面</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#更新和绘制-UI"><span class="toc-number">8.</span> <span class="toc-text">更新和绘制 UI</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#显示-UI"><span class="toc-number">9.</span> <span class="toc-text">显示 UI</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#State-history"><span class="toc-number">9.1.</span> <span class="toc-text">State history</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#添加元素"><span class="toc-number">10.</span> <span class="toc-text">添加元素</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#添加一些文本"><span class="toc-number">10.1.</span> <span class="toc-text">添加一些文本</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#中心元素"><span class="toc-number">10.2.</span> <span class="toc-text">中心元素</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#类似标题的文本"><span class="toc-number">10.2.1.</span> <span class="toc-text">类似标题的文本</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#居中-UIPanel"><span class="toc-number">10.2.2.</span> <span class="toc-text">居中 UIPanel</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#与-UIElement-的交互"><span class="toc-number">11.</span> <span class="toc-text">与 UIElement 的交互</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#事件"><span class="toc-number">11.0.1.</span> <span class="toc-text">事件</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#悬停工具提示-Tooltip"><span class="toc-number">12.</span> <span class="toc-text">悬停工具提示(Tooltip)</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#UI-显示或隐藏时的交互"><span class="toc-number">13.</span> <span class="toc-text">UI 显示或隐藏时的交互</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#自定义-UIElement"><span class="toc-number">14.</span> <span class="toc-text">自定义 UIElement</span></a></li></ol>
+        </nav>
+    </div>
+</aside>
+
+
+
+
+
+        </section>
+        <footer class="hidden lg:block fixed bottom-0 left-0 sm:w-1/12 lg:w-1/6 bg-gray-100 z-40">
+    
+    <div class="footer-social-links">
+        
+            <a href="https://github.com/keyboard3" target="_blank" rel="noopener">
+                <i class="iconfont icon-github"></i>
+            </a>
+        
+            <a href="/blog/atom.xml">
+                <i class="iconfont icon-rss"></i>
+            </a>
+        
+    </div>
+    
+    
+        <p class="footer-custom">浙ICP备2022008282号</p>
+        <p class="theme-brand">Theme by <a href="https://github.com/fengkx/hexo-theme-purer" target="_blank" rel="nofollow noopener noreferrer noopener">hexo-theme-purer</a></p>
+    
+</footer>
+
+        <div id="mask" class="hidden mask fixed inset-0 bg-gray-900 opacity-75 z-40"></div>
+        <div id="search-view-container" class="hidden shadow-xl"></div>
+        
+<script src="/blog/js/dom-event.min.js"></script>
+
+
+
+<script src="/blog/js/local-search.min.js"></script>
+
+
+    <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+<script src="//cdn.jsdelivr.net/npm/valine"></script>
+<script type="text/javascript">
+var GUEST = ['nick', 'mail', 'link'];
+var meta = '';
+meta = meta.split(',').filter(function(item) {
+  return GUEST.indexOf(item) > -1;
+});
+new Valine({
+  el: '#vcomments',
+  verify: 'false',
+  notify: 'false',
+  appId: '',
+  appKey: '',
+  placeholder: 'just go go',
+  avatar: 'mm',
+  meta: meta,
+  pageSize: '10' || 10,
+  visitor: 'true',
+  lang: ''
+});
+</script>
+
+
+
+    <script src="//cdn.jsdelivr.net/npm/lightgallery.js@1.1.3/dist/js/lightgallery.min.js"></script>
+    
+<script src="/blog/js/light-gallery.min.js"></script>
+
+
+
+
+
+
+    </body>
+</html>
