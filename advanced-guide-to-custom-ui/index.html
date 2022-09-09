@@ -198,7 +198,7 @@
                 </span>
                 
     
-        <span class="post-wordcount" itemprop="wordCount">字数统计: 3.8k(字)</span>
+        <span class="post-wordcount" itemprop="wordCount">字数统计: 3.9k(字)</span>
     
     
         <span class="post-readcount" itemprop="timeRequired">阅读时长: 15(分)</span>
@@ -237,7 +237,7 @@
 <pre class="line-numbers language-csharp"><code class="language-csharp">MyUI<span class="token operator">?</span><span class="token punctuation">.</span><span class="token function">SomeKindOfUnload</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// 如果你持有需要卸载的数据，在OO-fashion中调用它</span>
 MyUI <span class="token operator">=</span> <span class="token keyword">null</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
 <p>不建议在 UI 上卸载如上所示，因为通常让 UI 负责数据是不好的做法。但是，如果您的 UI 包含诸如纹理之类的静态引用，这将很有用。</p>
-<h1 id="更新和绘制-UI"><a href="#更新和绘制-UI" class="headerlink" title="更新和绘制 UI"></a>更新和绘制 UI</h1><p>设置界面的状态很好，但 UI 不会被神奇地调用来更新或绘制自身。为此，您必须覆盖 Mod.UpdateUI(Gametime gameTime) 和 Mod.ModifyInterfaceLayers(List<GameInterfaceLayer> 层)：</p>
+<h1 id="更新和绘制-UI"><a href="#更新和绘制-UI" class="headerlink" title="更新和绘制 UI"></a>更新和绘制 UI</h1><p>设置界面的状态很好，但 UI 不会被神奇地调用来更新或绘制自身。为此，您必须覆盖 Mod.UpdateUI(Gametime gameTime) 和 Mod.ModifyInterfaceLayers(List<gameinterfacelayer> 层)：</gameinterfacelayer></p>
 <pre class="line-numbers language-csharp"><code class="language-csharp"><span class="token keyword">private</span> GameTime _lastUpdateUiGameTime<span class="token punctuation">;</span>
 
 <span class="token keyword">public</span> <span class="token keyword">override</span> <span class="token keyword">void</span> <span class="token function">UpdateUI</span><span class="token punctuation">(</span>GameTime gameTime<span class="token punctuation">)</span> <span class="token punctuation">{</span>
@@ -575,7 +575,25 @@ MyMod<span class="token punctuation">.</span>Instance<span class="token punctuat
 <span class="token keyword">private</span> <span class="token keyword">void</span> <span class="token function">OnButtonClick</span><span class="token punctuation">(</span>UIMouseEvent evt<span class="token punctuation">,</span> UIElement listeningElement<span class="token punctuation">)</span> <span class="token punctuation">{</span>
     _button<span class="token punctuation">.</span>Text <span class="token operator">=</span> <span class="token string">"I was clicked!"</span><span class="token punctuation">;</span>
 <span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
+<script>
+        document.querySelectorAll('.github-emoji')
+          .forEach(el => {
+            if (!el.dataset.src) { return; }
+            const img = document.createElement('img');
+            img.style = 'display:none !important;';
+            img.src = el.dataset.src;
+            img.addEventListener('error', () => {
+              img.remove();
+              el.style.color = 'inherit';
+              el.style.backgroundImage = 'none';
+              el.style.background = 'none';
+            });
+            img.addEventListener('load', () => {
+              img.remove();
+            });
+            document.body.appendChild(img);
+          });
+      </script>
         </div>
         
 <blockquote class="copyright">

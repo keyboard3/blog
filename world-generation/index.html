@@ -230,7 +230,7 @@
                 </span>
                 
     
-        <span class="post-wordcount" itemprop="wordCount">字数统计: 13k(字)</span>
+        <span class="post-wordcount" itemprop="wordCount">字数统计: 13.1k(字)</span>
     
     
         <span class="post-readcount" itemprop="timeRequired">阅读时长: 52(分)</span>
@@ -782,7 +782,25 @@ structures<span class="token punctuation">.</span><span class="token function">A
 <h2 id="TileID-Sets-GeneralPlacementTiles"><a href="#TileID-Sets-GeneralPlacementTiles" class="headerlink" title="TileID.Sets.GeneralPlacementTiles"></a>TileID.Sets.GeneralPlacementTiles</h2><p>当代码检查 Worldgen.structures.CanPlace 时，CanPlace 将另外在该区域中搜索 GeneralPlacementTiles 中为 false 的图块。在 GeneralPlacementTiles 中将 TileID 设置为 false 将阻止遵循 StructureMap 的结构尝试放置在其上。</p>
 <h2 id="TileID-Sets-CanBeClearedDuringGeneration"><a href="#TileID-Sets-CanBeClearedDuringGeneration" class="headerlink" title="TileID.Sets.CanBeClearedDuringGeneration"></a>TileID.Sets.CanBeClearedDuringGeneration</h2><p>此代码会影响 Cavinator 和 TileRunner 等地形方法。此数组中标记为 false 的图块将在这些操作中继续存在。</p>
 <h2 id="IL-Editing"><a href="#IL-Editing" class="headerlink" title="IL Editing"></a>IL Editing</h2><p>原版世界生成通行证都是匿名方法，不幸的是，这意味着 IL 编辑要困难得多。我们必须手动使用 HookEndpointManager，更复杂的是方法名称是自动生成的。 TODO：他们经常改变吗？如何以编程方式找到它们，例如。</p>
-
+<script>
+        document.querySelectorAll('.github-emoji')
+          .forEach(el => {
+            if (!el.dataset.src) { return; }
+            const img = document.createElement('img');
+            img.style = 'display:none !important;';
+            img.src = el.dataset.src;
+            img.addEventListener('error', () => {
+              img.remove();
+              el.style.color = 'inherit';
+              el.style.backgroundImage = 'none';
+              el.style.background = 'none';
+            });
+            img.addEventListener('load', () => {
+              img.remove();
+            });
+            document.body.appendChild(img);
+          });
+      </script>
         </div>
         
 <blockquote class="copyright">

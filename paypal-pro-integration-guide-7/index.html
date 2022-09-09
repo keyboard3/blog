@@ -197,7 +197,7 @@
                 </span>
                 
     
-        <span class="post-wordcount" itemprop="wordCount">字数统计: 637(字)</span>
+        <span class="post-wordcount" itemprop="wordCount">字数统计: 689(字)</span>
     
     
         <span class="post-readcount" itemprop="timeRequired">阅读时长: 2(分)</span>
@@ -207,7 +207,7 @@
             </p>
         </header>
         <div class="marked-body article-body">
-            <p><a href="https://www.paypalobjects.com/webstatic/en_AU/developer/docs/pdf/hostedsolution_au.pdf#page=61&zoom=100,84,126" target="_blank" rel="noopener">原文</a></p>
+            <p><a href="https://www.paypalobjects.com/webstatic/en_AU/developer/docs/pdf/hostedsolution_au.pdf#page=61&amp;zoom=100,84,126" target="_blank" rel="noopener">原文</a></p>
 <h1 id="订单处理"><a href="#订单处理" class="headerlink" title="订单处理"></a>订单处理</h1><p>本章将带领您体验终端订单处理的经验。它包括在执行订单之前验证订单状态和真<br>实性的信息。</p>
 <h2 id="验证交易状态和真实性"><a href="#验证交易状态和真实性" class="headerlink" title="验证交易状态和真实性"></a>验证交易状态和真实性</h2><p>当买方成功完成交易时，他们将被重定向到 PayPal 确认页面或者您在返回变量中指定的网站，或者在 Profile 部分的 Settings 页面(如第 15 页“ Simple Hosted Solution Integration”中概述的)。当浏览器被重定向到你指定的网站时，一个交易 ID 被附加到它上面。</p>
 <p>注意: 为了确保交易 ID 被追加到返回的 URL，登录到您的 PayPal 商户帐户并选择 Profile。在 Profile 页面的 Website Payments Standard and Express Checkout 部分，选择 Preferences 并验证 Auto Return 是否设置为 On。<br>在同一个设置页面上，也确认 Payment Data Transfer 设置为 On。</p>
@@ -225,7 +225,25 @@
 <p>如果您集成了 PayPal api，您可以使用 web 重定向中返回的交易 ID 调用<br>GetTransactionDetails 来验证订单的真实性。</p>
 <p>有关详细信息，请参阅第 ”GetTransactionDetails API“</p>
 <h2 id="履行订单"><a href="#履行订单" class="headerlink" title="履行订单"></a>履行订单</h2><p>在您验证了付款金额和状态的真实性之后，您可以通过将货物运送给买方来履行订单。</p>
-
+<script>
+        document.querySelectorAll('.github-emoji')
+          .forEach(el => {
+            if (!el.dataset.src) { return; }
+            const img = document.createElement('img');
+            img.style = 'display:none !important;';
+            img.src = el.dataset.src;
+            img.addEventListener('error', () => {
+              img.remove();
+              el.style.color = 'inherit';
+              el.style.backgroundImage = 'none';
+              el.style.background = 'none';
+            });
+            img.addEventListener('load', () => {
+              img.remove();
+            });
+            document.body.appendChild(img);
+          });
+      </script>
         </div>
         
 <blockquote class="copyright">

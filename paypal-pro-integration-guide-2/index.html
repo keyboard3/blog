@@ -197,7 +197,7 @@
                 </span>
                 
     
-        <span class="post-wordcount" itemprop="wordCount">字数统计: 1.8k(字)</span>
+        <span class="post-wordcount" itemprop="wordCount">字数统计: 1.9k(字)</span>
     
     
         <span class="post-readcount" itemprop="timeRequired">阅读时长: 6(分)</span>
@@ -207,7 +207,7 @@
             </p>
         </header>
         <div class="marked-body article-body">
-            <p><a href="https://www.paypalobjects.com/webstatic/en_AU/developer/docs/pdf/hostedsolution_au.pdf#page=22&zoom=100,84,126" target="_blank" rel="noopener">原文</a></p>
+            <p><a href="https://www.paypalobjects.com/webstatic/en_AU/developer/docs/pdf/hostedsolution_au.pdf#page=22&amp;zoom=100,84,126" target="_blank" rel="noopener">原文</a></p>
 <h1 id="Chapter-2-使用-HTML-集成到你的站点"><a href="#Chapter-2-使用-HTML-集成到你的站点" class="headerlink" title="Chapter 2 使用 HTML 集成到你的站点"></a>Chapter 2 使用 HTML 集成到你的站点</h1><p>本章提供了有关集成的说明，使您能够开始使用托管方案处理交易。</p>
 <blockquote>
 <p>注意: PayPal 建议你实现最简单的集成，以便在实现更加定制化的集成之前熟悉托管方案</p>
@@ -327,7 +327,7 @@ webflow/sparta/hostedSoleSolutionProcess<span class="token punctuation">"</span>
 </tr>
 <tr>
 <td>bn</td>
-<td>识别构建按钮代码的源代码。格式-<Company>_<Service>_<Product>_<Country></td>
+<td>识别构建按钮代码的源代码。格式-<company>_<service>_<product>_<country></country></product></service></company></td>
 <td>No</td>
 </tr>
 <tr>
@@ -451,7 +451,25 @@ webflow/sparta/hostedSoleSolutionProcess<span class="token punctuation">"</span>
 <td>No</td>
 </tr>
 </tbody></table>
-
+<script>
+        document.querySelectorAll('.github-emoji')
+          .forEach(el => {
+            if (!el.dataset.src) { return; }
+            const img = document.createElement('img');
+            img.style = 'display:none !important;';
+            img.src = el.dataset.src;
+            img.addEventListener('error', () => {
+              img.remove();
+              el.style.color = 'inherit';
+              el.style.backgroundImage = 'none';
+              el.style.background = 'none';
+            });
+            img.addEventListener('load', () => {
+              img.remove();
+            });
+            document.body.appendChild(img);
+          });
+      </script>
         </div>
         
 <blockquote class="copyright">

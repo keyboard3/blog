@@ -296,7 +296,7 @@
 <h3 id="Effect-Hook"><a href="#Effect-Hook" class="headerlink" title="Effect Hook"></a>Effect Hook</h3><p>你之前可能已经执行过数据获取，订阅，或者手动在 React 组件中改变 DOM。我们叫这些行为为”副作用“（或者说是作用），因为它们可以影响其他组件并且在一次渲染过程中就结束。</p>
 <p>这个 Effect Hook，useEffect，给函数组件添加执行副作用的能力。它跟 React class 中的 componentDidMount,componentDidUpdate,componentWillUnmount 用途相同，但是被统一到单个 API 中。（我们显示的案例比较了 useEffect 和在<a href="https://reactjs.org/docs/hooks-effect.html" target="_blank" rel="noopener">Effect Hook 使用</a>中的方法）</p>
 <p>这个例子，这个组件在 React 更新 DOM 之后设置 document 的标题：</p>
-<pre><code>import React, { useState, useEffect } from &#39;react&#39;;
+<pre><code>import React, { useState, useEffect } from 'react';
 
 function Example() {
   const [count, setCount] = useState(0);
@@ -558,7 +558,7 @@ function Example() {
 <h2 id="使用-Effect-Hook"><a href="#使用-Effect-Hook" class="headerlink" title="使用 Effect Hook"></a>使用 Effect Hook</h2><blockquote>
 <p>Effect Hook 让你在函数组件中执行副作用的操作</p>
 </blockquote>
-<pre><code>import React, { useState, useEffect } from &#39;react&#39;;
+<pre><code>import React, { useState, useEffect } from 'react';
 
 function Example() {
   const [count, setCount] = useState(0);
@@ -608,7 +608,7 @@ function Example() {
     );
   }
 }</code></pre><p>现在我们有两份重复的代码在两个生命周期函数中。<br>这也是为什么许多情况下，我们执行相同的副作用操作，不关心组件刚加载完或者刚更新 DOM 完。<br>从概念上将，我们向要在每次渲染之后执行-但是 React 类组件没有这样的方法。我们可以提取独立的方法，但是仍然会在两个地方调用。<br>现在让我们看下相同的事情在<code>UseEffect</code>HOOK 下的情况。<br><strong>使用 Hooks 的案例</strong><br>我们已经在上面看到过这个例子，但是让我们仔细看看</p>
-<pre><code>import React, { useState, useEffect } from &#39;react&#39;;
+<pre><code>import React, { useState, useEffect } from 'react';
 
 function Example() {
   const [count, setCount] = useState(0);
@@ -664,15 +664,15 @@ function Example() {
 
   render() {
     if (this.state.isOnline === null) {
-      return &#39;Loading...&#39;;
+      return 'Loading...';
     }
-    return this.state.isOnline ? &#39;Online&#39; : &#39;Offline&#39;;
+    return this.state.isOnline ? 'Online' : 'Offline';
   }
 }</code></pre><p>通知的操作是一样的。生命周期强制分离了业务逻辑到不同函数功能下。</p>
 <blockquote>
 <p>注意<br>聪明的读者可能注意到这个例子需要<code>componentDidUpdate</code>函数才完全正确。我们将会在<a href="https://reactjs.org/docs/hooks-effect.html#explanation-why-effects-run-on-each-update" target="_blank" rel="noopener">下一节</a>讨论到<br><strong>使用 Hooks 的案例</strong><br>你可能会觉得我们需要一个独立的 effect 来执行清理。但是添加和删除订阅逻辑是强耦合的，useEffect 被设计来讲它们联系在一起。如果你返回一个函数，React 将会在合适的时机清理掉</p>
 </blockquote>
-<pre><code>import React, { useState, useEffect } from &#39;react&#39;;
+<pre><code>import React, { useState, useEffect } from 'react';
 
 function FriendStatus(props) {
   const [isOnline, setIsOnline] = useState(null);
@@ -689,9 +689,9 @@ function FriendStatus(props) {
   });
 
   if (isOnline === null) {
-    return &#39;Loading...&#39;;
+    return 'Loading...';
   }
-  return isOnline ? &#39;Online&#39; : &#39;Offline&#39;;
+  return isOnline ? 'Online' : 'Offline';
 }</code></pre><p><strong>为什么我们需要在 effect 函数返回一个函数？</strong>这是可选的机制。每个 effect 可能返回一个请求它的函数。这使得我们能够将添加和删除订阅保持在一起。也同样也是 effect 的一部分<br><strong>什么时候 React 会清理 effect？</strong>React 会在组件卸载时清理。但是，前面的学习我们知道渲染不会只调用一次。这也是为什么 React 会在运行下一次 effect 之前清理上一次的 effect。我们后面将讨论<a href="https://reactjs.org/docs/hooks-effect.html#explanation-why-effects-run-on-each-update" target="_blank" rel="noopener">为什么会帮助我们避免 bug</a>和<a href="https://reactjs.org/docs/hooks-effect.html#tip-optimizing-performance-by-skipping-effects" target="_blank" rel="noopener">在产生性能问题时如何退出此行为</a></p>
 <blockquote>
 <p>注意<br>我们不需要在 effect 返回有名函数。我们叫<code>cleanup</code>以描述意图，但是你也可以返回箭头函数或者叫其他函数名</p>
@@ -1149,7 +1149,25 @@ ChatAPI<span class="token punctuation">.</span><span class="token function">unsu
 <p><strong>清理 effect</strong><br><strong>effects 的执行时机</strong><br><strong>有条件的触发 effect</strong></p>
 <h4 id="useContext"><a href="#useContext" class="headerlink" title="useContext"></a>useContext</h4><pre class="line-numbers language-jsx"><code class="language-jsx"><span class="token keyword">const</span> value <span class="token operator">=</span> <span class="token function">useContext</span><span class="token punctuation">(</span>MyContext<span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 <p><strong>将它和 Context.Provider 放在一起</strong></p>
-<h3 id="Additional-Hooks"><a href="#Additional-Hooks" class="headerlink" title="Additional Hooks"></a>Additional Hooks</h3><h4 id="useReducer"><a href="#useReducer" class="headerlink" title="useReducer"></a>useReducer</h4><h4 id="useCallback"><a href="#useCallback" class="headerlink" title="useCallback"></a>useCallback</h4><h4 id="useMemo"><a href="#useMemo" class="headerlink" title="useMemo"></a>useMemo</h4><h4 id="useRef"><a href="#useRef" class="headerlink" title="useRef"></a>useRef</h4><h4 id="useImperativeHandle"><a href="#useImperativeHandle" class="headerlink" title="useImperativeHandle"></a>useImperativeHandle</h4><h4 id="useLayoutEffect"><a href="#useLayoutEffect" class="headerlink" title="useLayoutEffect"></a>useLayoutEffect</h4><h4 id="useDebugValue"><a href="#useDebugValue" class="headerlink" title="useDebugValue"></a>useDebugValue</h4><h2 id="Hooks-常见问题"><a href="#Hooks-常见问题" class="headerlink" title="Hooks 常见问题"></a>Hooks 常见问题</h2>
+<h3 id="Additional-Hooks"><a href="#Additional-Hooks" class="headerlink" title="Additional Hooks"></a>Additional Hooks</h3><h4 id="useReducer"><a href="#useReducer" class="headerlink" title="useReducer"></a>useReducer</h4><h4 id="useCallback"><a href="#useCallback" class="headerlink" title="useCallback"></a>useCallback</h4><h4 id="useMemo"><a href="#useMemo" class="headerlink" title="useMemo"></a>useMemo</h4><h4 id="useRef"><a href="#useRef" class="headerlink" title="useRef"></a>useRef</h4><h4 id="useImperativeHandle"><a href="#useImperativeHandle" class="headerlink" title="useImperativeHandle"></a>useImperativeHandle</h4><h4 id="useLayoutEffect"><a href="#useLayoutEffect" class="headerlink" title="useLayoutEffect"></a>useLayoutEffect</h4><h4 id="useDebugValue"><a href="#useDebugValue" class="headerlink" title="useDebugValue"></a>useDebugValue</h4><h2 id="Hooks-常见问题"><a href="#Hooks-常见问题" class="headerlink" title="Hooks 常见问题"></a>Hooks 常见问题</h2><script>
+        document.querySelectorAll('.github-emoji')
+          .forEach(el => {
+            if (!el.dataset.src) { return; }
+            const img = document.createElement('img');
+            img.style = 'display:none !important;';
+            img.src = el.dataset.src;
+            img.addEventListener('error', () => {
+              img.remove();
+              el.style.color = 'inherit';
+              el.style.backgroundImage = 'none';
+              el.style.background = 'none';
+            });
+            img.addEventListener('load', () => {
+              img.remove();
+            });
+            document.body.appendChild(img);
+          });
+      </script>
         </div>
         
 <blockquote class="copyright">

@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html  lang="zh-CN" >
+    <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, minimum-scale=1, initial-scale=1, maximum-scale=5, viewport-fit=cover">
+    <title>在泰拉瑞亚中绘制任意图形 | keyboard3的博客</title>
+    <meta name="description" content="背景需求是需要在 tModLoader 中向泰拉瑞亚中画出文本图案 方案一个很容易想到的方案是使用 TEdit 编辑 .wld 地图文件，在指定位置上手动画出文本内容 但是这种方案就脱离 mod 自动化的方向了。分析下如果我们要自动化在游戏中画出文本图形需要做哪些工作   需要知道指定字体的文字的图形    同时需要文字排版引擎布局多个文字    需要将这些文字的图形信息使用游戏纹理表示，并放在游">
+<meta property="og:type" content="article">
+<meta property="og:title" content="在泰拉瑞亚中绘制任意图形">
+<meta property="og:url" content="https://keyboard3.github.io/draw-text-terraria/index.html">
+<meta property="og:site_name" content="keyboard3的博客">
+<meta property="og:description" content="背景需求是需要在 tModLoader 中向泰拉瑞亚中画出文本图案 方案一个很容易想到的方案是使用 TEdit 编辑 .wld 地图文件，在指定位置上手动画出文本内容 但是这种方案就脱离 mod 自动化的方向了。分析下如果我们要自动化在游戏中画出文本图形需要做哪些工作   需要知道指定字体的文字的图形    同时需要文字排版引擎布局多个文字    需要将这些文字的图形信息使用游戏纹理表示，并放在游">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://keyboard3.github.io/assets/draw-text-tmodloader.png">
+<meta property="article:published_time" content="2022-05-10T02:06:23.000Z">
+<meta property="article:modified_time" content="2022-09-09T11:41:34.308Z">
+<meta property="article:author" content="keyboard3">
+<meta property="article:tag" content="tModLoader">
+<meta property="article:tag" content="terraria">
+<meta property="article:tag" content="c#">
+<meta property="article:tag" content="图形学">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://keyboard3.github.io/assets/draw-text-tmodloader.png">
+
+    <link rel="alternate" type="application/atom+xml" href="/blog/atom.xml">
+    <link rel="icon" href="/images/favicon.ico" type="image/x-icon">
+
+    
+<link rel="stylesheet" href="/blog/css/common.min.css">
+
+
+
+    
+        <link href="//cdn.jsdelivr.net/npm/katex@0.9.0/dist/katex.min.css" rel="stylesheet">
+    
+    
+    
+    
+        <link href="//cdn.jsdelivr.net/npm/lightgallery.js@1.1.3/dist/css/lightgallery.min.css" rel="stylesheet">
+    
+    
+    
+<link rel="stylesheet" href="/blog/css/iconfont.min.css">
+
+    
+<meta name="generator" content="Hexo 4.2.0"><link rel="stylesheet" href="/blog/css/prism-tomorrow.css" type="text/css">
+<link rel="stylesheet" href="/blog/css/prism-line-numbers.css" type="text/css"></head>
+
+    <body>
+        <header class="header header-fixture">
+    <div class="profile-search-wrap flex sm:block">
+        
+        
+        <div class="profile sm:text-center md:px-1 lg:px-3 sm:pb-4 sm:pt-6">
+            <a id="avatar" role="link" href="https://github.com/keyboard3" class="inline-block lg:w-16 lg:h-16 w-8 h-8 m-2" target="_blank" rel="noopener" rel="noreferrer" >
+                <img src="https://www.gravatar.com/avatar/5a65c2880a8f2804b5af3dc39819bdf1?s=128" class="rounded-full" alt="avatar">
+            </a>
+            <h2 id="name" class="hidden lg:block">keyboard3</h2>
+            <h3 id="title" class="hidden lg:block">单身男青年</h3>
+            
+            <small id="location" class="hidden lg:block">
+                <i class="iconfont icon-map-icon"></i>
+                home
+            </small>
+            
+        </div>
+        
+        
+<div class="search flex-1 flex lg:inline-block sm:hidden lg:px-4 lg:mt-2 lg:mb-4 lg:w-full">
+    <form id="search-form" class="my-auto flex-1 lg:border lg:border-solid lg:border-gray-200">
+        <div class="input-group table bg-gray-100 lg:bg-white w-full">
+            <input id="search-input" type="text" placeholder="搜索" class="inline-block w-full bg-gray-100 lg:bg-white">
+            <span class="table-cell">
+                <button name="search tigger button" disabled>
+                    <i class="iconfont icon-search m-2"></i>
+                </button>
+            </span>
+        </div>
+    </form>
+        
+<div id="content-json" data-placeholder="搜索" class="invisible hidden">/content.json</div>
+<script id="search-teamplate" type="text/html" data-path="/blog/content.json">
+    <div>
+        <div class="search-header bg-gray-400">
+            <input id="actual-search-input" model="keyword" ref="input" class="inline-block w-full h-10 px-2 py-1" placeholder="搜索" type="text">
+        </div>
+        <div class="search-result bg-gray-200">
+            {{#each searchPosts}}
+            <a href="/{{ path }}" class="result-item block px-2 pb-3 mb-1 pt-1 hover:bg-indigo-100">
+                <i class="iconfont icon-file"></i>
+                <h1 class="result-title inline font-medium text-lg">{{ title }}</h1>
+                <p class="result-content text-gray-600 text-sm">{{{ text }}}</p>
+            </a>
+            {{/each}}
+        </div>
+    </div>
+</script>
+
+</div>
+
+
+        <button name="menu toogle button" id="menu-toggle-btn" class="block sm:hidden p-3" role="button" aria-expanded="false">
+            <i class="iconfont icon-hamburger"></i>
+        </button>
+    </div>
+    <nav id="menu-nav" class="hidden sm:flex flex-col">
+        
+        
+            <div class="menu-item menu-home" role="menuitem">
+                <a href="/blog/.">
+                    <i class="iconfont icon-home" aria-hidden="true"></i>
+                    <span class="menu-title">首页</span>
+                </a>
+            </div>
+        
+        
+            <div class="menu-item menu-archives" role="menuitem">
+                <a href="/blog/archives">
+                    <i class="iconfont icon-archive" aria-hidden="true"></i>
+                    <span class="menu-title">归档</span>
+                </a>
+            </div>
+        
+        
+            <div class="menu-item menu-repository" role="menuitem">
+                <a href="/blog/repository">
+                    <i class="iconfont icon-project" aria-hidden="true"></i>
+                    <span class="menu-title">项目</span>
+                </a>
+            </div>
+        
+        
+            <div class="menu-item menu-about" role="menuitem">
+                <a href="/blog/about">
+                    <i class="iconfont icon-cup" aria-hidden="true"></i>
+                    <span class="menu-title">关于</span>
+                </a>
+            </div>
+        
+        
+<div class="social-links flex sm:flex-col lg:hidden mt-5">
+    
+        <span class="social-item text-center">
+            <a href="https://github.com/keyboard3" target="_blank" rel="noopener">
+                <i class="iconfont social-icon icon-github"></i>
+                <span class="menu-title hidden lg:inline">menu.github</span>
+            </a>
+        </span>
+    
+        <span class="social-item text-center">
+            <a href="/blog/atom.xml">
+                <i class="iconfont social-icon icon-rss"></i>
+                <span class="menu-title hidden lg:inline">menu.rss</span>
+            </a>
+        </span>
+    
+</div>
+
+
+    </nav>
+</header>
+
+        <section class="main-section">
+            
+    <main class="flex-1 px-4 py-14 md:px-5 lg:px-8 lg:py-4 relative min-h-screen">
+    
+
+    <article class="content article article-archives article-type-list" itemscope="">
+        <header class="article-header">
+            
+    
+        <h1 class="article-title text-lg" itemprop="name">
+            在泰拉瑞亚中绘制任意图形
+        </h1>
+    
+
+
+
+            <p class="article-meta mb-3 text-xs">
+                <span class="article-date">
+    <i class="iconfont icon-calendar-check"></i>
+	<a href="/blog/draw-text-terraria/" class="article-date">
+	  <time datetime="2022-05-10T02:06:23.000Z" itemprop="datePublished">5月 10</time>
+	</a>
+</span>
+
+                
+
+                
+    <span class="article-tags">
+    <i class="iconfont icon-tag"></i>
+    <a class="article-tag-link" href="/blog/tags/c/" rel="tag">c#</a>, <a class="article-tag-link" href="/blog/tags/tModLoader/" rel="tag">tModLoader</a>, <a class="article-tag-link" href="/blog/tags/terraria/" rel="tag">terraria</a>, <a class="article-tag-link" href="/blog/tags/%E5%9B%BE%E5%BD%A2%E5%AD%A6/" rel="tag">图形学</a>
+  </span>
+
+
+                <span class="_partial/post-comment"><i class="icon icon-comment"></i>
+                    <a href="/blog/draw-text-terraria/#comments" class="article-comment-link">
+                        评论
+                    </a>
+                </span>
+                
+    
+        <span class="post-wordcount" itemprop="wordCount">字数统计: 534(字)</span>
+    
+    
+        <span class="post-readcount" itemprop="timeRequired">阅读时长: 2(分)</span>
+    
+
+
+            </p>
+        </header>
+        <div class="marked-body article-body">
+            <h1 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h1><p>需求是需要在 tModLoader 中向泰拉瑞亚中画出文本图案<br><img src="../assets/draw-text-tmodloader.png" alt=""></p>
+<h1 id="方案"><a href="#方案" class="headerlink" title="方案"></a>方案</h1><p>一个很容易想到的方案是使用 TEdit 编辑 .wld 地图文件，在指定位置上手动画出文本内容</p>
+<p>但是这种方案就脱离 mod 自动化的方向了。<br>分析下如果我们要自动化在游戏中画出文本图形需要做哪些工作</p>
+<ul>
+<li><ol>
+<li>需要知道指定字体的文字的图形</li>
+</ol>
+</li>
+<li><ol start="2">
+<li>同时需要文字排版引擎布局多个文字</li>
+</ol>
+</li>
+<li><ol start="3">
+<li>需要将这些文字的图形信息使用游戏纹理表示，并放在游戏的指定位置</li>
+</ol>
+</li>
+</ul>
+<p>如果有一定的图形化经验(前端/移动端)会发现,1和2不正式 canvas.drawText 就已经实现的嘛。在 c# 中，可以将文本画到 bitmap 上，那么 bitmap 就有了已经排版好图形信息了。最后只需要将 bitmap 的二维像素点中非白色的像素点就是我们想要的游戏纹理块。</p>
+<h1 id="实现"><a href="#实现" class="headerlink" title="实现"></a>实现</h1><pre class="line-numbers language-csharp"><code class="language-csharp"><span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token keyword">void</span> <span class="token function">drawText</span><span class="token punctuation">(</span>Point startPoint<span class="token punctuation">,</span> <span class="token keyword">int</span> sizeWidth<span class="token punctuation">,</span> <span class="token keyword">int</span> sizeHeight<span class="token punctuation">,</span> <span class="token keyword">string</span> words<span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+  <span class="token keyword">int</span> width <span class="token operator">=</span> <span class="token number">15</span><span class="token punctuation">,</span> height <span class="token operator">=</span> <span class="token number">100</span><span class="token punctuation">;</span>
+  <span class="token keyword">int</span> textWidth <span class="token operator">=</span> width <span class="token operator">*</span> <span class="token number">3</span> <span class="token operator">/</span> <span class="token number">5</span><span class="token punctuation">;</span>
+
+  <span class="token comment" spellcheck="true">//将文本处理成所需的图形信息</span>
+  System<span class="token punctuation">.</span>Drawing<span class="token punctuation">.</span>Bitmap bmp <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">System<span class="token punctuation">.</span>Drawing<span class="token punctuation">.</span>Bitmap</span><span class="token punctuation">(</span>width<span class="token punctuation">,</span> height<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  System<span class="token punctuation">.</span>Drawing<span class="token punctuation">.</span>RectangleF rectf <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">System<span class="token punctuation">.</span>Drawing<span class="token punctuation">.</span>RectangleF</span><span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">,</span> width<span class="token punctuation">,</span> height<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  System<span class="token punctuation">.</span>Drawing<span class="token punctuation">.</span>Graphics g <span class="token operator">=</span> System<span class="token punctuation">.</span>Drawing<span class="token punctuation">.</span>Graphics<span class="token punctuation">.</span><span class="token function">FromImage</span><span class="token punctuation">(</span>bmp<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  System<span class="token punctuation">.</span>Drawing<span class="token punctuation">.</span>StringFormat drawFormat <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">System<span class="token punctuation">.</span>Drawing<span class="token punctuation">.</span>StringFormat</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  drawFormat<span class="token punctuation">.</span>FormatFlags <span class="token operator">=</span> System<span class="token punctuation">.</span>Drawing<span class="token punctuation">.</span>StringFormatFlags<span class="token punctuation">.</span>DirectionVertical<span class="token punctuation">;</span>
+  g<span class="token punctuation">.</span><span class="token function">DrawString</span><span class="token punctuation">(</span>words<span class="token punctuation">,</span> <span class="token keyword">new</span> <span class="token class-name">System<span class="token punctuation">.</span>Drawing<span class="token punctuation">.</span>Font</span><span class="token punctuation">(</span><span class="token string">"Arial"</span><span class="token punctuation">,</span> textWidth<span class="token punctuation">)</span><span class="token punctuation">,</span> System<span class="token punctuation">.</span>Drawing<span class="token punctuation">.</span>Brushes<span class="token punctuation">.</span>Black<span class="token punctuation">,</span> rectf<span class="token punctuation">,</span> drawFormat<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  g<span class="token punctuation">.</span><span class="token function">Dispose</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+  <span class="token comment" spellcheck="true">//将图形信息绘制到游戏中</span>
+  <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> x <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> x <span class="token operator">&lt;</span> bmp<span class="token punctuation">.</span>Width<span class="token punctuation">;</span> x<span class="token operator">++</span><span class="token punctuation">)</span>
+    <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> y <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> y <span class="token operator">&lt;</span> bmp<span class="token punctuation">.</span>Height<span class="token punctuation">;</span> y<span class="token operator">++</span><span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>
+      System<span class="token punctuation">.</span>Drawing<span class="token punctuation">.</span>Color color <span class="token operator">=</span> bmp<span class="token punctuation">.</span><span class="token function">GetPixel</span><span class="token punctuation">(</span>x<span class="token punctuation">,</span> y<span class="token punctuation">)</span><span class="token punctuation">;</span>
+      <span class="token keyword">if</span> <span class="token punctuation">(</span>color<span class="token punctuation">.</span><span class="token function">ToArgb</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">!=</span> <span class="token number">0</span><span class="token punctuation">)</span>
+        WorldGen<span class="token punctuation">.</span><span class="token function">PlaceWall</span><span class="token punctuation">(</span>startPoint<span class="token punctuation">.</span>X <span class="token operator">+</span> x<span class="token punctuation">,</span> startPoint<span class="token punctuation">.</span>Y <span class="token operator">+</span> y<span class="token punctuation">,</span> <span class="token number">73</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+  bmp<span class="token punctuation">.</span><span class="token function">Dispose</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h1 id="扩展思考"><a href="#扩展思考" class="headerlink" title="扩展思考"></a>扩展思考</h1><p>甚至可以在游戏中绘制任意的图形。甚至可以根据约定不同的像素颜色为不同的纹理，将一张已经处理过的低分辨率的图片绘制到游戏中是可行的，甚至可以绘制 gif。</p>
+<script>
+        document.querySelectorAll('.github-emoji')
+          .forEach(el => {
+            if (!el.dataset.src) { return; }
+            const img = document.createElement('img');
+            img.style = 'display:none !important;';
+            img.src = el.dataset.src;
+            img.addEventListener('error', () => {
+              img.remove();
+              el.style.color = 'inherit';
+              el.style.backgroundImage = 'none';
+              el.style.background = 'none';
+            });
+            img.addEventListener('load', () => {
+              img.remove();
+            });
+            document.body.appendChild(img);
+          });
+      </script>
+        </div>
+        
+<blockquote class="copyright">
+    <p><strong>本文链接 : </strong><a class="permalink" href="https://keyboard3.github.io/draw-text-terraria/">https://keyboard3.github.io/draw-text-terraria/</a></p>
+    <p><strong>This article is available under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank" rel="noopener noreferrer">Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0)</a> License</strong></p>
+</blockquote>
+
+
+    </article>
+    
+    <section id="comments">
+        
+            <div id="vcomments"></div>
+        
+    </section>
+
+
+    
+
+</main>
+
+
+<aside style="" id="sidebar" class="aside aside-fixture">
+    <div class="toc-sidebar">
+        <nav id="toc" class="article-toc">
+            <h3 class="toc-title">文章目录</h3>
+            <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#背景"><span class="toc-number">1.</span> <span class="toc-text">背景</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#方案"><span class="toc-number">2.</span> <span class="toc-text">方案</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#实现"><span class="toc-number">3.</span> <span class="toc-text">实现</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#扩展思考"><span class="toc-number">4.</span> <span class="toc-text">扩展思考</span></a></li></ol>
+        </nav>
+    </div>
+</aside>
+
+
+
+
+
+        </section>
+        <footer class="hidden lg:block fixed bottom-0 left-0 sm:w-1/12 lg:w-1/6 bg-gray-100 z-40">
+    
+    <div class="footer-social-links">
+        
+            <a href="https://github.com/keyboard3" target="_blank" rel="noopener">
+                <i class="iconfont icon-github"></i>
+            </a>
+        
+            <a href="/blog/atom.xml">
+                <i class="iconfont icon-rss"></i>
+            </a>
+        
+    </div>
+    
+    
+        <p class="footer-custom">浙ICP备2022008282号</p>
+        <p class="theme-brand">Theme by <a href="https://github.com/fengkx/hexo-theme-purer" target="_blank" rel="nofollow noopener noreferrer noopener">hexo-theme-purer</a></p>
+    
+</footer>
+
+        <div id="mask" class="hidden mask fixed inset-0 bg-gray-900 opacity-75 z-40"></div>
+        <div id="search-view-container" class="hidden shadow-xl"></div>
+        
+<script src="/blog/js/dom-event.min.js"></script>
+
+
+
+<script src="/blog/js/local-search.min.js"></script>
+
+
+    <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+<script src="//cdn.jsdelivr.net/npm/valine"></script>
+<script type="text/javascript">
+var GUEST = ['nick', 'mail', 'link'];
+var meta = '';
+meta = meta.split(',').filter(function(item) {
+  return GUEST.indexOf(item) > -1;
+});
+new Valine({
+  el: '#vcomments',
+  verify: 'false',
+  notify: 'false',
+  appId: '',
+  appKey: '',
+  placeholder: 'just go go',
+  avatar: 'mm',
+  meta: meta,
+  pageSize: '10' || 10,
+  visitor: 'true',
+  lang: ''
+});
+</script>
+
+
+
+    <script src="//cdn.jsdelivr.net/npm/lightgallery.js@1.1.3/dist/js/lightgallery.min.js"></script>
+    
+<script src="/blog/js/light-gallery.min.js"></script>
+
+
+
+
+
+
+    </body>
+</html>

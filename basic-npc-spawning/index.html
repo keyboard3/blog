@@ -200,7 +200,7 @@
                 </span>
                 
     
-        <span class="post-wordcount" itemprop="wordCount">字数统计: 2.3k(字)</span>
+        <span class="post-wordcount" itemprop="wordCount">字数统计: 2.4k(字)</span>
     
     
         <span class="post-readcount" itemprop="timeRequired">阅读时长: 9(分)</span>
@@ -265,7 +265,7 @@
 </li>
 <li><code>Main.raining</code> - 如果当前正在下雨则为 true</li>
 <li><code>NPC.AnyNPCs(NPCID.IceGolem)</code> - 如果世界上有任何冰傀儡，则为 true。与 !以防止重复生成迷你 Boss。<ul>
-<li>NPC.AnyNPCs(mod.NPCType<PartyZombie>()) 或 NPC.AnyNPCs(mod.NPCType(“PartyZombie”)) - 相同，但适用于修改后的 NPC</li>
+<li>NPC.AnyNPCs(mod.NPCType<partyzombie>()) 或 NPC.AnyNPCs(mod.NPCType(“PartyZombie”)) - 相同，但适用于修改后的 NPC</partyzombie></li>
 </ul>
 </li>
 <li><code>NPC.CountNPCS(NPCID.AngryNimbus) &lt; 2</code> - 如果世界上存在的 NPC 少于 2 个，则为真</li>
@@ -329,7 +329,25 @@
 <li>GlobalNPC.EditSpawnPool - 填充选项后操作生成池</li>
 <li>GlobalNPC.SpawnNPC</li>
 </ul>
-
+<script>
+        document.querySelectorAll('.github-emoji')
+          .forEach(el => {
+            if (!el.dataset.src) { return; }
+            const img = document.createElement('img');
+            img.style = 'display:none !important;';
+            img.src = el.dataset.src;
+            img.addEventListener('error', () => {
+              img.remove();
+              el.style.color = 'inherit';
+              el.style.backgroundImage = 'none';
+              el.style.background = 'none';
+            });
+            img.addEventListener('load', () => {
+              img.remove();
+            });
+            document.body.appendChild(img);
+          });
+      </script>
         </div>
         
 <blockquote class="copyright">

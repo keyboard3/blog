@@ -196,10 +196,10 @@
                 </span>
                 
     
-        <span class="post-wordcount" itemprop="wordCount">字数统计: 1.5k(字)</span>
+        <span class="post-wordcount" itemprop="wordCount">字数统计: 1.6k(字)</span>
     
     
-        <span class="post-readcount" itemprop="timeRequired">阅读时长: 5(分)</span>
+        <span class="post-readcount" itemprop="timeRequired">阅读时长: 6(分)</span>
     
 
 
@@ -319,7 +319,25 @@
 document<span class="token punctuation">.</span><span class="token function">addEventListener</span><span class="token punctuation">(</span><span class="token string">"visibilitychange"</span><span class="token punctuation">,</span> handleVisibilityChange<span class="token punctuation">,</span> <span class="token boolean">false</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 </li>
 </ul>
-
+<script>
+        document.querySelectorAll('.github-emoji')
+          .forEach(el => {
+            if (!el.dataset.src) { return; }
+            const img = document.createElement('img');
+            img.style = 'display:none !important;';
+            img.src = el.dataset.src;
+            img.addEventListener('error', () => {
+              img.remove();
+              el.style.color = 'inherit';
+              el.style.backgroundImage = 'none';
+              el.style.background = 'none';
+            });
+            img.addEventListener('load', () => {
+              img.remove();
+            });
+            document.body.appendChild(img);
+          });
+      </script>
         </div>
         
 <blockquote class="copyright">

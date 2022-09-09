@@ -255,7 +255,7 @@
     <span class="token punctuation">}</span>
 <span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>现在您有了一个 .cs 文件，将您的纹理文件（您制作的一个 .png 图像文件）放入该 .cs 文件所在的文件夹中。确保阅读自动加载，这样您就知道如何满足计算机对其文件名和文件夹结构的期望。</p>
-<h1 id="我找不到我的投射物"><a href="#我找不到我的投射物" class="headerlink" title="我找不到我的投射物"></a>我找不到我的投射物</h1><p>请记住，物品和射弹是不同的。一个常见的错误是模组制作者会制造弹丸，但不明白他们需要使用该弹丸制造一些东西。例如，对于投掷刀武器，您需要同时制作物品和射弹。弹药物品也需要一个与之相关的独特射弹。您并不总是需要和项目和射弹，例如如果射弹是由 npc 生成的。测试弹丸的最简单方法是制作一个物品并将 item.shoot 设置为弹丸。例如，item.shoot = ModContent.ProjectileType<MyProjectile>()。参见 ExampleMod 以获取由 Items 生成的 Projectiles 的许多示例，它们位于不同的文件夹中，但很容易找到。</p>
+<h1 id="我找不到我的投射物"><a href="#我找不到我的投射物" class="headerlink" title="我找不到我的投射物"></a>我找不到我的投射物</h1><p>请记住，物品和射弹是不同的。一个常见的错误是模组制作者会制造弹丸，但不明白他们需要使用该弹丸制造一些东西。例如，对于投掷刀武器，您需要同时制作物品和射弹。弹药物品也需要一个与之相关的独特射弹。您并不总是需要和项目和射弹，例如如果射弹是由 npc 生成的。测试弹丸的最简单方法是制作一个物品并将 item.shoot 设置为弹丸。例如，item.shoot = ModContent.ProjectileType<myprojectile>()。参见 ExampleMod 以获取由 Items 生成的 Projectiles 的许多示例，它们位于不同的文件夹中，但很容易找到。</myprojectile></p>
 <h1 id="SetDefaults"><a href="#SetDefaults" class="headerlink" title="SetDefaults"></a>SetDefaults</h1><p>弹丸最重要的部分是 SetDefaults。 SetDefaults 是您为射弹设置值的地方，例如命中框的宽度和高度，射弹是友好还是敌对，以及射弹将使用哪个 AI。请参阅 <a href="https://github.com/tModLoader/tModLoader/wiki/Projectile-Class-Documentation" target="_blank" rel="noopener">Projectile 类文档</a>以查看 SetDefaults 中通常设置的值的含义。您还可以通过访问<a href="https://github.com/tModLoader/tModLoader/wiki/Vanilla-Projectile-Field-Values" target="_blank" rel="noopener">Vanilla弹丸字段值</a>来查看Vanilla弹丸值。可以在 <a href="https://github.com/tModLoader/tModLoader/tree/master/ExampleMod/Projectiles" target="_blank" rel="noopener">ExampleMod.Projectiles</a> 中找到许多不同射弹的示例</p>
 <h2 id="projectile-damage"><a href="#projectile-damage" class="headerlink" title="projectile.damage"></a>projectile.damage</h2><p>一个常见的错误是在 SetDefaults 中设置 projectile.damage，这不起作用，因为在生成射弹时，射弹的伤害值总是被传递给 Projectile.NewProjectile 的值覆盖。通常物品或生成该物品的NPC会影响伤害。</p>
 <h2 id="drawOffsetX-drawOriginOffsetY-drawOffsetX"><a href="#drawOffsetX-drawOriginOffsetY-drawOffsetX" class="headerlink" title="drawOffsetX, drawOriginOffsetY, drawOffsetX"></a>drawOffsetX, drawOriginOffsetY, drawOffsetX</h2><p>这些是 ModProjectile 字段，与正确将命中框居中到精灵相关。阅读<a href="https://github.com/tModLoader/tModLoader/wiki/Basic-Projectile#drawing-and-collision" target="_blank" rel="noopener">绘图和碰撞</a>了解更多信息。</p>
@@ -441,7 +441,25 @@ projectile<span class="token punctuation">.</span>rotation <span class="token op
     drawOriginOffsetX <span class="token operator">=</span> <span class="token operator">-</span><span class="token number">31</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// 数学计算出这是另一个值的负数。</span>
 <span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p><img src="https://camo.githubusercontent.com/564dc03d1f5c3a2e8686769b151af5cbf5a918e6532ce51d791b88a35617bd93/68747470733a2f2f692e696d6775722e636f6d2f464b66687451302e706e67" alt=""><br>希望这些答案可以帮助您解决弹丸碰撞箱和绘图问题。</p>
-
+<script>
+        document.querySelectorAll('.github-emoji')
+          .forEach(el => {
+            if (!el.dataset.src) { return; }
+            const img = document.createElement('img');
+            img.style = 'display:none !important;';
+            img.src = el.dataset.src;
+            img.addEventListener('error', () => {
+              img.remove();
+              el.style.color = 'inherit';
+              el.style.backgroundImage = 'none';
+              el.style.background = 'none';
+            });
+            img.addEventListener('load', () => {
+              img.remove();
+            });
+            document.body.appendChild(img);
+          });
+      </script>
         </div>
         
 <blockquote class="copyright">

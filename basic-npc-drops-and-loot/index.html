@@ -198,7 +198,7 @@
                 </span>
                 
     
-        <span class="post-wordcount" itemprop="wordCount">字数统计: 1.9k(字)</span>
+        <span class="post-wordcount" itemprop="wordCount">字数统计: 2k(字)</span>
     
     
         <span class="post-readcount" itemprop="timeRequired">阅读时长: 8(分)</span>
@@ -213,7 +213,7 @@
 <h2 id="基础"><a href="#基础" class="headerlink" title="基础"></a>基础</h2><p>我们在 ModNPC 类或 GlobalNPC 类中使用 NPCLoot 方法来指定从敌人身上掉落的物品。</p>
 <h3 id="ModNPC-NPCLoot-vs-GlobalNPC-NPCLoot"><a href="#ModNPC-NPCLoot-vs-GlobalNPC-NPCLoot" class="headerlink" title="ModNPC.NPCLoot() vs GlobalNPC.NPCLoot()"></a>ModNPC.NPCLoot() vs GlobalNPC.NPCLoot()</h3><p>我们可以在 2 个地方放置 NPC 战利品代码。如果我们的模组添加了一个 NPC 并且我们想要该 NPC 的特定掉落，请将相关代码放入该 ModNPC 类中。如果我们想为原版 NPC 添加掉落物，请将代码放入 GlobalNPC 类中。如果我们想为所有NPC添加掉落物，例如地牢宝箱钥匙或灵魂如何掉落，请将代码放在GlobalNPC中。请记住，组织是模组可维护性的关键。</p>
 <h3 id="Item-NewItem"><a href="#Item-NewItem" class="headerlink" title="Item.NewItem"></a>Item.NewItem</h3><p>在本指南中，您将看到 Item.NewItem 方法被调用。请参阅<a href="https://github.com/tModLoader/tModLoader/wiki/Useful-Vanilla-Methods#public-static-int-newitemint-x-int-y-int-width-int-height-int-type-int-stack--1-bool-nobroadcast--false-int-pfix--0-bool-nograbdelay--false-bool-reverselookup--false" target="_blank" rel="noopener">有用的香草方法</a>以查看参数。此方法将一个项目生成到游戏世界中。该项目以参数指定的区域为中心生成。</p>
-<h3 id="如何指定我的项目？"><a href="#如何指定我的项目？" class="headerlink" title="如何指定我的项目？"></a>如何指定我的项目？</h3><p>在下面的示例中，我们删除了一个普通项目：ItemID.BeeGun。这可以通过用 ModContent.ItemType<ItemName>() 替换你的 mod 中的一个项目</p>
+<h3 id="如何指定我的项目？"><a href="#如何指定我的项目？" class="headerlink" title="如何指定我的项目？"></a>如何指定我的项目？</h3><p>在下面的示例中，我们删除了一个普通项目：ItemID.BeeGun。这可以通过用 ModContent.ItemType<itemname>() 替换你的 mod 中的一个项目</itemname></p>
 <h3 id="一直掉落-1-件物品"><a href="#一直掉落-1-件物品" class="headerlink" title="一直掉落 1 件物品"></a>一直掉落 1 件物品</h3><p>下面显示了最基本的示例。每次杀死此 ModNPC 时，此代码将掉落 1 个蜜蜂枪。</p>
 <pre class="line-numbers language-csharp"><code class="language-csharp"><span class="token keyword">public</span> <span class="token keyword">override</span> <span class="token keyword">void</span> <span class="token function">NPCLoot</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
 <span class="token punctuation">{</span>
@@ -261,7 +261,7 @@ Item<span class="token punctuation">.</span><span class="token function">NewItem
         Item<span class="token punctuation">.</span><span class="token function">NewItem</span><span class="token punctuation">(</span>npc<span class="token punctuation">.</span><span class="token function">getRect</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span> ItemID<span class="token punctuation">.</span>SoulofLight<span class="token punctuation">)</span><span class="token punctuation">;</span>
     <span class="token punctuation">}</span>
 <span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<h3 id="自定义生物群落"><a href="#自定义生物群落" class="headerlink" title="自定义生物群落"></a>自定义生物群落</h3><p>将上述示例中的 .ZoneHoly 替换为 .GetModPlayer<ExamplePlayer>().ZoneExample。</p>
+<h3 id="自定义生物群落"><a href="#自定义生物群落" class="headerlink" title="自定义生物群落"></a>自定义生物群落</h3><p>将上述示例中的 .ZoneHoly 替换为 .GetModPlayer<exampleplayer>().ZoneExample。</exampleplayer></p>
 <h3 id="杀死NPC的玩家"><a href="#杀死NPC的玩家" class="headerlink" title="杀死NPC的玩家"></a>杀死NPC的玩家</h3><p>有时我们想为最后攻击 NPC 的玩家做点什么。 NPC 有一个 lastInteraction 字段，默认为 255，这意味着没有玩家损坏过 NPC。如果 townNPC 或陷阱对 NPC 造成所有伤害，则 NPC 有可能在 lastInteraction 仍为 255 时死亡。因此，通常用于奖励或影响杀死 NPC 的玩家的代码可能看起来像这样，如果需要，可以使用 FindClosestPlayer：</p>
 <pre class="line-numbers language-csharp"><code class="language-csharp"><span class="token keyword">int</span> playerIndex <span class="token operator">=</span> npc<span class="token punctuation">.</span>lastInteraction<span class="token punctuation">;</span>
 <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span>Main<span class="token punctuation">.</span>player<span class="token punctuation">[</span>playerIndex<span class="token punctuation">]</span><span class="token punctuation">.</span>active <span class="token operator">||</span> Main<span class="token punctuation">.</span>player<span class="token punctuation">[</span>playerIndex<span class="token punctuation">]</span><span class="token punctuation">.</span>dead<span class="token punctuation">)</span>
@@ -311,7 +311,25 @@ Item<span class="token punctuation">.</span><span class="token function">NewItem
 <h2 id="其他方法"><a href="#其他方法" class="headerlink" title="其他方法"></a>其他方法</h2><h3 id="NextBool"><a href="#NextBool" class="headerlink" title="NextBool"></a>NextBool</h3><p>如果您想使用它而不是将随机数与 0 进行比较，可以使用 NextBool 方法</p>
 <pre class="line-numbers language-csharp"><code class="language-csharp"><span class="token keyword">if</span> <span class="token punctuation">(</span>Main<span class="token punctuation">.</span>rand<span class="token punctuation">.</span><span class="token function">NextBool</span><span class="token punctuation">(</span><span class="token number">7</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
     Item<span class="token punctuation">.</span><span class="token function">NewItem</span><span class="token punctuation">(</span>npc<span class="token punctuation">.</span><span class="token function">getRect</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span> ItemID<span class="token punctuation">.</span>Beenade<span class="token punctuation">,</span> <span class="token number">20</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
-
+<script>
+        document.querySelectorAll('.github-emoji')
+          .forEach(el => {
+            if (!el.dataset.src) { return; }
+            const img = document.createElement('img');
+            img.style = 'display:none !important;';
+            img.src = el.dataset.src;
+            img.addEventListener('error', () => {
+              img.remove();
+              el.style.color = 'inherit';
+              el.style.backgroundImage = 'none';
+              el.style.background = 'none';
+            });
+            img.addEventListener('load', () => {
+              img.remove();
+            });
+            document.body.appendChild(img);
+          });
+      </script>
         </div>
         
 <blockquote class="copyright">

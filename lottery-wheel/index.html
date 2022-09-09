@@ -552,12 +552,12 @@
 <li>light</li>
 </ul>
 <pre><code>light: {
-    border: &#39;orange&#39;,
-    prize: &#39;lightyellow&#39;,
-    button: &#39;tomato&#39;,
-    line: &#39;orange&#39;,
-    prizeFont: &#39;orange&#39;,
-    buttonFont: &#39;white&#39;
+    border: 'orange',
+    prize: 'lightyellow',
+    button: 'tomato',
+    line: 'orange',
+    prizeFont: 'orange',
+    buttonFont: 'white'
 }</code></pre><p><img src="https://github.com/fralonra/lottery-wheel/raw/master/doc/images/theme-light.png" alt=""></p>
 <ul>
 <li>dark</li>
@@ -618,7 +618,25 @@
 <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p><img src="https://github.com/fralonra/lottery-wheel/blob/master/doc/images/image.png" alt=""></p>
 <h2 id="最后"><a href="#最后" class="headerlink" title="最后"></a>最后</h2><p>我开了分支，为它支持了 remoteDrawn 属性，支持了奖品有远程接口支持的功能<br><a href="https://github.com/keyboard3/lottery-wheel" target="_blank" rel="noopener">keyboard3/lottery-wheel</a></p>
-
+<script>
+        document.querySelectorAll('.github-emoji')
+          .forEach(el => {
+            if (!el.dataset.src) { return; }
+            const img = document.createElement('img');
+            img.style = 'display:none !important;';
+            img.src = el.dataset.src;
+            img.addEventListener('error', () => {
+              img.remove();
+              el.style.color = 'inherit';
+              el.style.backgroundImage = 'none';
+              el.style.background = 'none';
+            });
+            img.addEventListener('load', () => {
+              img.remove();
+            });
+            document.body.appendChild(img);
+          });
+      </script>
         </div>
         
 <blockquote class="copyright">

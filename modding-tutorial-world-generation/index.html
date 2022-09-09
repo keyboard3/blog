@@ -205,7 +205,7 @@
                 </span>
                 
     
-        <span class="post-wordcount" itemprop="wordCount">字数统计: 3k(字)</span>
+        <span class="post-wordcount" itemprop="wordCount">字数统计: 3.1k(字)</span>
     
     
         <span class="post-readcount" itemprop="timeRequired">阅读时长: 11(分)</span>
@@ -245,10 +245,10 @@
 <pre class="line-numbers language-csharp"><code class="language-csharp">WorldGen<span class="token punctuation">.</span><span class="token function">TileRunner</span><span class="token punctuation">(</span><span class="token keyword">int</span> i<span class="token punctuation">,</span> <span class="token keyword">int</span> j<span class="token punctuation">,</span> <span class="token keyword">int</span> strength<span class="token punctuation">,</span> <span class="token keyword">int</span> steps<span class="token punctuation">,</span> <span class="token keyword">int</span> type<span class="token punctuation">,</span> <span class="token keyword">bool</span> addTile <span class="token operator">=</span> <span class="token keyword">false</span><span class="token punctuation">,</span> <span class="token keyword">float</span> speedX <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">,</span> <span class="token keyword">float</span> speedY <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">,</span> <span class="token keyword">bool</span> noYChange <span class="token operator">=</span> <span class="token keyword">false</span><span class="token punctuation">,</span> <span class="token keyword">bool</span> overRide <span class="token operator">=</span> <span class="token keyword">true</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 <p>好吧，这要复杂得多。 TileRunner 是一种方法，我可以解释的唯一方法是，如果选择的话，它会创建一个带有嘈杂边缘的“钻石”。<br>i 和 j 是 TileRunner 的位置。同样，这是在平铺位置。因此，如果您想使用玩家或 npc 位置来生成某些东西，则必须除以 16。<br>strength 是产生的块有多大——在某种程度上是“半径”。<br>我认为更好的解释方法是视觉参考：</p>
 <h2 id="Spoiler-Strength-of-2"><a href="#Spoiler-Strength-of-2" class="headerlink" title="Spoiler: Strength of 2"></a>Spoiler: Strength of 2</h2><div style="display:flex;flex-direction:row;flex-wrap:wrap;">
-<img src="https://forums.terraria.org/index.php?attachments/1611985758319-png.306278/"/>
-<img src="https://forums.terraria.org/index.php?attachments/1611985817752-png.306279/"/>
-<img src="https://forums.terraria.org/index.php?attachments/1611985961872-png.306280/"/>
-<img src="https://forums.terraria.org/index.php?attachments/1611986005783-png.306281/"/>
+<img src="https://forums.terraria.org/index.php?attachments/1611985758319-png.306278/">
+<img src="https://forums.terraria.org/index.php?attachments/1611985817752-png.306279/">
+<img src="https://forums.terraria.org/index.php?attachments/1611985961872-png.306280/">
+<img src="https://forums.terraria.org/index.php?attachments/1611986005783-png.306281/">
 <img src="https://forums.terraria.org/index.php?attachments/1611986233247-png.306282/">
 </div>
 
@@ -258,7 +258,7 @@
 <p>TileRunner 对于较小规模的 tile 非常有用，例如矿床（矿石是 TileRunner 最常见的用途之一）、沙子、泥土和石块以及类似的东西。但是，我建议不要将其用于大型生物群落和结构，因为当您想要完全填充一个区域而又不会低效时，它真的很难使用。同样，也很难准确地控制你想要的方式。</p>
 <pre class="line-numbers language-csharp"><code class="language-csharp">WorldGen<span class="token punctuation">.</span><span class="token function">digTunnel</span><span class="token punctuation">(</span><span class="token keyword">int</span> i<span class="token punctuation">,</span> <span class="token keyword">int</span> j<span class="token punctuation">,</span> <span class="token keyword">float</span> xDir<span class="token punctuation">,</span> <span class="token keyword">float</span> yDir<span class="token punctuation">,</span> <span class="token keyword">int</span> Steps<span class="token punctuation">,</span> <span class="token keyword">int</span> Size<span class="token punctuation">,</span> <span class="token keyword">bool</span> Wet <span class="token operator">=</span> <span class="token keyword">false</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 <p>现在，想象一下 TileRunner，但它会删除tile。就是这样。它的工作原理相同，只是杀死tile。<br>唯一的区别是 Wet 的作用。这会将水放入它挖掘的隧道中。很简单。</p>
-<h1 id="定位"><a href="#定位" class="headerlink" title="定位"></a>定位</h1><p>考虑到所有这些方法，我看到做生成的人最大的问题是 定位。我应该把我的结构放在哪里才能让它在 <x> 生物群系中？天空在哪里？表面在哪里？这些都是有效的问题，值得庆幸的是，它们很容易解决——尤其是当你像我一样做 gen 的时候。</p>
+<h1 id="定位"><a href="#定位" class="headerlink" title="定位"></a>定位</h1><p>考虑到所有这些方法，我看到做生成的人最大的问题是 定位。我应该把我的结构放在哪里才能让它在 <x> 生物群系中？天空在哪里？表面在哪里？这些都是有效的问题，值得庆幸的是，它们很容易解决——尤其是当你像我一样做 gen 的时候。</x></p>
 <p>你有五个主要的值——</p>
 <ul>
 <li><ol>
@@ -327,7 +327,25 @@
 <p>这会将您放置的箱子中的第一个物品设置为一个香蕉郎。 如果要增加数量，只需执行以下操作：</p>
 <pre class="line-numbers language-csharp"><code class="language-csharp">Main<span class="token punctuation">.</span>chest<span class="token punctuation">[</span>ChestIndex<span class="token punctuation">]</span><span class="token punctuation">.</span>item<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">.</span>stack <span class="token operator">=</span> <span class="token number">20</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 <p>boom，你有20 个香蕉郎。<br>对箱子及其库存的进一步操作只需要一些逻辑和思考，因此大约对本节进行了四舍五入。</p>
-
+<script>
+        document.querySelectorAll('.github-emoji')
+          .forEach(el => {
+            if (!el.dataset.src) { return; }
+            const img = document.createElement('img');
+            img.style = 'display:none !important;';
+            img.src = el.dataset.src;
+            img.addEventListener('error', () => {
+              img.remove();
+              el.style.color = 'inherit';
+              el.style.backgroundImage = 'none';
+              el.style.background = 'none';
+            });
+            img.addEventListener('load', () => {
+              img.remove();
+            });
+            document.body.appendChild(img);
+          });
+      </script>
         </div>
         
 <blockquote class="copyright">

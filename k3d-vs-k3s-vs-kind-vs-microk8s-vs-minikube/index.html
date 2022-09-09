@@ -239,7 +239,25 @@
 <p>虽然 minikube 是在本地运行 Kubernetes 的一般不错的选择，但一个主要缺点是它只能在本地 Kubernetes 集群中运行单个节点——这使它离生产多节点 Kubernetes 环境更远一些。</p>
 <p>与 miniKube 不同，microK8S 可以在本地 Kubernetes 集群中运行多个节点。</p>
 <p>与此列表中的其他工具相比，microK8S 在不支持 snap 包的 Linux 机器上安装具有挑战性。 microK8S 使用 canonical 创建的 snap 包来安装 Linux 机器工具，这使得在不支持它的 Linux 发行版上很难运行。 miniKube 还使用 VM 框架 multipass 安装在多个平台上，为 Kubernetes 集群创建 VM。</p>
-
+<script>
+        document.querySelectorAll('.github-emoji')
+          .forEach(el => {
+            if (!el.dataset.src) { return; }
+            const img = document.createElement('img');
+            img.style = 'display:none !important;';
+            img.src = el.dataset.src;
+            img.addEventListener('error', () => {
+              img.remove();
+              el.style.color = 'inherit';
+              el.style.backgroundImage = 'none';
+              el.style.background = 'none';
+            });
+            img.addEventListener('load', () => {
+              img.remove();
+            });
+            document.body.appendChild(img);
+          });
+      </script>
         </div>
         
 <blockquote class="copyright">

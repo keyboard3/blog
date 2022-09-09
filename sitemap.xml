@@ -2,6 +2,20 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://keyboard3.github.io/node-fullstack-upgrade/</loc>
+    
+    <lastmod>2022-09-09T12:14:51.364Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://keyboard3.github.io/draw-text-terraria/</loc>
+    
+    <lastmod>2022-09-09T11:41:34.308Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://keyboard3.github.io/advanced-guide-to-custom-ui/</loc>
     
     <lastmod>2022-05-09T08:15:46.790Z</lastmod>
@@ -149,14 +163,14 @@
   </url>
   
   <url>
-    <loc>https://keyboard3.github.io/flatlist/</loc>
+    <loc>https://keyboard3.github.io/virtualizedlist/</loc>
     
     <lastmod>2022-03-31T15:14:13.113Z</lastmod>
     
   </url>
   
   <url>
-    <loc>https://keyboard3.github.io/virtualizedlist/</loc>
+    <loc>https://keyboard3.github.io/flatlist/</loc>
     
     <lastmod>2022-03-31T15:14:13.113Z</lastmod>
     

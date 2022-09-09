@@ -207,7 +207,7 @@
             </p>
         </header>
         <div class="marked-body article-body">
-            <p><a href="https://www.paypalobjects.com/webstatic/en_AU/developer/docs/pdf/hostedsolution_au.pdf#page=41&zoom=100,84,126" target="_blank" rel="noopener">原文</a></p>
+            <p><a href="https://www.paypalobjects.com/webstatic/en_AU/developer/docs/pdf/hostedsolution_au.pdf#page=41&amp;zoom=100,84,126" target="_blank" rel="noopener">原文</a></p>
 <h1 id="集成-iframe-到站点中"><a href="#集成-iframe-到站点中" class="headerlink" title="集成 iframe 到站点中"></a>集成 iframe 到站点中</h1><p>PayPal 提供了一种紧凑的付款方式，可以集成到您网站上的 iFrame 中。由于此表单已集成在您的网站上，因此买家永远不会离开您的网站，因此减少潜在的流失。你也可以在 紧凑的支付表单周围的主框架中保持你的结账外观和感觉。信用卡字段是紧凑型支付表单的一部分，所以你不必单独收集这些信息。</p>
 <blockquote>
 <p>重要提示: 由于涉及到 iFrame 的安全问题，以下浏览器被支持并安全使用—— internet explorer 7.0、8.0 和 9.0、 Firefox 24、 Chrome 30、 Safari 4.x 和 5.x。涉及其他浏览器用户的交易不应该使用 iFrame 流或放弃交易。此外，除了 iFrame 流之外还有另一个风险——如果 PayPal iFrame 成为攻击源，那么攻击似乎来自商家网站; 如果你希望避免这个额外的风险，就不要使用 iFrame 流。</p>
@@ -355,7 +355,25 @@ document<span class="token punctuation">.</span>form_iframe<span class="token pu
 </span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>script</span><span class="token punctuation">></span></span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 </li>
 </ul>
-
+<script>
+        document.querySelectorAll('.github-emoji')
+          .forEach(el => {
+            if (!el.dataset.src) { return; }
+            const img = document.createElement('img');
+            img.style = 'display:none !important;';
+            img.src = el.dataset.src;
+            img.addEventListener('error', () => {
+              img.remove();
+              el.style.color = 'inherit';
+              el.style.backgroundImage = 'none';
+              el.style.background = 'none';
+            });
+            img.addEventListener('load', () => {
+              img.remove();
+            });
+            document.body.appendChild(img);
+          });
+      </script>
         </div>
         
 <blockquote class="copyright">
