@@ -12,6 +12,10 @@ permalink: /repository/
 一些想法用C++验证
 - [algorithm](https://github.com/keyboard3/algorithm)
 分别用 js 和 c++ 多种思路实现 leetCode 的题目
+- [next-nest](https://github.com/keyboard3/next-nest)
+在单 Node 服务中以 monorepo 的形式松耦合 Next.js 和 Nest.js
+- [egg-midway-next](https://github.com/keyboard3/egg-midway-next)
+在单 Node 服务中以 monorepo 的形式松耦合 Next.js 和 Midway.js
 - [HencoderKeyboard3](https://github.com/keyboard3/HencoderKeyboard3)
 即刻点赞、薄荷健康尺、小米运动、Fliboard 翻页效果
 - [SubPlayer](https://github.com/keyboard3/SubPlayer)
